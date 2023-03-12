@@ -279,7 +279,6 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 32, -1));
 
         btn_vga.setBackground(new java.awt.Color(186, 79, 84));
-        btn_vga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit3.png"))); // NOI18N
         btn_vga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_vgaActionPerformed(evt);
@@ -288,7 +287,6 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel4.add(btn_vga, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 130, 28));
 
         btn_cpu.setBackground(new java.awt.Color(186, 79, 84));
-        btn_cpu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit3.png"))); // NOI18N
         btn_cpu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cpuActionPerformed(evt);
@@ -297,7 +295,6 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel4.add(btn_cpu, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 130, 28));
 
         btn_hang.setBackground(new java.awt.Color(186, 79, 84));
-        btn_hang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit3.png"))); // NOI18N
         btn_hang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_hangActionPerformed(evt);
@@ -306,7 +303,6 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel4.add(btn_hang, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 130, 28));
 
         btn_ram.setBackground(new java.awt.Color(186, 79, 84));
-        btn_ram.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit3.png"))); // NOI18N
         btn_ram.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ramActionPerformed(evt);
@@ -315,7 +311,6 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel4.add(btn_ram, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 130, 28));
 
         btn_ocung.setBackground(new java.awt.Color(186, 79, 84));
-        btn_ocung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit3.png"))); // NOI18N
         btn_ocung.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ocungActionPerformed(evt);
@@ -324,7 +319,6 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel4.add(btn_ocung, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 130, 28));
 
         btn_serial.setBackground(new java.awt.Color(186, 79, 84));
-        btn_serial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit3.png"))); // NOI18N
         btn_serial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_serialActionPerformed(evt);
@@ -333,7 +327,6 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel4.add(btn_serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, 130, 28));
 
         btn_mausac.setBackground(new java.awt.Color(186, 79, 84));
-        btn_mausac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit3.png"))); // NOI18N
         btn_mausac.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_mausacActionPerformed(evt);
@@ -342,7 +335,6 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel4.add(btn_mausac, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, 130, 28));
 
         btn_manhinh.setBackground(new java.awt.Color(186, 79, 84));
-        btn_manhinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit3.png"))); // NOI18N
         btn_manhinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_manhinhActionPerformed(evt);
@@ -409,28 +401,24 @@ public class JPanelSanPham extends javax.swing.JPanel {
         btn_sua.setBackground(new java.awt.Color(186, 79, 84));
         btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_sua.setForeground(new java.awt.Color(255, 255, 255));
-        btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit20px.png"))); // NOI18N
         btn_sua.setText("Sửa");
         jPanel5.add(btn_sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 87, 32));
 
         btn_moi.setBackground(new java.awt.Color(186, 79, 84));
         btn_moi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_moi.setForeground(new java.awt.Color(255, 255, 255));
-        btn_moi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/clear20px.png"))); // NOI18N
         btn_moi.setText("Mới");
         jPanel5.add(btn_moi, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, 87, 32));
 
         btn_them.setBackground(new java.awt.Color(186, 79, 84));
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_them.setForeground(new java.awt.Color(255, 255, 255));
-        btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add20px.png"))); // NOI18N
         btn_them.setText("Thêm");
         jPanel5.add(btn_them, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, 87, 32));
 
         btn_xoa.setBackground(new java.awt.Color(186, 79, 84));
         btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_xoa.setForeground(new java.awt.Color(255, 255, 255));
-        btn_xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/delete20px.png"))); // NOI18N
         btn_xoa.setText("Xóa");
         jPanel5.add(btn_xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 490, 87, 32));
 

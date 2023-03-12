@@ -147,19 +147,19 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         jPanel2.add(btn_taikhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 510, -1, 30));
 
         jButton1.setBackground(new java.awt.Color(186, 79, 84));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/last25px.png"))); // NOI18N
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 510, 40, 30));
+        jButton1.setText(">>");
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 510, 50, 30));
 
         jButton2.setBackground(new java.awt.Color(186, 79, 84));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/first25px.png"))); // NOI18N
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 40, 30));
+        jButton2.setText("<<");
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 50, 30));
 
         jButton3.setBackground(new java.awt.Color(186, 79, 84));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/predious25px.png"))); // NOI18N
+        jButton3.setText("<");
         jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 510, 40, 30));
 
         jButton4.setBackground(new java.awt.Color(186, 79, 84));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/next25px.png"))); // NOI18N
+        jButton4.setText(">");
         jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 510, 40, 30));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -230,7 +230,6 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         btn_them.setBackground(new java.awt.Color(186, 79, 84));
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_them.setForeground(new java.awt.Color(255, 255, 255));
-        btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add20px.png"))); // NOI18N
         btn_them.setText("Thêm");
         btn_them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,7 +241,6 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         btn_sua.setBackground(new java.awt.Color(186, 79, 84));
         btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_sua.setForeground(new java.awt.Color(255, 255, 255));
-        btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit20px.png"))); // NOI18N
         btn_sua.setText("Sửa");
         btn_sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,7 +252,6 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         btn_xoa.setBackground(new java.awt.Color(186, 79, 84));
         btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_xoa.setForeground(new java.awt.Color(255, 255, 255));
-        btn_xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/delete20px.png"))); // NOI18N
         btn_xoa.setText("Xóa");
         btn_xoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,7 +263,6 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         btn_lammoi.setBackground(new java.awt.Color(186, 79, 84));
         btn_lammoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_lammoi.setForeground(new java.awt.Color(255, 255, 255));
-        btn_lammoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/clear20px.png"))); // NOI18N
         btn_lammoi.setText("Mới");
         btn_lammoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

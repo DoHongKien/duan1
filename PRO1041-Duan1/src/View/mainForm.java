@@ -75,41 +75,31 @@ public class mainForm extends javax.swing.JFrame {
         btn_home = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         btn_sell = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         btn_product = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         btn_staff = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         btn_customer = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         btn_report = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         btn_promotion = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
         btn_receipt = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel20 = new javax.swing.JLabel();
         pnlCard3 = new javax.swing.JPanel();
         pnlCard1 = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
         pnlCard4 = new javax.swing.JPanel();
         pnlCard5 = new javax.swing.JPanel();
         pnlCard6 = new javax.swing.JPanel();
@@ -151,9 +141,6 @@ public class mainForm extends javax.swing.JFrame {
         jLabel3.setText("Trang Chủ");
         btn_home.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/menu2.png"))); // NOI18N
-        btn_home.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 40, 40));
-
         jPanel2.add(btn_home, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 180, 50));
 
         btn_sell.setBackground(new java.awt.Color(186, 79, 84));
@@ -178,9 +165,6 @@ public class mainForm extends javax.swing.JFrame {
         jLabel32.setForeground(new java.awt.Color(255, 255, 255));
         jLabel32.setText("Bán hàng");
         btn_sell.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cart.png"))); // NOI18N
-        btn_sell.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 40, 40));
 
         jPanel2.add(btn_sell, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 180, 50));
 
@@ -207,9 +191,6 @@ public class mainForm extends javax.swing.JFrame {
         jLabel9.setText("Sản Phẩm");
         btn_product.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/laptop.png"))); // NOI18N
-        btn_product.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 40, 40));
-
         jPanel2.add(btn_product, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 180, 50));
 
         btn_staff.setBackground(new java.awt.Color(186, 79, 84));
@@ -234,9 +215,6 @@ public class mainForm extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Nhân Viên");
         btn_staff.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
-
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/staff2.png"))); // NOI18N
-        btn_staff.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 40, 40));
 
         jPanel2.add(btn_staff, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 180, 50));
 
@@ -263,9 +241,6 @@ public class mainForm extends javax.swing.JFrame {
         jLabel33.setText("Khách Hàng");
         btn_customer.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/client.png"))); // NOI18N
-        btn_customer.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 40, 40));
-
         jPanel2.add(btn_customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 180, 50));
 
         btn_report.setBackground(new java.awt.Color(186, 79, 84));
@@ -290,9 +265,6 @@ public class mainForm extends javax.swing.JFrame {
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Doanh Thu");
         btn_report.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/report2.png"))); // NOI18N
-        btn_report.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 40, 40));
 
         jPanel2.add(btn_report, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 180, 50));
 
@@ -319,9 +291,6 @@ public class mainForm extends javax.swing.JFrame {
         jLabel31.setText("Khuyến Mãi");
         btn_promotion.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
 
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/promotion.png"))); // NOI18N
-        btn_promotion.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 40, 40));
-
         jPanel2.add(btn_promotion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 180, 50));
 
         btn_receipt.setBackground(new java.awt.Color(186, 79, 84));
@@ -347,9 +316,6 @@ public class mainForm extends javax.swing.JFrame {
         jLabel34.setText("Hóa Đơn");
         btn_receipt.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/receipt.png"))); // NOI18N
-        btn_receipt.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 40, 40));
-
         jPanel2.add(btn_receipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 180, 50));
 
         jLabel23.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -359,17 +325,11 @@ public class mainForm extends javax.swing.JFrame {
         jPanel2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 130, -1));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 130, 10));
 
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/jelly_band_64px.png"))); // NOI18N
-        jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 70, 70));
-
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 700));
 
         pnlCard1.setBackground(new java.awt.Color(255, 255, 255));
         pnlCard1.setMinimumSize(new java.awt.Dimension(1070, 680));
         pnlCard1.setLayout(new java.awt.BorderLayout());
-
-        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/hinh-anh-loi-chao-welcome_094125267 (1).png"))); // NOI18N
-        pnlCard1.add(jLabel22, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout pnlCard3Layout = new javax.swing.GroupLayout(pnlCard3);
         pnlCard3.setLayout(pnlCard3Layout);
@@ -586,31 +546,21 @@ public class mainForm extends javax.swing.JFrame {
     private javax.swing.JPanel btn_report;
     private javax.swing.JPanel btn_sell;
     private javax.swing.JPanel btn_staff;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

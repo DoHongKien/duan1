@@ -182,7 +182,6 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         btn_them.setBackground(new java.awt.Color(186, 79, 84));
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_them.setForeground(new java.awt.Color(255, 255, 255));
-        btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add20px.png"))); // NOI18N
         btn_them.setText("Thêm");
         btn_them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,7 +193,6 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         btn_sua.setBackground(new java.awt.Color(186, 79, 84));
         btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_sua.setForeground(new java.awt.Color(255, 255, 255));
-        btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit20px.png"))); // NOI18N
         btn_sua.setText("Sửa");
         btn_sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,7 +204,6 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         btn_xoa.setBackground(new java.awt.Color(186, 79, 84));
         btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_xoa.setForeground(new java.awt.Color(255, 255, 255));
-        btn_xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/delete20px.png"))); // NOI18N
         btn_xoa.setText("Xóa");
         btn_xoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,7 +215,6 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         btn_lammoi.setBackground(new java.awt.Color(186, 79, 84));
         btn_lammoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_lammoi.setForeground(new java.awt.Color(255, 255, 255));
-        btn_lammoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/clear20px.png"))); // NOI18N
         btn_lammoi.setText("Mới");
         btn_lammoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,40 +224,40 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         jPanel3.add(btn_lammoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 540, 87, 32));
 
         btn_first.setBackground(new java.awt.Color(186, 79, 84));
-        btn_first.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/first25px.png"))); // NOI18N
+        btn_first.setText("<<");
         btn_first.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_firstActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_first, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, -1, -1));
+        jPanel3.add(btn_first, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, 50, 30));
 
         btn_predious.setBackground(new java.awt.Color(186, 79, 84));
-        btn_predious.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/predious25px.png"))); // NOI18N
+        btn_predious.setText("<");
         btn_predious.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_prediousActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_predious, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 540, -1, -1));
+        jPanel3.add(btn_predious, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 540, 40, 30));
 
         btn_next.setBackground(new java.awt.Color(186, 79, 84));
-        btn_next.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/next25px.png"))); // NOI18N
+        btn_next.setText(">");
         btn_next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_nextActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 540, -1, -1));
+        jPanel3.add(btn_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 540, 40, 30));
 
         btn_last.setBackground(new java.awt.Color(186, 79, 84));
-        btn_last.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/last25px.png"))); // NOI18N
+        btn_last.setText(">>");
         btn_last.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_lastActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_last, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 540, -1, -1));
+        jPanel3.add(btn_last, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 540, 50, 30));
 
         chk_trangthai.setText("Trạng thái");
         jPanel3.add(chk_trangthai, new org.netbeans.lib.awtextra.AbsoluteConstraints(578, 51, -1, -1));

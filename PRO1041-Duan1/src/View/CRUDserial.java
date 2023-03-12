@@ -92,7 +92,6 @@ public class CRUDserial extends javax.swing.JFrame {
         btnXóa.setBackground(new java.awt.Color(186, 79, 84));
         btnXóa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnXóa.setForeground(new java.awt.Color(255, 255, 255));
-        btnXóa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/delete20px.png"))); // NOI18N
         btnXóa.setText("Xóa");
         btnXóa.setBorder(null);
         btnXóa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -101,7 +100,6 @@ public class CRUDserial extends javax.swing.JFrame {
         btnMoi.setBackground(new java.awt.Color(186, 79, 84));
         btnMoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnMoi.setForeground(new java.awt.Color(255, 255, 255));
-        btnMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/clear20px.png"))); // NOI18N
         btnMoi.setText("Mới");
         btnMoi.setBorder(null);
         btnMoi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -116,7 +114,6 @@ public class CRUDserial extends javax.swing.JFrame {
         btnThem.setBackground(new java.awt.Color(186, 79, 84));
         btnThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnThem.setForeground(new java.awt.Color(255, 255, 255));
-        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add20px.png"))); // NOI18N
         btnThem.setText("Thêm");
         btnThem.setBorder(null);
         btnThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

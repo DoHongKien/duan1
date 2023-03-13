@@ -4,12 +4,12 @@
  */
 package View;
 
+import Model.KhuyenMai;
+import Service.KhuyenMaiService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -21,6 +21,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JPanelKhuyenMai extends javax.swing.JPanel {
 
+    DefaultTableModel defaultTableModel;
+    KhuyenMaiService khuyenMaiService = new KhuyenMaiService();
     private static Pattern DATE_PATTERN = Pattern.compile("^((2000|2400|2800|(19|2[0-9])(0[48]|[2468][048]|[13579][26]))-02-29)$"
             + "|^(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))$"
             + "|^(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))$"
@@ -28,6 +30,7 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
 
     public JPanelKhuyenMai() {
         initComponents();
+        fillTable(khuyenMaiService.getListKhuyenMai());
     }
 
     /**
@@ -65,6 +68,9 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         btn_sua = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
         btn_moi = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txt_ngaysua = new javax.swing.JTextField();
+        jSeparator5 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1070, 680));
@@ -135,7 +141,7 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Id", "Mã", "Giá Trị", "Ngày Tạo", "Ngày Hết Hạn", "Trạng Thái"
+                "Id", "Mã", "Giá Trị", "Ngày Tạo", "Ngày Hết Hạn", "Ngày Sửa", "Trạng Thái"
             }
         ));
         tbl_khuyenmai.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -149,39 +155,39 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Mã giảm giá");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(739, 101, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 80, -1, -1));
 
         txt_ma.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_ma.setBorder(null);
-        jPanel2.add(txt_ma, new org.netbeans.lib.awtextra.AbsoluteConstraints(841, 101, 200, -1));
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(841, 123, 200, 11));
+        jPanel2.add(txt_ma, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 80, 200, -1));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 100, 200, 11));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Giá Trị");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(739, 156, -1, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 130, -1, -1));
 
         txt_giatri.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_giatri.setBorder(null);
-        jPanel2.add(txt_giatri, new org.netbeans.lib.awtextra.AbsoluteConstraints(841, 156, 200, -1));
-        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(841, 178, 200, 10));
+        jPanel2.add(txt_giatri, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 130, 200, -1));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 150, 200, 10));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Ngày Tạo");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(739, 213, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 180, -1, -1));
 
         txt_ngaytao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_ngaytao.setBorder(null);
-        jPanel2.add(txt_ngaytao, new org.netbeans.lib.awtextra.AbsoluteConstraints(841, 213, 200, -1));
-        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(841, 235, 200, 10));
+        jPanel2.add(txt_ngaytao, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 180, 200, -1));
+        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 200, 200, 10));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("Ngày Hết Hạn");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(739, 273, -1, -1));
+        jLabel5.setText("Ngày Sửa");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 300, -1, -1));
 
         txt_ngayhethan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_ngayhethan.setBorder(null);
-        jPanel2.add(txt_ngayhethan, new org.netbeans.lib.awtextra.AbsoluteConstraints(842, 273, 199, -1));
-        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(842, 295, 199, 10));
+        jPanel2.add(txt_ngayhethan, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 240, 199, -1));
+        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 260, 199, 10));
 
         btn_them.setBackground(new java.awt.Color(186, 79, 84));
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -227,6 +233,15 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         });
         jPanel2.add(btn_moi, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 420, 87, 32));
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("Ngày Hết Hạn");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 240, -1, -1));
+
+        txt_ngaysua.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_ngaysua.setBorder(null);
+        jPanel2.add(txt_ngaysua, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 300, 199, -1));
+        jPanel2.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 320, 199, 10));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -238,8 +253,9 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                .addGap(22, 22, 22))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -249,43 +265,43 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         txt_giatri.setText(tbl_khuyenmai.getValueAt(index, 2).toString());
         txt_ngaytao.setText(tbl_khuyenmai.getValueAt(index, 3).toString());
         txt_ngayhethan.setText(tbl_khuyenmai.getValueAt(index, 4).toString());
+        txt_ngaysua.setText(tbl_khuyenmai.getValueAt(index, 5).toString());
     }//GEN-LAST:event_tbl_khuyenmaiMouseClicked
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
-//        if (checkValidate()) {
-//            int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
-//
-//            if (cf == JOptionPane.YES_OPTION) {
-//                JOptionPane.showMessageDialog(this, khuyenMaiService.insert(getField()));
-//                fillTable(khuyenMaiService.getListKhuyenMai());
-//            }
-//        }
+        if (checkValidate()) {
+            int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
 
+            if (cf == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(this, khuyenMaiService.insert(getField()));
+                fillTable(khuyenMaiService.getListKhuyenMai());
+            }
+        }
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
-//        if (checkValidateUpdate()) {
-//            int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?", "Sửa", JOptionPane.YES_NO_OPTION);
-//
-//            if (cf == JOptionPane.YES_OPTION) {
-//                JOptionPane.showMessageDialog(this, khuyenMaiService.update(getField()));
-//                fillTable(khuyenMaiService.getListKhuyenMai());
-//            }
-//        }
+        if (checkValidateUpdate()) {
+            int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?", "Sửa", JOptionPane.YES_NO_OPTION);
+
+            if (cf == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(this, khuyenMaiService.update(getField()));
+                fillTable(khuyenMaiService.getListKhuyenMai());
+            }
+        }
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
-//        if (txt_ma.getText().trim().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Mã không được trống");
-//            txt_ma.requestFocus();
-//            return;
-//        }
-//        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
-//
-//        if (cf == JOptionPane.YES_OPTION) {
-//            JOptionPane.showMessageDialog(this, khuyenMaiService.delete(txt_ma.getText()));
-//            fillTable(khuyenMaiService.getListKhuyenMai());
-//        }
+        if (txt_ma.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mã không được trống");
+            txt_ma.requestFocus();
+            return;
+        }
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
+
+        if (cf == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, khuyenMaiService.delete(txt_ma.getText()));
+            fillTable(khuyenMaiService.getListKhuyenMai());
+        }
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void btn_moiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_moiActionPerformed
@@ -293,6 +309,7 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         txt_giatri.setText("");
         txt_ngaytao.setText("");
         txt_ngayhethan.setText("");
+        txt_ngaysua.setText("");
     }//GEN-LAST:event_btn_moiActionPerformed
 
     private void rdo_tatcaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdo_tatcaMouseClicked
@@ -314,158 +331,175 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
 //        fillTable(khuyenMaiService.fiterByEndDate(localDate.toString()));
     }//GEN-LAST:event_rdo_daketthucMouseClicked
 
-//    private void fillTable(List<KhuyenMai> list) {
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-//        defaultTableModel = (DefaultTableModel) tbl_khuyenmai.getModel();
-//        defaultTableModel.setRowCount(0);
-//        for (KhuyenMai km : list) {
-//            defaultTableModel.addRow(new Object[]{km.getId(), km.getMa(), km.getGiaTri(), dateFormat.format(km.getNgayTao()), dateFormat.format(km.getNgayHetHan()), km.getTrangThai()});
-//        }
-//    }
-//
-//    private KhuyenMai getField() {
+    private void fillTable(List<KhuyenMai> list) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        defaultTableModel = (DefaultTableModel) tbl_khuyenmai.getModel();
+        defaultTableModel.setRowCount(0);
+        for (KhuyenMai km : list) {
+            defaultTableModel.addRow(new Object[]{km.getId(), km.getMa(), km.getGiaTri(), km.getNgayTao(), km.getNgayHetHan(), km.getNgayNhap(), km.getTrangThai()});
+        }
+    }
+
+    private KhuyenMai getField() {
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        KhuyenMai km = new KhuyenMai();
-//        km.setMa(txt_ma.getText());
-//        km.setGiaTri(Integer.parseInt(txt_giatri.getText()));
-//        try {
-//            km.setNgayTao(dateFormat.parse(txt_ngaytao.getText()));
-//            km.setNgayHetHan(dateFormat.parse(txt_ngayhethan.getText()));
-//        } catch (ParseException ex) {
-//            Logger.getLogger(JPanelKhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return km;
-//    }
-//
-//    private boolean matches(String date) {
-//        return DATE_PATTERN.matcher(date).matches();
-//    }
-//
-//    private boolean checkValidate() {
-//        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-//        Matcher ma = p.matcher(txt_ma.getText());
-//
-//        if (txt_ma.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Mã không được trống");
-//            txt_ma.requestFocus();
-//            return false;
-//        } else if (ma.find()) {
-//            JOptionPane.showMessageDialog(this, "Mã không được chứa ký tự đặc biệt");
-//            txt_ma.requestFocus();
-//            return false;
-//        }
-//
-//        if (checkMa(txt_ma.getText()) == 1) {
-//            JOptionPane.showMessageDialog(this, "Mã khách hàng đã tồn tại");
-//            txt_ma.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_giatri.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Giá trị không được trống");
-//            txt_giatri.requestFocus();
-//            return false;
-//        }
-//        try {
-//            int giaTri = Integer.parseInt(txt_giatri.getText());
-//            if (giaTri <= 0) {
-//                JOptionPane.showMessageDialog(this, "Giá trị phải lớn hơn 0");
-//                txt_giatri.requestFocus();
-//                return false;
-//            }
-//        } catch (NumberFormatException e) {
-//            JOptionPane.showMessageDialog(this, "Giá trị phải là số");
-//            txt_giatri.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_ngaytao.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
-//            txt_ngaytao.requestFocus();
-//            return false;
-//        } else if (!matches(txt_ngaytao.getText())) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
-//            txt_ngaytao.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_ngayhethan.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
-//            txt_ngayhethan.requestFocus();
-//            return false;
-//        } else if (!matches(txt_ngayhethan.getText())) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
-//            txt_ngayhethan.requestFocus();
-//            return false;
-//        }
-//
-//        return true;
-//    }
-//
-//    private boolean checkValidateUpdate() {
-//        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-//        Matcher ma = p.matcher(txt_ma.getText());
-//
-//        if (txt_ma.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Mã không được trống");
-//            txt_ma.requestFocus();
-//            return false;
-//        } else if (ma.find()) {
-//            JOptionPane.showMessageDialog(this, "Mã không được chứa ký tự đặc biệt");
-//            txt_ma.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_giatri.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Giá trị không được trống");
-//            txt_giatri.requestFocus();
-//            return false;
-//        }
-//        try {
-//            int giaTri = Integer.parseInt(txt_giatri.getText());
-//            if (giaTri <= 0) {
-//                JOptionPane.showMessageDialog(this, "Giá trị phải lớn hơn 0");
-//                txt_giatri.requestFocus();
-//                return false;
-//            }
-//        } catch (NumberFormatException e) {
-//            JOptionPane.showMessageDialog(this, "Giá trị phải là số");
-//            txt_giatri.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_ngaytao.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
-//            txt_ngaytao.requestFocus();
-//            return false;
-//        } else if (!matches(txt_ngaytao.getText())) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
-//            txt_ngaytao.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_ngayhethan.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
-//            txt_ngayhethan.requestFocus();
-//            return false;
-//        } else if (!matches(txt_ngayhethan.getText())) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
-//            txt_ngayhethan.requestFocus();
-//            return false;
-//        }
-//
-//        return true;
-//    }
-//
-//    private int checkMa(String ma) {
-//        for (int i = 0; i < khuyenMaiService.getListKhuyenMai().size(); i++) {
-//            KhuyenMai get = khuyenMaiService.getListKhuyenMai().get(i);
-//            if (get.getMa().trim().equalsIgnoreCase(ma)) {
-//                return 1;
-//            }
-//        }
-//        return 2;
-//    }
+        KhuyenMai km = new KhuyenMai();
+        km.setMa(txt_ma.getText());
+        km.setGiaTri(Integer.parseInt(txt_giatri.getText()));
+        km.setNgayTao(txt_ngaytao.getText());
+        km.setNgayHetHan(txt_ngayhethan.getText());
+        km.setNgayNhap(txt_ngaysua.getText());
+        return km;
+    }
+
+    private boolean matches(String date) {
+        return DATE_PATTERN.matcher(date).matches();
+    }
+
+    private boolean checkValidate() {
+        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Matcher ma = p.matcher(txt_ma.getText());
+
+        if (txt_ma.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mã không được trống");
+            txt_ma.requestFocus();
+            return false;
+        } else if (ma.find()) {
+            JOptionPane.showMessageDialog(this, "Mã không được chứa ký tự đặc biệt");
+            txt_ma.requestFocus();
+            return false;
+        }
+
+        if (checkMa(txt_ma.getText()) == 1) {
+            JOptionPane.showMessageDialog(this, "Mã khách hàng đã tồn tại");
+            txt_ma.requestFocus();
+            return false;
+        }
+
+        if (txt_giatri.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Giá trị không được trống");
+            txt_giatri.requestFocus();
+            return false;
+        }
+        try {
+            int giaTri = Integer.parseInt(txt_giatri.getText());
+            if (giaTri <= 0) {
+                JOptionPane.showMessageDialog(this, "Giá trị phải lớn hơn 0");
+                txt_giatri.requestFocus();
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Giá trị phải là số");
+            txt_giatri.requestFocus();
+            return false;
+        }
+
+        if (txt_ngaytao.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
+            txt_ngaytao.requestFocus();
+            return false;
+        } else if (!matches(txt_ngaytao.getText())) {
+            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
+            txt_ngaytao.requestFocus();
+            return false;
+        }
+
+        if (txt_ngayhethan.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
+            txt_ngayhethan.requestFocus();
+            return false;
+        } else if (!matches(txt_ngayhethan.getText())) {
+            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
+            txt_ngayhethan.requestFocus();
+            return false;
+        }
+        
+        if (txt_ngaysua.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
+            txt_ngaysua.requestFocus();
+            return false;
+        } else if (!matches(txt_ngaysua.getText())) {
+            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
+            txt_ngaysua.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean checkValidateUpdate() {
+        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Matcher ma = p.matcher(txt_ma.getText());
+
+        if (txt_ma.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mã không được trống");
+            txt_ma.requestFocus();
+            return false;
+        } else if (ma.find()) {
+            JOptionPane.showMessageDialog(this, "Mã không được chứa ký tự đặc biệt");
+            txt_ma.requestFocus();
+            return false;
+        }
+
+        if (txt_giatri.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Giá trị không được trống");
+            txt_giatri.requestFocus();
+            return false;
+        }
+        try {
+            int giaTri = Integer.parseInt(txt_giatri.getText());
+            if (giaTri <= 0) {
+                JOptionPane.showMessageDialog(this, "Giá trị phải lớn hơn 0");
+                txt_giatri.requestFocus();
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Giá trị phải là số");
+            txt_giatri.requestFocus();
+            return false;
+        }
+
+        if (txt_ngaytao.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
+            txt_ngaytao.requestFocus();
+            return false;
+        } else if (!matches(txt_ngaytao.getText())) {
+            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
+            txt_ngaytao.requestFocus();
+            return false;
+        }
+
+        if (txt_ngayhethan.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
+            txt_ngayhethan.requestFocus();
+            return false;
+        } else if (!matches(txt_ngayhethan.getText())) {
+            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
+            txt_ngayhethan.requestFocus();
+            return false;
+        }
+        
+        if (txt_ngaysua.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
+            txt_ngaysua.requestFocus();
+            return false;
+        } else if (!matches(txt_ngaysua.getText())) {
+            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
+            txt_ngaysua.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+    private int checkMa(String ma) {
+        for (int i = 0; i < khuyenMaiService.getListKhuyenMai().size(); i++) {
+            KhuyenMai get = khuyenMaiService.getListKhuyenMai().get(i);
+            if (get.getMa().trim().equalsIgnoreCase(ma)) {
+                return 1;
+            }
+        }
+        return 2;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_moi;
@@ -478,6 +512,7 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -485,6 +520,7 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JRadioButton rdo_daketthuc;
     private javax.swing.JRadioButton rdo_dangdienra;
     private javax.swing.JRadioButton rdo_sapdienra;
@@ -493,6 +529,7 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JTextField txt_giatri;
     private javax.swing.JTextField txt_ma;
     private javax.swing.JTextField txt_ngayhethan;
+    private javax.swing.JTextField txt_ngaysua;
     private javax.swing.JTextField txt_ngaytao;
     // End of variables declaration//GEN-END:variables
 }

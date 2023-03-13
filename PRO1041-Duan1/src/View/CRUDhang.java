@@ -5,6 +5,8 @@
 package View;
 
 //import domainmodel.Hang;
+import Model.Hang;
+import Service.HangService;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +21,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CRUDhang extends javax.swing.JFrame {
 
-//    HangService hS = new HangService();
-//    List<Hang> list = new ArrayList<>();
-
+    HangService hS = new HangService();
+    List<Hang> list = new ArrayList<>();
+    DefaultTableModel defaultTableModel;
     public CRUDhang() {
         initComponents();
-        setTitle("Hãng");
-        ImageIcon icon = new ImageIcon(getClass().getResource("/Images/sevent-logo.png"));
-        Image image = icon.getImage();
-        setIconImage(image);
-//        loadTBH();
+        this.setLocationRelativeTo(null);
+        fillTable(hS.getListHang());
     }
 
     /**
@@ -57,10 +56,10 @@ public class CRUDhang extends javax.swing.JFrame {
         btnXoa = new javax.swing.JButton();
         btnMoi = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        txtMa1 = new javax.swing.JTextField();
+        txtTao = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
-        txtTen1 = new javax.swing.JTextField();
+        txtSua = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         rdo_con = new javax.swing.JRadioButton();
@@ -183,13 +182,13 @@ public class CRUDhang extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Ngày Tạo");
 
-        txtMa1.setBorder(null);
+        txtTao.setBorder(null);
 
         jSeparator3.setForeground(new java.awt.Color(204, 0, 51));
 
         jSeparator4.setForeground(new java.awt.Color(204, 0, 51));
 
-        txtTen1.setBorder(null);
+        txtSua.setBorder(null);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Ngày Sửa");
@@ -222,13 +221,13 @@ public class CRUDhang extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtMa1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtTao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtTen1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtSua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -276,13 +275,13 @@ public class CRUDhang extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(4, 4, 4)
-                        .addComponent(txtMa1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTao, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(4, 4, 4)
-                        .addComponent(txtTen1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSua, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
@@ -323,25 +322,56 @@ public class CRUDhang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-//        updateH();
+         int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
+
+            if (cf == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(this, hS.update(getField()));
+                fillTable(hS.getListHang());
+            }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-//        deleteH();
+        if (txtMa.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mã không được trống");
+            txtMa.requestFocus();
+            return;
+        }
+          int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
+
+        if (cf == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, hS.delete(txtMa.getText().trim()));
+            fillTable(hS.getListHang());
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
         txtMa.setText("");
         txtTen.setText("");
+        txtTao.setText("");
+        txtSua.setText("");
+        rdo_con.setSelected(true);
     }//GEN-LAST:event_btnMoiActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-//        addH();
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
+
+        if (cf == JOptionPane.YES_OPTION) 
+        { JOptionPane.showMessageDialog(this, hS.insert(getField()));
+        fillTable(hS.getListHang());
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHangMouseClicked
         int index = tblHang.getSelectedRow();
-//        mouseClickTBH(index);
+        txtMa.setText(tblHang.getValueAt(index, 1).toString());
+        txtTen.setText(tblHang.getValueAt(index, 2).toString());
+        txtTao.setText(tblHang.getValueAt(index, 3).toString());
+        txtSua.setText(tblHang.getValueAt(index, 4).toString());
+        if(Integer.parseInt(tblHang.getValueAt(index, 5).toString()) == 1) {
+            rdo_con.setSelected(true);
+        } else {
+            rdo_het.setSelected(true);
+        }
     }//GEN-LAST:event_tblHangMouseClicked
 
     /**
@@ -380,6 +410,28 @@ public class CRUDhang extends javax.swing.JFrame {
                 new CRUDhang().setVisible(true);
             }
         });
+    }
+    private void fillTable(List<Hang> list) {
+        defaultTableModel = (DefaultTableModel) tblHang.getModel();
+        defaultTableModel.setRowCount(0);
+        for (Hang hG : list) {
+            defaultTableModel.addRow(new Object[]{hG.getId(), hG.getMa(), hG.getTen(),
+                hG.getNgayTao(), hG.getNgayNhap(), hG.getTrangThai()});
+        }
+    }
+  private Hang getField() {
+        Hang hG = new Hang();
+        hG.setMa(txtMa.getText().trim());
+        hG.setTen(txtTen.getText().trim());
+        hG.setNgayTao(txtTao.getText().trim());
+        hG.setNgayNhap(txtSua.getText().trim());
+        if (rdo_con.isSelected()) {
+            hG.setTrangThai(1);
+        } else {
+            hG.setTrangThai(0);
+        }
+
+        return hG;
     }
 
 //    private void loadTBH() {
@@ -491,8 +543,8 @@ public class CRUDhang extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdo_het;
     private javax.swing.JTable tblHang;
     private javax.swing.JTextField txtMa;
-    private javax.swing.JTextField txtMa1;
+    private javax.swing.JTextField txtSua;
+    private javax.swing.JTextField txtTao;
     private javax.swing.JTextField txtTen;
-    private javax.swing.JTextField txtTen1;
     // End of variables declaration//GEN-END:variables
 }

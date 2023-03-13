@@ -4,6 +4,8 @@
  */
 package View;
 
+import Model.ManHinh;
+import Service.ManHinhService;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +19,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CRUDmanhinh extends javax.swing.JFrame {
 
-
+    ManHinhService mS = new ManHinhService();
+    List<ManHinh> list = new ArrayList<>();
+    DefaultTableModel defaultTableModel;
     public CRUDmanhinh() {
         initComponents();
-        setTitle("Màn hình");
-        ImageIcon icon = new ImageIcon(getClass().getResource("/Images/sevent-logo.png"));
-        Image image = icon.getImage();
-        setIconImage(image);
+        fillTable(mS.getListManHinh());
     }
 
     /**
@@ -52,10 +53,10 @@ public class CRUDmanhinh extends javax.swing.JFrame {
         btnXoa = new javax.swing.JButton();
         btnMoi = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        txtMa1 = new javax.swing.JTextField();
+        txtTao = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
-        txtTen1 = new javax.swing.JTextField();
+        txtSua = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         rdo_con = new javax.swing.JRadioButton();
@@ -177,13 +178,13 @@ public class CRUDmanhinh extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Ngày Tạo");
 
-        txtMa1.setBorder(null);
+        txtTao.setBorder(null);
 
         jSeparator3.setForeground(new java.awt.Color(204, 0, 51));
 
         jSeparator4.setForeground(new java.awt.Color(204, 0, 51));
 
-        txtTen1.setBorder(null);
+        txtSua.setBorder(null);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Ngày Sửa");
@@ -229,13 +230,13 @@ public class CRUDmanhinh extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtMa1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtTao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGap(18, 18, 18)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel4)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTen1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtSua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(jPanel3Layout.createSequentialGroup()
                             .addGap(39, 39, 39)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,13 +272,13 @@ public class CRUDmanhinh extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(4, 4, 4)
-                        .addComponent(txtMa1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTao, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(4, 4, 4)
-                        .addComponent(txtTen1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSua, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
@@ -320,11 +321,26 @@ public class CRUDmanhinh extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
+
+            if (cf == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(this, mS.update(getField()));
+                fillTable(mS.getListManHinh());
+            }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        
+    if (txtMa.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mã không được trống");
+            txtMa.requestFocus();
+            return;
+        }
+          int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
+
+        if (cf == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, mS.delete(txtMa.getText().trim()));
+            fillTable(mS.getListManHinh());
+        }     
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
@@ -333,13 +349,26 @@ public class CRUDmanhinh extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMoiActionPerformed
 
     private void tblHinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHinhMouseClicked
-        int index = tblHinh.getSelectedRow();
-//        mouseClickTBM(index);
+         int index = tblHinh.getSelectedRow();
+        txtMa.setText(tblHinh.getValueAt(index, 1).toString());
+        txtTen.setText(tblHinh.getValueAt(index, 2).toString());
+        txtTao.setText(tblHinh.getValueAt(index, 3).toString());
+        txtSua.setText(tblHinh.getValueAt(index, 4).toString());
+        if(Integer.parseInt(tblHinh.getValueAt(index, 5).toString()) == 1) {
+            rdo_con.setSelected(true);
+        } else {
+            rdo_het.setSelected(true);
+        }
     }//GEN-LAST:event_tblHinhMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        
-    }//GEN-LAST:event_btnThemActionPerformed
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
+
+        if (cf == JOptionPane.YES_OPTION) 
+        { JOptionPane.showMessageDialog(this, mS.insert(getField()));
+        fillTable(mS.getListManHinh());
+        }
+            }//GEN-LAST:event_btnThemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -378,6 +407,29 @@ public class CRUDmanhinh extends javax.swing.JFrame {
             }
         });
     }
+      private void fillTable(List<ManHinh> list) {
+        defaultTableModel = (DefaultTableModel) tblHinh.getModel();
+        defaultTableModel.setRowCount(0);
+        for (ManHinh hG : list) {
+            defaultTableModel.addRow(new Object[]{hG.getId(), hG.getMa(), hG.getTen(),
+                hG.getNgayTao(), hG.getNgayNhap(), hG.getTrangThai()});
+        }
+    }
+  private ManHinh getField() {
+        ManHinh mH = new ManHinh();
+        mH.setMa(txtMa.getText().trim());
+        mH.setTen(txtTen.getText().trim());
+        mH.setNgayTao(txtTao.getText().trim());
+        mH.setNgayNhap(txtSua.getText().trim());
+        if (rdo_con.isSelected()) {
+            mH.setTrangThai(1);
+        } else {
+            mH.setTrangThai(0);
+        }
+
+        return mH;
+    }
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -403,8 +455,8 @@ public class CRUDmanhinh extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdo_het;
     private javax.swing.JTable tblHinh;
     private javax.swing.JTextField txtMa;
-    private javax.swing.JTextField txtMa1;
+    private javax.swing.JTextField txtSua;
+    private javax.swing.JTextField txtTao;
     private javax.swing.JTextField txtTen;
-    private javax.swing.JTextField txtTen1;
     // End of variables declaration//GEN-END:variables
 }

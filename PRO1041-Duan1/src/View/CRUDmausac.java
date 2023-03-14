@@ -5,6 +5,8 @@
 package View;
 
 
+import Model.MauSac;
+import Service.MauSacService;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +21,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CRUDmausac extends javax.swing.JFrame {
 
-    
+    MauSacService mauSacService = new MauSacService();
+    DefaultTableModel defaultTableModel;
 
 
     public CRUDmausac() {
         initComponents();
-        setTitle("Màu sắc");
-        ImageIcon icon = new ImageIcon(getClass().getResource("/Images/sevent-logo.png"));
-        Image image = icon.getImage();
-        setIconImage(image);
+       this.setLocationRelativeTo(null);
+        fillTable(mauSacService.getAllMauSac());
 
     }
 
@@ -47,7 +48,7 @@ public class CRUDmausac extends javax.swing.JFrame {
         tblMauSac = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtMauSac = new javax.swing.JTextField();
+        txtMa = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtTen = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -57,10 +58,10 @@ public class CRUDmausac extends javax.swing.JFrame {
         btnXoa = new javax.swing.JButton();
         btnMoi = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        txtMauSac1 = new javax.swing.JTextField();
+        txtNgayTao = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
-        txtTen1 = new javax.swing.JTextField();
+        txtNgaySua = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         rdo_con = new javax.swing.JRadioButton();
@@ -114,7 +115,7 @@ public class CRUDmausac extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Mã màu sắc");
 
-        txtMauSac.setBorder(null);
+        txtMa.setBorder(null);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Tên màu sắc");
@@ -182,13 +183,13 @@ public class CRUDmausac extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Ngày Tạo");
 
-        txtMauSac1.setBorder(null);
+        txtNgayTao.setBorder(null);
 
         jSeparator3.setForeground(new java.awt.Color(204, 0, 51));
 
         jSeparator4.setForeground(new java.awt.Color(204, 0, 51));
 
-        txtTen1.setBorder(null);
+        txtNgaySua.setBorder(null);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Ngày Sửa");
@@ -221,19 +222,19 @@ public class CRUDmausac extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtMauSac1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtNgayTao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtTen1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtNgaySua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtMauSac, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
+                                .addComponent(txtMa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -261,7 +262,7 @@ public class CRUDmausac extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(4, 4, 4)
-                        .addComponent(txtMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -275,13 +276,13 @@ public class CRUDmausac extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(4, 4, 4)
-                        .addComponent(txtMauSac1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(4, 4, 4)
-                        .addComponent(txtTen1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNgaySua, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
@@ -324,24 +325,56 @@ public class CRUDmausac extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        
+         int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?", "Sửa", JOptionPane.YES_NO_OPTION);
+
+        if (cf == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, mauSacService.updateMS(getField()));
+            fillTable(mauSacService.getAllMauSac());
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        
+        if (txtMa.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mã không được trống");
+            txtMa.requestFocus();
+            return;
+        }
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
+
+        if (cf == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, mauSacService.deleteMS(txtMa.getText().trim()));
+            fillTable(mauSacService.getAllMauSac());
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
-        txtMauSac.setText("");
+        txtMa.setText("");
         txtTen.setText("");
+        txtNgayTao.setText("");
+        txtNgaySua.setText("");
+        rdo_con.setSelected(true);
     }//GEN-LAST:event_btnMoiActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
+
+        if (cf == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, mauSacService.insertMS(getField()));
+            fillTable(mauSacService.getAllMauSac());
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblMauSacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMauSacMouseClicked
-        
+        int index = tblMauSac.getSelectedRow();
+        txtMa.setText(tblMauSac.getValueAt(index, 1).toString());
+        txtTen.setText(tblMauSac.getValueAt(index, 2).toString());
+        txtNgayTao.setText(tblMauSac.getValueAt(index, 3).toString());
+        txtNgaySua.setText(tblMauSac.getValueAt(index, 4).toString());
+        if (Integer.parseInt(tblMauSac.getValueAt(index, 5).toString()) == 1) {
+            rdo_con.setSelected(true);
+        } else {
+            rdo_het.setSelected(true);
+        }
     }//GEN-LAST:event_tblMauSacMouseClicked
 
     /**
@@ -382,7 +415,29 @@ public class CRUDmausac extends javax.swing.JFrame {
         });
     }
     
+private void fillTable(List<MauSac> list) {
+        defaultTableModel = (DefaultTableModel) tblMauSac.getModel();
+        defaultTableModel.setRowCount(0);
+        for (MauSac mauSac : list) {
+            defaultTableModel.addRow(new Object[]{mauSac.getId(), mauSac.getMa(), mauSac.getTen(),
+                mauSac.getNgayTao(), mauSac.getNgayNhap(), mauSac.getTrangThai()});
+        }
+    }
 
+    private MauSac getField() {
+        MauSac mauSac = new MauSac();
+        mauSac.setMa(txtMa.getText().trim());
+        mauSac.setTen(txtTen.getText().trim());
+        mauSac.setNgayTao(txtNgayTao.getText().trim());
+        mauSac.setNgayNhap(txtNgaySua.getText().trim());
+        if (rdo_con.isSelected()) {
+            mauSac.setTrangThai(1);
+        } else {
+            mauSac.setTrangThai(0);
+        }
+
+        return mauSac;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMoi;
@@ -406,9 +461,9 @@ public class CRUDmausac extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdo_con;
     private javax.swing.JRadioButton rdo_het;
     private javax.swing.JTable tblMauSac;
-    private javax.swing.JTextField txtMauSac;
-    private javax.swing.JTextField txtMauSac1;
+    private javax.swing.JTextField txtMa;
+    private javax.swing.JTextField txtNgaySua;
+    private javax.swing.JTextField txtNgayTao;
     private javax.swing.JTextField txtTen;
-    private javax.swing.JTextField txtTen1;
     // End of variables declaration//GEN-END:variables
 }

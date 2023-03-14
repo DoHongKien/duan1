@@ -4,7 +4,8 @@
  */
 package View;
 
-
+import Model.OCung;
+import Service.OCungService;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,20 +13,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author quyen
  */
 public class CRUDocung extends javax.swing.JFrame {
 
+    OCungService oCungService = new OCungService();
+    DefaultTableModel defaultTableModel;
 
     public CRUDocung() {
         initComponents();
-        setTitle("Ổ cứng");
-        ImageIcon icon = new ImageIcon(getClass().getResource("/Images/sevent-logo.png"));
-        Image image = icon.getImage();
-        setIconImage(image);
+        this.setLocationRelativeTo(null);
+        fillTable(oCungService.getAllOCung());
     }
 
     /**
@@ -54,10 +54,10 @@ public class CRUDocung extends javax.swing.JFrame {
         btnXoa = new javax.swing.JButton();
         btnMoi = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        txtMa1 = new javax.swing.JTextField();
+        txtNgayTao = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
-        txtTen1 = new javax.swing.JTextField();
+        txtNgaySua = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         rdo_con = new javax.swing.JRadioButton();
@@ -179,13 +179,13 @@ public class CRUDocung extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Ngày Tạo");
 
-        txtMa1.setBorder(null);
+        txtNgayTao.setBorder(null);
 
         jSeparator3.setForeground(new java.awt.Color(204, 0, 51));
 
         jSeparator4.setForeground(new java.awt.Color(204, 0, 51));
 
-        txtTen1.setBorder(null);
+        txtNgaySua.setBorder(null);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Ngày Sửa");
@@ -243,13 +243,13 @@ public class CRUDocung extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtMa1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtNgayTao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGap(18, 18, 18)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel4)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTen1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(txtNgaySua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -274,13 +274,13 @@ public class CRUDocung extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(4, 4, 4)
-                        .addComponent(txtMa1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(4, 4, 4)
-                        .addComponent(txtTen1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNgaySua, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -323,24 +323,56 @@ public class CRUDocung extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?", "Sửa", JOptionPane.YES_NO_OPTION);
+
+        if (cf == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, oCungService.updateOC(getField()));
+            fillTable(oCungService.getAllOCung());
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        
+        if (txtMa.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mã không được trống");
+            txtMa.requestFocus();
+            return;
+        }
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
+
+        if (cf == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, oCungService.deleteOC(txtMa.getText().trim()));
+            fillTable(oCungService.getAllOCung());
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
         txtMa.setText("");
         txtTen.setText("");
+        txtNgayTao.setText("");
+        txtNgaySua.setText("");
+        rdo_con.setSelected(true);
     }//GEN-LAST:event_btnMoiActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
+
+        if (cf == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, oCungService.insertOC(getField()));
+            fillTable(oCungService.getAllOCung());
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblOCungMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOCungMouseClicked
-        
+        int index = tblOCung.getSelectedRow();
+        txtMa.setText(tblOCung.getValueAt(index, 1).toString());
+        txtTen.setText(tblOCung.getValueAt(index, 2).toString());
+        txtNgayTao.setText(tblOCung.getValueAt(index, 3).toString());
+        txtNgaySua.setText(tblOCung.getValueAt(index, 4).toString());
+        if (Integer.parseInt(tblOCung.getValueAt(index, 5).toString()) == 1) {
+            rdo_con.setSelected(true);
+        } else {
+            rdo_het.setSelected(true);
+        }
     }//GEN-LAST:event_tblOCungMouseClicked
 
     /**
@@ -381,7 +413,30 @@ public class CRUDocung extends javax.swing.JFrame {
         });
     }
 
-    
+    private void fillTable(List<OCung> list) {
+        defaultTableModel = (DefaultTableModel) tblOCung.getModel();
+        defaultTableModel.setRowCount(0);
+        for (OCung oCung : list) {
+            defaultTableModel.addRow(new Object[]{oCung.getId(), oCung.getMa(), oCung.getTen(),
+                oCung.getNgayTao(), oCung.getNgayNhap(), oCung.getTrangThai()});
+        }
+    }
+
+    private OCung getField() {
+        OCung oCung = new OCung();
+        oCung.setMa(txtMa.getText().trim());
+        oCung.setTen(txtTen.getText().trim());
+        oCung.setNgayTao(txtNgayTao.getText().trim());
+        oCung.setNgayNhap(txtNgaySua.getText().trim());
+        if (rdo_con.isSelected()) {
+            oCung.setTrangThai(1);
+        } else {
+            oCung.setTrangThai(0);
+        }
+
+        return oCung;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMoi;
     private javax.swing.JButton btnSua;
@@ -405,8 +460,8 @@ public class CRUDocung extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdo_het;
     private javax.swing.JTable tblOCung;
     private javax.swing.JTextField txtMa;
-    private javax.swing.JTextField txtMa1;
+    private javax.swing.JTextField txtNgaySua;
+    private javax.swing.JTextField txtNgayTao;
     private javax.swing.JTextField txtTen;
-    private javax.swing.JTextField txtTen1;
     // End of variables declaration//GEN-END:variables
 }

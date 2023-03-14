@@ -81,6 +81,11 @@ public class OCung {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
+
+    @Override
+    public String toString() {
+        return "OCung{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", ngayTao=" + ngayTao + ", ngayNhap=" + ngayNhap + ", trangThai=" + trangThai + '}';
+    }
     
     
 }

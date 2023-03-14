@@ -174,7 +174,7 @@
                                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="jSeparator3" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtMa1" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="txtNgayTao" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -182,7 +182,7 @@
                                   <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="jSeparator4" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtDungL1" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="txtNgaySua" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -199,7 +199,7 @@
                                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtDungL" alignment="0" pref="120" max="32767" attributes="0"/>
+                                      <Component id="txtTen" alignment="0" pref="120" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -238,7 +238,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Component id="txtDungL" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="txtTen" min="-2" pref="22" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                           </Group>
@@ -248,14 +248,14 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Component id="txtMa1" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="txtNgayTao" min="-2" pref="22" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Component id="txtDungL1" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="txtNgaySua" min="-2" pref="22" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jSeparator4" min="-2" pref="10" max="-2" attributes="0"/>
                           </Group>
@@ -305,7 +305,7 @@
                 <Property name="text" type="java.lang.String" value="Dung l&#x1b0;&#x1ee3;ng"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtDungL">
+            <Component class="javax.swing.JTextField" name="txtTen">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -444,7 +444,7 @@
                 <Property name="text" type="java.lang.String" value="Ng&#xe0;y T&#x1ea1;o"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtMa1">
+            <Component class="javax.swing.JTextField" name="txtNgayTao">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -466,7 +466,7 @@
                 <Property name="text" type="java.lang.String" value="Ng&#xe0;y S&#x1eed;a"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtDungL1">
+            <Component class="javax.swing.JTextField" name="txtNgaySua">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>

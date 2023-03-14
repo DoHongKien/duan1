@@ -4,6 +4,8 @@
  */
 package View;
 
+import Model.Ram;
+import Service.RamService;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +19,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CRUDram extends javax.swing.JFrame {
 
+    RamService ramService = new RamService();
+    DefaultTableModel defaultTableModel;
+    
     public CRUDram() {
         initComponents();
-        setTitle("RAM");
-        ImageIcon icon = new ImageIcon(getClass().getResource("/Images/sevent-logo.png"));
-        Image image = icon.getImage();
-        setIconImage(image);
+        this.setLocationRelativeTo(null);
+        fillTable(ramService.getAllRam());
     }
 
     /**
@@ -43,7 +46,7 @@ public class CRUDram extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtMa = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtDungL = new javax.swing.JTextField();
+        txtTen = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         btnThem = new javax.swing.JButton();
@@ -51,10 +54,10 @@ public class CRUDram extends javax.swing.JFrame {
         btnXoa = new javax.swing.JButton();
         btnMoi = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        txtMa1 = new javax.swing.JTextField();
+        txtNgayTao = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
-        txtDungL1 = new javax.swing.JTextField();
+        txtNgaySua = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         rdo_con = new javax.swing.JRadioButton();
@@ -113,7 +116,7 @@ public class CRUDram extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Dung lượng");
 
-        txtDungL.setBorder(null);
+        txtTen.setBorder(null);
 
         jSeparator1.setForeground(new java.awt.Color(204, 0, 51));
 
@@ -176,14 +179,14 @@ public class CRUDram extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Ngày Tạo");
 
-        txtMa1.setBorder(null);
+        txtNgayTao.setBorder(null);
 
         jSeparator3.setForeground(new java.awt.Color(204, 0, 51));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Ngày Sửa");
 
-        txtDungL1.setBorder(null);
+        txtNgaySua.setBorder(null);
 
         jSeparator4.setForeground(new java.awt.Color(204, 0, 51));
 
@@ -215,13 +218,13 @@ public class CRUDram extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtMa1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtNgayTao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtDungL1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtNgaySua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -233,7 +236,7 @@ public class CRUDram extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtDungL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))))
+                                .addComponent(txtTen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,7 +264,7 @@ public class CRUDram extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(4, 4, 4)
-                        .addComponent(txtDungL, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12)
@@ -269,13 +272,13 @@ public class CRUDram extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(4, 4, 4)
-                        .addComponent(txtMa1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(4, 4, 4)
-                        .addComponent(txtDungL1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNgaySua, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -316,23 +319,56 @@ public class CRUDram extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?", "Sửa", JOptionPane.YES_NO_OPTION);
+
+        if (cf == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, ramService.updateRam(getField()));
+            fillTable(ramService.getAllRam());
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        
+        if (txtMa.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mã không được trống");
+            txtMa.requestFocus();
+            return;
+        }
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
+
+        if (cf == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, ramService.deleteRam(txtMa.getText().trim()));
+            fillTable(ramService.getAllRam());
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
-        // TODO add your handling code here:
+        txtMa.setText("");
+        txtTen.setText("");
+        txtNgayTao.setText("");
+        txtNgaySua.setText("");
+        rdo_con.setSelected(true);
     }//GEN-LAST:event_btnMoiActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
+
+        if (cf == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, ramService.insertRam(getField()));
+            fillTable(ramService.getAllRam());
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblRamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRamMouseClicked
-        
+        int index = tblRam.getSelectedRow();
+        txtMa.setText(tblRam.getValueAt(index, 1).toString());
+        txtTen.setText(tblRam.getValueAt(index, 2).toString());
+        txtNgayTao.setText(tblRam.getValueAt(index, 3).toString());
+        txtNgaySua.setText(tblRam.getValueAt(index, 4).toString());
+        if (Integer.parseInt(tblRam.getValueAt(index, 5).toString()) == 1) {
+            rdo_con.setSelected(true);
+        } else {
+            rdo_het.setSelected(true);
+        }
     }//GEN-LAST:event_tblRamMouseClicked
 
     /**
@@ -373,7 +409,29 @@ public class CRUDram extends javax.swing.JFrame {
         });
     }
     
+    private void fillTable(List<Ram> list) {
+        defaultTableModel = (DefaultTableModel) tblRam.getModel();
+        defaultTableModel.setRowCount(0);
+        for (Ram ram : list) {
+            defaultTableModel.addRow(new Object[]{ram.getId(), ram.getMa(), ram.getTen(),
+                ram.getNgayTao(), ram.getNgayNhap(), ram.getTrangThai()});
+        }
+    }
 
+    private Ram getField() {
+        Ram ram = new Ram();
+        ram.setMa(txtMa.getText().trim());
+        ram.setTen(txtTen.getText().trim());
+        ram.setNgayTao(txtNgayTao.getText().trim());
+        ram.setNgayNhap(txtNgaySua.getText().trim());
+        if (rdo_con.isSelected()) {
+            ram.setTrangThai(1);
+        } else {
+            ram.setTrangThai(0);
+        }
+
+        return ram;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMoi;
@@ -397,9 +455,9 @@ public class CRUDram extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdo_con;
     private javax.swing.JRadioButton rdo_het;
     private javax.swing.JTable tblRam;
-    private javax.swing.JTextField txtDungL;
-    private javax.swing.JTextField txtDungL1;
     private javax.swing.JTextField txtMa;
-    private javax.swing.JTextField txtMa1;
+    private javax.swing.JTextField txtNgaySua;
+    private javax.swing.JTextField txtNgayTao;
+    private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables
 }

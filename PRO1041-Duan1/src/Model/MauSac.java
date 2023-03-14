@@ -81,6 +81,11 @@ public class MauSac {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
+
+    @Override
+    public String toString() {
+        return "MauSac{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", ngayTao=" + ngayTao + ", ngayNhap=" + ngayNhap + ", trangThai=" + trangThai + '}';
+    }
     
     
 }

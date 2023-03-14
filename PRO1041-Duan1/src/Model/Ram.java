@@ -81,6 +81,11 @@ public class Ram {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
+
+    @Override
+    public String toString() {
+        return "Ram{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", ngayTao=" + ngayTao + ", ngayNhap=" + ngayNhap + ", trangThai=" + trangThai + '}';
+    }
     
     
 }

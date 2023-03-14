@@ -70,6 +70,12 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         chk_trangthai = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         txt_diachi = new javax.swing.JTextArea();
+        jLabel30 = new javax.swing.JLabel();
+        txt_ngayTao = new javax.swing.JTextField();
+        jSeparator5 = new javax.swing.JSeparator();
+        jLabel31 = new javax.swing.JLabel();
+        txt_ngayNhap = new javax.swing.JTextField();
+        jSeparator7 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
 
@@ -88,50 +94,50 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         txt_ma.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_ma.setBorder(null);
         txt_ma.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanel3.add(txt_ma, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 49, 174, -1));
+        jPanel3.add(txt_ma, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 174, -1));
 
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel25.setText("Tên khách hàng");
-        jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 119, -1, -1));
+        jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         txt_ten.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_ten.setBorder(null);
-        jPanel3.add(txt_ten, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 151, 174, -1));
+        jPanel3.add(txt_ten, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 174, -1));
 
         txt_ngaysinh.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_ngaysinh.setBorder(null);
-        jPanel3.add(txt_ngaysinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 236, 174, -1));
+        jPanel3.add(txt_ngaysinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 174, -1));
 
         jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel26.setText("Ngày sinh");
-        jPanel3.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 206, -1, -1));
+        jPanel3.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel27.setText("Giới Tính");
-        jPanel3.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 19, -1, -1));
+        jPanel3.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         rdo_nam.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(rdo_nam);
         rdo_nam.setSelected(true);
         rdo_nam.setText("Nam");
-        jPanel3.add(rdo_nam, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 49, 67, -1));
+        jPanel3.add(rdo_nam, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 67, -1));
 
         rdo_nu.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(rdo_nu);
         rdo_nu.setText("Nữ");
-        jPanel3.add(rdo_nu, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 49, 67, -1));
+        jPanel3.add(rdo_nu, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 67, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Số điện thoại");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 119, -1, -1));
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
 
         txt_sdt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_sdt.setBorder(null);
-        jPanel3.add(txt_sdt, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 151, 174, -1));
+        jPanel3.add(txt_sdt, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 174, -1));
 
         jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel28.setText("Địa chỉ");
-        jPanel3.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(376, 206, -1, -1));
+        jPanel3.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
 
         txt_timkiem.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_timkiem.setBorder(null);
@@ -140,7 +146,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
                 txt_timkiemKeyPressed(evt);
             }
         });
-        jPanel3.add(txt_timkiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 50, 174, -1));
+        jPanel3.add(txt_timkiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 40, 174, -1));
 
         jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel29.setText("Tìm kiếm");
@@ -162,22 +168,22 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbl_khachhang);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 663, 207));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 1030, 207));
 
         jSeparator1.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 72, 174, 12));
+        jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 174, 12));
 
         jSeparator2.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel3.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 173, 174, 12));
+        jPanel3.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 174, 12));
 
         jSeparator3.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel3.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 258, 174, 10));
+        jPanel3.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 174, 10));
 
         jSeparator4.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel3.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 173, 174, 10));
+        jPanel3.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 174, 10));
 
         jSeparator6.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel3.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(739, 74, 174, 10));
+        jPanel3.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 60, 174, 10));
 
         btn_them.setBackground(new java.awt.Color(186, 79, 84));
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -188,7 +194,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
                 btn_themActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_them, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 90, 32));
+        jPanel3.add(btn_them, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, 90, 32));
 
         btn_sua.setBackground(new java.awt.Color(186, 79, 84));
         btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -199,7 +205,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
                 btn_suaActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 540, 87, 32));
+        jPanel3.add(btn_sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 540, 87, 32));
 
         btn_xoa.setBackground(new java.awt.Color(186, 79, 84));
         btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -210,7 +216,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
                 btn_xoaActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 540, 87, 32));
+        jPanel3.add(btn_xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 540, 87, 32));
 
         btn_lammoi.setBackground(new java.awt.Color(186, 79, 84));
         btn_lammoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -221,7 +227,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
                 btn_lammoiActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_lammoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 540, 87, 32));
+        jPanel3.add(btn_lammoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 540, 87, 32));
 
         btn_first.setBackground(new java.awt.Color(186, 79, 84));
         btn_first.setText("<<");
@@ -230,7 +236,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
                 btn_firstActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_first, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, 50, 30));
+        jPanel3.add(btn_first, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 540, 50, 30));
 
         btn_predious.setBackground(new java.awt.Color(186, 79, 84));
         btn_predious.setText("<");
@@ -239,7 +245,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
                 btn_prediousActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_predious, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 540, 40, 30));
+        jPanel3.add(btn_predious, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 540, 40, 30));
 
         btn_next.setBackground(new java.awt.Color(186, 79, 84));
         btn_next.setText(">");
@@ -248,7 +254,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
                 btn_nextActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 540, 40, 30));
+        jPanel3.add(btn_next, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 540, 40, 30));
 
         btn_last.setBackground(new java.awt.Color(186, 79, 84));
         btn_last.setText(">>");
@@ -257,18 +263,40 @@ public class JPanelKhachHang extends javax.swing.JPanel {
                 btn_lastActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_last, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 540, 50, 30));
+        jPanel3.add(btn_last, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 540, 50, 30));
 
         chk_trangthai.setText("Trạng thái");
-        jPanel3.add(chk_trangthai, new org.netbeans.lib.awtextra.AbsoluteConstraints(578, 51, -1, -1));
+        jPanel3.add(chk_trangthai, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, -1, -1));
 
         txt_diachi.setColumns(20);
         txt_diachi.setRows(5);
         jScrollPane2.setViewportView(txt_diachi);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 236, -1, 70));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 230, -1, 70));
 
-        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 62, -1, 618));
+        jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel30.setText("Ngày Tạo");
+        jPanel3.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, -1));
+
+        txt_ngayTao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_ngayTao.setBorder(null);
+        jPanel3.add(txt_ngayTao, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 174, -1));
+
+        jSeparator5.setForeground(new java.awt.Color(186, 79, 84));
+        jPanel3.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 174, 10));
+
+        jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel31.setText("Ngày Nhập");
+        jPanel3.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, -1, -1));
+
+        txt_ngayNhap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_ngayNhap.setBorder(null);
+        jPanel3.add(txt_ngayNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 174, -1));
+
+        jSeparator7.setForeground(new java.awt.Color(186, 79, 84));
+        jPanel3.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 174, 10));
+
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, 618));
 
         jPanel1.setBackground(new java.awt.Color(186, 79, 84));
 
@@ -602,6 +630,8 @@ public class JPanelKhachHang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
@@ -611,12 +641,16 @@ public class JPanelKhachHang extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
     private javax.swing.JRadioButton rdo_nam;
     private javax.swing.JRadioButton rdo_nu;
     private javax.swing.JTable tbl_khachhang;
     private javax.swing.JTextArea txt_diachi;
     private javax.swing.JTextField txt_ma;
+    private javax.swing.JTextField txt_ngayNhap;
+    private javax.swing.JTextField txt_ngayTao;
     private javax.swing.JTextField txt_ngaysinh;
     private javax.swing.JTextField txt_sdt;
     private javax.swing.JTextField txt_ten;

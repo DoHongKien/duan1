@@ -524,19 +524,19 @@
         <Container class="javax.swing.JPanel" name="pnlCard3">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="180" y="20" width="1070" height="680"/>
+              <AbsoluteConstraints x="180" y="0" width="1070" height="700"/>
             </Constraint>
           </Constraints>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnlCard1" min="-2" pref="1070" max="-2" attributes="0"/>
+                  <Component id="pnlCard1" alignment="0" pref="1070" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnlCard1" min="-2" pref="680" max="-2" attributes="0"/>
+                  <Component id="pnlCard1" alignment="0" pref="700" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>

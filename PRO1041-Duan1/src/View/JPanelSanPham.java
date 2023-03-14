@@ -130,6 +130,12 @@ public class JPanelSanPham extends javax.swing.JPanel {
         btn_moi = new javax.swing.JButton();
         btn_them = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
+        jLabel30 = new javax.swing.JLabel();
+        txt_ngayTao = new javax.swing.JTextField();
+        jSeparator7 = new javax.swing.JSeparator();
+        jLabel31 = new javax.swing.JLabel();
+        txt_ngayNhap = new javax.swing.JTextField();
+        jSeparator8 = new javax.swing.JSeparator();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -232,11 +238,11 @@ public class JPanelSanPham extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Serial");
+        jLabel8.setText("Sản phẩm");
         jLabel8.setMaximumSize(new java.awt.Dimension(100, 50));
         jLabel8.setMinimumSize(new java.awt.Dimension(40, 20));
         jLabel8.setPreferredSize(new java.awt.Dimension(40, 20));
-        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, -1, -1));
+        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 60, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -279,6 +285,9 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 32, -1));
 
         btn_vga.setBackground(new java.awt.Color(186, 79, 84));
+        btn_vga.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_vga.setForeground(new java.awt.Color(255, 255, 255));
+        btn_vga.setText("VGA");
         btn_vga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_vgaActionPerformed(evt);
@@ -287,6 +296,9 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel4.add(btn_vga, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 130, 28));
 
         btn_cpu.setBackground(new java.awt.Color(186, 79, 84));
+        btn_cpu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_cpu.setForeground(new java.awt.Color(255, 255, 255));
+        btn_cpu.setText("CPU");
         btn_cpu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cpuActionPerformed(evt);
@@ -295,6 +307,9 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel4.add(btn_cpu, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 130, 28));
 
         btn_hang.setBackground(new java.awt.Color(186, 79, 84));
+        btn_hang.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_hang.setForeground(new java.awt.Color(255, 255, 255));
+        btn_hang.setText("Hãng");
         btn_hang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_hangActionPerformed(evt);
@@ -303,6 +318,9 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel4.add(btn_hang, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 130, 28));
 
         btn_ram.setBackground(new java.awt.Color(186, 79, 84));
+        btn_ram.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_ram.setForeground(new java.awt.Color(255, 255, 255));
+        btn_ram.setText("RAM");
         btn_ram.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ramActionPerformed(evt);
@@ -311,6 +329,9 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel4.add(btn_ram, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 130, 28));
 
         btn_ocung.setBackground(new java.awt.Color(186, 79, 84));
+        btn_ocung.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_ocung.setForeground(new java.awt.Color(255, 255, 255));
+        btn_ocung.setText("Ổ cứng");
         btn_ocung.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ocungActionPerformed(evt);
@@ -319,6 +340,9 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel4.add(btn_ocung, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 130, 28));
 
         btn_serial.setBackground(new java.awt.Color(186, 79, 84));
+        btn_serial.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_serial.setForeground(new java.awt.Color(255, 255, 255));
+        btn_serial.setText("Sản Phẩm");
         btn_serial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_serialActionPerformed(evt);
@@ -327,6 +351,9 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel4.add(btn_serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, 130, 28));
 
         btn_mausac.setBackground(new java.awt.Color(186, 79, 84));
+        btn_mausac.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_mausac.setForeground(new java.awt.Color(255, 255, 255));
+        btn_mausac.setText("Màu Sắc");
         btn_mausac.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_mausacActionPerformed(evt);
@@ -335,6 +362,9 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel4.add(btn_mausac, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, 130, 28));
 
         btn_manhinh.setBackground(new java.awt.Color(186, 79, 84));
+        btn_manhinh.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_manhinh.setForeground(new java.awt.Color(255, 255, 255));
+        btn_manhinh.setText("Màn Hình");
         btn_manhinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_manhinhActionPerformed(evt);
@@ -350,79 +380,101 @@ public class JPanelSanPham extends javax.swing.JPanel {
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setText("Giá bán");
-        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 80, 20));
+        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 50, 20));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setText("Mã sản phẩm");
-        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 80, 20));
+        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 80, 20));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setText("Số lượng tồn");
-        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 80, 20));
+        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 90, 20));
 
         txt_gianhap.setBorder(null);
-        jPanel5.add(txt_gianhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 130, 20));
+        jPanel5.add(txt_gianhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 130, 20));
 
         txt_giaban.setBorder(null);
-        jPanel5.add(txt_giaban, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 130, 20));
+        jPanel5.add(txt_giaban, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 130, 20));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel14.setText("Giá nhập");
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 80, 20));
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 80, 20));
 
         jSeparator1.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel5.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 180, 10));
+        jPanel5.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 130, 10));
 
         txtMa.setBorder(null);
-        jPanel5.add(txtMa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 120, 20));
+        jPanel5.add(txtMa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 130, 20));
 
         jSeparator3.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel5.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 120, 10));
+        jPanel5.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 130, 10));
 
         txtSLTon.setBorder(null);
-        jPanel5.add(txtSLTon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 180, 20));
+        jPanel5.add(txtSLTon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 130, 20));
 
         jSeparator4.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel5.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 130, 10));
+        jPanel5.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 130, 10));
 
         jSeparator5.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel5.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 130, -1));
+        jPanel5.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 130, 10));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel16.setText("Tên sản phẩm");
-        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 80, 20));
+        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 80, 20));
 
         txt_ten.setBorder(null);
-        jPanel5.add(txt_ten, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 120, 20));
+        jPanel5.add(txt_ten, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 130, 20));
 
         jSeparator6.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel5.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 120, 10));
+        jPanel5.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 130, 10));
 
         btn_sua.setBackground(new java.awt.Color(186, 79, 84));
         btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_sua.setForeground(new java.awt.Color(255, 255, 255));
         btn_sua.setText("Sửa");
-        jPanel5.add(btn_sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 87, 32));
+        jPanel5.add(btn_sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 460, 87, 32));
 
         btn_moi.setBackground(new java.awt.Color(186, 79, 84));
         btn_moi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_moi.setForeground(new java.awt.Color(255, 255, 255));
         btn_moi.setText("Mới");
-        jPanel5.add(btn_moi, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, 87, 32));
+        jPanel5.add(btn_moi, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 520, 87, 32));
 
         btn_them.setBackground(new java.awt.Color(186, 79, 84));
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_them.setForeground(new java.awt.Color(255, 255, 255));
         btn_them.setText("Thêm");
-        jPanel5.add(btn_them, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, 87, 32));
+        jPanel5.add(btn_them, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 460, 87, 32));
 
         btn_xoa.setBackground(new java.awt.Color(186, 79, 84));
         btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_xoa.setForeground(new java.awt.Color(255, 255, 255));
         btn_xoa.setText("Xóa");
-        jPanel5.add(btn_xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 490, 87, 32));
+        jPanel5.add(btn_xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 520, 87, 32));
 
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, 350, 580));
+        jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel30.setText("Ngày Tạo");
+        jPanel5.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+
+        txt_ngayTao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_ngayTao.setBorder(null);
+        jPanel5.add(txt_ngayTao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 130, -1));
+
+        jSeparator7.setForeground(new java.awt.Color(186, 79, 84));
+        jPanel5.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 130, 10));
+
+        jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel31.setText("Ngày Nhập");
+        jPanel5.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, -1, -1));
+
+        txt_ngayNhap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_ngayNhap.setBorder(null);
+        jPanel5.add(txt_ngayNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 130, -1));
+
+        jSeparator8.setForeground(new java.awt.Color(186, 79, 84));
+        jPanel5.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 130, 10));
+
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 0, 360, 620));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1070, 620));
     }// </editor-fold>//GEN-END:initComponents
@@ -472,8 +524,8 @@ public class JPanelSanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_mausacActionPerformed
 
     private void btn_serialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_serialActionPerformed
-        CRUDserial serial = new CRUDserial();
-        serial.setVisible(true);
+        CRUDsanpham sanpham = new CRUDsanpham();
+        sanpham.setVisible(true);
     }//GEN-LAST:event_btn_serialActionPerformed
 
 //    public void fillTB() {
@@ -807,6 +859,8 @@ public class JPanelSanPham extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -825,12 +879,16 @@ public class JPanelSanPham extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblSanPham;
     private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtSLTon;
     private javax.swing.JTextField txt_giaban;
     private javax.swing.JTextField txt_gianhap;
+    private javax.swing.JTextField txt_ngayNhap;
+    private javax.swing.JTextField txt_ngayTao;
     private javax.swing.JTextField txt_ten;
     // End of variables declaration//GEN-END:variables
 }

@@ -59,7 +59,6 @@ public class CRUDsanpham extends javax.swing.JFrame {
         btn_xoa = new javax.swing.JButton();
         btn_moi = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(750, 400));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

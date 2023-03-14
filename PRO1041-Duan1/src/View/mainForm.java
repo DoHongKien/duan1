@@ -335,14 +335,14 @@ public class mainForm extends javax.swing.JFrame {
         pnlCard3.setLayout(pnlCard3Layout);
         pnlCard3Layout.setHorizontalGroup(
             pnlCard3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlCard1, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnlCard1, javax.swing.GroupLayout.DEFAULT_SIZE, 1070, Short.MAX_VALUE)
         );
         pnlCard3Layout.setVerticalGroup(
             pnlCard3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlCard1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnlCard1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
 
-        jPanel1.add(pnlCard3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 1070, 680));
+        jPanel1.add(pnlCard3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 1070, 700));
 
         pnlCard4.setLayout(new java.awt.BorderLayout());
         jPanel1.add(pnlCard4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 1070, 680));

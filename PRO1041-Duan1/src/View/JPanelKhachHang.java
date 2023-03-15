@@ -4,7 +4,10 @@
  */
 package View;
 
+import Model.KhachHang;
+import Service.KhachHangService;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,6 +20,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JPanelKhachHang extends javax.swing.JPanel {
 
+    KhachHangService khS = new KhachHangService();
+    List<KhachHang> list = new ArrayList<>();
     int index = 0;
     private static final Pattern DATE_PATTERN = Pattern.compile("^((2000|2400|2800|(19|2[0-9])(0[48]|[2468][048]|[13579][26]))-02-29)$"
             + "|^(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))$"
@@ -319,42 +324,34 @@ public class JPanelKhachHang extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
-//        if (checkValidate()) {
-//            int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
-//            if (cf == JOptionPane.YES_OPTION) {
-//                JOptionPane.showMessageDialog(this, khachHangService.insert(getInput()));
-//                fillTable(khachHangService.getListKhachHang());
-//                clearField();
-//            }
-//        }
+        addKH();
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
-//        if (checkValidateUpdate()) {
-//            int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?", "Sửa", JOptionPane.YES_NO_OPTION);
-//            if (cf == JOptionPane.YES_OPTION) {
-//                JOptionPane.showMessageDialog(this, khachHangService.update(getInput()));
-//                fillTable(khachHangService.getListKhachHang());
-//                clearField();
-//            }
-//        }
+        updateKH();
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
-//        if (txt_ma.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Vui lòng chọn mã để xóa");
-//            return;
-//        }
-//        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
-//        if (cf == JOptionPane.YES_OPTION) {
-//            JOptionPane.showMessageDialog(this, khachHangService.delete(txt_ma.getText()));
-//            fillTable(khachHangService.getListKhachHang());
-//            clearField();
-//        }
+        if (txt_ma.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã để xóa");
+            return;
+        }
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
+        if (cf == JOptionPane.YES_OPTION) {
+            deleteKH();
+        }
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void btn_lammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lammoiActionPerformed
-//        clearField();
+        txt_ma.setText("");
+        txt_ten.setText("");
+        txt_sdt.setText("");
+        txt_diachi.setText("");
+        txt_ngayNhap.setText("");
+        txt_ngayTao.setText("");
+        txt_ngaysinh.setText("");
+        rdo_nam.setSelected(true);
+        chk_trangthai.setSelected(false);
     }//GEN-LAST:event_btn_lammoiActionPerformed
 
     private void btn_firstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_firstActionPerformed
@@ -426,191 +423,109 @@ public class JPanelKhachHang extends javax.swing.JPanel {
 //            fillTable(khachHangService.getListKHByMa(txt_timkiem.getText()));
 //        }
     }//GEN-LAST:event_txt_timkiemKeyPressed
+    private void loadTBV() {
+        list = khS.getListDB();
+        DefaultTableModel mol = (DefaultTableModel) tbl_khachhang.getModel();
+        mol.setRowCount(0);
+        for (KhachHang kh : list) {
+            mol.addRow(new Object[]{kh.getId(), kh.getMa(), kh.getTen(), kh.getNgaySinh(), kh.getGioiTinh(),
+                kh.getSdt(), kh.getDiaChi(), kh.getTrangThai()});
+        }
+        tbl_khachhang.setModel(mol);
+        if (tbl_khachhang.getRowCount() > 0) {
+            mouseClickTBV(0);
+            tbl_khachhang.setRowSelectionInterval(0, 0);
+        }
+    }
 
-//    private void fillTable(List<KhachHang> list) {
-//        defaultTableModel = (DefaultTableModel) tbl_khachhang.getModel();
-//        defaultTableModel.setRowCount(0);
-//        for (KhachHang kh : list) {
-//            String tt = kh.getTrangThai() == 1 ? "Còn" : "Không";
-//            defaultTableModel.addRow(new Object[]{kh.getId(), kh.getMa(), kh.getTen(), kh.getNgaySinh(),
-//                kh.getGioiTinh(), kh.getsDT(), kh.getDiaChi(), tt});
-//        }
-//    }
-//
-//    private KhachHang getInput() {
-//        KhachHang khachHang = new KhachHang();
-//        khachHang.setMa(txt_ma.getText().trim());
-//        khachHang.setTen(txt_ten.getText());
-//        khachHang.setNgaySinh(txt_ngaysinh.getText().trim());
-//        if (rdo_nam.isSelected()) {
-//            khachHang.setGioiTinh("Nam");
-//        } else {
-//            khachHang.setGioiTinh("Nữ");
-//        }
-//        khachHang.setsDT(txt_sdt.getText().trim());
-//        khachHang.setDiaChi(txt_diachi.getText());
-//        if (chk_trangthai.isSelected()) {
-//            khachHang.setTrangThai(1);
-//        } else {
-//            khachHang.setTrangThai(0);
-//        }
-//        return khachHang;
-//    }
-//
-//    private void fillField(int index) {
-//        txt_ma.setText(tbl_khachhang.getValueAt(index, 1).toString());
-//        txt_ten.setText(tbl_khachhang.getValueAt(index, 2).toString());
-//        txt_ngaysinh.setText(tbl_khachhang.getValueAt(index, 3).toString());
-//        txt_sdt.setText(tbl_khachhang.getValueAt(index, 5).toString());
-//        txt_diachi.setText(tbl_khachhang.getValueAt(index, 6).toString());
-//        if (tbl_khachhang.getValueAt(index, 4).toString().equalsIgnoreCase("Nam")) {
-//            rdo_nam.setSelected(true);
-//        } else {
-//            rdo_nu.setSelected(true);
-//        }
-//
-//        if (tbl_khachhang.getValueAt(index, 7).toString().equals("Còn")) {
-//            chk_trangthai.setSelected(true);
-//        } else {
-//            chk_trangthai.setSelected(false);
-//        }
-//    }
-//
-//    private void clearField() {
-//        txt_ma.setText("");
-//        txt_ten.setText("");
-//        txt_ngaysinh.setText("");
-//        txt_diachi.setText("");
-//        txt_sdt.setText("");
-//        chk_trangthai.setSelected(false);
-//        txt_timkiem.setText("");
-//    }
-//
-//    private boolean matches(String date) {
-//        return DATE_PATTERN.matcher(date).matches();
-//    }
-//
-//    private boolean checkValidate() {
-//        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-//        Matcher ma = p.matcher(txt_ma.getText());
-//        Matcher ten = p.matcher(txt_ten.getText());
-//
-//        if (txt_ma.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Mã không được trống");
-//            txt_ma.requestFocus();
-//            return false;
-//        } else if (ma.find()) {
-//            JOptionPane.showMessageDialog(this, "Mã không được chứa ký tự đặc biệt");
-//            txt_ma.requestFocus();
-//            return false;
-//        }
-//
-//        if (checkMa(txt_ma.getText()) == 1) {
-//            JOptionPane.showMessageDialog(this, "Mã khách hàng đã tồn tại");
-//            txt_ma.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_ten.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Tên khách hàng không được trống");
-//            txt_ten.requestFocus();
-//            return false;
-//        } else if (ten.find()) {
-//            JOptionPane.showMessageDialog(this, "Tên không được chứa ký tự đặc biệt");
-//            txt_ten.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_ngaysinh.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Ngày sinh không được trống");
-//            txt_ngaysinh.requestFocus();
-//            return false;
-//        } else if (!matches(txt_ngaysinh.getText())) {
-//            JOptionPane.showMessageDialog(this, "Ngày sinh không đúng định dạng");
-//            txt_ngaysinh.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_sdt.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Số điện thoại không được trống");
-//            txt_sdt.requestFocus();
-//            return false;
-//        } else if (!txt_sdt.getText().matches("0[0-9]{9}")) {
-//            JOptionPane.showMessageDialog(this, "Số điện thoại không đúng định dạng");
-//            txt_sdt.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_diachi.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Địa chỉ không được trống");
-//            txt_diachi.requestFocus();
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    private boolean checkValidateUpdate() {
-//        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-//        Matcher ma = p.matcher(txt_ma.getText());
-//        Matcher ten = p.matcher(txt_ten.getText());
-//
-//        if (txt_ma.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Mã không được trống");
-//            txt_ma.requestFocus();
-//            return false;
-//        } else if (ma.find()) {
-//            JOptionPane.showMessageDialog(this, "Mã không được chứa ký tự đặc biệt");
-//            txt_ma.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_ten.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Tên khách hàng không được trống");
-//            txt_ten.requestFocus();
-//            return false;
-//        } else if (ten.find()) {
-//            JOptionPane.showMessageDialog(this, "Tên không được chứa ký tự đặc biệt");
-//            txt_ten.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_ngaysinh.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Ngày sinh không được trống");
-//            txt_ngaysinh.requestFocus();
-//            return false;
-//        } else if (!matches(txt_ngaysinh.getText())) {
-//            JOptionPane.showMessageDialog(this, "Ngày sinh không đúng định dạng");
-//            txt_ngaysinh.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_sdt.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Số điện thoại không được trống");
-//            txt_sdt.requestFocus();
-//            return false;
-//        } else if (!txt_sdt.getText().matches("0[0-9]{9}")) {
-//            JOptionPane.showMessageDialog(this, "Số điện thoại không đúng định dạng");
-//            txt_sdt.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_diachi.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Địa chỉ không được trống");
-//            txt_diachi.requestFocus();
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    private int checkMa(String ma) {
-//        for (int i = 0; i < khachHangService.getListKhachHang().size(); i++) {
-//            KhachHang get = khachHangService.getListKhachHang().get(i);
-//            if (get.getMa().trim().equalsIgnoreCase(ma)) {
-//                return 1;
-//            }
-//        }
-//        return 2;
-//    }
+    private void addKH() {
+        String ma = txt_ma.getText().trim();
+        String ten = txt_ten.getText().trim();
+        String ngaySinh = txt_ngaysinh.getText();
+        String gt;
+        if (rdo_nam.isSelected() == true) {
+            gt = "nam";
+        } else {
+            gt = "nữ";
+        }
+        String ngayTao = txt_ngayTao.getText().trim();
+        String ngaySua = txt_ngayNhap.getText().trim();
+        String sdt = txt_sdt.getText();
+        String diaChi = txt_diachi.getText();
+        int tt = chk_trangthai.isSelected() ? 0 : 1;
+        KhachHang kh = new KhachHang(0, ma, ten, ngaySinh, gt, sdt, diaChi, ngayTao, ngaySua, tt);
+        KhachHang vCheck = khS.getDB(ma);
+        if (vCheck != null) {
+            JOptionPane.showMessageDialog(this, "Mã khách hàng đã tồn tại");
+        } else {
+            boolean result = khS.create(kh);
+            if (result == true) {
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                loadTBV();
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            }
+        }
+    }
+
+    private void updateKH() {
+        int index = tbl_khachhang.getSelectedRow();
+        list = khS.getListDB();
+        KhachHang kh = list.get(index);
+        String ma = txt_ma.getText();
+        String ten = txt_ten.getText();
+        String ngaySinh = txt_ngaysinh.getText();
+        String gt;
+        if (rdo_nam.isSelected() == true) {
+            gt = "nam";
+        } else {
+            gt = "nữ";
+        }
+        String sdt = txt_sdt.getText();
+        String diaChi = txt_diachi.getText();
+        KhachHang vCheck = khS.getDB(ma);
+        if (vCheck == null) {
+            kh = new KhachHang(kh.getId(), ma, ten, ngaySinh, gt, sdt, diaChi, null, null, kh.getTrangThai());
+            boolean result = khS.update(kh);
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+            loadTBV();
+        } else if (kh.getMa().equals(ma)) {
+            kh = new KhachHang(kh.getId(), ma, ten, ngaySinh, gt, sdt, diaChi, null, null, kh.getTrangThai());
+            boolean result = khS.update(kh);
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+            loadTBV();
+        } else {
+            JOptionPane.showMessageDialog(this, "Mã hãng đã tồn tại");
+        }
+    }
+
+    private void deleteKH() {
+        int index = tbl_khachhang.getSelectedRow();
+        KhachHang kh = list.get(index);
+        boolean result = khS.delete(kh);
+        if (result == true) {
+            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            loadTBV();
+        } else {
+            JOptionPane.showMessageDialog(this, "Xóa thất bại");
+        }
+    }
+
+    private void mouseClickTBV(int index) {
+        list = khS.getListDB();
+        KhachHang kh = list.get(index);
+        txt_ma.setText(kh.getMa());
+        txt_ten.setText(kh.getTen());
+        txt_sdt.setText(kh.getSdt());
+        txt_diachi.setText(kh.getDiaChi());
+        if (kh.getGioiTinh().equalsIgnoreCase("Nam")) {
+            rdo_nam.setSelected(true);
+            return;
+        } else {
+            rdo_nu.setSelected(true);
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_first;

@@ -51,6 +51,19 @@ public class NhanVien {
         this.trangThai = trangThai;
     }
 
+    public NhanVien(int id, String ma, String ten, String ngaySinh, String gioiTinh, String sdt, String diaChi, String ngayTao, String ngayNhap, int trangThai) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.ngaySinh = ngaySinh;
+        this.gioiTinh = gioiTinh;
+        this.sdt = sdt;
+        this.diaChi = diaChi;
+        this.ngayTao = ngayTao;
+        this.ngayNhap = ngayNhap;
+        this.trangThai = trangThai;
+    }
+
     public int getId() {
         return id;
     }

@@ -4,6 +4,8 @@
  */
 package View;
 
+import Model.Vga;
+import Service.VGAService;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +19,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CRUDvga extends javax.swing.JFrame {
 
+    VGAService vgaS = new VGAService();
+    List<Vga> list = new ArrayList<>();
+
     public CRUDvga() {
         initComponents();
         setTitle("VGA");
-        ImageIcon icon = new ImageIcon(getClass().getResource("/Images/sevent-logo.png"));
-        Image image = icon.getImage();
-        setIconImage(image);
     }
 
     /**
@@ -51,10 +53,10 @@ public class CRUDvga extends javax.swing.JFrame {
         btnXoa = new javax.swing.JButton();
         btnMoi = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        txtMa1 = new javax.swing.JTextField();
+        txtNgayTao = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
-        txtTen1 = new javax.swing.JTextField();
+        txtNgaySua = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         rdo_con = new javax.swing.JRadioButton();
@@ -176,13 +178,13 @@ public class CRUDvga extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Ngày Tạo");
 
-        txtMa1.setBorder(null);
+        txtNgayTao.setBorder(null);
 
         jSeparator3.setForeground(new java.awt.Color(204, 0, 51));
 
         jSeparator4.setForeground(new java.awt.Color(204, 0, 51));
 
-        txtTen1.setBorder(null);
+        txtNgaySua.setBorder(null);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Ngày Sửa");
@@ -215,13 +217,13 @@ public class CRUDvga extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtMa1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtNgayTao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtTen1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtNgaySua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -269,13 +271,13 @@ public class CRUDvga extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(4, 4, 4)
-                        .addComponent(txtMa1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(4, 4, 4)
-                        .addComponent(txtTen1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNgaySua, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
@@ -318,24 +320,43 @@ public class CRUDvga extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        
+        updateV();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        
+ if (txtMa.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã để xóa");
+            return;
+        }
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
+        if (cf == JOptionPane.YES_OPTION) {
+           deleteV();
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
         txtMa.setText("");
         txtTen.setText("");
+        txtNgayTao.setText("");
+        txtNgaySua.setText("");
     }//GEN-LAST:event_btnMoiActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        
+        addV();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblVGAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVGAMouseClicked
-        
+        int a = tblVGA.getSelectedRow();
+
+        txtMa.setText(tblVGA.getValueAt(a, 1).toString());
+        txtTen.setText(tblVGA.getValueAt(a, 2).toString());
+        txtNgayTao.setText(tblVGA.getValueAt(a, 3).toString());
+        txtNgaySua.setText(tblVGA.getValueAt(a, 4).toString());
+        if (tblVGA.getValueAt(a, 5).equals(1)) {
+            rdo_con.setSelected(true);
+        } else {
+            rdo_het.setSelected(true);
+        }
     }//GEN-LAST:event_tblVGAMouseClicked
 
     /**
@@ -375,8 +396,93 @@ public class CRUDvga extends javax.swing.JFrame {
             }
         });
     }
-    
 
+    private void loadTBV() {
+        list = vgaS.getListDB();
+        DefaultTableModel mol = (DefaultTableModel) tblVGA.getModel();
+        mol.setRowCount(0);
+        for (Vga v : list) {
+            mol.addRow(new Object[]{v.getId(), v.getMa(), v.getTen(), v.getNgayTao(), v.getNgayNhap(), v.getTrangThai()});
+        }
+        tblVGA.setModel(mol);
+        if (tblVGA.getRowCount() > 0) {
+            mouseClickTBV(0);
+            tblVGA.setRowSelectionInterval(0, 0);
+        }
+    }
+
+    private void addV() {
+        String ma = txtMa.getText();
+        String ten = txtTen.getText();
+        String ngayTao = txtNgayTao.getText();
+        String ngaySua = txtNgaySua.getText();
+        int tt = rdo_con.isSelected() ? 1 : 0;
+
+        Vga v = new Vga(0, ma, ten, ngayTao, ngaySua, tt);
+        Vga vCheck = vgaS.getDB(ma);
+        if (vCheck != null) {
+            JOptionPane.showMessageDialog(this, "Mã Vga đã tồn tại");
+        } else {
+            boolean result = vgaS.create(v);
+            if (result == true) {
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                loadTBV();
+            } else {
+                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+            }
+        }
+    }
+
+    private void updateV() {
+        int index = tblVGA.getSelectedRow();
+        list = vgaS.getListDB();
+        Vga v = list.get(index);
+        String ma = txtMa.getText();
+        String ten = txtTen.getText();
+        String ngayTao = txtNgayTao.getText();
+        String ngaySua = txtNgaySua.getText();
+        Vga vCheck = vgaS.getDB(ma);
+        if (vCheck == null) {
+            v = new Vga(v.getId(), ma, ten, ngayTao, ngaySua, v.getTrangThai());
+            boolean result = vgaS.update(v);
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+            loadTBV();
+        } else if (v.getMa().equals(ma)) {
+            v = new Vga(v.getId(), ma, ten, ngayTao, ngaySua, v.getTrangThai());
+            boolean result = vgaS.update(v);
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+            loadTBV();
+        } else {
+            JOptionPane.showMessageDialog(this, "Mã hãng đã tồn tại");
+        }
+    }
+
+    private void deleteV() {
+        int index = tblVGA.getSelectedRow();
+        Vga v = list.get(index);
+        boolean result = vgaS.delete(v);
+        if (result == true) {
+            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            loadTBV();
+        } else {
+            JOptionPane.showMessageDialog(this, "Xóa thất bại");
+        }
+    }
+
+    private void mouseClickTBV(int index) {
+        list = vgaS.getListDB();
+        Vga v = list.get(index);
+        txtMa.setText(v.getMa());
+        txtTen.setText(v.getTen());
+        txtNgayTao.setText(v.getNgayTao());
+        txtNgaySua.setText(v.getNgayNhap());
+        if (v.getTrangThai() == 1) {
+            rdo_con.setSelected(true);
+            return;
+        } else {
+            rdo_het.setSelected(true);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMoi;
@@ -401,8 +507,8 @@ public class CRUDvga extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdo_het;
     private javax.swing.JTable tblVGA;
     private javax.swing.JTextField txtMa;
-    private javax.swing.JTextField txtMa1;
+    private javax.swing.JTextField txtNgaySua;
+    private javax.swing.JTextField txtNgayTao;
     private javax.swing.JTextField txtTen;
-    private javax.swing.JTextField txtTen1;
     // End of variables declaration//GEN-END:variables
 }

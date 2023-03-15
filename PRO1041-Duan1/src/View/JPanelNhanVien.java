@@ -29,6 +29,7 @@ public class JPanelNhanVien extends javax.swing.JPanel {
 
     public JPanelNhanVien() {
         initComponents();
+        loadTBV();
     }
 
     /**

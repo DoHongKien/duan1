@@ -30,6 +30,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
 
     public JPanelKhachHang() {
         initComponents();
+        loadTBV();
     }
 
     /**

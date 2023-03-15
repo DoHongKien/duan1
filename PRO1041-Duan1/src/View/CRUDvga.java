@@ -25,6 +25,7 @@ public class CRUDvga extends javax.swing.JFrame {
     public CRUDvga() {
         initComponents();
         setTitle("VGA");
+        loadTBV();
     }
 
     /**

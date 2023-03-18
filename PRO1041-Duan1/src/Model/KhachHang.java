@@ -23,6 +23,43 @@ public class KhachHang {
     public KhachHang() {
     }
 
+    public KhachHang(String ma, String ten, String ngaySinh, String gioiTinh, String sdt, String diaChi, String ngayNhap, int trangThai) {
+        this.ma = ma;
+        this.ten = ten;
+        this.ngaySinh = ngaySinh;
+        this.gioiTinh = gioiTinh;
+        this.sdt = sdt;
+        this.diaChi = diaChi;
+        this.ngayNhap = ngayNhap;
+        this.trangThai = trangThai;
+    }
+    
+
+    public KhachHang(String ma, String ten, String ngaySinh, String gioiTinh, String sdt, String diaChi, String ngayTao, String ngayNhap, int trangThai) {
+        this.ma = ma;
+        this.ten = ten;
+        this.ngaySinh = ngaySinh;
+        this.gioiTinh = gioiTinh;
+        this.sdt = sdt;
+        this.diaChi = diaChi;
+        this.ngayTao = ngayTao;
+        this.ngayNhap = ngayNhap;
+        this.trangThai = trangThai;
+    }
+    
+
+    public KhachHang(int id, String ma, String ten, String ngaySinh, String gioiTinh, String sdt, String diaChi, String ngayNhap, int trangThai) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.ngaySinh = ngaySinh;
+        this.gioiTinh = gioiTinh;
+        this.sdt = sdt;
+        this.diaChi = diaChi;
+        this.ngayNhap = ngayNhap;
+        this.trangThai = trangThai;
+    }
+
     public KhachHang(int id, String ma, String ten, String ngaySinh, String gioiTinh, String sdt, String diaChi, String ngayTao, String ngayNhap, int trangThai) {
         this.id = id;
         this.ma = ma;

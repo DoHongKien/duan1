@@ -82,15 +82,14 @@ public class VGARepository  implements VGAInterface{
 
     @Override
     public boolean update(Vga vga) {
-        String sql = "update VGA set ma = ?,ten = ?,ngay_tao = ?, ngay_nhap = ?, trang_thai = ? where id = ?";
+        String sql = "update VGA set ma = ?,ten = ?, ngay_nhap = ?, trang_thai = ? where id = ?";
         try {
             ps = dbCon.getConnection().prepareStatement(sql);
             ps.setObject(1, vga.getMa());
             ps.setObject(2, vga.getTen());
-            ps.setObject(3, vga.getNgayTao());
-            ps.setObject(4, vga.getNgayNhap());
-            ps.setObject(5, vga.getTrangThai());
-            ps.setObject(6, vga.getId());
+            ps.setObject(3, vga.getNgayNhap());
+            ps.setObject(4, vga.getTrangThai());
+            ps.setObject(5, vga.getId());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {

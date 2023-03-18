@@ -69,9 +69,8 @@ public class NhanVienRepository implements NhanVienInterface {
 
     @Override
     public boolean create(NhanVien nv) {
-        String sql = "insert into NhanVien(ma, ten, ngay_sinh, gioi_tinh, sdt,\n"
-                + "dia_chi, ngay_tao, ngay_nhap, trang_thai)\n"
-                + "values(?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into NhanVien(ma, ten, ngay_sinh, gioi_tinh, sdt, dia_chi, ngay_tao, ngay_nhap, "
+                + "trang_thai, mat_khau) values(?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = dbCon.getConnection().prepareStatement(sql);
             ps.setObject(1, nv.getMa());
@@ -83,6 +82,7 @@ public class NhanVienRepository implements NhanVienInterface {
             ps.setObject(7, nv.getNgayTao());
             ps.setObject(8, nv.getNgayNhap());
             ps.setObject(9, nv.getTrangThai());
+            ps.setObject(10, nv.getMatKhau());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -92,20 +92,18 @@ public class NhanVienRepository implements NhanVienInterface {
 
     @Override
     public boolean update(NhanVien nv) {
-        String sql = "update NhanVien set  ma = ?, ten = ?, ngay_sinh = ?, gioi_tinh =?, sdt= ?, dia_chi=?, "
-                + "ngay_tao = ?, ngay_nhap = ?, trang_thai = ? where id = ?";
+        String sql = "update NhanVien set ten = ?, ngay_sinh = ?, gioi_tinh =?, sdt= ?, dia_chi=?,"
+                + " ngay_nhap = ?, trang_thai = ? where ma = ?";
         try {
             ps = dbCon.getConnection().prepareStatement(sql);
-            ps.setObject(1, nv.getMa());
-            ps.setObject(2, nv.getTen());
-            ps.setObject(3, nv.getNgaySinh());
-            ps.setObject(4, nv.getGioiTinh());
-            ps.setObject(5, nv.getSdt());
-            ps.setObject(6, nv.getDiaChi());
-            ps.setObject(7, nv.getNgayTao());
-            ps.setObject(8, nv.getNgayNhap());
-            ps.setObject(9, nv.getTrangThai());
-            ps.setObject(10, nv.getId());
+            ps.setObject(1, nv.getTen());
+            ps.setObject(2, nv.getNgaySinh());
+            ps.setObject(3, nv.getGioiTinh());
+            ps.setObject(4, nv.getSdt());
+            ps.setObject(5, nv.getDiaChi());
+            ps.setObject(6, nv.getNgayNhap());
+            ps.setObject(7, nv.getTrangThai());
+            ps.setObject(8, nv.getMa());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {

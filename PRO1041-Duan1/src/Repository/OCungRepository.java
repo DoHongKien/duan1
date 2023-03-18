@@ -75,16 +75,15 @@ public class OCungRepository implements IOCungRepository {
     @Override
     public boolean update(OCung oc) {
         boolean f = false;
-        String sql = "update OCung set ten = ?, ngay_tao = ?, ngay_nhap = ?, trang_thai = ? where ma = ?";
+        String sql = "update OCung set ten = ?, ngay_nhap = ?, trang_thai = ? where ma = ?";
 
         try {
             conn = new DBConnection().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, oc.getTen());
-            ps.setString(2, oc.getNgayTao());
-            ps.setString(3, oc.getNgayNhap());
-            ps.setInt(4, oc.getTrangThai());
-            ps.setString(5, oc.getMa());
+            ps.setString(2, oc.getNgayNhap());
+            ps.setInt(3, oc.getTrangThai());
+            ps.setString(4, oc.getMa());
             int result = ps.executeUpdate();
 
             if (result == 1) {

@@ -90,20 +90,18 @@ public class KhachHangRepository implements KhachHangInterface {
 
     @Override
     public boolean update(KhachHang kh) {
-        String sql = "update KhachHang set ma = ?,ten = ?,ngay_sinh = ?, gioi_tinh = ?, sdt = ?,"
-                + " dia_chi = ?, ngay_tao = ?, ngay_nhap = ?, trang_thai = ? where id = ?";
+        String sql = "update KhachHang set ten = ?,ngay_sinh = ?, gioi_tinh = ?, sdt = ?,"
+                + " dia_chi = ?, ngay_nhap = ?, trang_thai = ? where ma = ?";
         try {
             ps = dbCon.getConnection().prepareStatement(sql);
-            ps.setObject(1, kh.getMa());
-            ps.setObject(2, kh.getTen());
-            ps.setObject(3, kh.getNgaySinh());
-            ps.setObject(4, kh.getGioiTinh());
-            ps.setObject(5, kh.getSdt());
-            ps.setObject(6, kh.getDiaChi());
-            ps.setObject(7, kh.getNgayTao());
-            ps.setObject(8, kh.getNgayNhap());
-            ps.setObject(9, kh.getTrangThai());
-            ps.setObject(10, kh.getId());
+            ps.setObject(1, kh.getTen());
+            ps.setObject(2, kh.getNgaySinh());
+            ps.setObject(3, kh.getGioiTinh());
+            ps.setObject(4, kh.getSdt());
+            ps.setObject(5, kh.getDiaChi());
+            ps.setObject(6, kh.getNgayNhap());
+            ps.setObject(7, kh.getTrangThai());
+            ps.setObject(8, kh.getMa());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {

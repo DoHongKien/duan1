@@ -74,16 +74,15 @@ public class MauSacRepository implements IMauSacRepository {
     @Override
     public boolean update(MauSac ms) {
         boolean f = false;
-        String sql = "update MauSac set ten = ?, ngay_tao = ?, ngay_nhap = ?, trang_thai = ? where ma = ?";
+        String sql = "update MauSac set ten = ?, ngay_nhap = ?, trang_thai = ? where ma = ?";
 
         try {
             conn = new DBConnection().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, ms.getTen());
-            ps.setString(2, ms.getNgayTao());
-            ps.setString(3, ms.getNgayNhap());
-            ps.setInt(4, ms.getTrangThai());
-            ps.setString(5, ms.getMa());
+            ps.setString(2, ms.getNgayNhap());
+            ps.setInt(3, ms.getTrangThai());
+            ps.setString(4, ms.getMa());
             int result = ps.executeUpdate();
 
             if (result == 1) {

@@ -75,16 +75,15 @@ public class RamRepository implements IRAMRepository {
     @Override
     public boolean update(Ram ram) {
         boolean f = false;
-        String sql = "update RAM set ten = ?, ngay_tao = ?, ngay_nhap = ?, trang_thai = ? where ma = ?";
+        String sql = "update RAM set ten = ?, ngay_nhap = ?, trang_thai = ? where ma = ?";
 
         try {
             conn = new DBConnection().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, ram.getTen());
-            ps.setString(2, ram.getNgayTao());
-            ps.setString(3, ram.getNgayNhap());
-            ps.setInt(4, ram.getTrangThai());
-            ps.setString(5, ram.getMa());
+            ps.setString(2, ram.getNgayNhap());
+            ps.setInt(3, ram.getTrangThai());
+            ps.setString(4, ram.getMa());
             int result = ps.executeUpdate();
 
             if (result == 1) {

@@ -84,7 +84,7 @@ public class OCung {
 
     @Override
     public String toString() {
-        return "OCung{" + "id=" + id + ", ma=" + ma + ", ten=" + ten + ", ngayTao=" + ngayTao + ", ngayNhap=" + ngayNhap + ", trangThai=" + trangThai + '}';
+        return ten;
     }
     
     

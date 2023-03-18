@@ -71,16 +71,15 @@ public class SanPhamRepository implements ISanPhamRepository {
     @Override
     public boolean update(SanPham sp) {
         boolean f = false;
-        String sql = "update SanPham set ten = ?, ngay_tao = ?, ngay_nhap = ?, trang_thai = ? where ma = ?";
+        String sql = "update SanPham set ten = ?, ngay_nhap = ?, trang_thai = ? where ma = ?";
 
         try {
             conn = new DBConnection().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, sp.getTen());
-            ps.setString(2, sp.getNgayTao());
-            ps.setString(3, sp.getNgayNhap());
-            ps.setInt(4, sp.getTrangThai());
-            ps.setString(5, sp.getMa());
+            ps.setString(2, sp.getNgayNhap());
+            ps.setInt(3, sp.getTrangThai());
+            ps.setString(4, sp.getMa());
             int result = ps.executeUpdate();
 
             if (result == 1) {

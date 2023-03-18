@@ -4,7 +4,6 @@
  */
 package Repository;
 
-import Model.Hang;
 import Model.ManHinh;
 import Utility.DBConnection;
 import java.sql.Connection;
@@ -71,16 +70,15 @@ public class ManHinhRepository implements IManHinhRepository{
     @Override
     public boolean update(ManHinh mH) {
         boolean f = false;
-        String sql = "update ManHinh set ten = ?, ngay_tao = ?, ngay_nhap = ?, trang_thai = ? where ma = ?";
+        String sql = "update ManHinh set ten = ?, ngay_nhap = ?, trang_thai = ? where ma = ?";
 
         try {
             conn = new DBConnection().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, mH.getTen());
-            ps.setString(2, mH.getNgayTao());
-            ps.setString(3, mH.getNgayNhap());
-            ps.setInt(4, mH.getTrangThai());
-            ps.setString(5, mH.getMa());
+            ps.setString(2, mH.getNgayNhap());
+            ps.setInt(3, mH.getTrangThai());
+            ps.setString(4, mH.getMa());
             int result = ps.executeUpdate();
 
             if (result == 1) {

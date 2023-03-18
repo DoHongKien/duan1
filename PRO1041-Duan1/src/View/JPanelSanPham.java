@@ -1,33 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package View;
 
-//import domainmodel.CPU;
-//import domainmodel.Hang;
-//import domainmodel.ManHinh;
-//import domainmodel.MauSac;
-//import domainmodel.OCung;
-//import domainmodel.RAM;
-//import domainmodel.SanPham;
-//import domainmodel.VGA;
+import Model.ChiTietSanPham;
+import Model.Cpu;
+import Model.Hang;
+import Model.ManHinh;
+import Model.MauSac;
+import Model.OCung;
+import Model.Ram;
+import Model.SanPham;
+import Model.Vga;
+import Service.CPUService;
+import Service.ChiTietSanPhamService;
+import Service.HangService;
+import Service.ManHinhService;
+import Service.MauSacService;
+import Service.OCungService;
+import Service.RamService;
+import Service.SanPhamService;
+import Service.VGAService;
+import ViewModel.ChiTietSanPhamModel;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-//import service.CPUService;
-//import service.HangService;
-//import service.ManHinhService;
-//import service.MauSacService;
-//import service.OcungService;
-//import service.RAMService;
-//import service.SanPhamService;
-//import service.VGAService;
-//import viewmodel.SanPhamViewMD;
 
 /**
  *
@@ -35,35 +36,37 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JPanelSanPham extends javax.swing.JPanel {
 
-//    HangService hS = new HangService();
-//    OcungService ocS = new OcungService();
-//    RAMService rS = new RAMService();
-//    ManHinhService mhS = new ManHinhService();
-//    VGAService vS = new VGAService();
-//    CPUService cS = new CPUService();
-//    MauSacService msS = new MauSacService();
-//    SanPhamService spS = new SanPhamService();
-//    List<SanPhamViewMD> listSPV = new ArrayList<>();
+    HangService hS = new HangService();
+    OCungService ocS = new OCungService();
+    RamService rS = new RamService();
+    ManHinhService mhS = new ManHinhService();
+    VGAService vS = new VGAService();
+    CPUService cS = new CPUService();
+    MauSacService msS = new MauSacService();
+    SanPhamService spS = new SanPhamService();
+    ChiTietSanPhamService ctspService = new ChiTietSanPhamService();
 //    List<SanPham> listSP = new ArrayList<>();
 
     public JPanelSanPham() {
         initComponents();
-//        List<Hang> listH = hS.getListH();
-//        cboHang.setModel(new DefaultComboBoxModel(listH.toArray()));
-//        List<CPU> listC = cS.getListCPU();
-//        cboCPU.setModel(new DefaultComboBoxModel(listC.toArray()));
-//        List<RAM> listR = rS.getListRAM();
-//        cboRam.setModel(new DefaultComboBoxModel(listR.toArray()));
-//        List<OCung> listO = ocS.getListO();
-//        cboOcung.setModel(new DefaultComboBoxModel(listO.toArray()));
-//        List<VGA> listV = vS.getListV();
-//        cboVGA.setModel(new DefaultComboBoxModel(listV.toArray()));
-//        List<ManHinh> listMH = mhS.getListM();
-//        cboManHinh.setModel(new DefaultComboBoxModel(listMH.toArray()));
-//        List<MauSac> listMS = msS.getListMS();
-//        cboMauSac.setModel(new DefaultComboBoxModel(listMS.toArray()));
-//
-//        fillTB();
+        List<Hang> listH = hS.getListHang();
+        cboHang.setModel(new DefaultComboBoxModel(listH.toArray()));
+        List<Cpu> listC = cS.getListCPU();
+        cboCPU.setModel(new DefaultComboBoxModel(listC.toArray()));
+        List<Ram> listR = rS.getAllRam();
+        cboRam.setModel(new DefaultComboBoxModel(listR.toArray()));
+        List<OCung> listO = ocS.getAllOCung();
+        cboOcung.setModel(new DefaultComboBoxModel(listO.toArray()));
+        List<Vga> listV = vS.getListDB();
+        cboVGA.setModel(new DefaultComboBoxModel(listV.toArray()));
+        List<ManHinh> listMH = mhS.getListManHinh();
+        cboManHinh.setModel(new DefaultComboBoxModel(listMH.toArray()));
+        List<MauSac> listMS = msS.getAllMauSac();
+        cboMauSac.setModel(new DefaultComboBoxModel(listMS.toArray()));
+        List<SanPham> listSP = spS.getAllSanPham();
+        cbo_sanpham.setModel(new DefaultComboBoxModel(listSP.toArray()));
+
+        fillTB(ctspService.getListSanPham());
     }
 
     /**
@@ -75,16 +78,13 @@ public class JPanelSanPham extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSanPham = new javax.swing.JTable();
-        jSeparator2 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -93,7 +93,7 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        cboSeri = new javax.swing.JComboBox<>();
+        cbo_sanpham = new javax.swing.JComboBox<>();
         cboCPU = new javax.swing.JComboBox<>();
         cboRam = new javax.swing.JComboBox<>();
         cboOcung = new javax.swing.JComboBox<>();
@@ -107,35 +107,30 @@ public class JPanelSanPham extends javax.swing.JPanel {
         btn_hang = new javax.swing.JButton();
         btn_ram = new javax.swing.JButton();
         btn_ocung = new javax.swing.JButton();
-        btn_serial = new javax.swing.JButton();
+        btn_sanpham = new javax.swing.JButton();
         btn_mausac = new javax.swing.JButton();
         btn_manhinh = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txt_gianhap = new javax.swing.JTextField();
         txt_giaban = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        txtMa = new javax.swing.JTextField();
-        jSeparator3 = new javax.swing.JSeparator();
         txtSLTon = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
-        jLabel16 = new javax.swing.JLabel();
-        txt_ten = new javax.swing.JTextField();
-        jSeparator6 = new javax.swing.JSeparator();
         btn_sua = new javax.swing.JButton();
         btn_moi = new javax.swing.JButton();
         btn_them = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
-        jLabel30 = new javax.swing.JLabel();
-        txt_ngayTao = new javax.swing.JTextField();
-        jSeparator7 = new javax.swing.JSeparator();
-        jLabel31 = new javax.swing.JLabel();
-        txt_ngayNhap = new javax.swing.JTextField();
-        jSeparator8 = new javax.swing.JSeparator();
+        jLabel15 = new javax.swing.JLabel();
+        rdo_con = new javax.swing.JRadioButton();
+        rdo_khong = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -164,20 +159,12 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setText("Tìm kiếm");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        jTextField1.setBorder(null);
-        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 290, 20));
-
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã", "Tên", "Màu Sắc", "Hãng", "RAM", "CPU", "Ổ cứng", "VGA", "Màn Hình", "Số lượng tồn", "Giá Nhập", "Giá Bán"
+                "Id", "Sản Phẩm", "Cpu", "Hãng", "Màn Hình", "Màu Sắc", "Ổ cứng", "Ram", "Vga", "Số lượng tồn", "Giá Nhập", "Giá Bán", "Ngày Tạo", "Ngày Nhập", "Trạng Thái"
             }
         ));
         tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -187,23 +174,9 @@ public class JPanelSanPham extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblSanPham);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 60, 660, 300));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, 300));
 
-        jSeparator2.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel3.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 290, 10));
-
-        jButton1.setBackground(new java.awt.Color(186, 79, 84));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Tìm kiếm");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
-
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 670, 376));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1050, 310));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -260,7 +233,7 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jLabel10.setPreferredSize(new java.awt.Dimension(40, 20));
         jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 60, -1));
 
-        jPanel4.add(cboSeri, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, 130, -1));
+        jPanel4.add(cbo_sanpham, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, 130, -1));
 
         jPanel4.add(cboCPU, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 130, -1));
 
@@ -339,16 +312,16 @@ public class JPanelSanPham extends javax.swing.JPanel {
         });
         jPanel4.add(btn_ocung, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 130, 28));
 
-        btn_serial.setBackground(new java.awt.Color(186, 79, 84));
-        btn_serial.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btn_serial.setForeground(new java.awt.Color(255, 255, 255));
-        btn_serial.setText("Sản Phẩm");
-        btn_serial.addActionListener(new java.awt.event.ActionListener() {
+        btn_sanpham.setBackground(new java.awt.Color(186, 79, 84));
+        btn_sanpham.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_sanpham.setForeground(new java.awt.Color(255, 255, 255));
+        btn_sanpham.setText("Sản Phẩm");
+        btn_sanpham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_serialActionPerformed(evt);
+                btn_sanphamActionPerformed(evt);
             }
         });
-        jPanel4.add(btn_serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, 130, 28));
+        jPanel4.add(btn_sanpham, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 150, 130, 28));
 
         btn_mausac.setBackground(new java.awt.Color(186, 79, 84));
         btn_mausac.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -380,107 +353,123 @@ public class JPanelSanPham extends javax.swing.JPanel {
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setText("Giá bán");
-        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 50, 20));
+        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, 50, 20));
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel12.setText("Mã sản phẩm");
-        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 80, 20));
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setText("Số lượng tồn");
-        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 90, 20));
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel13.setText("Trạng Thái");
+        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 70, 20));
 
         txt_gianhap.setBorder(null);
-        jPanel5.add(txt_gianhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 130, 20));
+        jPanel5.add(txt_gianhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 130, 20));
 
         txt_giaban.setBorder(null);
-        jPanel5.add(txt_giaban, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 130, 20));
+        jPanel5.add(txt_giaban, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 130, 20));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel14.setText("Giá nhập");
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 80, 20));
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 80, 20));
 
         jSeparator1.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel5.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 130, 10));
-
-        txtMa.setBorder(null);
-        jPanel5.add(txtMa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 130, 20));
-
-        jSeparator3.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel5.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 130, 10));
+        jPanel5.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 130, 10));
 
         txtSLTon.setBorder(null);
-        jPanel5.add(txtSLTon, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 130, 20));
+        jPanel5.add(txtSLTon, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 130, 20));
 
         jSeparator4.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel5.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 130, 10));
+        jPanel5.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 130, 10));
 
         jSeparator5.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel5.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 130, 10));
-
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel16.setText("Tên sản phẩm");
-        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 80, 20));
-
-        txt_ten.setBorder(null);
-        jPanel5.add(txt_ten, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 130, 20));
-
-        jSeparator6.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel5.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 130, 10));
+        jPanel5.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 130, 10));
 
         btn_sua.setBackground(new java.awt.Color(186, 79, 84));
         btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_sua.setForeground(new java.awt.Color(255, 255, 255));
         btn_sua.setText("Sửa");
-        jPanel5.add(btn_sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 460, 87, 32));
+        btn_sua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_suaActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btn_sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 70, 32));
 
         btn_moi.setBackground(new java.awt.Color(186, 79, 84));
         btn_moi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_moi.setForeground(new java.awt.Color(255, 255, 255));
         btn_moi.setText("Mới");
-        jPanel5.add(btn_moi, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 520, 87, 32));
+        btn_moi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_moiActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btn_moi, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, 70, 32));
 
         btn_them.setBackground(new java.awt.Color(186, 79, 84));
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_them.setForeground(new java.awt.Color(255, 255, 255));
         btn_them.setText("Thêm");
-        jPanel5.add(btn_them, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 460, 87, 32));
+        btn_them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btn_them, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 70, 32));
 
         btn_xoa.setBackground(new java.awt.Color(186, 79, 84));
         btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_xoa.setForeground(new java.awt.Color(255, 255, 255));
         btn_xoa.setText("Xóa");
-        jPanel5.add(btn_xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 520, 87, 32));
+        btn_xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoaActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btn_xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 70, 32));
 
-        jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel30.setText("Ngày Tạo");
-        jPanel5.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel15.setText("Số lượng tồn");
+        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 90, 20));
 
-        txt_ngayTao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_ngayTao.setBorder(null);
-        jPanel5.add(txt_ngayTao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 130, -1));
+        buttonGroup1.add(rdo_con);
+        rdo_con.setText("Còn");
+        jPanel5.add(rdo_con, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, -1, -1));
 
-        jSeparator7.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel5.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 130, 10));
+        buttonGroup1.add(rdo_khong);
+        rdo_khong.setText("Không");
+        jPanel5.add(rdo_khong, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, 60, -1));
 
-        jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel31.setText("Ngày Nhập");
-        jPanel5.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, -1, -1));
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 340, 380, 280));
 
-        txt_ngayNhap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_ngayNhap.setBorder(null);
-        jPanel5.add(txt_ngayNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 130, -1));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("Tìm kiếm");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
 
-        jSeparator8.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel5.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 130, 10));
+        jTextField1.setBorder(null);
+        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 160, 20));
 
-        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 0, 360, 620));
+        jSeparator2.setForeground(new java.awt.Color(186, 79, 84));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 160, 10));
+
+        jButton1.setBackground(new java.awt.Color(186, 79, 84));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Tìm kiếm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, -1, -1));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1070, 620));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
-//        int index = tblSanPham.getSelectedRow();
+        int index = tblSanPham.getSelectedRow();
+        txtSLTon.setText(tblSanPham.getValueAt(index, 9).toString());
+        txt_gianhap.setText(tblSanPham.getValueAt(index, 10).toString());
+        txt_giaban.setText(tblSanPham.getValueAt(index, 11).toString());
+        cboCPU.setSelectedItem(tblSanPham.getValueAt(index, 2));
 //        mouseClickTB(index);
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
@@ -523,26 +512,123 @@ public class JPanelSanPham extends javax.swing.JPanel {
         mausac.setVisible(true);
     }//GEN-LAST:event_btn_mausacActionPerformed
 
-    private void btn_serialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_serialActionPerformed
+    private void btn_sanphamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sanphamActionPerformed
         CRUDsanpham sanpham = new CRUDsanpham();
         sanpham.setVisible(true);
-    }//GEN-LAST:event_btn_serialActionPerformed
+    }//GEN-LAST:event_btn_sanphamActionPerformed
 
-//    public void fillTB() {
-//        listSPV = spS.getListSPV();
-//        DefaultTableModel mol = (DefaultTableModel) tblSanPham.getModel();
-//        mol.setRowCount(0);
-//        for (SanPhamViewMD sp : listSPV) {
-//            mol.addRow(new Object[]{sp.getMa(), sp.getTen(), sp.getIdMauSac(), sp.getIdHang(), sp.getIdRam(), sp.getIdCpu(),
-//                sp.getIdOCung(), sp.getIdVga(), sp.getIdManHinh(), sp.getSLTon(), sp.getGiaNhap(), sp.getGiaBan()});
-//        }
-//        tblSanPham.setModel(mol);
-//        if (tblSanPham.getRowCount() > 0) {
-//            mouseClickTB(0);
-//            tblSanPham.setRowSelectionInterval(0, 0);
-//        }
-//
-//    }
+    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
+
+        if (cf == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, ctspService.insert(getFieldInsert()));
+            fillTB(ctspService.getListSanPham());
+        }
+    }//GEN-LAST:event_btn_themActionPerformed
+
+    private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?", "Sửa", JOptionPane.YES_NO_OPTION);
+
+        if (cf == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, ctspService.update(getFieldUpdate()));
+            fillTB(ctspService.getListSanPham());
+        }
+    }//GEN-LAST:event_btn_suaActionPerformed
+
+    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
+        int index = tblSanPham.getSelectedRow();
+        ChiTietSanPham ctsp = new ChiTietSanPham();
+        ctsp.setId(Integer.parseInt(tblSanPham.getValueAt(index, 0).toString()));
+        if (cf == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, ctspService.delete(ctsp));
+            fillTB(ctspService.getListSanPham());
+        }
+    }//GEN-LAST:event_btn_xoaActionPerformed
+
+    private void btn_moiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_moiActionPerformed
+        txtSLTon.setText("");
+        txt_gianhap.setText("");
+        txt_giaban.setText("");
+    }//GEN-LAST:event_btn_moiActionPerformed
+
+    private void fillTB(List<ChiTietSanPhamModel> list) {
+        DefaultTableModel mol = (DefaultTableModel) tblSanPham.getModel();
+        mol.setRowCount(0);
+        for (ChiTietSanPhamModel sp : list) {
+            mol.addRow(new Object[]{sp.getId(), sp.getSanPham(), sp.getCpu(), sp.getHang(), sp.getManHinh(), sp.getMauSac(),
+                sp.getoCung(), sp.getRam(), sp.getVga(), sp.getSlTon(), sp.getGiaNhap(), sp.getGiaBan(), sp.getNgayTao(), sp.getNgayNhap(), sp.getTrangThai()});
+        }
+    }
+
+    private ChiTietSanPham getFieldInsert() {
+        ChiTietSanPham ctsp = new ChiTietSanPham();
+        LocalDate date = LocalDate.now();
+        Hang h = (Hang) cboHang.getSelectedItem();
+        Cpu cpu = (Cpu) cboCPU.getSelectedItem();
+        Ram ram = (Ram) cboRam.getSelectedItem();
+        OCung oc = (OCung) cboOcung.getSelectedItem();
+        ManHinh mh = (ManHinh) cboManHinh.getSelectedItem();
+        Vga vga = (Vga) cboVGA.getSelectedItem();
+        MauSac ms = (MauSac) cboMauSac.getSelectedItem();
+        SanPham sp = (SanPham) cbo_sanpham.getSelectedItem();
+
+        ctsp.setIdSanPham(sp.getId());
+        ctsp.setIdHang(h.getId());
+        ctsp.setIdCpu(cpu.getId());
+        ctsp.setIdRam(ram.getId());
+        ctsp.setIdOCung(oc.getId());
+        ctsp.setIdVga(vga.getId());
+        ctsp.setIdManHinh(mh.getId());
+        ctsp.setIdMauSac(ms.getId());
+        ctsp.setGiaNhap(Double.valueOf(txt_gianhap.getText()));
+        ctsp.setGiaBan(Double.valueOf(txt_giaban.getText()));
+        ctsp.setNgayTao(date.format(DateTimeFormatter.ISO_DATE));
+        ctsp.setNgayNhap(date.format(DateTimeFormatter.ISO_DATE));
+        ctsp.setSlTon(Integer.parseInt(txtSLTon.getText()));
+        if (rdo_con.isSelected()) {
+            ctsp.setTrangThai(1);
+        } else {
+            ctsp.setTrangThai(0);
+        }
+
+        return ctsp;
+    }
+
+    private ChiTietSanPham getFieldUpdate() {
+        int index = tblSanPham.getSelectedRow();
+        ChiTietSanPham ctsp = new ChiTietSanPham();
+        LocalDate date = LocalDate.now();
+        Hang h = (Hang) cboHang.getSelectedItem();
+        Cpu cpu = (Cpu) cboCPU.getSelectedItem();
+        Ram ram = (Ram) cboRam.getSelectedItem();
+        OCung oc = (OCung) cboOcung.getSelectedItem();
+        ManHinh mh = (ManHinh) cboManHinh.getSelectedItem();
+        Vga vga = (Vga) cboVGA.getSelectedItem();
+        MauSac ms = (MauSac) cboMauSac.getSelectedItem();
+        SanPham sp = (SanPham) cbo_sanpham.getSelectedItem();
+
+        ctsp.setId(Integer.parseInt(tblSanPham.getValueAt(index, 0).toString()));
+        ctsp.setIdSanPham(sp.getId());
+        ctsp.setIdHang(h.getId());
+        ctsp.setIdCpu(cpu.getId());
+        ctsp.setIdRam(ram.getId());
+        ctsp.setIdOCung(oc.getId());
+        ctsp.setIdVga(vga.getId());
+        ctsp.setIdManHinh(mh.getId());
+        ctsp.setIdMauSac(ms.getId());
+        ctsp.setGiaNhap(Double.valueOf(txt_gianhap.getText()));
+        ctsp.setGiaBan(Double.valueOf(txt_giaban.getText()));
+        ctsp.setNgayNhap(date.format(DateTimeFormatter.ISO_DATE));
+        ctsp.setSlTon(Integer.parseInt(txtSLTon.getText()));
+        if (rdo_con.isSelected()) {
+            ctsp.setTrangThai(1);
+        } else {
+            ctsp.setTrangThai(0);
+        }
+
+        return ctsp;
+    }
 //
 //    public void mouseClickTB(int index) {
 //        listSPV = spS.getListSPV();
@@ -836,31 +922,29 @@ public class JPanelSanPham extends javax.swing.JPanel {
     private javax.swing.JButton btn_moi;
     private javax.swing.JButton btn_ocung;
     private javax.swing.JButton btn_ram;
-    private javax.swing.JButton btn_serial;
+    private javax.swing.JButton btn_sanpham;
     private javax.swing.JButton btn_sua;
     private javax.swing.JButton btn_them;
     private javax.swing.JButton btn_vga;
     private javax.swing.JButton btn_xoa;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboCPU;
     private javax.swing.JComboBox<String> cboHang;
     private javax.swing.JComboBox<String> cboManHinh;
     private javax.swing.JComboBox<String> cboMauSac;
     private javax.swing.JComboBox<String> cboOcung;
     private javax.swing.JComboBox<String> cboRam;
-    private javax.swing.JComboBox<String> cboSeri;
     private javax.swing.JComboBox<String> cboVGA;
+    private javax.swing.JComboBox<String> cbo_sanpham;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -875,20 +959,14 @@ public class JPanelSanPham extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JRadioButton rdo_con;
+    private javax.swing.JRadioButton rdo_khong;
     private javax.swing.JTable tblSanPham;
-    private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtSLTon;
     private javax.swing.JTextField txt_giaban;
     private javax.swing.JTextField txt_gianhap;
-    private javax.swing.JTextField txt_ngayNhap;
-    private javax.swing.JTextField txt_ngayTao;
-    private javax.swing.JTextField txt_ten;
     // End of variables declaration//GEN-END:variables
 }

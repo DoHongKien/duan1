@@ -12,101 +12,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 /**
  *
  * @author admin
  */
-public class CPURepotsitory implements ICPURepotsitory{
-    
-  private Connection conn;
+public class CPURepotsitory implements ICPURepotsitory {
+
+    private Connection conn;
+
     public CPURepotsitory() {
     }
-    
-
-//    public List<Cpu> getListCPU()  {
-//        List<Cpu> list = new ArrayList<>();
-//        String select = "select * from CPU";
-//
-//        try {
-//            conn = new DBConnection().getConnection();
-//            PreparedStatement ps = conn.prepareStatement(select);
-//            ResultSet rs = ps.executeQuery();
-//
-//            while (rs.next()) {
-//               Cpu cpu = new Cpu(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6));
-//                list.add(cpu);
-//            }
-//        } catch (SQLException ex) {
-//            ex.getMessage();
-//        }
-//
-//        return list;
-//    }
-//   public boolean insert(Cpu cp) {
-//        boolean f = false;
-//        String sql = "insert into CPU(ma, ten, ngay_tao, ngay_nhap, trang_thai) values (?,?,?,?,?)";
-//
-//        try {
-//            conn = new DBConnection().getConnection();
-//            PreparedStatement ps = conn.prepareStatement(sql);
-//            ps.setString(1, cp.getMa());
-//            ps.setString(2, cp.getTen());
-//            ps.setString(3, cp.getNgayTao());
-//            ps.setString(4, cp.getNgayNhap());
-//            ps.setInt(5, cp.getTrangThai());
-//            int result = ps.executeUpdate();
-//
-//            if (result == 1) {
-//                f = true;
-//            }
-//        } catch (SQLException e) {
-//            e.getMessage();
-//        }
-//        return f;
-//    }
-// public boolean update(Cpu cp) {
-//        boolean f = false;
-//        String sql = "update CPU set ten = ?, ngay_tao = ?, ngay_nhap = ?, trang_thai = ? where ma = ?";
-//
-//        try {
-//            conn = new DBConnection().getConnection();
-//            PreparedStatement ps = conn.prepareStatement(sql);
-//            ps.setString(1, cp.getTen());
-//            ps.setString(2, cp.getNgayTao());
-//            ps.setString(3, cp.getNgayNhap());
-//            ps.setInt(4, cp.getTrangThai());
-//            ps.setString(5, cp.getMa());
-//            int result = ps.executeUpdate();
-//
-//            if (result == 1) {
-//                f = true;
-//            }
-//        } catch (SQLException e) {
-//            e.getMessage();
-//        }
-//        return f;
-//    }
-// public boolean delete(String ma) {
-//        boolean f = false;
-//        String sql = "delete from CPU where ma = ?";
-//        
-//        try {
-//            conn = new DBConnection().getConnection();
-//            PreparedStatement ps = conn.prepareStatement(sql);
-//            ps.setString(1, ma);
-//
-//            int result = ps.executeUpdate();
-//            
-//            if(result == 1) {
-//                f = true;
-//            }
-//        } catch (SQLException e) {
-//            e.getMessage();
-//        }
-//        return f;
-//    }
 
     @Override
     public List<Cpu> getListCPU() {
@@ -119,18 +35,19 @@ public class CPURepotsitory implements ICPURepotsitory{
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-               Cpu cpu = new Cpu(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6));
+                Cpu cpu = new Cpu(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6));
                 list.add(cpu);
             }
         } catch (SQLException ex) {
             ex.getMessage();
         }
 
-        return list;    }
+        return list;
+    }
 
     @Override
     public boolean insert(Cpu cp) {
-         boolean f = false;
+        boolean f = false;
         String sql = "insert into CPU(ma, ten, ngay_tao, ngay_nhap, trang_thai) values (?,?,?,?,?)";
 
         try {
@@ -149,21 +66,21 @@ public class CPURepotsitory implements ICPURepotsitory{
         } catch (SQLException e) {
             e.getMessage();
         }
-        return f;    }
+        return f;
+    }
 
     @Override
     public boolean update(Cpu cp) {
-          boolean f = false;
-        String sql = "update CPU set ten = ?, ngay_tao = ?, ngay_nhap = ?, trang_thai = ? where ma = ?";
+        boolean f = false;
+        String sql = "update CPU set ten = ?, ngay_nhap = ?, trang_thai = ? where ma = ?";
 
         try {
             conn = new DBConnection().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, cp.getTen());
-            ps.setString(2, cp.getNgayTao());
-            ps.setString(3, cp.getNgayNhap());
-            ps.setInt(4, cp.getTrangThai());
-            ps.setString(5, cp.getMa());
+            ps.setString(2, cp.getNgayNhap());
+            ps.setInt(3, cp.getTrangThai());
+            ps.setString(4, cp.getMa());
             int result = ps.executeUpdate();
 
             if (result == 1) {
@@ -179,21 +96,21 @@ public class CPURepotsitory implements ICPURepotsitory{
     public boolean delete(String ma) {
         boolean f = false;
         String sql = "delete from CPU where ma = ?";
-        
+
         try {
             conn = new DBConnection().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, ma);
 
             int result = ps.executeUpdate();
-            
-            if(result == 1) {
+
+            if (result == 1) {
                 f = true;
             }
         } catch (SQLException e) {
             e.getMessage();
         }
-        return f;    }
+        return f;
+    }
 
-   
 }

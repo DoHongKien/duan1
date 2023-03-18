@@ -16,6 +16,8 @@ public class ChiTietSanPham {
     
     private int idCpu;
     
+    private int idHang;
+    
     private int idManHinh;
     
     private int idMauSac;
@@ -43,10 +45,11 @@ public class ChiTietSanPham {
     public ChiTietSanPham() {
     }
 
-    public ChiTietSanPham(int id, int idSanPham, int idCpu, int idManHinh, int idMauSac, int idOCung, int idRam, int idVga, int idSerial, int slTon, Double GiaNhap, Double GiaBan, String ngayTao, String ngayNhap, int trangThai) {
+    public ChiTietSanPham(int id, int idSanPham, int idCpu, int idHang, int idManHinh, int idMauSac, int idOCung, int idRam, int idVga, int idSerial, int slTon, Double GiaNhap, Double GiaBan, String ngayTao, String ngayNhap, int trangThai) {
         this.id = id;
         this.idSanPham = idSanPham;
         this.idCpu = idCpu;
+        this.idHang = idHang;
         this.idManHinh = idManHinh;
         this.idMauSac = idMauSac;
         this.idOCung = idOCung;
@@ -84,6 +87,15 @@ public class ChiTietSanPham {
     public void setIdCpu(int idCpu) {
         this.idCpu = idCpu;
     }
+
+    public int getIdHang() {
+        return idHang;
+    }
+
+    public void setIdHang(int idHang) {
+        this.idHang = idHang;
+    }
+    
 
     public int getIdManHinh() {
         return idManHinh;
@@ -179,6 +191,11 @@ public class ChiTietSanPham {
 
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
+    }
+
+    @Override
+    public String toString() {
+        return "ChiTietSanPham{" + "id=" + id + ", idSanPham=" + idSanPham + ", idCpu=" + idCpu + ", idManHinh=" + idManHinh + ", idMauSac=" + idMauSac + ", idOCung=" + idOCung + ", idRam=" + idRam + ", idVga=" + idVga + ", idSerial=" + idSerial + ", slTon=" + slTon + ", GiaNhap=" + GiaNhap + ", GiaBan=" + GiaBan + ", ngayTao=" + ngayTao + ", ngayNhap=" + ngayNhap + ", trangThai=" + trangThai + '}';
     }
     
 }

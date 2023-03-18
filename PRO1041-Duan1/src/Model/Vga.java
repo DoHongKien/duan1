@@ -5,21 +5,30 @@ package Model;
  * @author dohongkien
  */
 public class Vga {
-    
+
     private int id;
-    
+
     private String ma;
-    
+
     private String ten;
-    
+
     private String ngayTao;
-    
+
     private String ngayNhap;
-    
+
     private int trangThai;
 
     public Vga() {
     }
+
+    public Vga(int id, String ma, String ten, String ngayNhap, int trangThai) {
+        this.id = id;
+        this.ma = ma;
+        this.ten = ten;
+        this.ngayNhap = ngayNhap;
+        this.trangThai = trangThai;
+    }
+    
 
     public Vga(int id, String ma, String ten, String ngayTao, String ngayNhap, int trangThai) {
         this.id = id;
@@ -77,6 +86,10 @@ public class Vga {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return ten;
+    }
+
 }

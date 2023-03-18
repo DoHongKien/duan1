@@ -8,6 +8,8 @@ package View;
 import Model.Cpu;
 import Service.CPUService;
 import java.awt.Image;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -24,15 +26,16 @@ public class CRUDcpu extends javax.swing.JFrame {
     CPUService cS = new CPUService();
     List<Cpu> list = new ArrayList<>();
     DefaultTableModel defaultTableModel;
+
     public CRUDcpu() {
         initComponents();
 //        setTitle("CPU");
 //        ImageIcon icon = new ImageIcon(getClass().getResource("/Images/sevent-logo.png"));
 //        Image image = icon.getImage();
 //        setIconImage(image);
- this.setLocationRelativeTo(null);
-  fillTable(cS.getListCPU());
-        
+        this.setLocationRelativeTo(null);
+        fillTable(cS.getListCPU());
+
     }
 
     /**
@@ -60,12 +63,6 @@ public class CRUDcpu extends javax.swing.JFrame {
         btn_sua = new javax.swing.JButton();
         btn_moi = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        txt_ngayTao = new javax.swing.JTextField();
-        jSeparator3 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
-        txt_ngayNhap = new javax.swing.JTextField();
-        jSeparator4 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         rdo_con = new javax.swing.JRadioButton();
         rdo_het = new javax.swing.JRadioButton();
@@ -169,20 +166,6 @@ public class CRUDcpu extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("Ngày Tạo");
-
-        txt_ngayTao.setBorder(null);
-
-        jSeparator3.setForeground(new java.awt.Color(204, 0, 51));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setText("Ngày Sửa");
-
-        txt_ngayNhap.setBorder(null);
-
-        jSeparator4.setForeground(new java.awt.Color(204, 0, 51));
-
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Trạng Thái");
 
@@ -198,38 +181,20 @@ public class CRUDcpu extends javax.swing.JFrame {
         JPanel3Layout.setHorizontalGroup(
             JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanel3Layout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(JPanel3Layout.createSequentialGroup()
                         .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(33, 33, 33)
                         .addComponent(btn_moi, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(JPanel3Layout.createSequentialGroup()
                         .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(33, 33, 33)
                         .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(56, 56, 56))
+                .addGap(41, 41, 41))
             .addGroup(JPanel3Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(JPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(27, 27, 27)
-                        .addComponent(rdo_con, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rdo_het, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(JPanel3Layout.createSequentialGroup()
-                        .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txt_ngayTao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txt_ngayNhap, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(JPanel3Layout.createSequentialGroup()
                         .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -241,7 +206,13 @@ public class CRUDcpu extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txt_ten, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))))
+                                .addComponent(txt_ten, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))))
+                    .addGroup(JPanel3Layout.createSequentialGroup()
+                        .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(rdo_con, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addComponent(rdo_het, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         JPanel3Layout.setVerticalGroup(
@@ -262,33 +233,20 @@ public class CRUDcpu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(JPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(4, 4, 4)
-                        .addComponent(txt_ngayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(JPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(4, 4, 4)
-                        .addComponent(txt_ngayNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
                     .addComponent(rdo_con)
                     .addComponent(rdo_het))
-                .addGap(33, 33, 33)
-                .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_moi, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(btn_xoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(11, 11, 11))
+                .addGap(43, 43, 43)
+                .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(JPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_moi, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15))
         );
 
         jPanel1.add(JPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 300, 350));
@@ -316,9 +274,7 @@ public class CRUDcpu extends javax.swing.JFrame {
         int index = tblCPU.getSelectedRow();
         txt_ma.setText(tblCPU.getValueAt(index, 1).toString());
         txt_ten.setText(tblCPU.getValueAt(index, 2).toString());
-        txt_ngayTao.setText(tblCPU.getValueAt(index, 3).toString());
-        txt_ngayNhap.setText(tblCPU.getValueAt(index, 4).toString());
-        if(Integer.parseInt(tblCPU.getValueAt(index, 5).toString()) == 1) {
+        if (Integer.parseInt(tblCPU.getValueAt(index, 5).toString()) == 1) {
             rdo_con.setSelected(true);
         } else {
             rdo_het.setSelected(true);
@@ -326,38 +282,36 @@ public class CRUDcpu extends javax.swing.JFrame {
     }//GEN-LAST:event_tblCPUMouseClicked
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
-          int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
 
-            if (cf == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(this, cS.insert(getField()));
-                fillTable(cS.getListCPU());
-            }
+        if (cf == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, cS.insert(getFieldInsert()));
+            fillTable(cS.getListCPU());
+        }
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
-          int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
 
-            if (cf == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(this, cS.update(getField()));
-                fillTable(cS.getListCPU());
-            }
+        if (cf == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, cS.update(getFieldUpdate()));
+            fillTable(cS.getListCPU());
+        }
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void btn_moiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_moiActionPerformed
         txt_ma.setText("");
         txt_ten.setText("");
-        txt_ngayTao.setText("");
-        txt_ngayNhap.setText("");
         rdo_con.setSelected(true);
     }//GEN-LAST:event_btn_moiActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
-          if (txt_ma.getText().trim().isEmpty()) {
+        if (txt_ma.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Mã không được trống");
             txt_ma.requestFocus();
             return;
         }
-          int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
 
         if (cf == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, cS.delete(txt_ma.getText().trim()));
@@ -403,7 +357,7 @@ public class CRUDcpu extends javax.swing.JFrame {
         });
     }
 
-  private void fillTable(List<Cpu> list) {
+    private void fillTable(List<Cpu> list) {
         defaultTableModel = (DefaultTableModel) tblCPU.getModel();
         defaultTableModel.setRowCount(0);
         for (Cpu cpu : list) {
@@ -411,12 +365,29 @@ public class CRUDcpu extends javax.swing.JFrame {
                 cpu.getNgayTao(), cpu.getNgayNhap(), cpu.getTrangThai()});
         }
     }
-  private Cpu getField() {
+
+    private Cpu getFieldInsert() {
+        LocalDate date = LocalDate.now();
         Cpu cpu = new Cpu();
         cpu.setMa(txt_ma.getText().trim());
         cpu.setTen(txt_ten.getText().trim());
-        cpu.setNgayTao(txt_ngayTao.getText().trim());
-        cpu.setNgayNhap(txt_ngayNhap.getText().trim());
+        cpu.setNgayTao(date.format(DateTimeFormatter.ISO_DATE));
+        cpu.setNgayNhap(date.format(DateTimeFormatter.ISO_DATE));
+        if (rdo_con.isSelected()) {
+            cpu.setTrangThai(1);
+        } else {
+            cpu.setTrangThai(0);
+        }
+
+        return cpu;
+    }
+    
+    private Cpu getFieldUpdate() {
+        LocalDate date = LocalDate.now();
+        Cpu cpu = new Cpu();
+        cpu.setMa(txt_ma.getText().trim());
+        cpu.setTen(txt_ten.getText().trim());
+        cpu.setNgayNhap(date.format(DateTimeFormatter.ISO_DATE));
         if (rdo_con.isSelected()) {
             cpu.setTrangThai(1);
         } else {
@@ -434,22 +405,16 @@ public class CRUDcpu extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JRadioButton rdo_con;
     private javax.swing.JRadioButton rdo_het;
     private javax.swing.JTable tblCPU;
     private javax.swing.JTextField txt_ma;
-    private javax.swing.JTextField txt_ngayNhap;
-    private javax.swing.JTextField txt_ngayTao;
     private javax.swing.JTextField txt_ten;
     // End of variables declaration//GEN-END:variables
 }

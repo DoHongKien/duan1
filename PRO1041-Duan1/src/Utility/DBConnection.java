@@ -20,7 +20,7 @@ public class DBConnection {
 
     public Connection getConnection() {
         try {
-            return DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=ShopPCHT", "sa", "2003");
+            return DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=ShopPCHT1", "sa", "2003");
         } catch (SQLException ex) {
             return null;
         }

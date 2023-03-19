@@ -1,6 +1,6 @@
-Create database ShopPCHT
+Create database ShopPCHT1
 go
-use ShopPCHT
+use ShopPCHT1
 go
 
 IF OBJECT_ID('KhachHang') IS NOT NULL
@@ -52,7 +52,7 @@ CREATE TABLE NhanVien
 	ngay_nhap date null,
 	trang_thai int null,
 	Constraint PK_NhanVien Primary key (id),
-	Constraint FK_NhanVien_TaiKhoan Foreign key (id_chuc_vu) references ChucVu
+	Constraint FK_NhanVien_ChucVu Foreign key (id_chuc_vu) references ChucVu
 )
 
 IF OBJECT_ID('KhuyenMai') IS NOT NULL
@@ -268,6 +268,39 @@ CREATE TABLE ChiTietHoaDon
 	Constraint FK_ChiTietHoaDon_KhuyenMai Foreign key (id_khuyen_mai) references KhuyenMai
 )
 
+IF OBJECT_ID('GioHang') IS NOT NULL
+	DROP TABLE GioHang
+GO
+CREATE TABLE GioHang
+(
+	id int IDENTITY(1,1) not null,
+	id_hoa_don int null,
+	ma nchar(10) null,
+	ngay_tao date null,
+	ngay_nhap date null,
+	trang_thai int null,
+	Constraint PK_GioHang Primary key(id),
+	Constraint FK_GioHang_HoaDon Foreign key (id_hoa_don) references HoaDon
+)
+
+IF OBJECT_ID('ChiTietGioHang') IS NOT NULL
+	DROP TABLE ChiTietGioHang
+GO
+CREATE TABLE ChiTietGioHang
+(
+	id int IDENTITY(1,1) not null,
+	id_gio_hang int null,
+	id_ctsp int null,
+	so_luong int null,
+	don_gia float null,
+	ngay_tao date null,
+	ngay_nhap date null,
+	trang_thai int null,
+	Constraint PK_ChiTietGioHang Primary key(id),
+	Constraint FK_ChiTietGioHang_GioHang Foreign key (id_gio_hang) references GioHang,
+	Constraint FK_ChiTietGioHang_ChiTietSanPham Foreign key (id_ctsp) references ChiTietSanPham
+)
+
 insert into KhachHang 
 values 
 		('Ma01','Khach Hang1','2003-01-12','Nam','0379431893','Dia chi 1','2023-03-12','2023-03-12','1'),
@@ -288,7 +321,7 @@ values
 	
 insert into NhanVien
 values 
-		('1','NV1','NhanVien1','2000-01-02','Nam','0345678912','Dia Chi Nhan Vien 1','1234','2023-03-12','2023-03-12','0'),
+		('6','NV1','NhanVien1','2000-01-02','Nam','0345678912','Dia Chi Nhan Vien 1','1234','2023-03-12','2023-03-12','0'),
 		('4','NV2','NhanVien1','2002-05-22','Nu','0345672222','Dia Chi Nhan Vien 2','1234','2023-03-12','2023-03-12','1'),
 		('5','NV3','NhanVien1','2001-08-02','Nu','0345333912','Dia Chi Nhan Vien 3','1234','2023-03-12','2023-03-12','0'),
 		('2','NV4','NhanVien1','2003-12-16','Nam','0345558912','Dia Chi Nhan Vien 4','1234','2023-03-12','2023-03-12','0'),
@@ -307,10 +340,10 @@ values
 
 insert into HoaDon
 values 
-		('2','2','HD1','2023-03-12','2023-03-12','100000','2023-03-12','0'),
-		('3','3','HD2','2023-03-12','2023-03-12','120000','2023-03-12','1'),
-		('4','5','HD3','2023-03-12','2023-03-12','200000','2023-03-12','0'),
-		('1','1','HD4','2023-03-12','2023-03-12','410000','2023-03-12','1'),
+		('6','6','HD1','2023-03-12','2023-03-12','100000','2023-03-12','0'),
+		('7','3','HD2','2023-03-12','2023-03-12','120000','2023-03-12','1'),
+		('8','5','HD3','2023-03-12','2023-03-12','200000','2023-03-12','0'),
+		('9','2','HD4','2023-03-12','2023-03-12','410000','2023-03-12','1'),
 		('5','4','HD5','2023-03-12','2023-03-12','310000','2023-03-12','0')
 
 	
@@ -433,11 +466,11 @@ values
 
 insert into ChiTietHoaDon
 values
-		('1','3','3','12','2000000','2023-03-12','2023-03-12','0'),
+		('1','8','3','12','2000000','2023-03-12','2023-03-12','0'),
 		('3','7','2','22','1400000','2023-03-12','2023-03-12','1'),
-		('4','5','5','15','1600000','2023-03-12','2023-03-12','1'),
-		('2','4','4','22','2400000','2023-03-12','2023-03-12','0'),
-		('5','6','1','12','4400000','2023-03-12','2023-03-12','1')
+		('4','9','5','15','1600000','2023-03-12','2023-03-12','1'),
+		('2','10','4','22','2400000','2023-03-12','2023-03-12','0'),
+		('5','6','6','12','4400000','2023-03-12','2023-03-12','1')
 
 	select * from KhachHang
 	select * from ChiTietSanPham

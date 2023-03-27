@@ -17,10 +17,18 @@ public interface IChiTietSanPhamService {
     public List<ChiTietSanPhamModel> getListSanPham();
 
     public List<ChiTietSanPhamModel> timKiem(String ten);
+    
+    public ChiTietSanPham getDonGiaById(int id);
 
     public String insert(ChiTietSanPham sp);
 
     public String update(ChiTietSanPham sp);
 
-    public String delete(ChiTietSanPham sp);
+    public boolean updateTT(ChiTietSanPham sp);
+    
+    public boolean updateIdSerial(ChiTietSanPham sp);
+    
+    public int getSoLuongByIdCTSP(int idCTSP);
+
+    public boolean updateSoLuongByID(int soluong, int idCTSP);
 }

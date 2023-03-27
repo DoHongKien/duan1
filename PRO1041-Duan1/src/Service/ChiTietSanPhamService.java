@@ -31,30 +31,46 @@ public class ChiTietSanPhamService implements IChiTietSanPhamService {
     }
 
     @Override
+    public ChiTietSanPham getDonGiaById(int id) {
+        return ctspRepo.getDonGiaById(id);
+    }
+
+    @Override
     public String insert(ChiTietSanPham sp) {
-        if(ctspRepo.insert(sp)){
-            return "Thêm thành công";
+        if (ctspRepo.insert(sp)) {
+            return "Thêm sản phẩm thành công";
         } else {
-            return "Thêm thất bại";
+            return "Thêm sản phẩm thất bại";
         }
     }
 
     @Override
     public String update(ChiTietSanPham sp) {
-        if(ctspRepo.update(sp)){
-            return "Sửa thành công";
+        if (ctspRepo.update(sp)) {
+            return "Sửa sản phẩm thành công";
         } else {
-            return "Sửa thất bại";
+            return "Sửa sản phẩm thất bại";
         }
     }
 
     @Override
-    public String delete(ChiTietSanPham sp) {
-        if(ctspRepo.delete(sp)){
-            return "Xóa thành công";
-        } else {
-            return "Xóa thất bại";
-        }
+    public boolean updateTT(ChiTietSanPham sp) {
+        return ctspRepo.updateTT(sp);
+    }
+
+    @Override
+    public boolean updateIdSerial(ChiTietSanPham sp) {
+        return ctspRepo.updateIdSerial(sp);
+    }
+
+    @Override
+    public int getSoLuongByIdCTSP(int idCTSP) {
+        return ctspRepo.getSoLuongByIdCTSP(idCTSP);
+    }
+
+    @Override
+    public boolean updateSoLuongByID(int soluong, int idCTSP) {
+        return ctspRepo.updateSoLuongByID(soluong, idCTSP);
     }
 
 }

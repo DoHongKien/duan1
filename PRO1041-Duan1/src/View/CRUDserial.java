@@ -4,8 +4,16 @@
  */
 package View;
 
+import Model.Serial;
+import Service.SerialService;
 import java.awt.Image;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,12 +24,27 @@ public class CRUDserial extends javax.swing.JFrame {
     /**
      * Creates new form CRUDserial
      */
+    SerialService serialService = new SerialService();
+    DefaultTableModel defaultTableModel;
+    int idCTSP;
+
     public CRUDserial() {
         initComponents();
         setTitle("Serial");
         ImageIcon icon = new ImageIcon(getClass().getResource("/Images/sevent-logo.png"));
         Image image = icon.getImage();
         setIconImage(image);
+        fillTable(serialService.getAllSerial());
+    }
+
+    public CRUDserial(int id) {
+        initComponents();
+        setTitle("Serial");
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Images/sevent-logo.png"));
+        Image image = icon.getImage();
+        setIconImage(image);
+        this.idCTSP = id;
+        fillTable(serialService.getSerialByIdCTSP(idCTSP));
     }
 
     /**
@@ -36,12 +59,11 @@ public class CRUDserial extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblHang = new javax.swing.JTable();
+        tbl_serial = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txtTenHang = new javax.swing.JTextField();
+        txt_maserial = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
-        btnXóa = new javax.swing.JButton();
         btnMoi = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
 
@@ -51,7 +73,7 @@ public class CRUDserial extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        tblHang.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_serial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -59,7 +81,7 @@ public class CRUDserial extends javax.swing.JFrame {
                 "Mã Serial"
             }
         ));
-        jScrollPane2.setViewportView(tblHang);
+        jScrollPane2.setViewportView(tbl_serial);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -85,19 +107,11 @@ public class CRUDserial extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Mã Serial");
 
-        txtTenHang.setBorder(null);
+        txt_maserial.setBorder(null);
 
-        jSeparator2.setForeground(new java.awt.Color(204, 0, 51));
+        jSeparator2.setForeground(new java.awt.Color(147, 214, 255));
 
-        btnXóa.setBackground(new java.awt.Color(186, 79, 84));
-        btnXóa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnXóa.setForeground(new java.awt.Color(255, 255, 255));
-        btnXóa.setText("Xóa");
-        btnXóa.setBorder(null);
-        btnXóa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnXóa.setPreferredSize(new java.awt.Dimension(85, 25));
-
-        btnMoi.setBackground(new java.awt.Color(186, 79, 84));
+        btnMoi.setBackground(new java.awt.Color(147, 214, 255));
         btnMoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnMoi.setForeground(new java.awt.Color(255, 255, 255));
         btnMoi.setText("Mới");
@@ -111,33 +125,33 @@ public class CRUDserial extends javax.swing.JFrame {
             }
         });
 
-        btnThem.setBackground(new java.awt.Color(186, 79, 84));
+        btnThem.setBackground(new java.awt.Color(147, 214, 255));
         btnThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnThem.setForeground(new java.awt.Color(255, 255, 255));
         btnThem.setText("Thêm");
         btnThem.setBorder(null);
         btnThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThem.setPreferredSize(new java.awt.Dimension(85, 25));
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtTenHang, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                            .addComponent(jSeparator2)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(btnXóa, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_maserial, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addComponent(jSeparator2))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -146,16 +160,14 @@ public class CRUDserial extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTenHang, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_maserial, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(105, 105, 105)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnXóa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(55, 55, 55))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 230, 280));
@@ -184,6 +196,16 @@ public class CRUDserial extends javax.swing.JFrame {
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMoiActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        LocalDate localDate = LocalDate.now();
+        String ngayTao = localDate.format(DateTimeFormatter.ISO_DATE);
+        String ngayNhap = localDate.format(DateTimeFormatter.ISO_DATE);
+        int trangThai = 0;
+        Serial serial = new Serial(idCTSP, txt_maserial.getText().trim(), ngayTao, ngayNhap, trangThai);
+        JOptionPane.showMessageDialog(this, serialService.insert(serial));
+        fillTable(serialService.getSerialByIdCTSP(idCTSP));
+    }//GEN-LAST:event_btnThemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,17 +245,25 @@ public class CRUDserial extends javax.swing.JFrame {
         });
     }
 
+    private void fillTable(List<Serial> list) {
+        defaultTableModel = (DefaultTableModel) tbl_serial.getModel();
+        defaultTableModel.setRowCount(0);
+
+        for (Serial serial : list) {
+            defaultTableModel.addRow(new Object[]{serial.getMa()});
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMoi;
     private javax.swing.JButton btnThem;
-    private javax.swing.JButton btnXóa;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable tblHang;
-    private javax.swing.JTextField txtTenHang;
+    private javax.swing.JTable tbl_serial;
+    private javax.swing.JTextField txt_maserial;
     // End of variables declaration//GEN-END:variables
 }

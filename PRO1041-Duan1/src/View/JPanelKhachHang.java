@@ -6,11 +6,17 @@ package View;
 
 import Model.KhachHang;
 import Service.KhachHangService;
+import com.toedter.calendar.JDateChooser;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -33,6 +39,8 @@ public class JPanelKhachHang extends javax.swing.JPanel {
     public JPanelKhachHang() {
         initComponents();
         loadTBV();
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
     }
 
     /**
@@ -45,12 +53,12 @@ public class JPanelKhachHang extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel3 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         txt_ma = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         txt_ten = new javax.swing.JTextField();
-        txt_ngaysinh = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         rdo_nam = new javax.swing.JRadioButton();
@@ -64,7 +72,6 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         tbl_khachhang = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
         btn_them = new javax.swing.JButton();
@@ -74,8 +81,9 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         txt_diachi = new javax.swing.JTextArea();
         jLabel32 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rdo_khong = new javax.swing.JRadioButton();
+        rdo_co = new javax.swing.JRadioButton();
+        txt_ngaysinh = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
 
@@ -103,10 +111,6 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         txt_ten.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_ten.setBorder(null);
         jPanel3.add(txt_ten, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 174, -1));
-
-        txt_ngaysinh.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_ngaysinh.setBorder(null);
-        jPanel3.add(txt_ngaysinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 174, -1));
 
         jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel26.setText("Ngày sinh");
@@ -176,16 +180,13 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         jSeparator2.setForeground(new java.awt.Color(186, 79, 84));
         jPanel3.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 174, 12));
 
-        jSeparator3.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel3.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 174, 10));
-
         jSeparator4.setForeground(new java.awt.Color(186, 79, 84));
         jPanel3.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 174, 10));
 
         jSeparator6.setForeground(new java.awt.Color(186, 79, 84));
         jPanel3.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 60, 174, 10));
 
-        btn_them.setBackground(new java.awt.Color(186, 79, 84));
+        btn_them.setBackground(new java.awt.Color(147, 214, 255));
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_them.setForeground(new java.awt.Color(255, 255, 255));
         btn_them.setText("Thêm");
@@ -196,7 +197,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         });
         jPanel3.add(btn_them, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, 90, 32));
 
-        btn_sua.setBackground(new java.awt.Color(186, 79, 84));
+        btn_sua.setBackground(new java.awt.Color(147, 214, 255));
         btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_sua.setForeground(new java.awt.Color(255, 255, 255));
         btn_sua.setText("Sửa");
@@ -207,7 +208,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         });
         jPanel3.add(btn_sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 540, 87, 32));
 
-        btn_xoa.setBackground(new java.awt.Color(186, 79, 84));
+        btn_xoa.setBackground(new java.awt.Color(147, 214, 255));
         btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_xoa.setForeground(new java.awt.Color(255, 255, 255));
         btn_xoa.setText("Xóa");
@@ -218,7 +219,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         });
         jPanel3.add(btn_xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 540, 87, 32));
 
-        btn_lammoi.setBackground(new java.awt.Color(186, 79, 84));
+        btn_lammoi.setBackground(new java.awt.Color(147, 214, 255));
         btn_lammoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_lammoi.setForeground(new java.awt.Color(255, 255, 255));
         btn_lammoi.setText("Mới");
@@ -239,15 +240,19 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         jLabel32.setText("Giới Tính");
         jPanel3.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
-        jRadioButton1.setText("Không");
-        jPanel3.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, -1, -1));
+        buttonGroup2.add(rdo_khong);
+        rdo_khong.setText("Không");
+        jPanel3.add(rdo_khong, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, -1, -1));
 
-        jRadioButton2.setText("Có");
-        jPanel3.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, -1, -1));
+        buttonGroup2.add(rdo_co);
+        rdo_co.setSelected(true);
+        rdo_co.setText("Có");
+        jPanel3.add(rdo_co, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, -1, -1));
+        jPanel3.add(txt_ngaysinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 180, -1));
 
         add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, 618));
 
-        jPanel1.setBackground(new java.awt.Color(186, 79, 84));
+        jPanel1.setBackground(new java.awt.Color(147, 214, 255));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
@@ -273,6 +278,9 @@ public class JPanelKhachHang extends javax.swing.JPanel {
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
         updateKH();
+        btn_them.setEnabled(true);
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
@@ -283,37 +291,52 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
         if (cf == JOptionPane.YES_OPTION) {
             deleteKH();
+            btn_them.setEnabled(true);
+            btn_sua.setEnabled(false);
+            btn_xoa.setEnabled(false);
         }
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void btn_lammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lammoiActionPerformed
+        btn_them.setEnabled(true);
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
+        txt_ma.setEditable(true);
         txt_ma.setText("");
         txt_ten.setText("");
         txt_sdt.setText("");
         txt_diachi.setText("");
-        txt_ngaysinh.setText("");
         rdo_nam.setSelected(true);
-        jRadioButton2.setSelected(true);
+        rdo_co.setSelected(true);
     }//GEN-LAST:event_btn_lammoiActionPerformed
 
     private void tbl_khachhangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_khachhangMouseClicked
+        btn_them.setEnabled(false);
+        btn_sua.setEnabled(true);
+        btn_xoa.setEnabled(true);
+        txt_ma.setEditable(false);
         int a = tbl_khachhang.getSelectedRow();
 
-        txt_ma.setText(tbl_khachhang.getValueAt(a, 1).toString());
-        txt_ten.setText(tbl_khachhang.getValueAt(a, 2).toString());
-        txt_ngaysinh.setText(tbl_khachhang.getValueAt(a, 3).toString());
-        txt_sdt.setText(tbl_khachhang.getValueAt(a, 5).toString());
-        txt_diachi.setText(tbl_khachhang.getValueAt(a, 6).toString());
+        txt_ma.setText(tbl_khachhang.getValueAt(a, 1).toString().trim());
+        txt_ten.setText(tbl_khachhang.getValueAt(a, 2).toString().trim());
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(tbl_khachhang.getValueAt(a, 3).toString().trim());
+            txt_ngaysinh.setDate(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(JPanelNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        txt_sdt.setText(tbl_khachhang.getValueAt(a, 5).toString().trim());
+        txt_diachi.setText(tbl_khachhang.getValueAt(a, 6).toString().trim());
         if (tbl_khachhang.getValueAt(a, 4).toString().equalsIgnoreCase("Nam")) {
             rdo_nam.setSelected(true);
         } else {
             rdo_nu.setSelected(true);
         }
 
-        if (tbl_khachhang.getValueAt(a, 7).toString().equalsIgnoreCase("Còn")) {
-            jRadioButton2.setSelected(true);
+        if (tbl_khachhang.getValueAt(a, 9).toString().equalsIgnoreCase("Có")) {
+            rdo_co.setSelected(true);
         } else {
-            jRadioButton1.setSelected(true);
+            rdo_khong.setSelected(true);
         }
     }//GEN-LAST:event_tbl_khachhangMouseClicked
 
@@ -330,23 +353,34 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         DefaultTableModel mol = (DefaultTableModel) tbl_khachhang.getModel();
         mol.setRowCount(0);
         for (KhachHang kh : list) {
-            mol.addRow(new Object[]{kh.getId(), kh.getMa(), kh.getTen(), kh.getNgaySinh(), kh.getGioiTinh(),
-                kh.getSdt(), kh.getDiaChi(), kh.getNgayTao(), kh.getNgayNhap(), kh.getTrangThai()});
+            String tt = "";
+            if (kh.getTrangThai() == 1) {
+                tt = "Còn hoạt động";
+            } else if (kh.getTrangThai() == 0) {
+                tt = "Không hoạt động";
+            }
+            if (kh.getTrangThai() != 2) {
+                mol.addRow(new Object[]{kh.getId(), kh.getMa(), kh.getTen(), kh.getNgaySinh(), kh.getGioiTinh(),
+                    kh.getSdt(), kh.getDiaChi(), kh.getNgayTao(), kh.getNgayNhap(), tt});
+            }
         }
     }
 
     private void addKH() {
         LocalDate date = LocalDate.now();
+        JDateChooser ngaySinh = new JDateChooser();
         String ma = txt_ma.getText().trim();
         String ten = txt_ten.getText().trim();
-        String ngaySinh = txt_ngaysinh.getText().trim();
+        ngaySinh.setDate(txt_ngaysinh.getDate());
+        Date selectedDate = ngaySinh.getDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String sdt = txt_sdt.getText().trim();
         String diaChi = txt_diachi.getText().trim();
         String gt;
         if (rdo_nam.isSelected()) {
-            gt = "nam";
+            gt = "Nam";
         } else {
-            gt = "nữ";
+            gt = "Nữ";
         }
         int tt;
         if (rdo_nam.isSelected()) {
@@ -355,7 +389,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
             tt = 0;
         }
 
-        KhachHang khachHang = new KhachHang(ma, ten, ngaySinh, gt, sdt, diaChi, date.format(DateTimeFormatter.ISO_DATE), date.format(DateTimeFormatter.ISO_DATE), tt);
+        KhachHang khachHang = new KhachHang(ma, ten, dateFormat.format(selectedDate), gt, sdt, diaChi, date.format(DateTimeFormatter.ISO_DATE), date.format(DateTimeFormatter.ISO_DATE), tt);
 
         int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
 
@@ -372,16 +406,19 @@ public class JPanelKhachHang extends javax.swing.JPanel {
 
     private void updateKH() {
         LocalDate date = LocalDate.now();
+        JDateChooser ngaySinh = new JDateChooser();
         String ma = txt_ma.getText().trim();
         String ten = txt_ten.getText().trim();
-        String ngaySinh = txt_ngaysinh.getText().trim();
+        ngaySinh.setDate(txt_ngaysinh.getDate());
+        Date selectedDate = ngaySinh.getDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String sdt = txt_sdt.getText().trim();
         String diaChi = txt_diachi.getText().trim();
         String gt;
         if (rdo_nam.isSelected()) {
-            gt = "nam";
+            gt = "Nam";
         } else {
-            gt = "nữ";
+            gt = "Nữ";
         }
         int tt;
         if (rdo_nam.isSelected()) {
@@ -389,7 +426,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         } else {
             tt = 0;
         }
-        KhachHang khachHang = new KhachHang(ma, ten, ngaySinh, gt, sdt, diaChi, date.format(DateTimeFormatter.ISO_DATE), tt);
+        KhachHang khachHang = new KhachHang(ma, ten, dateFormat.format(selectedDate), gt, sdt, diaChi, date.format(DateTimeFormatter.ISO_DATE), tt);
 
         int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?", "Sửa", JOptionPane.YES_NO_OPTION);
 
@@ -439,6 +476,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
     private javax.swing.JButton btn_them;
     private javax.swing.JButton btn_xoa;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel25;
@@ -450,21 +488,20 @@ public class JPanelKhachHang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JRadioButton rdo_co;
+    private javax.swing.JRadioButton rdo_khong;
     private javax.swing.JRadioButton rdo_nam;
     private javax.swing.JRadioButton rdo_nu;
     private javax.swing.JTable tbl_khachhang;
     private javax.swing.JTextArea txt_diachi;
     private javax.swing.JTextField txt_ma;
-    private javax.swing.JTextField txt_ngaysinh;
+    private com.toedter.calendar.JDateChooser txt_ngaysinh;
     private javax.swing.JTextField txt_sdt;
     private javax.swing.JTextField txt_ten;
     private javax.swing.JTextField txt_timkiem;

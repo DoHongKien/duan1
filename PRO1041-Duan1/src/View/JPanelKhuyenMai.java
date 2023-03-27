@@ -6,10 +6,14 @@ package View;
 
 import Model.KhuyenMai;
 import Service.KhuyenMaiService;
+import com.toedter.calendar.JDateChooser;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -31,6 +35,8 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
     public JPanelKhuyenMai() {
         initComponents();
         fillTable(khuyenMaiService.getListKhuyenMai());
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
     }
 
     /**
@@ -56,27 +62,27 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         txt_ma = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
-        txt_giatri = new javax.swing.JTextField();
+        txt_dieukien = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
-        txt_ngaytao = new javax.swing.JTextField();
-        jSeparator3 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
-        txt_ngayhethan = new javax.swing.JTextField();
-        jSeparator4 = new javax.swing.JSeparator();
         btn_them = new javax.swing.JButton();
         btn_sua = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
         btn_moi = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        txt_ngaysua = new javax.swing.JTextField();
-        jSeparator5 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+        txt_giatri = new javax.swing.JTextField();
+        jSeparator6 = new javax.swing.JSeparator();
+        txt_ngaytao = new com.toedter.calendar.JDateChooser();
+        txt_ngayhethan = new com.toedter.calendar.JDateChooser();
+        txt_ngaysua = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1070, 680));
         setPreferredSize(new java.awt.Dimension(1070, 680));
 
-        jPanel1.setBackground(new java.awt.Color(186, 79, 84));
+        jPanel1.setBackground(new java.awt.Color(147, 214, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -141,7 +147,7 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Id", "Mã", "Giá Trị", "Ngày Tạo", "Ngày Hết Hạn", "Ngày Sửa", "Trạng Thái"
+                "Id", "Mã", "Điều kiện", "Giá Trị", "Ngày Tạo", "Ngày Hết Hạn", "Ngày Sửa", "Trạng Thái"
             }
         ));
         tbl_khuyenmai.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -151,45 +157,35 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbl_khuyenmai);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 77, 705, -1));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 77, 760, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Mã giảm giá");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 80, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 80, -1, -1));
 
         txt_ma.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_ma.setBorder(null);
-        jPanel2.add(txt_ma, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 80, 200, -1));
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 100, 200, 11));
+        jPanel2.add(txt_ma, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 80, 150, -1));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 100, 150, 11));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("Giá Trị");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 130, -1, -1));
+        jLabel3.setText("Điều Kiện");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 130, -1, -1));
 
-        txt_giatri.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_giatri.setBorder(null);
-        jPanel2.add(txt_giatri, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 130, 200, -1));
-        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 150, 200, 10));
+        txt_dieukien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_dieukien.setBorder(null);
+        jPanel2.add(txt_dieukien, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 130, 150, -1));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 150, 150, 10));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Ngày Tạo");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 180, -1, -1));
-
-        txt_ngaytao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_ngaytao.setBorder(null);
-        jPanel2.add(txt_ngaytao, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 180, 200, -1));
-        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 200, 200, 10));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 230, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Ngày Sửa");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 300, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 340, -1, -1));
 
-        txt_ngayhethan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_ngayhethan.setBorder(null);
-        jPanel2.add(txt_ngayhethan, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 240, 199, -1));
-        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 260, 199, 10));
-
-        btn_them.setBackground(new java.awt.Color(186, 79, 84));
+        btn_them.setBackground(new java.awt.Color(147, 214, 255));
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_them.setForeground(new java.awt.Color(255, 255, 255));
         btn_them.setText("Thêm");
@@ -198,9 +194,9 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
                 btn_themActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_them, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 360, 90, 32));
+        jPanel2.add(btn_them, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 450, 90, 32));
 
-        btn_sua.setBackground(new java.awt.Color(186, 79, 84));
+        btn_sua.setBackground(new java.awt.Color(147, 214, 255));
         btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_sua.setForeground(new java.awt.Color(255, 255, 255));
         btn_sua.setText("Sửa");
@@ -209,9 +205,9 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
                 btn_suaActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 360, 87, 32));
+        jPanel2.add(btn_sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 450, 87, 32));
 
-        btn_xoa.setBackground(new java.awt.Color(186, 79, 84));
+        btn_xoa.setBackground(new java.awt.Color(147, 214, 255));
         btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_xoa.setForeground(new java.awt.Color(255, 255, 255));
         btn_xoa.setText("Xóa");
@@ -220,9 +216,9 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
                 btn_xoaActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 420, 87, 32));
+        jPanel2.add(btn_xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 510, 87, 32));
 
-        btn_moi.setBackground(new java.awt.Color(186, 79, 84));
+        btn_moi.setBackground(new java.awt.Color(147, 214, 255));
         btn_moi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_moi.setForeground(new java.awt.Color(255, 255, 255));
         btn_moi.setText("Mới");
@@ -231,16 +227,23 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
                 btn_moiActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_moi, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 420, 87, 32));
+        jPanel2.add(btn_moi, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 510, 87, 32));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Ngày Hết Hạn");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 240, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 280, -1, -1));
 
-        txt_ngaysua.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_ngaysua.setBorder(null);
-        jPanel2.add(txt_ngaysua, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 300, 199, -1));
-        jPanel2.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 320, 199, 10));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setText("Giá Trị");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 180, -1, -1));
+
+        txt_giatri.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_giatri.setBorder(null);
+        jPanel2.add(txt_giatri, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 180, 150, -1));
+        jPanel2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 200, 150, 10));
+        jPanel2.add(txt_ngaytao, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 230, 150, -1));
+        jPanel2.add(txt_ngayhethan, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 280, 150, -1));
+        jPanel2.add(txt_ngaysua, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 340, 150, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -260,12 +263,32 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbl_khuyenmaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_khuyenmaiMouseClicked
+        btn_them.setEnabled(false);
+        btn_sua.setEnabled(true);
+        btn_xoa.setEnabled(true);
+        txt_ma.setEditable(false);
         int index = tbl_khuyenmai.getSelectedRow();
-        txt_ma.setText(tbl_khuyenmai.getValueAt(index, 1).toString());
-        txt_giatri.setText(tbl_khuyenmai.getValueAt(index, 2).toString());
-        txt_ngaytao.setText(tbl_khuyenmai.getValueAt(index, 3).toString());
-        txt_ngayhethan.setText(tbl_khuyenmai.getValueAt(index, 4).toString());
-        txt_ngaysua.setText(tbl_khuyenmai.getValueAt(index, 5).toString());
+        txt_ma.setText(tbl_khuyenmai.getValueAt(index, 1).toString().trim());
+        txt_giatri.setText(tbl_khuyenmai.getValueAt(index, 2).toString().trim());
+        txt_dieukien.setText(tbl_khuyenmai.getValueAt(index, 3).toString().trim());
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(tbl_khuyenmai.getValueAt(index, 4).toString().trim());
+            txt_ngaytao.setDate(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(JPanelNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(tbl_khuyenmai.getValueAt(index, 5).toString().trim());
+            txt_ngayhethan.setDate(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(JPanelNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(tbl_khuyenmai.getValueAt(index, 6).toString().trim());
+            txt_ngaysua.setDate(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(JPanelNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_tbl_khuyenmaiMouseClicked
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
@@ -286,6 +309,9 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
             if (cf == JOptionPane.YES_OPTION) {
                 JOptionPane.showMessageDialog(this, khuyenMaiService.update(getField()));
                 fillTable(khuyenMaiService.getListKhuyenMai());
+                btn_them.setEnabled(true);
+                btn_sua.setEnabled(false);
+                btn_xoa.setEnabled(false);
             }
         }
     }//GEN-LAST:event_btn_suaActionPerformed
@@ -301,15 +327,20 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         if (cf == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, khuyenMaiService.delete(txt_ma.getText()));
             fillTable(khuyenMaiService.getListKhuyenMai());
+            btn_them.setEnabled(true);
+            btn_sua.setEnabled(false);
+            btn_xoa.setEnabled(false);
         }
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void btn_moiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_moiActionPerformed
         txt_ma.setText("");
+        txt_dieukien.setText("");
         txt_giatri.setText("");
-        txt_ngaytao.setText("");
-        txt_ngayhethan.setText("");
-        txt_ngaysua.setText("");
+        btn_them.setEnabled(true);
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
+        txt_ma.setEditable(true);
     }//GEN-LAST:event_btn_moiActionPerformed
 
     private void rdo_tatcaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdo_tatcaMouseClicked
@@ -336,18 +367,31 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         defaultTableModel = (DefaultTableModel) tbl_khuyenmai.getModel();
         defaultTableModel.setRowCount(0);
         for (KhuyenMai km : list) {
-            defaultTableModel.addRow(new Object[]{km.getId(), km.getMa(), km.getGiaTri(), km.getNgayTao(), km.getNgayHetHan(), km.getNgayNhap(), km.getTrangThai()});
+            defaultTableModel.addRow(new Object[]{km.getId(), km.getMa(), km.getDieuKien(), km.getGiaTri(), km.getNgayTao(), km.getNgayHetHan(), km.getNgayNhap(), km.getTrangThai()});
         }
     }
 
     private KhuyenMai getField() {
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        JDateChooser ngayTao = new JDateChooser();
+        ngayTao.setDate(txt_ngaytao.getDate());
+        Date selectedDate = ngayTao.getDate();
+
+        JDateChooser ngayHetHan = new JDateChooser();
+        ngayHetHan.setDate(txt_ngayhethan.getDate());
+        Date selectedDate1 = ngayHetHan.getDate();
+
+        JDateChooser ngaySua = new JDateChooser();
+        ngaySua.setDate(txt_ngaysua.getDate());
+        Date selectedDate2 = ngayTao.getDate();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         KhuyenMai km = new KhuyenMai();
         km.setMa(txt_ma.getText());
-        km.setGiaTri(Integer.parseInt(txt_giatri.getText()));
-        km.setNgayTao(txt_ngaytao.getText());
-        km.setNgayHetHan(txt_ngayhethan.getText());
-        km.setNgayNhap(txt_ngaysua.getText());
+        km.setGiaTri(Integer.parseInt(txt_giatri.getText().trim()));
+        km.setDieuKien(Integer.parseInt(txt_dieukien.getText().trim()));
+        km.setNgayTao(dateFormat.format(selectedDate));
+        km.setNgayHetHan(dateFormat.format(selectedDate1));
+        km.setNgayNhap(dateFormat.format(selectedDate2));
         return km;
     }
 
@@ -375,54 +419,53 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
             return false;
         }
 
-        if (txt_giatri.getText().isEmpty()) {
+        if (txt_dieukien.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Giá trị không được trống");
-            txt_giatri.requestFocus();
+            txt_dieukien.requestFocus();
             return false;
         }
         try {
-            int giaTri = Integer.parseInt(txt_giatri.getText());
+            int giaTri = Integer.parseInt(txt_dieukien.getText());
             if (giaTri <= 0) {
                 JOptionPane.showMessageDialog(this, "Giá trị phải lớn hơn 0");
-                txt_giatri.requestFocus();
+                txt_dieukien.requestFocus();
                 return false;
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Giá trị phải là số");
-            txt_giatri.requestFocus();
+            txt_dieukien.requestFocus();
             return false;
         }
 
-        if (txt_ngaytao.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
-            txt_ngaytao.requestFocus();
-            return false;
-        } else if (!matches(txt_ngaytao.getText())) {
-            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
-            txt_ngaytao.requestFocus();
-            return false;
-        }
-
-        if (txt_ngayhethan.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
-            txt_ngayhethan.requestFocus();
-            return false;
-        } else if (!matches(txt_ngayhethan.getText())) {
-            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
-            txt_ngayhethan.requestFocus();
-            return false;
-        }
-        
-        if (txt_ngaysua.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
-            txt_ngaysua.requestFocus();
-            return false;
-        } else if (!matches(txt_ngaysua.getText())) {
-            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
-            txt_ngaysua.requestFocus();
-            return false;
-        }
-
+//        if (txt_ngaytao.getText().isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
+//            txt_ngaytao.requestFocus();
+//            return false;
+//        } else if (!matches(txt_ngaytao.getText())) {
+//            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
+//            txt_ngaytao.requestFocus();
+//            return false;
+//        }
+//
+//        if (txt_ngayhethan.getText().isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
+//            txt_ngayhethan.requestFocus();
+//            return false;
+//        } else if (!matches(txt_ngayhethan.getText())) {
+//            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
+//            txt_ngayhethan.requestFocus();
+//            return false;
+//        }
+//
+//        if (txt_ngaysua.getText().isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
+//            txt_ngaysua.requestFocus();
+//            return false;
+//        } else if (!matches(txt_ngaysua.getText())) {
+//            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
+//            txt_ngaysua.requestFocus();
+//            return false;
+//        }
         return true;
     }
 
@@ -440,54 +483,53 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
             return false;
         }
 
-        if (txt_giatri.getText().isEmpty()) {
+        if (txt_dieukien.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Giá trị không được trống");
-            txt_giatri.requestFocus();
+            txt_dieukien.requestFocus();
             return false;
         }
         try {
-            int giaTri = Integer.parseInt(txt_giatri.getText());
+            int giaTri = Integer.parseInt(txt_dieukien.getText());
             if (giaTri <= 0) {
                 JOptionPane.showMessageDialog(this, "Giá trị phải lớn hơn 0");
-                txt_giatri.requestFocus();
+                txt_dieukien.requestFocus();
                 return false;
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Giá trị phải là số");
-            txt_giatri.requestFocus();
+            txt_dieukien.requestFocus();
             return false;
         }
 
-        if (txt_ngaytao.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
-            txt_ngaytao.requestFocus();
-            return false;
-        } else if (!matches(txt_ngaytao.getText())) {
-            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
-            txt_ngaytao.requestFocus();
-            return false;
-        }
-
-        if (txt_ngayhethan.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
-            txt_ngayhethan.requestFocus();
-            return false;
-        } else if (!matches(txt_ngayhethan.getText())) {
-            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
-            txt_ngayhethan.requestFocus();
-            return false;
-        }
-        
-        if (txt_ngaysua.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
-            txt_ngaysua.requestFocus();
-            return false;
-        } else if (!matches(txt_ngaysua.getText())) {
-            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
-            txt_ngaysua.requestFocus();
-            return false;
-        }
-
+//        if (txt_ngaytao.getText().isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
+//            txt_ngaytao.requestFocus();
+//            return false;
+//        } else if (!matches(txt_ngaytao.getText())) {
+//            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
+//            txt_ngaytao.requestFocus();
+//            return false;
+//        }
+//
+//        if (txt_ngayhethan.getText().isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
+//            txt_ngayhethan.requestFocus();
+//            return false;
+//        } else if (!matches(txt_ngayhethan.getText())) {
+//            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
+//            txt_ngayhethan.requestFocus();
+//            return false;
+//        }
+//
+//        if (txt_ngaysua.getText().isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
+//            txt_ngaysua.requestFocus();
+//            return false;
+//        } else if (!matches(txt_ngaysua.getText())) {
+//            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
+//            txt_ngaysua.requestFocus();
+//            return false;
+//        }
         return true;
     }
 
@@ -513,23 +555,23 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JRadioButton rdo_daketthuc;
     private javax.swing.JRadioButton rdo_dangdienra;
     private javax.swing.JRadioButton rdo_sapdienra;
     private javax.swing.JRadioButton rdo_tatca;
     private javax.swing.JTable tbl_khuyenmai;
+    private javax.swing.JTextField txt_dieukien;
     private javax.swing.JTextField txt_giatri;
     private javax.swing.JTextField txt_ma;
-    private javax.swing.JTextField txt_ngayhethan;
-    private javax.swing.JTextField txt_ngaysua;
-    private javax.swing.JTextField txt_ngaytao;
+    private com.toedter.calendar.JDateChooser txt_ngayhethan;
+    private com.toedter.calendar.JDateChooser txt_ngaysua;
+    private com.toedter.calendar.JDateChooser txt_ngaytao;
     // End of variables declaration//GEN-END:variables
 }

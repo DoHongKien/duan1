@@ -25,6 +25,16 @@ public class KhuyenMaiService implements IKhuyenMaiService {
     }
 
     @Override
+    public int getGiaTriByDieuKien(double dieuKien, String date, int trangThai) {
+        return khuyenMaiRepo.getGiaTriByDieuKien(dieuKien, date, trangThai);
+    }
+
+    @Override
+    public int getIdByGiaTri(int giaTri) {
+        return khuyenMaiRepo.getIdByGiaTri(giaTri);
+    }
+
+    @Override
     public String insert(KhuyenMai km) {
         if (khuyenMaiRepo.insert(km)) {
             return "Thêm thành công";

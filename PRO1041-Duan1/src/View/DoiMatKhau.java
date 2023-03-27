@@ -68,8 +68,9 @@ public class DoiMatKhau extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Nhập Lại Mật Khẩu:");
 
-        jPanel2.setBackground(new java.awt.Color(186, 79, 84));
+        jPanel2.setBackground(new java.awt.Color(147, 214, 255));
 
+        jLabel4.setBackground(new java.awt.Color(147, 214, 255));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("      Tài Khoản");
@@ -93,7 +94,7 @@ public class DoiMatKhau extends javax.swing.JFrame {
 
         txt_renewpass.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        btn_doimatkhau.setBackground(new java.awt.Color(186, 79, 84));
+        btn_doimatkhau.setBackground(new java.awt.Color(147, 214, 255));
         btn_doimatkhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_doimatkhau.setForeground(new java.awt.Color(255, 255, 255));
         btn_doimatkhau.setText("Đổi Mật Khẩu");
@@ -103,7 +104,7 @@ public class DoiMatKhau extends javax.swing.JFrame {
             }
         });
 
-        btn_cancel.setBackground(new java.awt.Color(186, 79, 84));
+        btn_cancel.setBackground(new java.awt.Color(147, 214, 255));
         btn_cancel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_cancel.setForeground(new java.awt.Color(255, 255, 255));
         btn_cancel.setText("Cancel");
@@ -118,7 +119,7 @@ public class DoiMatKhau extends javax.swing.JFrame {
 
         txt_username.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        btn_them.setBackground(new java.awt.Color(186, 79, 84));
+        btn_them.setBackground(new java.awt.Color(147, 214, 255));
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_them.setForeground(new java.awt.Color(255, 255, 255));
         btn_them.setText("Thêm");

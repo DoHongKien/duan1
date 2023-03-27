@@ -6,6 +6,7 @@ package Service;
 
 import Model.NhanVien;
 import Repository.NhanVienRepository;
+import ViewModel.RoleModel;
 import java.util.List;
 
 /**
@@ -27,6 +28,16 @@ public class NhanVienService implements NhanVienServiceInterface {
     }
 
     @Override
+    public List<RoleModel> roleLogin(String username, String password) {
+        return nvR.roleLogin(username, password);
+    }
+
+    @Override
+    public int getIdNVByMa(String ma) {
+        return nvR.getIdNVByMa(ma);
+    }
+
+    @Override
     public boolean create(NhanVien nv) {
         return nvR.create(nv);
     }
@@ -40,5 +51,4 @@ public class NhanVienService implements NhanVienServiceInterface {
     public boolean delete(NhanVien nv) {
         return nvR.delete(nv);
     }
-
 }

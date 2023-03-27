@@ -62,6 +62,7 @@ CREATE TABLE KhuyenMai
 (
 	id int identity(1,1) not null,
 	ma nchar(10) null,
+	dieu_kien int null,
 	gia_tri int null,
 	ngay_tao date null,
 	ngay_het_han date null,
@@ -262,6 +263,7 @@ CREATE TABLE ChiTietHoaDon
 	ngay_tao date null,
 	ngay_nhap date null,
 	trang_thai int null,
+	ghi_chu nvarchar(50) null,
 	Constraint PK_ChiTietHoaDon Primary key(id),
 	Constraint FK_ChiTietHoaDon_ChiTietSanPham Foreign key (id_ctsp) references ChiTietSanPham,
 	Constraint FK_ChiTietHoaDon_HoaDon Foreign key (id_hoa_don) references HoaDon,
@@ -330,13 +332,13 @@ values
 	
 insert into KhuyenMai
 values 
-		('KM1','10000','2023-03-12','2023-03-22','2023-03-12','0'),
-		('KM2','110000','2023-03-12','2023-03-12','2023-03-12','0'),
-		('KM3','20000','2023-03-12','2023-04-21','2023-03-12','1'),
-		('KM4','40000','2023-03-12','2023-05-12','2023-03-12','0'),
-		('KM5','150000','2023-03-12','2023-03-15','2023-03-12','1')
+		('KM1',100000, 20000,'2023-03-12','2023-03-22','2023-03-12','1'),
+		('KM2',200000, 40000,'2023-03-12','2023-03-12','2023-03-12','1'),
+		('KM3',300000, 60000,'2023-03-12','2023-04-21','2023-03-12','1'),
+		('KM4',50000, 10000,'2023-03-12','2023-05-12','2023-03-12','1'),
+		('KM5',150000, 15000,'2023-03-12','2023-03-15','2023-03-12','1')
 
-	
+	select * from KhuyenMai
 
 insert into HoaDon
 values 
@@ -466,18 +468,18 @@ values
 
 insert into ChiTietHoaDon
 values
-		('1','8','3','12','2000000','2023-03-12','2023-03-12','0'),
-		('3','7','2','22','1400000','2023-03-12','2023-03-12','1'),
-		('4','9','5','15','1600000','2023-03-12','2023-03-12','1'),
-		('2','10','4','22','2400000','2023-03-12','2023-03-12','0'),
-		('5','6','6','12','4400000','2023-03-12','2023-03-12','1')
+		('1','8','3','12','2000000','2023-03-12','2023-03-12','0', 'Không có gì'),
+		('3','7','2','22','1400000','2023-03-12','2023-03-12','1', 'Không có gì'),
+		('4','9','5','15','1600000','2023-03-12','2023-03-12','1', 'Không có gì'),
+		('2','10','4','22','2400000','2023-03-12','2023-03-12','0', 'Không có gì'),
+		('5','6','1','12','4400000','2023-03-12','2023-03-12','1', 'Không có gì')
 
 	select * from KhachHang
 	select * from ChiTietSanPham
 	select * from ChiTietHoaDon
 	select * from ChucVu
 	select * from NhanVien
-	select*from KhuyenMai
+	select * from KhuyenMai
 	select * from HoaDon
 	select * from SanPham
 	select * from CPU

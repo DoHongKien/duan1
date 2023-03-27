@@ -31,10 +31,6 @@ public class VGARepository  implements VGAInterface{
             while(rs.next()){
                 list.add(new Vga(rs.getInt(1), rs.getString(2), rs.getNString(3), rs.getString(4), rs.getString(5), rs.getInt(6)));
             }
-            
-            for (Vga vga : list) {
-                System.out.println(vga.toString());
-            }
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(VGARepository.class.getName()).log(Level.SEVERE, null, ex);

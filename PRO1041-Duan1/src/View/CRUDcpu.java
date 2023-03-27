@@ -35,7 +35,8 @@ public class CRUDcpu extends javax.swing.JFrame {
 //        setIconImage(image);
         this.setLocationRelativeTo(null);
         fillTable(cS.getListCPU());
-
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
     }
 
     /**
@@ -122,11 +123,11 @@ public class CRUDcpu extends javax.swing.JFrame {
 
         txt_ten.setBorder(null);
 
-        jSeparator1.setForeground(new java.awt.Color(204, 0, 51));
+        jSeparator1.setForeground(new java.awt.Color(147, 214, 255));
 
-        jSeparator2.setForeground(new java.awt.Color(204, 0, 51));
+        jSeparator2.setForeground(new java.awt.Color(147, 214, 255));
 
-        btn_them.setBackground(new java.awt.Color(186, 79, 84));
+        btn_them.setBackground(new java.awt.Color(147, 214, 255));
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_them.setForeground(new java.awt.Color(255, 255, 255));
         btn_them.setText("Thêm");
@@ -136,7 +137,7 @@ public class CRUDcpu extends javax.swing.JFrame {
             }
         });
 
-        btn_sua.setBackground(new java.awt.Color(186, 79, 84));
+        btn_sua.setBackground(new java.awt.Color(147, 214, 255));
         btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_sua.setForeground(new java.awt.Color(255, 255, 255));
         btn_sua.setText("Sửa");
@@ -146,7 +147,7 @@ public class CRUDcpu extends javax.swing.JFrame {
             }
         });
 
-        btn_moi.setBackground(new java.awt.Color(186, 79, 84));
+        btn_moi.setBackground(new java.awt.Color(147, 214, 255));
         btn_moi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_moi.setForeground(new java.awt.Color(255, 255, 255));
         btn_moi.setText("Mới");
@@ -156,7 +157,7 @@ public class CRUDcpu extends javax.swing.JFrame {
             }
         });
 
-        btn_xoa.setBackground(new java.awt.Color(186, 79, 84));
+        btn_xoa.setBackground(new java.awt.Color(147, 214, 255));
         btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_xoa.setForeground(new java.awt.Color(255, 255, 255));
         btn_xoa.setText("Xóa");
@@ -271,6 +272,10 @@ public class CRUDcpu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblCPUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCPUMouseClicked
+        btn_them.setEnabled(false);
+        btn_sua.setEnabled(true);
+        btn_xoa.setEnabled(true);
+        txt_ma.setEditable(false);
         int index = tblCPU.getSelectedRow();
         txt_ma.setText(tblCPU.getValueAt(index, 1).toString());
         txt_ten.setText(tblCPU.getValueAt(index, 2).toString());
@@ -296,6 +301,9 @@ public class CRUDcpu extends javax.swing.JFrame {
         if (cf == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, cS.update(getFieldUpdate()));
             fillTable(cS.getListCPU());
+            btn_them.setEnabled(true);
+            btn_sua.setEnabled(false);
+            btn_xoa.setEnabled(false);
         }
     }//GEN-LAST:event_btn_suaActionPerformed
 
@@ -303,6 +311,10 @@ public class CRUDcpu extends javax.swing.JFrame {
         txt_ma.setText("");
         txt_ten.setText("");
         rdo_con.setSelected(true);
+        btn_them.setEnabled(true);
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
+        txt_ma.setEditable(true);
     }//GEN-LAST:event_btn_moiActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
@@ -316,6 +328,9 @@ public class CRUDcpu extends javax.swing.JFrame {
         if (cf == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, cS.delete(txt_ma.getText().trim()));
             fillTable(cS.getListCPU());
+            btn_them.setEnabled(true);
+            btn_sua.setEnabled(false);
+            btn_xoa.setEnabled(false);
         }
     }//GEN-LAST:event_btn_xoaActionPerformed
 
@@ -381,7 +396,7 @@ public class CRUDcpu extends javax.swing.JFrame {
 
         return cpu;
     }
-    
+
     private Cpu getFieldUpdate() {
         LocalDate date = LocalDate.now();
         Cpu cpu = new Cpu();

@@ -6,11 +6,17 @@ package View;
 
 import Model.NhanVien;
 import Service.NhanVienService;
+import com.toedter.calendar.JDateChooser;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -21,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
  * @author admin
  */
 public class JPanelNhanVien extends javax.swing.JPanel {
-    
+
     NhanVienService nvS = new NhanVienService();
     List<NhanVien> list = new ArrayList<>();
     int index = 0;
@@ -29,10 +35,12 @@ public class JPanelNhanVien extends javax.swing.JPanel {
             + "|^(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))$"
             + "|^(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))$"
             + "|^(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30))$");
-    
+
     public JPanelNhanVien() {
         initComponents();
         loadTBV();
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
     }
 
     /**
@@ -59,8 +67,6 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         txt_ma = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
-        txt_ngaysinh = new javax.swing.JTextField();
-        jSeparator4 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         txt_ten = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
@@ -83,12 +89,13 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         btn_sua = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
         btn_lammoi = new javax.swing.JButton();
+        txt_ngaysinh = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1070, 680));
         setPreferredSize(new java.awt.Dimension(1070, 680));
 
-        jPanel1.setBackground(new java.awt.Color(186, 79, 84));
+        jPanel1.setBackground(new java.awt.Color(147, 214, 255));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,10 +145,11 @@ public class JPanelNhanVien extends javax.swing.JPanel {
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 1060, 220));
 
-        jSeparator1.setForeground(new java.awt.Color(186, 79, 84));
+        jSeparator1.setBackground(new java.awt.Color(147, 214, 255));
+        jSeparator1.setForeground(new java.awt.Color(147, 214, 255));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 70, 180, -1));
 
-        btn_taikhoan.setBackground(new java.awt.Color(186, 79, 84));
+        btn_taikhoan.setBackground(new java.awt.Color(147, 214, 255));
         btn_taikhoan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_taikhoan.setForeground(new java.awt.Color(255, 255, 255));
         btn_taikhoan.setText("Tài Khoản");
@@ -159,18 +167,13 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         txt_ma.setBorder(null);
         jPanel2.add(txt_ma, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 160, 20));
 
-        jSeparator2.setForeground(new java.awt.Color(186, 79, 84));
+        jSeparator2.setBackground(new java.awt.Color(147, 214, 255));
+        jSeparator2.setForeground(new java.awt.Color(147, 214, 255));
         jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 160, 10));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Ngày sinh");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
-
-        txt_ngaysinh.setBorder(null);
-        jPanel2.add(txt_ngaysinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 160, 20));
-
-        jSeparator4.setForeground(new java.awt.Color(186, 79, 84));
-        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 160, 10));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Tên");
@@ -179,7 +182,8 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         txt_ten.setBorder(null);
         jPanel2.add(txt_ten, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 160, 20));
 
-        jSeparator3.setForeground(new java.awt.Color(186, 79, 84));
+        jSeparator3.setBackground(new java.awt.Color(147, 214, 255));
+        jSeparator3.setForeground(new java.awt.Color(147, 214, 255));
         jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 160, 10));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -219,7 +223,8 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         txt_sdt.setBorder(null);
         jPanel2.add(txt_sdt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 160, 20));
 
-        jSeparator5.setForeground(new java.awt.Color(186, 79, 84));
+        jSeparator5.setBackground(new java.awt.Color(147, 214, 255));
+        jSeparator5.setForeground(new java.awt.Color(147, 214, 255));
         jPanel2.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 160, 10));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -229,7 +234,8 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         txt_matkhau.setBorder(null);
         jPanel2.add(txt_matkhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 160, 20));
 
-        jSeparator8.setForeground(new java.awt.Color(186, 79, 84));
+        jSeparator8.setBackground(new java.awt.Color(147, 214, 255));
+        jSeparator8.setForeground(new java.awt.Color(147, 214, 255));
         jPanel2.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 160, 10));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -242,7 +248,7 @@ public class JPanelNhanVien extends javax.swing.JPanel {
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 150, 70));
 
-        btn_them.setBackground(new java.awt.Color(186, 79, 84));
+        btn_them.setBackground(new java.awt.Color(147, 214, 255));
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_them.setForeground(new java.awt.Color(255, 255, 255));
         btn_them.setText("Thêm");
@@ -253,7 +259,7 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         });
         jPanel2.add(btn_them, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 540, 80, 32));
 
-        btn_sua.setBackground(new java.awt.Color(186, 79, 84));
+        btn_sua.setBackground(new java.awt.Color(147, 214, 255));
         btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_sua.setForeground(new java.awt.Color(255, 255, 255));
         btn_sua.setText("Sửa");
@@ -264,7 +270,7 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         });
         jPanel2.add(btn_sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 540, 80, 32));
 
-        btn_xoa.setBackground(new java.awt.Color(186, 79, 84));
+        btn_xoa.setBackground(new java.awt.Color(147, 214, 255));
         btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_xoa.setForeground(new java.awt.Color(255, 255, 255));
         btn_xoa.setText("Xóa");
@@ -275,7 +281,7 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         });
         jPanel2.add(btn_xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 540, 80, 32));
 
-        btn_lammoi.setBackground(new java.awt.Color(186, 79, 84));
+        btn_lammoi.setBackground(new java.awt.Color(147, 214, 255));
         btn_lammoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_lammoi.setForeground(new java.awt.Color(255, 255, 255));
         btn_lammoi.setText("Mới");
@@ -285,6 +291,7 @@ public class JPanelNhanVien extends javax.swing.JPanel {
             }
         });
         jPanel2.add(btn_lammoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 540, 80, 32));
+        jPanel2.add(txt_ngaysinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 160, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -314,6 +321,9 @@ public class JPanelNhanVien extends javax.swing.JPanel {
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
         updateKH();
+        btn_them.setEnabled(true);
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
@@ -324,13 +334,20 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
         if (cf == JOptionPane.YES_OPTION) {
             deleteKH();
+            btn_them.setEnabled(true);
+            btn_sua.setEnabled(false);
+            btn_xoa.setEnabled(false);
         }
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void btn_lammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lammoiActionPerformed
+        btn_them.setEnabled(true);
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
+        txt_ma.setEditable(true);
         txt_ma.setText("");
         txt_ten.setText("");
-        txt_ngaysinh.setText("");
+//        txt_ngaysinh.setDate();
         txt_sdt.setText("");
         txt_diachi.setText("");
         txt_matkhau.setText("");
@@ -339,19 +356,29 @@ public class JPanelNhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_lammoiActionPerformed
 
     private void tbl_nhanvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_nhanvienMouseClicked
+        btn_them.setEnabled(false);
+        btn_sua.setEnabled(true);
+        btn_xoa.setEnabled(true);
+        txt_ma.setEditable(false);
         int a = tbl_nhanvien.getSelectedRow();
-        
-        txt_ma.setText(tbl_nhanvien.getValueAt(a, 1).toString());
-        txt_ten.setText(tbl_nhanvien.getValueAt(a, 2).toString());
-        txt_ngaysinh.setText(tbl_nhanvien.getValueAt(a, 3).toString());
-        txt_sdt.setText(tbl_nhanvien.getValueAt(a, 5).toString());
-        txt_diachi.setText(tbl_nhanvien.getValueAt(a, 6).toString());
+
+        txt_ma.setText(tbl_nhanvien.getValueAt(a, 1).toString().trim());
+        txt_ten.setText(tbl_nhanvien.getValueAt(a, 2).toString().trim());
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(tbl_nhanvien.getValueAt(a, 3).toString());
+            txt_ngaysinh.setDate(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(JPanelNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        txt_ngaysinh.setDateFormatString(tbl_nhanvien.getValueAt(a, 3).toString());
+        txt_sdt.setText(tbl_nhanvien.getValueAt(a, 5).toString().trim());
+        txt_diachi.setText(tbl_nhanvien.getValueAt(a, 6).toString().trim());
         if (tbl_nhanvien.getValueAt(a, 4).toString().equalsIgnoreCase("Nam")) {
             rdo_nam.setSelected(true);
         } else {
             rdo_nu.setSelected(true);
         }
-        
+
         if (tbl_nhanvien.getValueAt(a, 10).toString().equalsIgnoreCase("Đi làm")) {
             rdo_dilam.setSelected(true);
         } else {
@@ -378,7 +405,7 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         DoiMatKhau doiMatKhau = new DoiMatKhau(tbl_nhanvien.getValueAt(index1, 1).toString().trim());
         doiMatKhau.setVisible(true);
     }//GEN-LAST:event_btn_taikhoanActionPerformed
-    
+
     private void loadTBV() {
         list = nvS.getListDb();
         DefaultTableModel mol = (DefaultTableModel) tbl_nhanvien.getModel();
@@ -389,19 +416,22 @@ public class JPanelNhanVien extends javax.swing.JPanel {
                 nv.getGioiTinh(), nv.getSdt(), nv.getDiaChi(), nv.getMatKhau(), nv.getNgayTao(), nv.getNgayNhap(), tt});
         }
     }
-    
+
     private void addNV() {
         LocalDate date = LocalDate.now();
+        JDateChooser ngaySinh = new JDateChooser();
         String ma = txt_ma.getText().trim();
         String ten = txt_ten.getText().trim();
-        String ngaySinh = txt_ngaysinh.getText().trim();
+        ngaySinh.setDate(txt_ngaysinh.getDate());
+        Date selectedDate = ngaySinh.getDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String gt;
         if (rdo_nam.isSelected()) {
-            gt = "nam";
+            gt = "Nam";
         } else {
-            gt = "nữ";
+            gt = "Nữ";
         }
-        
+
         String sdt = txt_sdt.getText().trim();
         String diaChi = txt_diachi.getText().trim();
         String matKhau = txt_matkhau.getText().trim();
@@ -411,9 +441,9 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         } else {
             tt = 0;
         }
-        NhanVien nv = new NhanVien(ma, ten, ngaySinh, gt, sdt, diaChi, matKhau, date.format(DateTimeFormatter.ISO_DATE), date.format(DateTimeFormatter.ISO_DATE), tt);
+        NhanVien nv = new NhanVien(ma, ten, dateFormat.format(selectedDate), gt, sdt, diaChi, matKhau, date.format(DateTimeFormatter.ISO_DATE), date.format(DateTimeFormatter.ISO_DATE), tt);
         int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
-        
+
         if (cf == JOptionPane.YES_OPTION) {
             boolean result = nvS.create(nv);
             if (result) {
@@ -424,19 +454,22 @@ public class JPanelNhanVien extends javax.swing.JPanel {
             }
         }
     }
-    
+
     private void updateKH() {
         LocalDate date = LocalDate.now();
+        JDateChooser ngaySinh = new JDateChooser();
         String ma = txt_ma.getText().trim();
         String ten = txt_ten.getText().trim();
-        String ngaySinh = txt_ngaysinh.getText().trim();
+        ngaySinh.setDate(txt_ngaysinh.getDate());
+        Date selectedDate = ngaySinh.getDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String gt;
         if (rdo_nam.isSelected()) {
-            gt = "nam";
+            gt = "Nam";
         } else {
-            gt = "nữ";
+            gt = "Nữ";
         }
-        
+
         String sdt = txt_sdt.getText().trim();
         String diaChi = txt_diachi.getText().trim();
         String matKhau = txt_matkhau.getText().trim();
@@ -446,9 +479,9 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         } else {
             tt = 0;
         }
-        NhanVien nv = new NhanVien(ma, ten, ngaySinh, gt, sdt, diaChi, matKhau, date.format(DateTimeFormatter.ISO_DATE), tt);
+        NhanVien nv = new NhanVien(ma, ten, dateFormat.format(selectedDate), gt, sdt, diaChi, matKhau, date.format(DateTimeFormatter.ISO_DATE), tt);
         int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?", "Sửa", JOptionPane.YES_NO_OPTION);
-        
+
         if (cf == JOptionPane.YES_OPTION) {
             boolean result = nvS.update(nv);
             if (result) {
@@ -459,7 +492,7 @@ public class JPanelNhanVien extends javax.swing.JPanel {
             }
         }
     }
-    
+
     private void deleteKH() {
         String ma = txt_ma.getText().trim();
         NhanVien nv = new NhanVien();
@@ -520,7 +553,6 @@ public class JPanelNhanVien extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JRadioButton rdo_dilam;
@@ -531,7 +563,7 @@ public class JPanelNhanVien extends javax.swing.JPanel {
     private javax.swing.JTextArea txt_diachi;
     private javax.swing.JTextField txt_ma;
     private javax.swing.JTextField txt_matkhau;
-    private javax.swing.JTextField txt_ngaysinh;
+    private com.toedter.calendar.JDateChooser txt_ngaysinh;
     private javax.swing.JTextField txt_sdt;
     private javax.swing.JTextField txt_ten;
     private javax.swing.JTextField txt_timkiem;

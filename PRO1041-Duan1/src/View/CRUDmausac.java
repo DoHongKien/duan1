@@ -4,7 +4,6 @@
  */
 package View;
 
-
 import Model.MauSac;
 import Service.MauSacService;
 import java.awt.Image;
@@ -15,7 +14,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author quyen
@@ -25,12 +23,12 @@ public class CRUDmausac extends javax.swing.JFrame {
     MauSacService mauSacService = new MauSacService();
     DefaultTableModel defaultTableModel;
 
-
     public CRUDmausac() {
         initComponents();
-       this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         fillTable(mauSacService.getAllMauSac());
-
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
     }
 
     /**
@@ -49,15 +47,15 @@ public class CRUDmausac extends javax.swing.JFrame {
         tblMauSac = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtMa = new javax.swing.JTextField();
+        txt_ma = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtTen = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        btnThem = new javax.swing.JButton();
-        btnSua = new javax.swing.JButton();
-        btnXoa = new javax.swing.JButton();
-        btnMoi = new javax.swing.JButton();
+        btn_them = new javax.swing.JButton();
+        btn_sua = new javax.swing.JButton();
+        btn_xoa = new javax.swing.JButton();
+        btn_moi = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         rdo_con = new javax.swing.JRadioButton();
         rdo_het = new javax.swing.JRadioButton();
@@ -110,68 +108,68 @@ public class CRUDmausac extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Mã màu sắc");
 
-        txtMa.setBorder(null);
+        txt_ma.setBorder(null);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Tên màu sắc");
 
         txtTen.setBorder(null);
 
-        jSeparator1.setForeground(new java.awt.Color(204, 0, 51));
+        jSeparator1.setForeground(new java.awt.Color(147, 214, 255));
 
-        jSeparator2.setForeground(new java.awt.Color(204, 0, 51));
+        jSeparator2.setForeground(new java.awt.Color(147, 214, 255));
 
-        btnThem.setBackground(new java.awt.Color(186, 79, 84));
-        btnThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnThem.setForeground(new java.awt.Color(255, 255, 255));
-        btnThem.setText("Thêm");
-        btnThem.setBorder(null);
-        btnThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnThem.setPreferredSize(new java.awt.Dimension(85, 25));
-        btnThem.addActionListener(new java.awt.event.ActionListener() {
+        btn_them.setBackground(new java.awt.Color(147, 214, 255));
+        btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_them.setForeground(new java.awt.Color(255, 255, 255));
+        btn_them.setText("Thêm");
+        btn_them.setBorder(null);
+        btn_them.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_them.setPreferredSize(new java.awt.Dimension(85, 25));
+        btn_them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemActionPerformed(evt);
+                btn_themActionPerformed(evt);
             }
         });
 
-        btnSua.setBackground(new java.awt.Color(186, 79, 84));
-        btnSua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnSua.setForeground(new java.awt.Color(255, 255, 255));
-        btnSua.setText("Sửa");
-        btnSua.setBorder(null);
-        btnSua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnSua.setPreferredSize(new java.awt.Dimension(85, 35));
-        btnSua.addActionListener(new java.awt.event.ActionListener() {
+        btn_sua.setBackground(new java.awt.Color(147, 214, 255));
+        btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_sua.setForeground(new java.awt.Color(255, 255, 255));
+        btn_sua.setText("Sửa");
+        btn_sua.setBorder(null);
+        btn_sua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_sua.setPreferredSize(new java.awt.Dimension(85, 35));
+        btn_sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuaActionPerformed(evt);
+                btn_suaActionPerformed(evt);
             }
         });
 
-        btnXoa.setBackground(new java.awt.Color(186, 79, 84));
-        btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnXoa.setForeground(new java.awt.Color(255, 255, 255));
-        btnXoa.setText("Xóa");
-        btnXoa.setBorder(null);
-        btnXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnXoa.setMinimumSize(new java.awt.Dimension(85, 35));
-        btnXoa.setPreferredSize(new java.awt.Dimension(85, 35));
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+        btn_xoa.setBackground(new java.awt.Color(147, 214, 255));
+        btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_xoa.setForeground(new java.awt.Color(255, 255, 255));
+        btn_xoa.setText("Xóa");
+        btn_xoa.setBorder(null);
+        btn_xoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_xoa.setMinimumSize(new java.awt.Dimension(85, 35));
+        btn_xoa.setPreferredSize(new java.awt.Dimension(85, 35));
+        btn_xoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
+                btn_xoaActionPerformed(evt);
             }
         });
 
-        btnMoi.setBackground(new java.awt.Color(186, 79, 84));
-        btnMoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnMoi.setForeground(new java.awt.Color(255, 255, 255));
-        btnMoi.setText("Mới");
-        btnMoi.setBorder(null);
-        btnMoi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMoi.setMinimumSize(new java.awt.Dimension(85, 35));
-        btnMoi.setPreferredSize(new java.awt.Dimension(85, 35));
-        btnMoi.addActionListener(new java.awt.event.ActionListener() {
+        btn_moi.setBackground(new java.awt.Color(147, 214, 255));
+        btn_moi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_moi.setForeground(new java.awt.Color(255, 255, 255));
+        btn_moi.setText("Mới");
+        btn_moi.setBorder(null);
+        btn_moi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_moi.setMinimumSize(new java.awt.Dimension(85, 35));
+        btn_moi.setPreferredSize(new java.awt.Dimension(85, 35));
+        btn_moi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoiActionPerformed(evt);
+                btn_moiActionPerformed(evt);
             }
         });
 
@@ -197,7 +195,7 @@ public class CRUDmausac extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtMa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
+                                .addComponent(txt_ma, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -213,12 +211,12 @@ public class CRUDmausac extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btn_moi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -229,7 +227,7 @@ public class CRUDmausac extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(4, 4, 4)
-                        .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_ma, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -246,12 +244,12 @@ public class CRUDmausac extends javax.swing.JFrame {
                     .addComponent(rdo_het))
                 .addGap(50, 50, 50)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_xoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_moi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 
@@ -278,47 +276,61 @@ public class CRUDmausac extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-         int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?", "Sửa", JOptionPane.YES_NO_OPTION);
+    private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?", "Sửa", JOptionPane.YES_NO_OPTION);
 
         if (cf == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, mauSacService.updateMS(getFieldUpdate()));
             fillTable(mauSacService.getAllMauSac());
+            btn_them.setEnabled(true);
+            btn_sua.setEnabled(false);
+            btn_xoa.setEnabled(false);
         }
-    }//GEN-LAST:event_btnSuaActionPerformed
+    }//GEN-LAST:event_btn_suaActionPerformed
 
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        if (txtMa.getText().trim().isEmpty()) {
+    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
+        if (txt_ma.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Mã không được trống");
-            txtMa.requestFocus();
+            txt_ma.requestFocus();
             return;
         }
         int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
 
         if (cf == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(this, mauSacService.deleteMS(txtMa.getText().trim()));
+            JOptionPane.showMessageDialog(this, mauSacService.deleteMS(txt_ma.getText().trim()));
             fillTable(mauSacService.getAllMauSac());
+            btn_them.setEnabled(true);
+            btn_sua.setEnabled(false);
+            btn_xoa.setEnabled(false);
         }
-    }//GEN-LAST:event_btnXoaActionPerformed
+    }//GEN-LAST:event_btn_xoaActionPerformed
 
-    private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
-        txtMa.setText("");
+    private void btn_moiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_moiActionPerformed
+        txt_ma.setText("");
         txtTen.setText("");
         rdo_con.setSelected(true);
-    }//GEN-LAST:event_btnMoiActionPerformed
+        btn_them.setEnabled(true);
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
+        txt_ma.setEditable(true);
+    }//GEN-LAST:event_btn_moiActionPerformed
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
 
         if (cf == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, mauSacService.insertMS(getFieldInsert()));
             fillTable(mauSacService.getAllMauSac());
         }
-    }//GEN-LAST:event_btnThemActionPerformed
+    }//GEN-LAST:event_btn_themActionPerformed
 
     private void tblMauSacMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMauSacMouseClicked
+        btn_them.setEnabled(false);
+        btn_sua.setEnabled(true);
+        btn_xoa.setEnabled(true);
+        txt_ma.setEditable(false);
         int index = tblMauSac.getSelectedRow();
-        txtMa.setText(tblMauSac.getValueAt(index, 1).toString());
+        txt_ma.setText(tblMauSac.getValueAt(index, 1).toString());
         txtTen.setText(tblMauSac.getValueAt(index, 2).toString());
         if (Integer.parseInt(tblMauSac.getValueAt(index, 5).toString()) == 1) {
             rdo_con.setSelected(true);
@@ -364,8 +376,8 @@ public class CRUDmausac extends javax.swing.JFrame {
             }
         });
     }
-    
-private void fillTable(List<MauSac> list) {
+
+    private void fillTable(List<MauSac> list) {
         defaultTableModel = (DefaultTableModel) tblMauSac.getModel();
         defaultTableModel.setRowCount(0);
         for (MauSac mauSac : list) {
@@ -377,7 +389,7 @@ private void fillTable(List<MauSac> list) {
     private MauSac getFieldInsert() {
         LocalDate date = LocalDate.now();
         MauSac mauSac = new MauSac();
-        mauSac.setMa(txtMa.getText().trim());
+        mauSac.setMa(txt_ma.getText().trim());
         mauSac.setTen(txtTen.getText().trim());
         mauSac.setNgayTao(date.format(DateTimeFormatter.ISO_DATE));
         mauSac.setNgayNhap(date.format(DateTimeFormatter.ISO_DATE));
@@ -389,11 +401,11 @@ private void fillTable(List<MauSac> list) {
 
         return mauSac;
     }
-    
+
     private MauSac getFieldUpdate() {
         LocalDate date = LocalDate.now();
         MauSac mauSac = new MauSac();
-        mauSac.setMa(txtMa.getText().trim());
+        mauSac.setMa(txt_ma.getText().trim());
         mauSac.setTen(txtTen.getText().trim());
         mauSac.setNgayNhap(date.format(DateTimeFormatter.ISO_DATE));
         if (rdo_con.isSelected()) {
@@ -406,10 +418,10 @@ private void fillTable(List<MauSac> list) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnMoi;
-    private javax.swing.JButton btnSua;
-    private javax.swing.JButton btnThem;
-    private javax.swing.JButton btnXoa;
+    private javax.swing.JButton btn_moi;
+    private javax.swing.JButton btn_sua;
+    private javax.swing.JButton btn_them;
+    private javax.swing.JButton btn_xoa;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -423,7 +435,7 @@ private void fillTable(List<MauSac> list) {
     private javax.swing.JRadioButton rdo_con;
     private javax.swing.JRadioButton rdo_het;
     private javax.swing.JTable tblMauSac;
-    private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtTen;
+    private javax.swing.JTextField txt_ma;
     // End of variables declaration//GEN-END:variables
 }

@@ -38,9 +38,6 @@ public class MauSacRepository implements IMauSacRepository {
                 MauSac mauSac = new MauSac(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6));
                 list.add(mauSac);
             }
-            for (MauSac mauSac : list) {
-                System.out.println(mauSac.toString());
-            }
         } catch (SQLException e) {
             e.getMessage();
         }

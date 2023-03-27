@@ -7,6 +7,7 @@ package Repository;
 import Model.ChiTietSanPham;
 import Utility.DBConnection;
 import ViewModel.ChiTietSanPhamModel;
+import java.sql.Statement;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,6 +23,7 @@ public class ChiTietSanPhamRepository implements IChiTietSanPhamRepository {
 
     private Connection conn;
 
+    // Hiển thị trên form Sản Phẩm và trên bảng sản phẩm ở form Bán Hàng
     @Override
     public List<ChiTietSanPhamModel> getListSanPham() {
         List<ChiTietSanPhamModel> list = new ArrayList<>();
@@ -42,16 +44,13 @@ public class ChiTietSanPhamRepository implements IChiTietSanPhamRepository {
                         rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10), rs.getDouble(11), rs.getDouble(12), rs.getString(13), rs.getString(14), rs.getInt(15));
                 list.add(chiTietSanPhamModel);
             }
-
-            for (ChiTietSanPhamModel chiTietSanPhamModel : list) {
-                System.out.println(chiTietSanPhamModel.toString());
-            }
         } catch (SQLException e) {
             e.getMessage();
         }
         return list;
     }
 
+    // Chức nằng tìm kiếm sản phẩm ở form Bán Hàng
     @Override
     public List<ChiTietSanPhamModel> timKiem(String ten) {
         List<ChiTietSanPhamModel> list = new ArrayList<>();
@@ -60,12 +59,11 @@ public class ChiTietSanPhamRepository implements IChiTietSanPhamRepository {
                 + "ChiTietSanPham.trang_thai from ChiTietSanPham join SanPham ON ChiTietSanPham.id_san_pham = SanPham.id join "
                 + "CPU ON ChiTietSanPham.id_cpu = CPU.id join Hang ON ChiTietSanPham.id_hang = Hang.id join ManHinh ON "
                 + "ChiTietSanPham.id_man_hinh = ManHinh.id join MauSac ON ChiTietSanPham.id_mau_sac = MauSac.id join OCung ON "
-                + "ChiTietSanPham.id_o_cung = OCung.id join RAM ON ChiTietSanPham.id_ram = RAM.id join VGA ON ChiTietSanPham.id_vga = VGA.id where SanPham.ten = ?";
+                + "ChiTietSanPham.id_o_cung = OCung.id join RAM ON ChiTietSanPham.id_ram = RAM.id join VGA ON ChiTietSanPham.id_vga = VGA.id where SanPham.ten like '%" + ten + "%'";
 
         try {
             conn = new DBConnection().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setObject(1, ten);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -73,16 +71,34 @@ public class ChiTietSanPhamRepository implements IChiTietSanPhamRepository {
                         rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getInt(10), rs.getDouble(11), rs.getDouble(12), rs.getString(13), rs.getString(14), rs.getInt(15));
                 list.add(chiTietSanPhamModel);
             }
-
-            for (ChiTietSanPhamModel chiTietSanPhamModel : list) {
-                System.out.println(chiTietSanPhamModel.toString());
-            }
         } catch (SQLException e) {
             e.getMessage();
         }
         return list;
     }
 
+    @Override
+    public ChiTietSanPham getDonGiaById(int id) {
+        String sql = "select gia_ban from ChiTietSanPham where id = ?";
+        ChiTietSanPham ctsp = null;
+
+        try {
+            conn = new DBConnection().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ChiTietSanPham ctsp1 = new ChiTietSanPham();
+                ctsp1.setGiaBan(rs.getDouble(1));
+                ctsp = ctsp1;
+            }
+            System.out.println(ctsp.getGiaBan());
+        } catch (SQLException e) {
+        }
+        return ctsp;
+    }
+
+    // Chức năng thêm sản phẩm ở form Sản Phẩm
     @Override
     public boolean insert(ChiTietSanPham sp) {
         String sql = "insert into ChiTietSanPham(id_san_pham, id_cpu, id_hang, id_man_hinh, id_mau_sac , id_o_cung, id_ram, id_vga, so_luong_ton, gia_nhap, "
@@ -116,6 +132,7 @@ public class ChiTietSanPhamRepository implements IChiTietSanPhamRepository {
         return f;
     }
 
+    // Chức năng update sản phẩm ở form Sản Phẩm
     @Override
     public boolean update(ChiTietSanPham sp) {
         String sql = "update ChiTietSanPham set id_san_pham = ?, id_cpu = ?, id_hang =?, id_man_hinh = ?, id_mau_sac = ?, id_o_cung = ?, id_ram = ?, "
@@ -149,26 +166,90 @@ public class ChiTietSanPhamRepository implements IChiTietSanPhamRepository {
         return f;
     }
 
+    // Chức năng delete ở form Sản Phẩm
     @Override
-    public boolean delete(ChiTietSanPham sp) {
-        String sql = "delete from ChiTietSanPham where id = ?";
+    public boolean updateTT(ChiTietSanPham sp) {
+        String sql = "update ChiTietSanPham set trang_thai = ? where id = ?";
         boolean f = false;
         try {
             conn = new DBConnection().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setObject(1, sp.getId());
+            ps.setObject(1, sp.getTrangThai());
+            ps.setObject(2, sp.getId());
             int result = ps.executeUpdate();
 
             if (result == 1) {
                 f = true;
             }
-        } catch (SQLException ex) {
-            ex.getMessage();
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return f;
+    }
+
+    // Chức năng update serial vào ctsp ở form Bán Hàng
+    @Override
+    public boolean updateIdSerial(ChiTietSanPham sp) {
+        String sql = "update ChiTietSanPham set id_serial = ? where id = ?";
+        boolean f = false;
+        try {
+            conn = new DBConnection().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setObject(1, sp.getIdSerial());
+            ps.setObject(2, sp.getId());
+            int result = ps.executeUpdate();
+
+            if (result == 1) {
+                f = true;
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return f;
+    }
+
+    @Override
+    public int getSoLuongByIdCTSP(int idCTSP) {
+        String sql = "select so_luong_ton from ChiTietSanPham where id = ?";
+        int soLuong = 0;
+
+        try {
+            conn = new DBConnection().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, idCTSP);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                soLuong = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return soLuong;
+    }
+
+    @Override
+    public boolean updateSoLuongByID(int soluong, int idCTSP) {
+        String sql = "update ChiTietSanPham set so_luong_ton = ? where id = ?";
+        boolean f = false;
+
+        try {
+            conn = new DBConnection().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, soluong);
+            ps.setInt(2, idCTSP);
+            int result = ps.executeUpdate();
+
+            if (result == 1) {
+                f = true;
+            }
+        } catch (SQLException e) {
+            e.getMessage();
         }
         return f;
     }
 
     public static void main(String[] args) {
-        new ChiTietSanPhamRepository().timKiem("San Pham 1");
+        System.out.println(new ChiTietSanPhamRepository().getSoLuongByIdCTSP(9));
     }
 }

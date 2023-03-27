@@ -14,6 +14,10 @@ import java.util.List;
 public interface IKhuyenMaiRepository {
     
     public List<KhuyenMai> getListKhuyenMai();
+    
+    public int getGiaTriByDieuKien(double dieuKien, String date, int trangThai);
+    
+    public int getIdByGiaTri(int giaTri);
 
 //    public List<KhuyenMai> locByTT(int tt);
 //    

@@ -59,7 +59,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="54" green="4f" red="ba" type="rgb"/>
+          <Color blue="ff" green="d6" red="93" type="rgb"/>
         </Property>
       </Properties>
 
@@ -172,8 +172,11 @@
         </Container>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="d6" red="93" type="rgb"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="54" green="4f" red="ba" type="rgb"/>
+              <Color blue="ff" green="d6" red="93" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -185,7 +188,7 @@
         <Component class="javax.swing.JButton" name="btn_taikhoan">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="54" green="4f" red="ba" type="rgb"/>
+              <Color blue="ff" green="d6" red="93" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
@@ -231,8 +234,11 @@
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="d6" red="93" type="rgb"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="54" green="4f" red="ba" type="rgb"/>
+              <Color blue="ff" green="d6" red="93" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -251,30 +257,6 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="30" y="80" width="-1" height="-1"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txt_ngaysinh">
-          <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="100" width="160" height="20"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="javax.swing.JSeparator" name="jSeparator4">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="54" green="4f" red="ba" type="rgb"/>
-            </Property>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="120" width="160" height="10"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -305,8 +287,11 @@
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator3">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="d6" red="93" type="rgb"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="54" green="4f" red="ba" type="rgb"/>
+              <Color blue="ff" green="d6" red="93" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -434,8 +419,11 @@
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator5">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="d6" red="93" type="rgb"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="54" green="4f" red="ba" type="rgb"/>
+              <Color blue="ff" green="d6" red="93" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -471,8 +459,11 @@
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator8">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="d6" red="93" type="rgb"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="54" green="4f" red="ba" type="rgb"/>
+              <Color blue="ff" green="d6" red="93" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -517,7 +508,7 @@
         <Component class="javax.swing.JButton" name="btn_them">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="54" green="4f" red="ba" type="rgb"/>
+              <Color blue="ff" green="d6" red="93" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
@@ -539,7 +530,7 @@
         <Component class="javax.swing.JButton" name="btn_sua">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="54" green="4f" red="ba" type="rgb"/>
+              <Color blue="ff" green="d6" red="93" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
@@ -561,7 +552,7 @@
         <Component class="javax.swing.JButton" name="btn_xoa">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="54" green="4f" red="ba" type="rgb"/>
+              <Color blue="ff" green="d6" red="93" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
@@ -583,7 +574,7 @@
         <Component class="javax.swing.JButton" name="btn_lammoi">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="54" green="4f" red="ba" type="rgb"/>
+              <Color blue="ff" green="d6" red="93" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
@@ -599,6 +590,13 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="420" y="540" width="80" height="32"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="txt_ngaysinh">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="30" y="110" width="160" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>

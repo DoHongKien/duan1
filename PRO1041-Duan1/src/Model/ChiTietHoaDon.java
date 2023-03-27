@@ -27,11 +27,13 @@ public class ChiTietHoaDon {
     private String ngayNhap;
     
     private int trangThai;
+    
+    private String ghiChu;
 
     public ChiTietHoaDon() {
     }
 
-    public ChiTietHoaDon(int id, int idCtsp, int idHoaDon, int idKhuyenMai, int soLuong, Double donGia, String ngayTao, String ngayNhap, int trangThai) {
+    public ChiTietHoaDon(int id, int idCtsp, int idHoaDon, int idKhuyenMai, int soLuong, Double donGia, String ngayTao, String ngayNhap, int trangThai, String ghiChu) {
         this.id = id;
         this.idCtsp = idCtsp;
         this.idHoaDon = idHoaDon;
@@ -41,6 +43,7 @@ public class ChiTietHoaDon {
         this.ngayTao = ngayTao;
         this.ngayNhap = ngayNhap;
         this.trangThai = trangThai;
+        this.ghiChu = ghiChu;
     }
 
     public int getId() {
@@ -113,6 +116,14 @@ public class ChiTietHoaDon {
 
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
     }
     
     

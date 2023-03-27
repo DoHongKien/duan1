@@ -5,6 +5,7 @@
 package Service;
 
 import Model.NhanVien;
+import ViewModel.RoleModel;
 import java.util.List;
 
 /**
@@ -16,6 +17,10 @@ public interface NhanVienServiceInterface {
     public List<NhanVien> getListDb();
 
     public NhanVien getDB(String ma);
+    
+    public int getIdNVByMa(String ma);
+    
+    public List<RoleModel> roleLogin(String username, String password);
 
     public boolean create(NhanVien nv);
 

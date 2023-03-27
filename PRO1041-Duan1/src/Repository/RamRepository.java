@@ -39,9 +39,6 @@ public class RamRepository implements IRAMRepository {
                 Ram ram = new Ram(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6));
                 list.add(ram);
             }
-            for (Ram ram : list) {
-                System.out.println(ram.toString());
-            }
         } catch (SQLException e) {
             e.getMessage();
         }

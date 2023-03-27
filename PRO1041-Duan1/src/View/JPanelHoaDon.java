@@ -82,8 +82,9 @@ public class JPanelHoaDon extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1070, 680));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(186, 79, 84));
+        jPanel1.setBackground(new java.awt.Color(147, 214, 255));
 
+        jLabel1.setBackground(new java.awt.Color(147, 214, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("          Hóa Đơn");
@@ -186,7 +187,7 @@ public class JPanelHoaDon extends javax.swing.JPanel {
         });
         jPanel2.add(txt_enddate, new org.netbeans.lib.awtextra.AbsoluteConstraints(904, 35, 116, -1));
 
-        btn_inhoadon.setBackground(new java.awt.Color(186, 79, 84));
+        btn_inhoadon.setBackground(new java.awt.Color(147, 214, 255));
         btn_inhoadon.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_inhoadon.setForeground(new java.awt.Color(255, 255, 255));
         btn_inhoadon.setText("In hóa đơn");

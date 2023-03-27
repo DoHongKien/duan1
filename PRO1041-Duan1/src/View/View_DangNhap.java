@@ -4,8 +4,11 @@
  */
 package View;
 
+import Service.NhanVienService;
+import ViewModel.RoleModel;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -16,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class View_DangNhap extends javax.swing.JFrame {
 
-//    TaiKhoanService taiKhoanService = new TaiKhoanService();
+    NhanVienService nhanVienService = new NhanVienService();
 
     public View_DangNhap() {
         initComponents();
@@ -37,23 +40,22 @@ public class View_DangNhap extends javax.swing.JFrame {
         txt_username = new javax.swing.JTextField();
         txt_password = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         pnl_signin = new javax.swing.JPanel();
         btn_signin = new javax.swing.JLabel();
         pnl_cancel = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        btn_cancel = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel3.setBackground(new java.awt.Color(186, 79, 84));
+        jPanel3.setBackground(new java.awt.Color(147, 214, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txt_username.setBackground(new java.awt.Color(186, 79, 84));
-        txt_username.setForeground(new java.awt.Color(204, 204, 204));
+        txt_username.setBackground(new java.awt.Color(147, 214, 255));
+        txt_username.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txt_username.setForeground(new java.awt.Color(255, 255, 255));
         txt_username.setText("Username");
         txt_username.setBorder(null);
         txt_username.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -68,8 +70,9 @@ public class View_DangNhap extends javax.swing.JFrame {
         });
         jPanel3.add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 180, 30));
 
-        txt_password.setBackground(new java.awt.Color(186, 79, 84));
-        txt_password.setForeground(new java.awt.Color(204, 204, 204));
+        txt_password.setBackground(new java.awt.Color(147, 214, 255));
+        txt_password.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txt_password.setForeground(new java.awt.Color(255, 255, 255));
         txt_password.setText("Password");
         txt_password.setBorder(null);
         txt_password.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -84,24 +87,19 @@ public class View_DangNhap extends javax.swing.JFrame {
         });
         jPanel3.add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 180, 30));
 
-        jSeparator1.setBackground(new java.awt.Color(204, 204, 204));
+        jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 180, 10));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/user.png"))); // NOI18N
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 30, 30));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/password.png"))); // NOI18N
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 30, 30));
-
-        jSeparator3.setBackground(new java.awt.Color(204, 204, 204));
+        jSeparator3.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator3.setForeground(new java.awt.Color(255, 255, 255));
         jPanel3.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 180, 10));
 
-        pnl_signin.setBackground(new java.awt.Color(186, 79, 84));
+        pnl_signin.setBackground(new java.awt.Color(147, 214, 255));
         pnl_signin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
-        btn_signin.setForeground(new java.awt.Color(204, 204, 204));
+        btn_signin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_signin.setForeground(new java.awt.Color(255, 255, 255));
         btn_signin.setText("        Sign in");
         btn_signin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_signin.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -129,21 +127,22 @@ public class View_DangNhap extends javax.swing.JFrame {
 
         jPanel3.add(pnl_signin, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 90, 30));
 
-        pnl_cancel.setBackground(new java.awt.Color(186, 79, 84));
+        pnl_cancel.setBackground(new java.awt.Color(147, 214, 255));
         pnl_cancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
-        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel4.setText("        Cancel");
-        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_cancel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_cancel.setForeground(new java.awt.Color(255, 255, 255));
+        btn_cancel.setText("        Cancel");
+        btn_cancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_cancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                btn_cancelMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel4MouseEntered(evt);
+                btn_cancelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel4MouseExited(evt);
+                btn_cancelMouseExited(evt);
             }
         });
 
@@ -151,11 +150,11 @@ public class View_DangNhap extends javax.swing.JFrame {
         pnl_cancel.setLayout(pnl_cancelLayout);
         pnl_cancelLayout.setHorizontalGroup(
             pnl_cancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+            .addComponent(btn_cancel, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
         );
         pnl_cancelLayout.setVerticalGroup(
             pnl_cancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+            .addComponent(btn_cancel, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
         );
 
         jPanel3.add(pnl_cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 90, 30));
@@ -164,7 +163,7 @@ public class View_DangNhap extends javax.swing.JFrame {
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(186, 79, 84));
+        jLabel5.setForeground(new java.awt.Color(147, 214, 255));
         jLabel5.setText("SEVENT STORE");
         jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 150, 30));
 
@@ -207,86 +206,86 @@ public class View_DangNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_passwordFocusGained
 
     private void btn_signinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_signinMouseClicked
-//        if (checkValidate()) {
-//            TaiKhoan taiKhoan = taiKhoanService.getChucVu(txt_username.getText(), String.valueOf(txt_password.getPassword()));
-//            if (taiKhoan == null) {
-//                JOptionPane.showMessageDialog(this, "Login Failed!");
-//                return;
-//            }
-//            int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng nhập với tư cách " + taiKhoan.getChucVu().trim() + " không?", "Đăng nhập", JOptionPane.YES_NO_OPTION);
-//            if (cf == JOptionPane.YES_OPTION) {
-//                if (!txt_username.getText().isEmpty() && txt_password.getPassword().length > 0) {
-//                    if (taiKhoan != null) {
-//                        JOptionPane.showMessageDialog(this, "Login succesfully!");
-//                        if (taiKhoan.getChucVu().trim().equalsIgnoreCase("admin")) {
-//                            main form = new main(taiKhoan);
-//                            form.setVisible(true);
-//                        } else {
-//                            main form = new main(taiKhoan);
-//                            form.setVisible(true);
-//                        }
-//                        this.dispose();
-//                    } else {
-//                        JOptionPane.showMessageDialog(this, "Login Failed!");
-//                    }
-//                } else {
-//                    JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin");
-//                }
-//            }
-//        }
+        if (checkValidate()) {
+            List<RoleModel> listRM = nhanVienService.roleLogin(txt_username.getText(), String.valueOf(txt_password.getPassword()));
+            if (listRM.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Login Failed!");
+                return;
+            }
+            int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng nhập với tư cách " + "" + " không?", "Đăng nhập", JOptionPane.YES_NO_OPTION);
+            if (cf == JOptionPane.YES_OPTION) {
+                if (!txt_username.getText().isEmpty() && txt_password.getPassword().length > 0) {
+                    if (!listRM.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "Login succesfully!");
+                        for (RoleModel roleModel : listRM) {
+                            if (roleModel.getRole().trim().equalsIgnoreCase("admin")) {
+                                mainForm form = new mainForm(roleModel.getMa().trim());
+                                form.setVisible(true);
+                            } else {
+                                JOptionPane.showMessageDialog(this, "I'm Staff");
+                            }
+                        }
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Login Failed!");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin");
+                }
+            }
+        }
 
     }//GEN-LAST:event_btn_signinMouseClicked
 
     private void btn_signinMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_signinMouseEntered
-        pnl_signin.setBackground(Color.decode("#990033"));
+        pnl_signin.setBackground(Color.decode("#0063EC"));
     }//GEN-LAST:event_btn_signinMouseEntered
 
     private void btn_signinMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_signinMouseExited
-        pnl_signin.setBackground(Color.decode("#BA4F54"));
+        pnl_signin.setBackground(Color.decode("#96D6FF"));
     }//GEN-LAST:event_btn_signinMouseExited
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    private void btn_cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseClicked
         System.exit(0);
-    }//GEN-LAST:event_jLabel4MouseClicked
+    }//GEN-LAST:event_btn_cancelMouseClicked
 
-    private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
-        pnl_cancel.setBackground(Color.decode("#990033"));
-    }//GEN-LAST:event_jLabel4MouseEntered
+    private void btn_cancelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseEntered
+        pnl_cancel.setBackground(Color.decode("#0063EC"));
+    }//GEN-LAST:event_btn_cancelMouseEntered
 
-    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
-        pnl_cancel.setBackground(Color.decode("#BA4F54"));
-    }//GEN-LAST:event_jLabel4MouseExited
+    private void btn_cancelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cancelMouseExited
+        pnl_cancel.setBackground(Color.decode("#96D6FF"));
+    }//GEN-LAST:event_btn_cancelMouseExited
 
     private void txt_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyPressed
-//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-//            if (checkValidate()) {
-//                TaiKhoan taiKhoan = taiKhoanService.getChucVu(txt_username.getText(), String.valueOf(txt_password.getPassword()));
-//                if (taiKhoan == null) {
-//                    JOptionPane.showMessageDialog(this, "Login Failed!");
-//                    return;
-//                }
-//                int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng nhập với tư cách " + taiKhoan.getChucVu().trim() + " không?", "Đăng nhập", JOptionPane.YES_NO_OPTION);
-//                if (cf == JOptionPane.YES_OPTION) {
-//                    if (!txt_username.getText().isEmpty() && txt_password.getPassword().length > 0) {
-//                        if (taiKhoan != null) {
-//                            JOptionPane.showMessageDialog(this, "Login succesfully!");
-//                            if (taiKhoan.getChucVu().trim().equalsIgnoreCase("admin")) {
-//                                main form = new main(taiKhoan);
-//                                form.setVisible(true);
-//                            } else {
-//                                main form = new main(taiKhoan);
-//                                form.setVisible(true);
-//                            }
-//                            this.dispose();
-//                        } else {
-//                            JOptionPane.showMessageDialog(this, "Login Failed!");
-//                        }
-//                    } else {
-//                        JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin");
-//                    }
-//                }
-//            }
-//        }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (checkValidate()) {
+                List<RoleModel> listRM = nhanVienService.roleLogin(txt_username.getText(), String.valueOf(txt_password.getPassword()));
+                if (listRM.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Login Failed!");
+                    return;
+                }
+                int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng nhập không?", "Đăng nhập", JOptionPane.YES_NO_OPTION);
+                if (cf == JOptionPane.YES_OPTION) {
+                    if (!txt_username.getText().isEmpty() && txt_password.getPassword().length > 0) {
+                        if (!listRM.isEmpty()) {
+//                        JOptionPane.showMessageDialog(this, "Login succesfully!");
+                        for (RoleModel roleModel : listRM) {
+                            if (roleModel.getRole().trim().equalsIgnoreCase("admin")) {
+                                mainForm form = new mainForm(roleModel.getMa().trim());
+                                form.setVisible(true);
+                            } else {
+                                JOptionPane.showMessageDialog(this, "I'm Staff");
+                            }
+                        }
+                        this.dispose();
+                    }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin");
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_txt_passwordKeyPressed
 
     private void txt_usernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usernameKeyPressed
@@ -353,10 +352,8 @@ public class View_DangNhap extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btn_cancel;
     private javax.swing.JLabel btn_signin;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

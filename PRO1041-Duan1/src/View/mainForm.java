@@ -26,7 +26,7 @@ public class mainForm extends javax.swing.JFrame {
                 while (true) {
                     Date date = new Date();
                     SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss a");
-//                    lbl_time.setText(dateFormat.format(date));
+                    lbl_time.setText(dateFormat.format(date));
                 }
             }
         }.start();
@@ -35,14 +35,14 @@ public class mainForm extends javax.swing.JFrame {
 
     public mainForm(String username) {
         initComponents();
-//        txt_user.setText(username);
+        txt_nhanvien.setText(username);
         date();
         new Thread() {
             public void run() {
                 while (true) {
                     Date date = new Date();
                     SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss a");
-//                    lbl_time.setText(dateFormat.format(date));
+                    lbl_time.setText(dateFormat.format(date));
                 }
             }
         }.start();
@@ -51,7 +51,7 @@ public class mainForm extends javax.swing.JFrame {
     private void date() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDateTime dateTime = LocalDateTime.now();
-//        lbl_date.setText(dateTimeFormatter.format(dateTime));
+        lbl_date.setText(dateTimeFormatter.format(dateTime));
     }
 
     private void showForm(Component component) {
@@ -98,6 +98,9 @@ public class mainForm extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        lbl_time = new javax.swing.JLabel();
+        lbl_date = new javax.swing.JLabel();
+        txt_nhanvien = new javax.swing.JLabel();
         pnlCard3 = new javax.swing.JPanel();
         pnlCard1 = new javax.swing.JPanel();
         pnlCard4 = new javax.swing.JPanel();
@@ -113,10 +116,10 @@ public class mainForm extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(186, 79, 84));
+        jPanel2.setBackground(new java.awt.Color(147, 214, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btn_home.setBackground(new java.awt.Color(186, 79, 84));
+        btn_home.setBackground(new java.awt.Color(147, 214, 255));
         btn_home.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_home.setName(""); // NOI18N
         btn_home.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -143,7 +146,7 @@ public class mainForm extends javax.swing.JFrame {
 
         jPanel2.add(btn_home, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 180, 50));
 
-        btn_sell.setBackground(new java.awt.Color(186, 79, 84));
+        btn_sell.setBackground(new java.awt.Color(147, 214, 255));
         btn_sell.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_sell.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -168,7 +171,7 @@ public class mainForm extends javax.swing.JFrame {
 
         jPanel2.add(btn_sell, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 180, 50));
 
-        btn_product.setBackground(new java.awt.Color(186, 79, 84));
+        btn_product.setBackground(new java.awt.Color(147, 214, 255));
         btn_product.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_product.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -193,7 +196,7 @@ public class mainForm extends javax.swing.JFrame {
 
         jPanel2.add(btn_product, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 180, 50));
 
-        btn_staff.setBackground(new java.awt.Color(186, 79, 84));
+        btn_staff.setBackground(new java.awt.Color(147, 214, 255));
         btn_staff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_staff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -218,7 +221,7 @@ public class mainForm extends javax.swing.JFrame {
 
         jPanel2.add(btn_staff, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 180, 50));
 
-        btn_customer.setBackground(new java.awt.Color(186, 79, 84));
+        btn_customer.setBackground(new java.awt.Color(147, 214, 255));
         btn_customer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_customer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -243,7 +246,7 @@ public class mainForm extends javax.swing.JFrame {
 
         jPanel2.add(btn_customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 180, 50));
 
-        btn_report.setBackground(new java.awt.Color(186, 79, 84));
+        btn_report.setBackground(new java.awt.Color(147, 214, 255));
         btn_report.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_report.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -268,7 +271,7 @@ public class mainForm extends javax.swing.JFrame {
 
         jPanel2.add(btn_report, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 180, 50));
 
-        btn_promotion.setBackground(new java.awt.Color(186, 79, 84));
+        btn_promotion.setBackground(new java.awt.Color(147, 214, 255));
         btn_promotion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_promotion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -293,7 +296,7 @@ public class mainForm extends javax.swing.JFrame {
 
         jPanel2.add(btn_promotion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 180, 50));
 
-        btn_receipt.setBackground(new java.awt.Color(186, 79, 84));
+        btn_receipt.setBackground(new java.awt.Color(147, 214, 255));
         btn_receipt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_receipt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -323,7 +326,21 @@ public class mainForm extends javax.swing.JFrame {
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setText("SevenT Store");
         jPanel2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 130, -1));
+
+        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 130, 10));
+
+        lbl_time.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lbl_time.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(lbl_time, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 670, 90, 20));
+
+        lbl_date.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lbl_date.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(lbl_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, 80, 20));
+
+        txt_nhanvien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_nhanvien.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(txt_nhanvien, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 110, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 700));
 
@@ -384,24 +401,24 @@ public class mainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_homeMouseClicked
 
     private void btn_homeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_homeMouseEntered
-        btn_home.setBackground(Color.decode("#002488"));
+        btn_home.setBackground(Color.decode("#0063EC"));
     }//GEN-LAST:event_btn_homeMouseEntered
 
     private void btn_homeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_homeMouseExited
-        btn_home.setBackground(Color.decode("#BA4F54"));
+        btn_home.setBackground(Color.decode("#96D6FF"));
     }//GEN-LAST:event_btn_homeMouseExited
 
     private void btn_sellMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_sellMouseClicked
         bar(jLabel5);
-        showForm(new JPanelBanHang());
+        showForm(new JPanelBanHang(txt_nhanvien.getText().trim()));
     }//GEN-LAST:event_btn_sellMouseClicked
 
     private void btn_sellMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_sellMouseEntered
-        btn_sell.setBackground(Color.decode("#002488"));
+        btn_sell.setBackground(Color.decode("#0063EC"));
     }//GEN-LAST:event_btn_sellMouseEntered
 
     private void btn_sellMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_sellMouseExited
-        btn_sell.setBackground(Color.decode("#BA4F54"));
+        btn_sell.setBackground(Color.decode("#96D6FF"));
     }//GEN-LAST:event_btn_sellMouseExited
 
     private void btn_productMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_productMouseClicked
@@ -410,11 +427,11 @@ public class mainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_productMouseClicked
 
     private void btn_productMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_productMouseEntered
-        btn_product.setBackground(Color.decode("#002488"));
+        btn_product.setBackground(Color.decode("#0063EC"));
     }//GEN-LAST:event_btn_productMouseEntered
 
     private void btn_productMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_productMouseExited
-        btn_product.setBackground(Color.decode("#BA4F54"));
+        btn_product.setBackground(Color.decode("#96D6FF"));
     }//GEN-LAST:event_btn_productMouseExited
 
     private void btn_staffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_staffMouseClicked
@@ -423,11 +440,11 @@ public class mainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_staffMouseClicked
 
     private void btn_staffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_staffMouseEntered
-        btn_staff.setBackground(Color.decode("#002488"));
+        btn_staff.setBackground(Color.decode("#0063EC"));
     }//GEN-LAST:event_btn_staffMouseEntered
 
     private void btn_staffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_staffMouseExited
-        btn_staff.setBackground(Color.decode("#BA4F54"));
+        btn_staff.setBackground(Color.decode("#96D6FF"));
     }//GEN-LAST:event_btn_staffMouseExited
 
     private void btn_customerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_customerMouseClicked
@@ -436,11 +453,11 @@ public class mainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_customerMouseClicked
 
     private void btn_customerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_customerMouseEntered
-        btn_customer.setBackground(Color.decode("#002488"));
+        btn_customer.setBackground(Color.decode("#0063EC"));
     }//GEN-LAST:event_btn_customerMouseEntered
 
     private void btn_customerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_customerMouseExited
-        btn_customer.setBackground(Color.decode("#BA4F54"));
+        btn_customer.setBackground(Color.decode("#96D6FF"));
     }//GEN-LAST:event_btn_customerMouseExited
 
     private void btn_promotionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_promotionMouseClicked
@@ -449,11 +466,11 @@ public class mainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_promotionMouseClicked
 
     private void btn_promotionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_promotionMouseEntered
-        btn_promotion.setBackground(Color.decode("#002488"));
+        btn_promotion.setBackground(Color.decode("#0063EC"));
     }//GEN-LAST:event_btn_promotionMouseEntered
 
     private void btn_promotionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_promotionMouseExited
-        btn_promotion.setBackground(Color.decode("#BA4F54"));
+        btn_promotion.setBackground(Color.decode("#96D6FF"));
     }//GEN-LAST:event_btn_promotionMouseExited
 
     private void btn_reportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_reportMouseClicked
@@ -462,11 +479,11 @@ public class mainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_reportMouseClicked
 
     private void btn_reportMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_reportMouseEntered
-        btn_report.setBackground(Color.decode("#002488"));
+        btn_report.setBackground(Color.decode("#0063EC"));
     }//GEN-LAST:event_btn_reportMouseEntered
 
     private void btn_reportMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_reportMouseExited
-        btn_report.setBackground(Color.decode("#BA4F54"));
+        btn_report.setBackground(Color.decode("#96D6FF"));
     }//GEN-LAST:event_btn_reportMouseExited
 
     private void btn_receiptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_receiptMouseClicked
@@ -475,11 +492,11 @@ public class mainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_receiptMouseClicked
 
     private void btn_receiptMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_receiptMouseEntered
-        btn_receipt.setBackground(Color.decode("#002488"));
+        btn_receipt.setBackground(Color.decode("#0063EC"));
     }//GEN-LAST:event_btn_receiptMouseEntered
 
     private void btn_receiptMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_receiptMouseExited
-        btn_receipt.setBackground(Color.decode("#BA4F54"));
+        btn_receipt.setBackground(Color.decode("#96D6FF"));
     }//GEN-LAST:event_btn_receiptMouseExited
 
     public void bar(JLabel lb) {
@@ -566,6 +583,8 @@ public class mainForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbl_date;
+    private javax.swing.JLabel lbl_time;
     private javax.swing.JPanel pnlCard1;
     private javax.swing.JPanel pnlCard2;
     private javax.swing.JPanel pnlCard3;
@@ -574,5 +593,6 @@ public class mainForm extends javax.swing.JFrame {
     private javax.swing.JPanel pnlCard6;
     private javax.swing.JPanel pnlCard7;
     private javax.swing.JPanel pnlCard8;
+    private javax.swing.JLabel txt_nhanvien;
     // End of variables declaration//GEN-END:variables
 }

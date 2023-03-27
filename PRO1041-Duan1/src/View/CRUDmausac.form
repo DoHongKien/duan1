@@ -170,7 +170,7 @@
                                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="txtMa" alignment="0" pref="120" max="32767" attributes="0"/>
+                                      <Component id="txt_ma" alignment="0" pref="120" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -193,13 +193,13 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="btnThem" min="-2" pref="86" max="-2" attributes="0"/>
-                                  <Component id="btnXoa" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_them" min="-2" pref="86" max="-2" attributes="0"/>
+                                  <Component id="btn_xoa" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnMoi" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btnSua" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_moi" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_sua" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -215,7 +215,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Component id="txtMa" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="txt_ma" min="-2" pref="22" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                           </Group>
@@ -236,13 +236,13 @@
                       </Group>
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnThem" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="btnSua" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_them" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="btn_sua" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnXoa" alignment="3" max="32767" attributes="0"/>
-                          <Component id="btnMoi" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_xoa" alignment="3" max="32767" attributes="0"/>
+                          <Component id="btn_moi" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
@@ -258,7 +258,7 @@
                 <Property name="text" type="java.lang.String" value="M&#xe3; m&#xe0;u s&#x1eaf;c"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtMa">
+            <Component class="javax.swing.JTextField" name="txt_ma">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -283,21 +283,21 @@
             <Component class="javax.swing.JSeparator" name="jSeparator1">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="0" red="cc" type="rgb"/>
+                  <Color blue="ff" green="d6" red="93" type="rgb"/>
                 </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator2">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="0" red="cc" type="rgb"/>
+                  <Color blue="ff" green="d6" red="93" type="rgb"/>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnThem">
+            <Component class="javax.swing.JButton" name="btn_them">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="54" green="4f" red="ba" type="rgb"/>
+                  <Color blue="ff" green="d6" red="93" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
@@ -317,13 +317,13 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_themActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnSua">
+            <Component class="javax.swing.JButton" name="btn_sua">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="54" green="4f" red="ba" type="rgb"/>
+                  <Color blue="ff" green="d6" red="93" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
@@ -343,13 +343,13 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSuaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_suaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnXoa">
+            <Component class="javax.swing.JButton" name="btn_xoa">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="54" green="4f" red="ba" type="rgb"/>
+                  <Color blue="ff" green="d6" red="93" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
@@ -372,13 +372,13 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_xoaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnMoi">
+            <Component class="javax.swing.JButton" name="btn_moi">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="54" green="4f" red="ba" type="rgb"/>
+                  <Color blue="ff" green="d6" red="93" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
@@ -401,7 +401,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMoiActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_moiActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">

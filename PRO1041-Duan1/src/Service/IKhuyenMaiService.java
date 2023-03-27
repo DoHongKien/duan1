@@ -12,8 +12,12 @@ import java.util.List;
  * @author admin
  */
 public interface IKhuyenMaiService {
-    
+
     public List<KhuyenMai> getListKhuyenMai();
+
+    public int getGiaTriByDieuKien(double dieuKien, String date, int trangThai);
+
+    public int getIdByGiaTri(int giaTri);
 
 //    public List<KhuyenMai> locByTT(int tt);
 //    
@@ -22,7 +26,6 @@ public interface IKhuyenMaiService {
 //    public List<KhuyenMai> fiterByEndDate(String date);
 //    
 //    public List<KhuyenMai> fiterByBetweenDate(String date);
-
     public String insert(KhuyenMai km);
 
     public String update(KhuyenMai km);

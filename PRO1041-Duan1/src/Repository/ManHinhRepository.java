@@ -17,12 +17,13 @@ import java.util.List;
  *
  * @author admin
  */
-public class ManHinhRepository implements IManHinhRepository{
+public class ManHinhRepository implements IManHinhRepository {
+
     private Connection conn;
 
     public ManHinhRepository() {
     }
- 
+
     @Override
     public List<ManHinh> getListManHinh() {
         List<ManHinh> list = new ArrayList<>();
@@ -34,18 +35,19 @@ public class ManHinhRepository implements IManHinhRepository{
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-               ManHinh mH = new ManHinh(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6));
+                ManHinh mH = new ManHinh(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6));
                 list.add(mH);
             }
         } catch (SQLException ex) {
             ex.getMessage();
         }
 
-        return list;      }
+        return list;
+    }
 
     @Override
     public boolean insert(ManHinh mH) {
-         boolean f = false;
+        boolean f = false;
         String sql = "insert into ManHinh(ma, ten, ngay_tao, ngay_nhap, trang_thai) values (?,?,?,?,?)";
 
         try {
@@ -64,7 +66,7 @@ public class ManHinhRepository implements IManHinhRepository{
         } catch (SQLException e) {
             e.getMessage();
         }
-        return f;    
+        return f;
     }
 
     @Override
@@ -87,22 +89,22 @@ public class ManHinhRepository implements IManHinhRepository{
         } catch (SQLException e) {
             e.getMessage();
         }
-        return f; 
+        return f;
     }
 
     @Override
     public boolean delete(String ma) {
         boolean f = false;
         String sql = "delete from ManHinh where ma = ?";
-        
+
         try {
             conn = new DBConnection().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, ma);
 
             int result = ps.executeUpdate();
-            
-            if(result == 1) {
+
+            if (result == 1) {
                 f = true;
             }
         } catch (SQLException e) {
@@ -110,5 +112,5 @@ public class ManHinhRepository implements IManHinhRepository{
         }
         return f;
     }
-    
+
 }

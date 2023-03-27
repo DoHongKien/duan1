@@ -6,6 +6,7 @@ package Repository;
 
 import Model.NhanVien;
 import Utility.DBConnection;
+import ViewModel.RoleModel;
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
@@ -68,6 +69,45 @@ public class NhanVienRepository implements NhanVienInterface {
     }
 
     @Override
+    public int getIdNVByMa(String ma) {
+        String sql = "select id from NhanVien where ma = ?";
+        int idNV = 0;
+        
+        try {
+            ps = dbCon.getConnection().prepareStatement(sql);
+            ps.setObject(1, ma);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                idNV = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        }
+        return idNV;
+    }
+    
+
+    @Override
+    public List<RoleModel> roleLogin(String username, String password) {
+        List<RoleModel> listRM = new ArrayList<>();
+        String sql = "select NhanVien.ma, ChucVu.chuc_vu from NhanVien join ChucVu on NhanVien.id_chuc_vu = ChucVu.id where ma = ? AND mat_khau = ?";
+
+        try {
+            ps = dbCon.getConnection().prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                RoleModel roleModel = new RoleModel(rs.getString(1), rs.getString(2));
+                listRM.add(roleModel);
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return listRM;
+    }
+
+    @Override
     public boolean create(NhanVien nv) {
         String sql = "insert into NhanVien(ma, ten, ngay_sinh, gioi_tinh, sdt, dia_chi, ngay_tao, ngay_nhap, "
                 + "trang_thai, mat_khau) values(?,?,?,?,?,?,?,?,?,?)";
@@ -127,7 +167,7 @@ public class NhanVienRepository implements NhanVienInterface {
     }
 
     public static void main(String[] args) {
-        new NhanVienRepository().getListDb();
+        new NhanVienRepository().roleLogin("NV1", "1234");
 
     }
 }

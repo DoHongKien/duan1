@@ -39,9 +39,6 @@ public class OCungRepository implements IOCungRepository {
                 OCung oCung = new OCung(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6));
                 list.add(oCung);
             }
-            for (OCung oCung : list) {
-                System.out.println(oCung.toString());
-            }
         } catch (SQLException e) {
             e.getMessage();
         }

@@ -10,6 +10,8 @@ public class KhuyenMai {
     
     private String ma;
     
+    private int dieuKien;
+    
     private int giaTri;
     
     private String ngayTao;
@@ -23,20 +25,20 @@ public class KhuyenMai {
     public KhuyenMai() {
     }
 
-    public KhuyenMai(String ma, int giaTri, String ngayTao, String ngayHetHan, String ngayNhap, int trangThai) {
+    public KhuyenMai(String ma, int dieuKien, int giaTri, String ngayTao, String ngayHetHan, String ngayNhap, int trangThai) {
         this.ma = ma;
+        this.dieuKien = dieuKien;
         this.giaTri = giaTri;
         this.ngayTao = ngayTao;
         this.ngayHetHan = ngayHetHan;
         this.ngayNhap = ngayNhap;
         this.trangThai = trangThai;
     }
-    
-    
 
-    public KhuyenMai(int id, String ma, int giaTri, String ngayTao, String ngayHetHan, String ngayNhap, int trangThai) {
+    public KhuyenMai(int id, String ma, int dieuKien, int giaTri, String ngayTao, String ngayHetHan, String ngayNhap, int trangThai) {
         this.id = id;
         this.ma = ma;
+        this.dieuKien = dieuKien;
         this.giaTri = giaTri;
         this.ngayTao = ngayTao;
         this.ngayHetHan = ngayHetHan;
@@ -58,6 +60,14 @@ public class KhuyenMai {
 
     public void setMa(String ma) {
         this.ma = ma;
+    }
+
+    public int getDieuKien() {
+        return dieuKien;
+    }
+
+    public void setDieuKien(int dieuKien) {
+        this.dieuKien = dieuKien;
     }
 
     public int getGiaTri() {

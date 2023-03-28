@@ -5,6 +5,7 @@
 package View;
 
 import Model.Serial;
+import Service.ChiTietSanPhamService;
 import Service.SerialService;
 import java.awt.Image;
 import java.text.SimpleDateFormat;
@@ -25,6 +26,7 @@ public class CRUDserial extends javax.swing.JFrame {
      * Creates new form CRUDserial
      */
     SerialService serialService = new SerialService();
+    ChiTietSanPhamService ctspService = new ChiTietSanPhamService();
     DefaultTableModel defaultTableModel;
     int idCTSP;
 
@@ -204,6 +206,8 @@ public class CRUDserial extends javax.swing.JFrame {
         int trangThai = 0;
         Serial serial = new Serial(idCTSP, txt_maserial.getText().trim(), ngayTao, ngayNhap, trangThai);
         JOptionPane.showMessageDialog(this, serialService.insert(serial));
+        int soluong = ctspService.getSoLuongByIdCTSP(idCTSP) + 1;
+        ctspService.updateSoLuongByID(soluong, idCTSP);
         fillTable(serialService.getSerialByIdCTSP(idCTSP));
     }//GEN-LAST:event_btnThemActionPerformed
 

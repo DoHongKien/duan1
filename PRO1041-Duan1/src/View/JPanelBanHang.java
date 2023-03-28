@@ -348,7 +348,6 @@ public class JPanelBanHang extends javax.swing.JPanel {
 
         txt_mahoadon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txt_mahoadon.setForeground(new java.awt.Color(255, 255, 255));
-        txt_mahoadon.setOpaque(true);
 
         txt_ngaytao.setEditable(false);
         txt_ngaytao.setBackground(new java.awt.Color(255, 255, 255));
@@ -404,9 +403,7 @@ public class JPanelBanHang extends javax.swing.JPanel {
         txt_tongtien.setEditable(false);
         txt_tongtien.setBackground(new java.awt.Color(255, 255, 255));
 
-        txt_ghichu.setBackground(new java.awt.Color(204, 204, 204));
         txt_ghichu.setForeground(new java.awt.Color(255, 255, 255));
-        txt_ghichu.setOpaque(true);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

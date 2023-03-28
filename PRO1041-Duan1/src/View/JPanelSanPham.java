@@ -613,6 +613,11 @@ public class JPanelSanPham extends javax.swing.JPanel {
         txtSLTon.setText(tbl_sanpham.getValueAt(index, 9).toString());
         txt_gianhap.setText(tbl_sanpham.getValueAt(index, 10).toString());
         txt_giaban.setText(tbl_sanpham.getValueAt(index, 11).toString());
+        if(tbl_sanpham.getValueAt(index, 14).toString().equalsIgnoreCase("Còn bán")) {
+            rdo_con.setSelected(true);
+        } else {
+            rdo_khong.setSelected(true);
+        }
 
         List<Serial> listSeri = serialService.getSerialByIdCTSP(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString()));
         cbo_serial.setModel(new DefaultComboBoxModel(listSeri.toArray()));
@@ -832,9 +837,9 @@ public class JPanelSanPham extends javax.swing.JPanel {
         ctsp.setNgayNhap(date.format(DateTimeFormatter.ISO_DATE));
         ctsp.setSlTon(Integer.parseInt(txtSLTon.getText()));
         if (rdo_con.isSelected()) {
-            ctsp.setTrangThai(1);
-        } else {
             ctsp.setTrangThai(0);
+        } else {
+            ctsp.setTrangThai(1);
         }
 
         return ctsp;

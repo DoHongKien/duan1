@@ -68,7 +68,7 @@ public class View_Serial extends javax.swing.JFrame {
         btn_addserial.setBackground(new java.awt.Color(147, 214, 255));
         btn_addserial.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_addserial.setForeground(new java.awt.Color(255, 255, 255));
-        btn_addserial.setText("OK");
+        btn_addserial.setText("Ok");
         btn_addserial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_addserialActionPerformed(evt);

@@ -28,4 +28,5 @@ public interface ISerial {
     public int getIdByMa(String ma);
     
     public boolean updateTT(Serial s);
+    
 }

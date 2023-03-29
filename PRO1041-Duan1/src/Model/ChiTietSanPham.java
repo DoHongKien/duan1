@@ -28,7 +28,7 @@ public class ChiTietSanPham {
     
     private int idVga;
     
-    private int idSerial;
+    private String idSerial;
     
     private int slTon;
     
@@ -45,7 +45,7 @@ public class ChiTietSanPham {
     public ChiTietSanPham() {
     }
 
-    public ChiTietSanPham(int id, int idSanPham, int idCpu, int idHang, int idManHinh, int idMauSac, int idOCung, int idRam, int idVga, int idSerial, int slTon, Double GiaNhap, Double GiaBan, String ngayTao, String ngayNhap, int trangThai) {
+    public ChiTietSanPham(int id, int idSanPham, int idCpu, int idHang, int idManHinh, int idMauSac, int idOCung, int idRam, int idVga, String idSerial, int slTon, Double GiaNhap, Double GiaBan, String ngayTao, String ngayNhap, int trangThai) {
         this.id = id;
         this.idSanPham = idSanPham;
         this.idCpu = idCpu;
@@ -137,11 +137,11 @@ public class ChiTietSanPham {
         this.idVga = idVga;
     }
 
-    public int getIdSerial() {
+    public String getIdSerial() {
         return idSerial;
     }
 
-    public void setIdSerial(int idSerial) {
+    public void setIdSerial(String idSerial) {
         this.idSerial = idSerial;
     }
 

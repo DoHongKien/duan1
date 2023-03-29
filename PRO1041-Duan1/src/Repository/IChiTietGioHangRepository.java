@@ -25,4 +25,6 @@ public interface IChiTietGioHangRepository {
     public boolean updateSoLuong(ChiTietGioHang ctgh);
     
     public boolean updateTrangThai(int tt, int id);
+    
+    public boolean delete(int id);
 }

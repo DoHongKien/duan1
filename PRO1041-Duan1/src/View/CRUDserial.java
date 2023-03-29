@@ -41,13 +41,13 @@ public class CRUDserial extends javax.swing.JFrame {
     ChiTietSanPhamService ctspService = new ChiTietSanPhamService();
     DefaultTableModel defaultTableModel;
     int idCTSP;
-    
+
     public CRUDserial() {
         initComponents();
         setTitle("Serial");
         fillTable(serialService.getAllSerial());
     }
-    
+
     public CRUDserial(int id) {
         initComponents();
         setTitle("Serial");
@@ -223,8 +223,8 @@ public class CRUDserial extends javax.swing.JFrame {
         FileInputStream fis = null;
         BufferedInputStream bis = null;
         XSSFWorkbook excelWorkBook = null;
-        
-        String currentDirectoryPath = "C:\\Users\\quyen\\Desktop\\Serial";
+
+        String currentDirectoryPath = "D:\\Serial";
         JFileChooser excelFileC = new JFileChooser(currentDirectoryPath);
         int choosed = excelFileC.showOpenDialog(null);
         if (choosed == JFileChooser.APPROVE_OPTION) {
@@ -234,32 +234,36 @@ public class CRUDserial extends javax.swing.JFrame {
                 bis = new BufferedInputStream(fis);
                 excelWorkBook = new XSSFWorkbook(bis);
                 XSSFSheet excelSheet = excelWorkBook.getSheetAt(0);
-                
+
                 for (int i = 0; i < excelSheet.getLastRowNum(); i++) {
                     XSSFRow excelRow = excelSheet.getRow(i);
-                    
+
                     XSSFCell cell = excelRow.getCell(0);
-                    
+
                     importDataExcelModel.addRow(new Object[]{cell});
-                    
+
                 }
+                int countsl = 0;
                 LocalDate localDate = LocalDate.now();
                 for (int j = 0; j < tbl_serial.getRowCount(); j++) {
                     Serial serial = new Serial();
                     serial.setMa(tbl_serial.getValueAt(j, 0).toString());
-                    serial.setIdCtsp(1);
+                    serial.setIdCtsp(idCTSP);
                     serial.setNgayTao(localDate.format(DateTimeFormatter.ISO_DATE));
                     serial.setNgayNhap(localDate.format(DateTimeFormatter.ISO_DATE));
-                    serial.setTrangThai(1);
+                    serial.setTrangThai(0);
                     serialService.insert(serial);
-                    
+                    countsl++;
                 }
+                int soluong = ctspService.getSoLuongByIdCTSP(idCTSP) + countsl;
+                ctspService.updateSoLuongByID(soluong, idCTSP);
+                fillTable(serialService.getSerialByIdCTSP(idCTSP));
             } catch (FileNotFoundException ex) {
-                ex.printStackTrace();
+                ex.getMessage();
             } catch (IOException ex) {
-                ex.printStackTrace();
+                ex.getMessage();
             }
-            
+
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -300,11 +304,11 @@ public class CRUDserial extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void fillTable(List<Serial> list) {
         defaultTableModel = (DefaultTableModel) tbl_serial.getModel();
         defaultTableModel.setRowCount(0);
-        
+
         for (Serial serial : list) {
             defaultTableModel.addRow(new Object[]{serial.getMa()});
         }

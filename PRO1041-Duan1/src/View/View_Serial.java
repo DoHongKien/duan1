@@ -145,7 +145,7 @@ public class View_Serial extends javax.swing.JFrame {
         String ma = cbo_serial.getSelectedItem().toString();
         ChiTietSanPham ctsp = new ChiTietSanPham();
         ctsp.setId(idCTSP);
-        ctsp.setIdSerial(serialService.getIdByMa(ma));
+        ctsp.setIdSerial(ma);
         ctspService.updateIdSerial(ctsp);
 
         Serial s = new Serial();
@@ -156,7 +156,6 @@ public class View_Serial extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_addserialActionPerformed
 
     private void btn_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timkiemActionPerformed
-        
         txt_tensanpham.setText(serialService.getNameByIdCTSPAndMa(idCTSP, cbo_serial.getSelectedItem().toString()));
     }//GEN-LAST:event_btn_timkiemActionPerformed
 

@@ -12,14 +12,12 @@ import Model.ChiTietSanPham;
 import Model.GioHang;
 import Model.HoaDon;
 import Model.KhachHang;
-import Model.KhuyenMai;
 import Model.SanPham;
 import Repository.ChiTietHoaDonRepository;
 import Repository.GioHangRepository;
 import Service.BanHangService;
 import Service.ChiTietGioHangService;
 import Service.ChiTietSanPhamService;
-import Service.GioHangService;
 import Service.KhachHangService;
 import Service.KhuyenMaiService;
 import Service.NhanVienService;
@@ -33,13 +31,11 @@ import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import static javax.swing.WindowConstants.HIDE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -53,7 +49,6 @@ public class JPanelBanHang extends javax.swing.JPanel {
     ChiTietSanPhamService ctspService = new ChiTietSanPhamService();
     BanHangService banHangService = new BanHangService();
     ChiTietGioHangService ctghService = new ChiTietGioHangService();
-    GioHangRepository ghRepositoy = new GioHangRepository();
     List<ChiTietGioHangModel> listCTGH = ctghService.getAllCTGH();
     NhanVienService nhanVienService = new NhanVienService();
     ChiTietHoaDonRepository cthdr = new ChiTietHoaDonRepository();
@@ -102,7 +97,7 @@ public class JPanelBanHang extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         tbl_sanpham = new javax.swing.JTable();
         btn_themgiohang = new javax.swing.JButton();
-        btn_capnhatgio = new javax.swing.JButton();
+        btn_xoagiohang = new javax.swing.JButton();
         cbo_sanpham = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -177,6 +172,11 @@ public class JPanelBanHang extends javax.swing.JPanel {
                 "Giỏ hàng", "Sản phẩm", "Tên sản phẩm", "Số lượng", "Đơn Giá", "Thành Tiền"
             }
         ));
+        tbl_giohang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_giohangMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbl_giohang);
         if (tbl_giohang.getColumnModel().getColumnCount() > 0) {
             tbl_giohang.getColumnModel().getColumn(0).setMinWidth(50);
@@ -225,16 +225,16 @@ public class JPanelBanHang extends javax.swing.JPanel {
         });
         jPanel2.add(btn_themgiohang, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
 
-        btn_capnhatgio.setBackground(new java.awt.Color(147, 214, 255));
-        btn_capnhatgio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btn_capnhatgio.setForeground(new java.awt.Color(255, 255, 255));
-        btn_capnhatgio.setText("Xóa giỏ");
-        btn_capnhatgio.addActionListener(new java.awt.event.ActionListener() {
+        btn_xoagiohang.setBackground(new java.awt.Color(147, 214, 255));
+        btn_xoagiohang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_xoagiohang.setForeground(new java.awt.Color(255, 255, 255));
+        btn_xoagiohang.setText("Xóa giỏ");
+        btn_xoagiohang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_capnhatgioActionPerformed(evt);
+                btn_xoagiohangActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_capnhatgio, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, -1));
+        jPanel2.add(btn_xoagiohang, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, -1));
 
         cbo_sanpham.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -335,15 +335,12 @@ public class JPanelBanHang extends javax.swing.JPanel {
         jLabel5.setText("Ngày tạo");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(204, 0, 0));
         jLabel8.setText("Tổng tiền:");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(204, 0, 0));
         jLabel9.setText("Giảm giá:");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(204, 0, 0));
         jLabel10.setText("Tổng tiền phải trả:");
 
         txt_mahoadon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -521,17 +518,17 @@ public class JPanelBanHang extends javax.swing.JPanel {
         int index = tbl_sanpham.getSelectedRow();
         LocalDate localDate = LocalDate.now();
 
-        if (timIdGioHang(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim())) == 1) {
-            for (int i = 0; i < tbl_giohang.getRowCount(); i++) {
-                if (tbl_sanpham.getValueAt(index, 0).toString().trim().equalsIgnoreCase(tbl_giohang.getValueAt(i, 0).toString().trim())) {
-                    int sl = Integer.parseInt(tbl_giohang.getValueAt(i, 2).toString().trim()) + 1;
-                    ChiTietGioHang ctGioHang = new ChiTietGioHang();
-                    ctGioHang.setIdCTSP(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim()));
-                    ctGioHang.setSoLuong(sl);
-                    ctghService.updateSoLuong(ctGioHang);
-                }
-            }
-        } else {
+//        if (timIdGioHang(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim())) == 1) {
+//            for (int i = 0; i < tbl_giohang.getRowCount(); i++) {
+//                if (tbl_sanpham.getValueAt(index, 0).toString().trim().equalsIgnoreCase(tbl_giohang.getValueAt(i, 0).toString().trim())) {
+//                    int sl = Integer.parseInt(tbl_giohang.getValueAt(i, 2).toString().trim()) + 1;
+//                    ChiTietGioHang ctGioHang = new ChiTietGioHang();
+//                    ctGioHang.setIdCTSP(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim()));
+//                    ctGioHang.setSoLuong(sl);
+//                    ctghService.updateSoLuong(ctGioHang);
+//                }
+//            }
+//        } else {
             ChiTietSanPham ctsp1 = ctspService.getDonGiaById(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim()));
             ChiTietGioHang ctgh = new ChiTietGioHang();
             ctgh.setIdCTSP(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim()));
@@ -541,8 +538,7 @@ public class JPanelBanHang extends javax.swing.JPanel {
             ctgh.setNgayNhap(localDate.format(DateTimeFormatter.ISO_DATE));
             ctgh.setTrangThai(1);
             ctghService.insert(ctgh);
-
-        }
+//        }
 
         double tongTien = 0;
         for (int i = 0; i < ctghService.getAllCTGH().size(); i++) {
@@ -559,33 +555,17 @@ public class JPanelBanHang extends javax.swing.JPanel {
         fillGioHang(ctghService.getAllCTGH());
     }//GEN-LAST:event_btn_themgiohangActionPerformed
 
-    private void btn_capnhatgioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_capnhatgioActionPerformed
-//        int indexGH = tbl_giohang.getSelectedRow();
-//        if (indexGH >= 0) {
-//            int slSP = banHangService.getSLById((int) tbl_giohang.getValueAt(indexGH, 1));
-//            String slGH = tbl_giohang.getValueAt(indexGH, 4).toString();
-//            int soLuong = slSP + Integer.parseInt(slGH);
-//            String ma = tbl_giohang.getValueAt(indexGH, 2).toString();
-//            sanPhamService.update(ma, soLuong);
-//            fillSanPham(sanPhamService.getListSP());
-
-//            listGioHang.remove(indexGH);
-//            fillGioHang(listGioHang);
-//        } else {
-//            for (int i = 0; i < listGioHang.size(); i++) {
-//                GioHang get = listGioHang.get(i);
-//                String ma = tbl_giohang.getValueAt(i, 2).toString();
-//                String slGH = tbl_giohang.getValueAt(i, 4).toString();
-//                int sl = Integer.parseInt(slGH) + banHangService.getSLById(Integer.parseInt(tbl_giohang.getValueAt(i, 1).toString()));
-//                sanPhamService.update(ma, sl);
-//            }
-//            fillSanPham(sanPhamService.getListSP());
-//            listGioHang.clear();
-//            fillGioHang(listGioHang);
-//        }
-        defaultTableModelGioHang = (DefaultTableModel) tbl_giohang.getModel();
-        defaultTableModelGioHang.setRowCount(0);
-    }//GEN-LAST:event_btn_capnhatgioActionPerformed
+    private void btn_xoagiohangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoagiohangActionPerformed
+        int index = tbl_giohang.getSelectedRow();
+        boolean result = ctghService.delete(Integer.parseInt(tbl_giohang.getValueAt(index, 0).toString()));
+        if(result) {
+            JOptionPane.showMessageDialog(this, "Xóa thành công sản phẩm khỏi giỏ hàng");
+        } else {
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi xóa sản phẩm khỏi giỏ hàng");
+        }
+        fillGioHang(ctghService.getAllCTGH());
+        clearForm();
+    }//GEN-LAST:event_btn_xoagiohangActionPerformed
 
     private void btn_thanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thanhtoanActionPerformed
         LocalDate localDate = LocalDate.now();
@@ -849,9 +829,7 @@ public class JPanelBanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_hoadonchoActionPerformed
 
     private void tbl_sanphamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_sanphamMouseClicked
-        int index = tbl_sanpham.getSelectedRow();
-        View_Serial view_Serial = new View_Serial(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString()));
-        view_Serial.setVisible(true);
+        
     }//GEN-LAST:event_tbl_sanphamMouseClicked
 
     private void tbl_hoadonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_hoadonMouseClicked
@@ -883,6 +861,12 @@ public class JPanelBanHang extends javax.swing.JPanel {
             txt_ghichu.setText("");
         }
     }//GEN-LAST:event_chk_khachvanglaiItemStateChanged
+
+    private void tbl_giohangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_giohangMouseClicked
+        int index = tbl_giohang.getSelectedRow();
+        View_Serial view_Serial = new View_Serial(Integer.parseInt(tbl_giohang.getValueAt(index, 1).toString()));
+        view_Serial.setVisible(true);
+    }//GEN-LAST:event_tbl_giohangMouseClicked
 
     private void fillSanPham(List<ChiTietSanPhamModel> list) {
         defaultTableModelSanPham = (DefaultTableModel) tbl_sanpham.getModel();
@@ -934,10 +918,9 @@ public class JPanelBanHang extends javax.swing.JPanel {
         }
     }
 
-    public void fillGioHang(List<ChiTietGioHangModel> list) {
+    private void fillGioHang(List<ChiTietGioHangModel> list) {
         defaultTableModelGioHang = (DefaultTableModel) tbl_giohang.getModel();
         defaultTableModelGioHang.setRowCount(0);
-        int i = 1;
         for (ChiTietGioHangModel ctghm : list) {
             if (ctghm.getTrangThai() == 1) {
                 defaultTableModelGioHang.addRow(new Object[]{ctghm.getId(), ctghm.getIdCTSP(), "Laptop " + ctghm.getSanPham() + " " + ctghm.getMauSac() + " "
@@ -947,7 +930,7 @@ public class JPanelBanHang extends javax.swing.JPanel {
         }
     }
 
-    public void fillGioHangByIdHoaDon(List<ChiTietGioHangModel> list) {
+    private void fillGioHangByIdHoaDon(List<ChiTietGioHangModel> list) {
         defaultTableModelGioHang = (DefaultTableModel) tbl_giohang.getModel();
         defaultTableModelGioHang.setRowCount(0);
         int i = 1;
@@ -1032,12 +1015,12 @@ public class JPanelBanHang extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_capnhatgio;
     private javax.swing.JButton btn_hoadoncho;
     private javax.swing.JButton btn_lammoi;
     private javax.swing.JButton btn_taohoadon;
     private javax.swing.JButton btn_thanhtoan;
     private javax.swing.JButton btn_themgiohang;
+    private javax.swing.JButton btn_xoagiohang;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbo_khachhang;
     private javax.swing.JComboBox<String> cbo_sanpham;

@@ -50,4 +50,8 @@ public class ChiTietGioHangService implements IChiTietGioHangService {
         return ctghRepository.updateTrangThai(tt, id);
     }
 
+    @Override
+    public boolean delete(int id) {
+        return ctghRepository.delete(id);
+    }
 }

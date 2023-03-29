@@ -5,15 +5,12 @@
 package Repository;
 
 import Model.ChiTietGioHang;
-import Model.GioHang;
 import Utility.DBConnection;
 import ViewModel.ChiTietGioHangModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -176,22 +173,24 @@ public class ChiTietGioHangRepository implements IChiTietGioHangRepository {
         return f;
     }
 
-    public static void main(String[] args) {
-        LocalDate localDate = LocalDate.now();
-        GioHang gioHang = new GioHang();
-        gioHang.setIdHoaDon(6);
-        gioHang.setNgayTao(localDate.format(DateTimeFormatter.ISO_DATE));
-        gioHang.setNgayNhap(localDate.format(DateTimeFormatter.ISO_DATE));
-        gioHang.setTrangThai(0);
-//        int iddd = new GioHangRepository().insert(gioHang);
-        ChiTietGioHang chiTietGioHang = new ChiTietGioHang();
-        chiTietGioHang.setIdGioHang(new GioHangRepository().insert(gioHang));
-        chiTietGioHang.setIdCTSP(1);
-        chiTietGioHang.setSoLuong(1);
-        chiTietGioHang.setDonGia(1);
-        chiTietGioHang.setNgayTao(localDate.format(DateTimeFormatter.ISO_DATE));
-        chiTietGioHang.setNgayNhap(localDate.format(DateTimeFormatter.ISO_DATE));
-        chiTietGioHang.setTrangThai(0);
-        new ChiTietGioHangRepository().insert(chiTietGioHang);
+    @Override
+    public boolean delete(int id) {
+        String sql = "delete from ChiTietGioHang where id = ?";
+        boolean f = false;
+
+        try {
+            conn = new DBConnection().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            int result = ps.executeUpdate();
+
+            if (result == 1) {
+                f = true;
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return f;
     }
 }

@@ -37,7 +37,7 @@ public class NhanVien {
     public NhanVien() {
     }
 
-    public NhanVien(String ma, String ten, String ngaySinh, String gioiTinh, String sdt, String diaChi, String matKhau, String ngayNhap, int trangThai) {
+    public NhanVien(String ma, String ten, String ngaySinh, String gioiTinh, String sdt, String diaChi, String matKhau, String ngayNhap, int trangThai, int idChucVu) {
         this.ma = ma;
         this.ten = ten;
         this.ngaySinh = ngaySinh;
@@ -47,9 +47,10 @@ public class NhanVien {
         this.matKhau = matKhau;
         this.ngayNhap = ngayNhap;
         this.trangThai = trangThai;
+        this.idChucVu = idChucVu;
     }
 
-    public NhanVien(String ma, String ten, String ngaySinh, String gioiTinh, String sdt, String diaChi, String matKhau, String ngayTao, String ngayNhap, int trangThai) {
+    public NhanVien(String ma, String ten, String ngaySinh, String gioiTinh, String sdt, String diaChi, String matKhau, String ngayTao, String ngayNhap, int trangThai, int idChucVu) {
         this.ma = ma;
         this.ten = ten;
         this.ngaySinh = ngaySinh;
@@ -60,6 +61,7 @@ public class NhanVien {
         this.ngayTao = ngayTao;
         this.ngayNhap = ngayNhap;
         this.trangThai = trangThai;
+        this.idChucVu = idChucVu;
     }
 
     public NhanVien(int id, int idChucVu, String ma, String ten, String ngaySinh, String gioiTinh, String sdt, String diaChi, String matKhau, String ngayTao, String ngayNhap, int trangThai) {

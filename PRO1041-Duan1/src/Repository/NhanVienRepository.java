@@ -22,7 +22,6 @@ public class NhanVienRepository implements NhanVienInterface {
     PreparedStatement ps = null;
     ResultSet rs = null;
     DBConnection dbCon = new DBConnection();
-    List<NhanVien> list = new ArrayList<>();
 
     @Override
     public List<NhanVien> getListDb() {
@@ -110,7 +109,7 @@ public class NhanVienRepository implements NhanVienInterface {
     @Override
     public boolean create(NhanVien nv) {
         String sql = "insert into NhanVien(ma, ten, ngay_sinh, gioi_tinh, sdt, dia_chi, ngay_tao, ngay_nhap, "
-                + "trang_thai, mat_khau) values(?,?,?,?,?,?,?,?,?,?)";
+                + "trang_thai, mat_khau, id_chuc-vu) values(?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = dbCon.getConnection().prepareStatement(sql);
             ps.setObject(1, nv.getMa());
@@ -123,6 +122,7 @@ public class NhanVienRepository implements NhanVienInterface {
             ps.setObject(8, nv.getNgayNhap());
             ps.setObject(9, nv.getTrangThai());
             ps.setObject(10, nv.getMatKhau());
+            ps.setObject(11, nv.getIdChucVu());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -133,7 +133,7 @@ public class NhanVienRepository implements NhanVienInterface {
     @Override
     public boolean update(NhanVien nv) {
         String sql = "update NhanVien set ten = ?, ngay_sinh = ?, gioi_tinh =?, sdt= ?, dia_chi=?,"
-                + " ngay_nhap = ?, trang_thai = ? where ma = ?";
+                + " ngay_nhap = ?, trang_thai = ?, id_chuc_vu = ? where ma = ?";
         try {
             ps = dbCon.getConnection().prepareStatement(sql);
             ps.setObject(1, nv.getTen());
@@ -143,7 +143,8 @@ public class NhanVienRepository implements NhanVienInterface {
             ps.setObject(5, nv.getDiaChi());
             ps.setObject(6, nv.getNgayNhap());
             ps.setObject(7, nv.getTrangThai());
-            ps.setObject(8, nv.getMa());
+            ps.setObject(8, nv.getIdChucVu());
+            ps.setObject(9, nv.getMa());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {

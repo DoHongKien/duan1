@@ -49,6 +49,7 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -77,6 +78,9 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         txt_ngaytao = new com.toedter.calendar.JDateChooser();
         txt_ngayhethan = new com.toedter.calendar.JDateChooser();
         txt_ngaysua = new com.toedter.calendar.JDateChooser();
+        jLabel8 = new javax.swing.JLabel();
+        rdo_khong = new javax.swing.JRadioButton();
+        rdo_co = new javax.swing.JRadioButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1070, 680));
@@ -182,8 +186,8 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 230, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("Ngày Sửa");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 340, -1, -1));
+        jLabel5.setText("Trạng Thái");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 390, -1, -1));
 
         btn_them.setBackground(new java.awt.Color(147, 214, 255));
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -245,12 +249,27 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         jPanel2.add(txt_ngayhethan, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 280, 150, -1));
         jPanel2.add(txt_ngaysua, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 340, 150, -1));
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setText("Ngày Sửa");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 340, -1, -1));
+
+        buttonGroup2.add(rdo_khong);
+        rdo_khong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        rdo_khong.setText("Không");
+        jPanel2.add(rdo_khong, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 390, -1, -1));
+
+        buttonGroup2.add(rdo_co);
+        rdo_co.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        rdo_co.setSelected(true);
+        rdo_co.setText("Có");
+        jPanel2.add(rdo_co, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 390, 50, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1070, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,6 +317,7 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
             if (cf == JOptionPane.YES_OPTION) {
                 JOptionPane.showMessageDialog(this, khuyenMaiService.insert(getField()));
                 fillTable(khuyenMaiService.getListKhuyenMai());
+                clearForm();
             }
         }
     }//GEN-LAST:event_btn_themActionPerformed
@@ -312,6 +332,7 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
                 btn_them.setEnabled(true);
                 btn_sua.setEnabled(false);
                 btn_xoa.setEnabled(false);
+                clearForm();
             }
         }
     }//GEN-LAST:event_btn_suaActionPerformed
@@ -330,17 +351,12 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
             btn_them.setEnabled(true);
             btn_sua.setEnabled(false);
             btn_xoa.setEnabled(false);
+            clearForm();
         }
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void btn_moiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_moiActionPerformed
-        txt_ma.setText("");
-        txt_dieukien.setText("");
-        txt_giatri.setText("");
-        btn_them.setEnabled(true);
-        btn_sua.setEnabled(false);
-        btn_xoa.setEnabled(false);
-        txt_ma.setEditable(true);
+        clearForm();
     }//GEN-LAST:event_btn_moiActionPerformed
 
     private void rdo_tatcaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdo_tatcaMouseClicked
@@ -363,11 +379,13 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
     }//GEN-LAST:event_rdo_daketthucMouseClicked
 
     private void fillTable(List<KhuyenMai> list) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         defaultTableModel = (DefaultTableModel) tbl_khuyenmai.getModel();
         defaultTableModel.setRowCount(0);
         for (KhuyenMai km : list) {
-            defaultTableModel.addRow(new Object[]{km.getId(), km.getMa(), km.getDieuKien(), km.getGiaTri(), km.getNgayTao(), km.getNgayHetHan(), km.getNgayNhap(), km.getTrangThai()});
+            if (km.getTrangThai() != 2) {
+                defaultTableModel.addRow(new Object[]{km.getId(), km.getMa(), km.getDieuKien(), km.getGiaTri(), 
+                    km.getNgayTao(), km.getNgayHetHan(), km.getNgayNhap(), km.getTrangThai()});
+            }
         }
     }
 
@@ -392,6 +410,11 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         km.setNgayTao(dateFormat.format(selectedDate));
         km.setNgayHetHan(dateFormat.format(selectedDate1));
         km.setNgayNhap(dateFormat.format(selectedDate2));
+        if (rdo_co.isSelected()) {
+            km.setTrangThai(1);
+        } else {
+            km.setTrangThai(0);
+        }
         return km;
     }
 
@@ -467,6 +490,16 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
 //            return false;
 //        }
         return true;
+    }
+
+    private void clearForm() {
+        txt_ma.setText("");
+        txt_dieukien.setText("");
+        txt_giatri.setText("");
+        btn_them.setEnabled(true);
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
+        txt_ma.setEditable(true);
     }
 
     private boolean checkValidateUpdate() {
@@ -549,6 +582,7 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JButton btn_them;
     private javax.swing.JButton btn_xoa;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -556,14 +590,17 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JRadioButton rdo_co;
     private javax.swing.JRadioButton rdo_daketthuc;
     private javax.swing.JRadioButton rdo_dangdienra;
+    private javax.swing.JRadioButton rdo_khong;
     private javax.swing.JRadioButton rdo_sapdienra;
     private javax.swing.JRadioButton rdo_tatca;
     private javax.swing.JTable tbl_khuyenmai;

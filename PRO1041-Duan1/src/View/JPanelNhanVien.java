@@ -54,6 +54,7 @@ public class JPanelNhanVien extends javax.swing.JPanel {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -90,6 +91,9 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         btn_xoa = new javax.swing.JButton();
         btn_lammoi = new javax.swing.JButton();
         txt_ngaysinh = new com.toedter.calendar.JDateChooser();
+        jLabel10 = new javax.swing.JLabel();
+        rdo_admin = new javax.swing.JRadioButton();
+        rdo_staff = new javax.swing.JRadioButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1070, 680));
@@ -133,7 +137,7 @@ public class JPanelNhanVien extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Mã ", "Tên", "Ngày sinh", "Giới tính", "SDT", "Địa chỉ", "Mật Khẩu", "Ngày Tạo", "Ngày Sửa", "Trạng Thái"
+                "ID", "Mã ", "Tên", "Ngày sinh", "Giới tính", "SDT", "Địa chỉ", "Mật Khẩu", "Ngày Tạo", "Ngày Sửa", "Chức Vụ", "Trạng Thái"
             }
         ));
         tbl_nhanvien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -202,19 +206,19 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         jPanel2.add(rdo_nu, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel8.setText("Trạng thái");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, -1, -1));
+        jLabel8.setText("Chức vụ");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, -1, -1));
 
         buttonGroup2.add(rdo_dilam);
         rdo_dilam.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         rdo_dilam.setSelected(true);
-        rdo_dilam.setText("Có");
+        rdo_dilam.setText("Đi làm");
         jPanel2.add(rdo_dilam, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, -1, -1));
 
         buttonGroup2.add(rdo_nghiviec);
         rdo_nghiviec.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        rdo_nghiviec.setText("Không");
-        jPanel2.add(rdo_nghiviec, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, -1, -1));
+        rdo_nghiviec.setText("Nghỉ việc");
+        jPanel2.add(rdo_nghiviec, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("SDT");
@@ -292,6 +296,21 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         });
         jPanel2.add(btn_lammoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 540, 80, 32));
         jPanel2.add(txt_ngaysinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 160, -1));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setText("Trạng thái");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, -1, -1));
+
+        buttonGroup3.add(rdo_admin);
+        rdo_admin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        rdo_admin.setSelected(true);
+        rdo_admin.setText("admin");
+        jPanel2.add(rdo_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, -1, -1));
+
+        buttonGroup3.add(rdo_staff);
+        rdo_staff.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        rdo_staff.setText("staff");
+        jPanel2.add(rdo_staff, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -379,7 +398,13 @@ public class JPanelNhanVien extends javax.swing.JPanel {
             rdo_nu.setSelected(true);
         }
 
-        if (tbl_nhanvien.getValueAt(a, 10).toString().equalsIgnoreCase("Đi làm")) {
+        if (tbl_nhanvien.getValueAt(a, 10).toString().equalsIgnoreCase("Admin")) {
+            rdo_admin.setSelected(true);
+        } else {
+            rdo_staff.setSelected(true);
+        }
+        
+        if (tbl_nhanvien.getValueAt(a, 11).toString().equalsIgnoreCase("Đi làm")) {
             rdo_dilam.setSelected(true);
         } else {
             rdo_nghiviec.setSelected(true);
@@ -412,8 +437,9 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         mol.setRowCount(0);
         for (NhanVien nv : list) {
             String tt = nv.getTrangThai() == 1 ? "Đi làm" : "Nghỉ việc";
+            String role = nv.getIdChucVu() == 2 ? "Admin" : "Staff";
             mol.addRow(new Object[]{nv.getId(), nv.getMa(), nv.getTen(), nv.getNgaySinh(),
-                nv.getGioiTinh(), nv.getSdt(), nv.getDiaChi(), nv.getMatKhau(), nv.getNgayTao(), nv.getNgayNhap(), tt});
+                nv.getGioiTinh(), nv.getSdt(), nv.getDiaChi(), nv.getMatKhau(), nv.getNgayTao(), nv.getNgayNhap(), role, tt});
         }
     }
 
@@ -441,7 +467,14 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         } else {
             tt = 0;
         }
-        NhanVien nv = new NhanVien(ma, ten, dateFormat.format(selectedDate), gt, sdt, diaChi, matKhau, date.format(DateTimeFormatter.ISO_DATE), date.format(DateTimeFormatter.ISO_DATE), tt);
+        
+        int role;
+        if(rdo_admin.isSelected()) {
+            role = 2;
+        } else {
+            role = 3;
+        }
+        NhanVien nv = new NhanVien(ma, ten, dateFormat.format(selectedDate), gt, sdt, diaChi, matKhau, date.format(DateTimeFormatter.ISO_DATE), date.format(DateTimeFormatter.ISO_DATE), tt, role);
         int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
 
         if (cf == JOptionPane.YES_OPTION) {
@@ -479,7 +512,14 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         } else {
             tt = 0;
         }
-        NhanVien nv = new NhanVien(ma, ten, dateFormat.format(selectedDate), gt, sdt, diaChi, matKhau, date.format(DateTimeFormatter.ISO_DATE), tt);
+        
+        int role;
+        if(rdo_admin.isSelected()) {
+            role = 2;
+        } else {
+            role = 3;
+        }
+        NhanVien nv = new NhanVien(ma, ten, dateFormat.format(selectedDate), gt, sdt, diaChi, matKhau, date.format(DateTimeFormatter.ISO_DATE), tt, role);
         int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?", "Sửa", JOptionPane.YES_NO_OPTION);
 
         if (cf == JOptionPane.YES_OPTION) {
@@ -536,7 +576,9 @@ public class JPanelNhanVien extends javax.swing.JPanel {
     private javax.swing.JButton btn_xoa;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -555,10 +597,12 @@ public class JPanelNhanVien extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JRadioButton rdo_admin;
     private javax.swing.JRadioButton rdo_dilam;
     private javax.swing.JRadioButton rdo_nam;
     private javax.swing.JRadioButton rdo_nghiviec;
     private javax.swing.JRadioButton rdo_nu;
+    private javax.swing.JRadioButton rdo_staff;
     private javax.swing.JTable tbl_nhanvien;
     private javax.swing.JTextArea txt_diachi;
     private javax.swing.JTextField txt_ma;

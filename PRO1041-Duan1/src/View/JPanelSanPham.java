@@ -613,7 +613,7 @@ public class JPanelSanPham extends javax.swing.JPanel {
         txtSLTon.setText(tbl_sanpham.getValueAt(index, 9).toString());
         txt_gianhap.setText(tbl_sanpham.getValueAt(index, 10).toString());
         txt_giaban.setText(tbl_sanpham.getValueAt(index, 11).toString());
-        if(tbl_sanpham.getValueAt(index, 14).toString().equalsIgnoreCase("Còn bán")) {
+        if (tbl_sanpham.getValueAt(index, 14).toString().equalsIgnoreCase("Còn bán")) {
             rdo_con.setSelected(true);
         } else {
             rdo_khong.setSelected(true);
@@ -670,6 +670,20 @@ public class JPanelSanPham extends javax.swing.JPanel {
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
 
+        String hang = cbo_hang.getSelectedItem().toString();
+        String cpu = cbo_cpu.getSelectedItem().toString();
+        String ram = cbo_ram.getSelectedItem().toString();
+        String ocung = cbo_ocung.getSelectedItem().toString();
+        String manhinh = cbo_manhinh.getSelectedItem().toString();
+        String vga = cbo_vga.getSelectedItem().toString();
+        String ms = cbo_mausac.getSelectedItem().toString();
+        String sp = cbo_sanpham.getSelectedItem().toString();
+
+        if (checkTrung(sp, cpu, hang, manhinh, ms, ocung, ram, vga) == 1) {
+            JOptionPane.showMessageDialog(this, "Sản phẩm đã tồn tại");
+            return;
+        }
+
         if (cf == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, ctspService.insert(getFieldInsert()));
             fillTB(ctspService.getListSanPham());
@@ -723,8 +737,14 @@ public class JPanelSanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_timkiemspxActionPerformed
 
     private void btn_khoiphucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_khoiphucActionPerformed
-        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn khôi phục không?", "Khôi phục", JOptionPane.YES_NO_OPTION);
         int index = tbl_sanphamxoa.getSelectedRow();
+
+        if (index == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm để khôi phục");
+            return;
+        }
+
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn khôi phục không?", "Khôi phục", JOptionPane.YES_NO_OPTION);
         ChiTietSanPham ctsp = new ChiTietSanPham();
         ctsp.setId(Integer.parseInt(tbl_sanphamxoa.getValueAt(index, 0).toString()));
         ctsp.setTrangThai(0);
@@ -925,6 +945,17 @@ public class JPanelSanPham extends javax.swing.JPanel {
         return null;
     }
 
+    private int checkTrung(String sp, String cpu, String hang, String manhinh, String ms, String ocung, String ram, String vga) {
+        for (ChiTietSanPhamModel ctspm : ctspService.getListSanPham()) {
+            if (ctspm.getSanPham().trim().equalsIgnoreCase(sp) && ctspm.getCpu().trim().equalsIgnoreCase(cpu)
+                    && ctspm.getHang().trim().equalsIgnoreCase(hang) && ctspm.getManHinh().trim().equalsIgnoreCase(manhinh)
+                    && ctspm.getMauSac().trim().equalsIgnoreCase(ms) && ctspm.getoCung().trim().equalsIgnoreCase(ocung)
+                    && ctspm.getRam().trim().equalsIgnoreCase(ram) && ctspm.getVga().trim().equalsIgnoreCase(vga)) {
+                return 1;
+            }
+        }
+        return 0;
+    }
 //    private boolean checkValidate() {
 //        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
 //        Matcher ma = p.matcher(txtMa.getText());

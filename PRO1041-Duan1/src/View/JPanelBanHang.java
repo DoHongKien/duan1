@@ -17,6 +17,7 @@ import Repository.ChiTietHoaDonRepository;
 import Repository.GioHangRepository;
 import Service.BanHangService;
 import Service.ChiTietGioHangService;
+import Service.ChiTietHoaDonService;
 import Service.ChiTietSanPhamService;
 import Service.KhachHangService;
 import Service.KhuyenMaiService;
@@ -51,7 +52,7 @@ public class JPanelBanHang extends javax.swing.JPanel {
     ChiTietGioHangService ctghService = new ChiTietGioHangService();
     List<ChiTietGioHangModel> listCTGH = ctghService.getAllCTGH();
     NhanVienService nhanVienService = new NhanVienService();
-    ChiTietHoaDonRepository cthdr = new ChiTietHoaDonRepository();
+    ChiTietHoaDonService cthdService = new ChiTietHoaDonService();
     KhuyenMaiService khuyenMaiService = new KhuyenMaiService();
 
     DefaultTableModel defaultTableModelSanPham;
@@ -388,6 +389,7 @@ public class JPanelBanHang extends javax.swing.JPanel {
 
         txt_giamgia.setEditable(false);
         txt_giamgia.setBackground(new java.awt.Color(255, 255, 255));
+        txt_giamgia.setText("0");
 
         chk_khachvanglai.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         chk_khachvanglai.setText("Khách vãng lai");
@@ -529,15 +531,15 @@ public class JPanelBanHang extends javax.swing.JPanel {
 //                }
 //            }
 //        } else {
-            ChiTietSanPham ctsp1 = ctspService.getDonGiaById(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim()));
-            ChiTietGioHang ctgh = new ChiTietGioHang();
-            ctgh.setIdCTSP(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim()));
-            ctgh.setSoLuong(1);
-            ctgh.setDonGia(ctsp1.getGiaBan());
-            ctgh.setNgayTao(localDate.format(DateTimeFormatter.ISO_DATE));
-            ctgh.setNgayNhap(localDate.format(DateTimeFormatter.ISO_DATE));
-            ctgh.setTrangThai(1);
-            ctghService.insert(ctgh);
+        ChiTietSanPham ctsp1 = ctspService.getDonGiaById(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim()));
+        ChiTietGioHang ctgh = new ChiTietGioHang();
+        ctgh.setIdCTSP(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim()));
+        ctgh.setSoLuong(1);
+        ctgh.setDonGia(ctsp1.getGiaBan());
+        ctgh.setNgayTao(localDate.format(DateTimeFormatter.ISO_DATE));
+        ctgh.setNgayNhap(localDate.format(DateTimeFormatter.ISO_DATE));
+        ctgh.setTrangThai(1);
+        ctghService.insert(ctgh);
 //        }
 
         double tongTien = 0;
@@ -558,7 +560,7 @@ public class JPanelBanHang extends javax.swing.JPanel {
     private void btn_xoagiohangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoagiohangActionPerformed
         int index = tbl_giohang.getSelectedRow();
         boolean result = ctghService.delete(Integer.parseInt(tbl_giohang.getValueAt(index, 0).toString()));
-        if(result) {
+        if (result) {
             JOptionPane.showMessageDialog(this, "Xóa thành công sản phẩm khỏi giỏ hàng");
         } else {
             JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi xóa sản phẩm khỏi giỏ hàng");
@@ -596,15 +598,13 @@ public class JPanelBanHang extends javax.swing.JPanel {
                 if (get.getTrangThai() == 1) {
                     cthd.setIdCtsp(get.getIdCTSP());
                     cthd.setIdHoaDon(Integer.parseInt(txt_mahoadon.getText().trim()));
-                    if (!txt_giamgia.getText().trim().equalsIgnoreCase("0")) {
-                        cthd.setIdKhuyenMai(khuyenMaiService.getIdByGiaTri(Integer.parseInt(txt_giamgia.getText().trim())));
-                    }
+                    cthd.setIdKhuyenMai(khuyenMaiService.getIdByGiaTri(Integer.parseInt(txt_giamgia.getText().trim())));
                     cthd.setSoLuong(get.getSoLuong());
-                    cthd.setDonGia(get.getSoLuong() * get.getDonGia());
+                    cthd.setDonGia(Double.valueOf(txt_tienphaitra.getText().trim()));
                     cthd.setNgayTao(localDate.format(DateTimeFormatter.ISO_DATE));
                     cthd.setNgayNhap(localDate.format(DateTimeFormatter.ISO_DATE));
                     cthd.setGhiChu(txt_ghichu.getText().trim());
-                    if (cthdr.insertCTHD(cthd, Integer.parseInt(txt_giamgia.getText().trim()))) {
+                    if (cthdService.insertCTHD(cthd)) {
                         System.out.println("thanh cong");
                     } else {
                         System.out.println("that bai");
@@ -829,7 +829,7 @@ public class JPanelBanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_hoadonchoActionPerformed
 
     private void tbl_sanphamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_sanphamMouseClicked
-        
+
     }//GEN-LAST:event_tbl_sanphamMouseClicked
 
     private void tbl_hoadonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_hoadonMouseClicked
@@ -872,7 +872,10 @@ public class JPanelBanHang extends javax.swing.JPanel {
         defaultTableModelSanPham = (DefaultTableModel) tbl_sanpham.getModel();
         defaultTableModelSanPham.setRowCount(0);
         for (ChiTietSanPhamModel ct : list) {
-            defaultTableModelSanPham.addRow(new Object[]{ct.getId(), "Laptop " + ct.getSanPham() + " " + ct.getMauSac() + " " + ct.getVga() + " " + ct.getCpu() + " " + ct.getRam() + " " + ct.getoCung(), ct.getGiaBan(), ct.getSlTon()});
+            if (ct.getTrangThai() == 0) {
+                defaultTableModelSanPham.addRow(new Object[]{ct.getId(), "Laptop " + ct.getSanPham() + " " + ct.getMauSac() + " "
+                    + ct.getVga() + " " + ct.getCpu() + " " + ct.getRam() + " " + ct.getoCung(), ct.getGiaBan(), ct.getSlTon()});
+            }
         }
     }
 

@@ -863,9 +863,26 @@ public class JPanelBanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_chk_khachvanglaiItemStateChanged
 
     private void tbl_giohangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_giohangMouseClicked
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn chọn serial cho sản phẩm?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+
         int index = tbl_giohang.getSelectedRow();
-        View_Serial view_Serial = new View_Serial(Integer.parseInt(tbl_giohang.getValueAt(index, 1).toString()));
-        view_Serial.setVisible(true);
+        if (confirm == JOptionPane.YES_OPTION) {
+            View_Serial view_Serial = new View_Serial(Integer.parseInt(tbl_giohang.getValueAt(index, 1).toString()));
+            view_Serial.setVisible(true);
+        } else if (confirm == JOptionPane.NO_OPTION) {
+            int confirmDelete = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa sản phẩm khỏi giỏ hàng không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (confirmDelete == JOptionPane.YES_OPTION) {
+                boolean result = ctghService.delete(Integer.parseInt(tbl_giohang.getValueAt(index, 0).toString()));
+                if (result) {
+                    JOptionPane.showMessageDialog(this, "Xóa thành công sản phẩm khỏi giỏ hàng");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi xóa sản phẩm khỏi giỏ hàng");
+                }
+                fillGioHang(ctghService.getAllCTGH());
+                clearForm();
+            }
+        }
+
     }//GEN-LAST:event_tbl_giohangMouseClicked
 
     private void fillSanPham(List<ChiTietSanPhamModel> list) {

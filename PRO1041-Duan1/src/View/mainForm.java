@@ -475,7 +475,7 @@ public class mainForm extends javax.swing.JFrame {
 
     private void btn_reportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_reportMouseClicked
         bar(jLabel17);
-//        showForm(new JPanelDoanhThu());
+        showForm(new JPanelDoanhThu());
     }//GEN-LAST:event_btn_reportMouseClicked
 
     private void btn_reportMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_reportMouseEntered

@@ -42,6 +42,11 @@ public class ChiTietHoaDonService implements IChiTietHoaDonService {
     }
 
     @Override
+    public List<HoaDonModel> filterHoaDonByDate(String date, String startDate, String endDate) {
+        return cthdRepository.filterHoaDonByDate(date, startDate, endDate);
+    }
+
+    @Override
     public boolean insertCTHD(ChiTietHoaDon cthd) {
         return cthdRepository.insertCTHD(cthd);
     }

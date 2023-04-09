@@ -136,7 +136,7 @@ public class ChiTietSanPhamRepository implements IChiTietSanPhamRepository {
     @Override
     public boolean update(ChiTietSanPham sp) {
         String sql = "update ChiTietSanPham set id_san_pham = ?, id_cpu = ?, id_hang =?, id_man_hinh = ?, id_mau_sac = ?, id_o_cung = ?, id_ram = ?, "
-                + "id_vga = ?, so_luong_ton = ?, gia_nhap = ?, gia_ban = ?, ngay_nhap = ?, trang_thai = ? where id = ?";
+                + "id_vga = ?, gia_nhap = ?, gia_ban = ?, ngay_nhap = ?, trang_thai = ? where id = ?";
         boolean f = false;
         try {
             conn = new DBConnection().getConnection();
@@ -149,12 +149,11 @@ public class ChiTietSanPhamRepository implements IChiTietSanPhamRepository {
             ps.setObject(6, sp.getIdOCung());
             ps.setObject(7, sp.getIdRam());
             ps.setObject(8, sp.getIdVga());
-            ps.setObject(9, sp.getSlTon());
-            ps.setObject(10, sp.getGiaNhap());
-            ps.setObject(11, sp.getGiaBan());
-            ps.setObject(12, sp.getNgayNhap());
-            ps.setObject(13, sp.getTrangThai());
-            ps.setObject(14, sp.getId());
+            ps.setObject(9, sp.getGiaNhap());
+            ps.setObject(10, sp.getGiaBan());
+            ps.setObject(11, sp.getNgayNhap());
+            ps.setObject(12, sp.getTrangThai());
+            ps.setObject(13, sp.getId());
             int result = ps.executeUpdate();
 
             if (result == 1) {

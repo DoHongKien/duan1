@@ -15,6 +15,8 @@ import java.util.List;
 public interface NhanVienInterface {
 
     public List<NhanVien> getListDb();
+    
+    public List<NhanVien> getNhanVienByName(String name);
 
     public NhanVien getDB(String ma);
     
@@ -25,6 +27,8 @@ public interface NhanVienInterface {
     public boolean create(NhanVien nv);
 
     public boolean update(NhanVien nv);
+    
+    public boolean updateMatKhau(NhanVien nv);
 
     public boolean delete(NhanVien nv);
 }

@@ -16,8 +16,10 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.util.regex.Pattern;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.text.JTextComponent;
 
 /**
  *
@@ -28,10 +30,6 @@ public class JPanelHoaDon extends javax.swing.JPanel {
     DefaultTableModel defaultTableModelHoaDon;
     DefaultTableModel defaultTableModelSanPham;
     ChiTietHoaDonService chiTietHoaDonService = new ChiTietHoaDonService();
-    private static final Pattern DATE_PATTERN = Pattern.compile("^((2000|2400|2800|(19|2[0-9])(0[48]|[2468][048]|[13579][26]))-02-29)$"
-            + "|^(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))$"
-            + "|^(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))$"
-            + "|^(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30))$");
 
     public JPanelHoaDon() {
         initComponents();
@@ -44,6 +42,8 @@ public class JPanelHoaDon extends javax.swing.JPanel {
             cbo_date.addItem(date1);
         }
         fillHoaDon(chiTietHoaDonService.getListHoaDon());
+        disableTextField((JTextComponent) txt_startdate.getDateEditor().getUiComponent());
+        disableTextField((JTextComponent) txt_enddate.getDateEditor().getUiComponent());
     }
 
     /**
@@ -74,6 +74,7 @@ public class JPanelHoaDon extends javax.swing.JPanel {
         btn_inhoadon = new javax.swing.JButton();
         txt_startdate = new com.toedter.calendar.JDateChooser();
         txt_enddate = new com.toedter.calendar.JDateChooser();
+        btn_loc = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1070, 680));
@@ -151,7 +152,7 @@ public class JPanelHoaDon extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Tên sản phẩm", "Giá bán", "Khuyến mãi (%)", "Số lượng", "Đơn giá"
+                "Tên sản phẩm", "Giá bán", "Khuyến mãi", "Số lượng", "Đơn giá"
             }
         ));
         jScrollPane2.setViewportView(tbl_sanpham);
@@ -175,7 +176,7 @@ public class JPanelHoaDon extends javax.swing.JPanel {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Đến");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 40, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 40, -1, -1));
 
         btn_inhoadon.setBackground(new java.awt.Color(147, 214, 255));
         btn_inhoadon.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -187,8 +188,23 @@ public class JPanelHoaDon extends javax.swing.JPanel {
             }
         });
         jPanel2.add(btn_inhoadon, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, -1, -1));
-        jPanel2.add(txt_startdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, 120, -1));
-        jPanel2.add(txt_enddate, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 70, 130, -1));
+
+        txt_startdate.setDateFormatString("yyyy-MM-dd");
+        jPanel2.add(txt_startdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, 130, -1));
+
+        txt_enddate.setDateFormatString("yyyy-MM-dd");
+        jPanel2.add(txt_enddate, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 70, 120, -1));
+
+        btn_loc.setBackground(new java.awt.Color(147, 214, 255));
+        btn_loc.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_loc.setForeground(new java.awt.Color(255, 255, 255));
+        btn_loc.setText("Lọc");
+        btn_loc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_locActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_loc, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 70, 50, -1));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 55, 1070, 620));
     }// </editor-fold>//GEN-END:initComponents
@@ -204,7 +220,7 @@ public class JPanelHoaDon extends javax.swing.JPanel {
 
     private void btn_inhoadonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inhoadonActionPerformed
         int index = tbl_hoadon.getSelectedRow();
-        if (index < 0) {
+        if (index == -1) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn hóa đơn để in");
             return;
         }
@@ -228,7 +244,6 @@ public class JPanelHoaDon extends javax.swing.JPanel {
             String tenKH = tbl_hoadon.getValueAt(index, 2).toString();
             String ngayTao = tbl_hoadon.getValueAt(index, 4).toString();
             String ngayThanhToan = tbl_hoadon.getValueAt(index, 5).toString();
-            double tongTien = Double.parseDouble(tbl_hoadon.getValueAt(index, 6).toString());
 
             PdfPTable tbl3 = new PdfPTable(3);
             PdfPTable tblTenCuaHang = new PdfPTable(1);
@@ -383,6 +398,23 @@ public class JPanelHoaDon extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txt_timkiemKeyPressed
 
+    private void btn_locActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_locActionPerformed
+        String ngay = (String) cbo_date.getSelectedItem();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date start = txt_startdate.getDate();
+        Date end = txt_enddate.getDate();
+
+        String ngay1 = ngay.equalsIgnoreCase("Ngày Tạo") ? "ngay_tao" : "ngay_thanh_toan";
+        fillHoaDon(chiTietHoaDonService.filterHoaDonByDate(ngay1, sdf.format(start), sdf.format(end)));
+    }//GEN-LAST:event_btn_locActionPerformed
+
+    private static void disableTextField(JTextComponent textComponent) {
+        textComponent.setEditable(false);
+        textComponent.setFocusable(false);
+        textComponent.setBackground(null);
+        textComponent.setBorder(null);
+    }
+
     private void fillHoaDon(List<HoaDonModel> list) {
         defaultTableModelHoaDon = (DefaultTableModel) tbl_hoadon.getModel();
         defaultTableModelHoaDon.setRowCount(0);
@@ -438,6 +470,7 @@ public class JPanelHoaDon extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_inhoadon;
+    private javax.swing.JButton btn_loc;
     private javax.swing.JComboBox<String> cbo_date;
     private javax.swing.JComboBox<String> cbo_trangthai;
     private javax.swing.JLabel jLabel1;

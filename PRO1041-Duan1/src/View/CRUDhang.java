@@ -24,7 +24,6 @@ public class CRUDhang extends javax.swing.JFrame {
     HangService hS = new HangService();
     List<Hang> list = new ArrayList<>();
     DefaultTableModel defaultTableModel;
-    JPanelSanPham jPanelSanPham = new JPanelSanPham();
 
     public CRUDhang() {
         initComponents();
@@ -321,7 +320,6 @@ public class CRUDhang extends javax.swing.JFrame {
         if (cf == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, hS.insert(getFieldInsert()));
             fillTable(hS.getListHang());
-            jPanelSanPham.fillComboBox();
         }
     }//GEN-LAST:event_btn_themActionPerformed
 

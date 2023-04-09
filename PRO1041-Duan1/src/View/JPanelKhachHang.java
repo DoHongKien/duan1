@@ -21,6 +21,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.JTextComponent;
 
 /**
  *
@@ -29,18 +30,13 @@ import javax.swing.table.DefaultTableModel;
 public class JPanelKhachHang extends javax.swing.JPanel {
 
     KhachHangService khS = new KhachHangService();
-    List<KhachHang> list = new ArrayList<>();
-    int index = 0;
-    private static final Pattern DATE_PATTERN = Pattern.compile("^((2000|2400|2800|(19|2[0-9])(0[48]|[2468][048]|[13579][26]))-02-29)$"
-            + "|^(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))$"
-            + "|^(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))$"
-            + "|^(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30))$");
 
     public JPanelKhachHang() {
         initComponents();
-        loadTBV();
+        loadTBV(khS.getListDB());
         btn_sua.setEnabled(false);
         btn_xoa.setEnabled(false);
+        disableTextField((JTextComponent) txt_ngaysinh.getDateEditor().getUiComponent());
     }
 
     /**
@@ -174,16 +170,16 @@ public class JPanelKhachHang extends javax.swing.JPanel {
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 1030, 207));
 
-        jSeparator1.setForeground(new java.awt.Color(186, 79, 84));
+        jSeparator1.setForeground(new java.awt.Color(147, 214, 255));
         jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 174, 12));
 
-        jSeparator2.setForeground(new java.awt.Color(186, 79, 84));
+        jSeparator2.setForeground(new java.awt.Color(147, 214, 255));
         jPanel3.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 174, 12));
 
-        jSeparator4.setForeground(new java.awt.Color(186, 79, 84));
+        jSeparator4.setForeground(new java.awt.Color(147, 214, 255));
         jPanel3.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 174, 10));
 
-        jSeparator6.setForeground(new java.awt.Color(186, 79, 84));
+        jSeparator6.setForeground(new java.awt.Color(147, 214, 255));
         jPanel3.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 60, 174, 10));
 
         btn_them.setBackground(new java.awt.Color(147, 214, 255));
@@ -248,6 +244,8 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         rdo_co.setSelected(true);
         rdo_co.setText("Có");
         jPanel3.add(rdo_co, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, -1, -1));
+
+        txt_ngaysinh.setDateFormatString("yyyy-MM-dd");
         jPanel3.add(txt_ngaysinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 180, -1));
 
         add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, 618));
@@ -273,14 +271,18 @@ public class JPanelKhachHang extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
-        addKH();
+        if (checkValidateInsert()) {
+            addKH();
+        }
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
-        updateKH();
-        btn_them.setEnabled(true);
-        btn_sua.setEnabled(false);
-        btn_xoa.setEnabled(false);
+        if (checkValidateUpdate()) {
+            updateKH();
+            btn_them.setEnabled(true);
+            btn_sua.setEnabled(false);
+            btn_xoa.setEnabled(false);
+        }
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
@@ -304,6 +306,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
         txt_ma.setEditable(true);
         txt_ma.setText("");
         txt_ten.setText("");
+        txt_ngaysinh.setDate(null);
         txt_sdt.setText("");
         txt_diachi.setText("");
         rdo_nam.setSelected(true);
@@ -333,7 +336,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
             rdo_nu.setSelected(true);
         }
 
-        if (tbl_khachhang.getValueAt(a, 9).toString().equalsIgnoreCase("Có")) {
+        if (tbl_khachhang.getValueAt(a, 9).toString().equalsIgnoreCase("Còn hoạt động")) {
             rdo_co.setSelected(true);
         } else {
             rdo_khong.setSelected(true);
@@ -341,15 +344,22 @@ public class JPanelKhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_tbl_khachhangMouseClicked
 
     private void txt_timkiemKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_timkiemKeyPressed
-//        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-//            if (txt_timkiem.getText().isEmpty()) {
-//                fillTable(khachHangService.getListKhachHang());
-//            }
-//            fillTable(khachHangService.getListKHByMa(txt_timkiem.getText()));
-//        }
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (txt_timkiem.getText().isEmpty()) {
+                loadTBV(khS.getListDB());
+            }
+            loadTBV(khS.getListKHByName(txt_timkiem.getText().trim()));
+        }
     }//GEN-LAST:event_txt_timkiemKeyPressed
-    private void loadTBV() {
-        list = khS.getListDB();
+
+    private static void disableTextField(JTextComponent textComponent) {
+        textComponent.setEditable(false);
+        textComponent.setFocusable(false);
+        textComponent.setBackground(null);
+        textComponent.setBorder(null);
+    }
+
+    private void loadTBV(List<KhachHang> list) {
         DefaultTableModel mol = (DefaultTableModel) tbl_khachhang.getModel();
         mol.setRowCount(0);
         for (KhachHang kh : list) {
@@ -397,7 +407,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
             boolean result = khS.create(khachHang);
             if (result) {
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
-                loadTBV();
+                loadTBV(khS.getListDB());
             } else {
                 JOptionPane.showMessageDialog(this, "Thêm thất bại");
             }
@@ -434,7 +444,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
             boolean result = khS.update(khachHang);
             if (result) {
                 JOptionPane.showMessageDialog(this, "Sửa thành công");
-                loadTBV();
+                loadTBV(khS.getListDB());
             } else {
                 JOptionPane.showMessageDialog(this, "Sửa thất bại");
             }
@@ -442,31 +452,126 @@ public class JPanelKhachHang extends javax.swing.JPanel {
     }
 
     private void deleteKH() {
-        int index = tbl_khachhang.getSelectedRow();
         String ma = txt_ma.getText().trim();
         KhachHang kh = new KhachHang();
         kh.setMa(ma);
         boolean result = khS.delete(kh);
         if (result == true) {
             JOptionPane.showMessageDialog(this, "Xóa thành công");
-            loadTBV();
+            loadTBV(khS.getListDB());
         } else {
             JOptionPane.showMessageDialog(this, "Xóa thất bại");
         }
     }
 
-    private void mouseClickTBV(int index) {
-        list = khS.getListDB();
-        KhachHang kh = list.get(index);
-        txt_ma.setText(kh.getMa());
-        txt_ten.setText(kh.getTen());
-        txt_sdt.setText(kh.getSdt());
-        txt_diachi.setText(kh.getDiaChi());
-        if (kh.getGioiTinh().equalsIgnoreCase("Nam")) {
-            rdo_nam.setSelected(true);
-        } else {
-            rdo_nu.setSelected(true);
+    private boolean checkValidateInsert() {
+        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Matcher ma = p.matcher(txt_ma.getText());
+        Matcher ten = p.matcher(txt_ten.getText());
+
+        JDateChooser ngayTao = new JDateChooser();
+        ngayTao.setDate(txt_ngaysinh.getDate());
+        Date selectedDate = ngayTao.getDate();
+
+        if (txt_ma.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mã không được trống");
+            txt_ma.requestFocus();
+            return false;
+        } else if (ma.find()) {
+            JOptionPane.showMessageDialog(this, "Mã không được chứa ký tự đặc biệt");
+            txt_ma.requestFocus();
+            return false;
         }
+
+        if (checkMa(txt_ma.getText().trim()) == 1) {
+            JOptionPane.showMessageDialog(this, "Mã khách hàng đã tồn tại");
+            txt_ma.requestFocus();
+            return false;
+        }
+
+        if (txt_ten.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên khách hàng không được trống");
+            txt_ten.requestFocus();
+            return false;
+        } else if (ten.find()) {
+            JOptionPane.showMessageDialog(this, "Tên không được chứa ký tự đặc biệt");
+            txt_ten.requestFocus();
+            return false;
+        }
+
+        if (selectedDate == null) {
+            JOptionPane.showMessageDialog(this, "Ngày sinh không được trống");
+            txt_ngaysinh.requestFocus();
+            return false;
+        }
+
+        if (txt_sdt.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại không được trống");
+            txt_sdt.requestFocus();
+            return false;
+        } else if (!txt_sdt.getText().trim().matches("0[0-9]{9}")) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại không đúng định dạng");
+            txt_sdt.requestFocus();
+            return false;
+        }
+
+        if (txt_diachi.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Địa chỉ không được trống");
+            txt_diachi.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkValidateUpdate() {
+        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Matcher ten = p.matcher(txt_ten.getText());
+
+        JDateChooser ngayTao = new JDateChooser();
+        ngayTao.setDate(txt_ngaysinh.getDate());
+        Date selectedDate = ngayTao.getDate();
+
+        if (txt_ten.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên khách hàng không được trống");
+            txt_ten.requestFocus();
+            return false;
+        } else if (ten.find()) {
+            JOptionPane.showMessageDialog(this, "Tên không được chứa ký tự đặc biệt");
+            txt_ten.requestFocus();
+            return false;
+        }
+
+        if (selectedDate == null) {
+            JOptionPane.showMessageDialog(this, "Ngày sinh không được trống");
+            txt_ngaysinh.requestFocus();
+            return false;
+        }
+
+        if (txt_sdt.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại không được trống");
+            txt_sdt.requestFocus();
+            return false;
+        } else if (!txt_sdt.getText().trim().matches("0[0-9]{9}")) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại không đúng định dạng");
+            txt_sdt.requestFocus();
+            return false;
+        }
+
+        if (txt_diachi.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Địa chỉ không được trống");
+            txt_diachi.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    private int checkMa(String ma) {
+        for (KhachHang kh : khS.getListDB()) {
+            if (kh.getMa().trim().equalsIgnoreCase(ma)) {
+                return 1;
+            }
+        }
+        return 2;
     }
 
 

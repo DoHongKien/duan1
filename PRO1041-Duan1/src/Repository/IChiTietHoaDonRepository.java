@@ -23,5 +23,7 @@ public interface IChiTietHoaDonRepository {
     
     public List<HoaDonModel> filterHoaDonByNameTT(int trangThai);
     
+    public List<HoaDonModel> filterHoaDonByDate(String date, String startDate, String endDate);
+    
     public boolean insertCTHD(ChiTietHoaDon cthd);
 }

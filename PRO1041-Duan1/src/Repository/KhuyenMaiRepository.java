@@ -93,7 +93,7 @@ public class KhuyenMaiRepository implements IKhuyenMaiRepository {
     @Override
     public Boolean insert(KhuyenMai km) {
         boolean f = false;
-        String sql = "insert into KhuyenMai(ma, gia_tri, ngay_tao, ngay_het_han, ngay_nhap, trang_thai, dieu_kien) values (?,?,?,?,?,?,?)";
+        String sql = "insert into KhuyenMai(ma, gia_tri, ngay_tao, ngay_het_han, trang_thai, dieu_kien) values (?,?,?,?,?,?)";
 
         try {
             conn = new DBConnection().getConnection();
@@ -102,9 +102,8 @@ public class KhuyenMaiRepository implements IKhuyenMaiRepository {
             ps.setInt(2, km.getGiaTri());
             ps.setString(3, km.getNgayTao());
             ps.setString(4, km.getNgayHetHan());
-            ps.setString(5, km.getNgayNhap());
-            ps.setInt(6, km.getTrangThai());
-            ps.setInt(7, km.getDieuKien());
+            ps.setInt(5, km.getTrangThai());
+            ps.setInt(6, km.getDieuKien());
             int result = ps.executeUpdate();
 
             if (result == 1) {
@@ -163,9 +162,54 @@ public class KhuyenMaiRepository implements IKhuyenMaiRepository {
         return f;
     }
 
-    public static void main(String[] args) {
-//        LocalDate localDate = LocalDate.now();
-//        System.out.println(localDate.format(DateTimeFormatter.ISO_DATE));
-        System.out.println(new KhuyenMaiRepository().getIdByGiaTri(10000));
+    @Override
+    public List<KhuyenMai> fiterByStartDate(String date) {
+        String select = "select * from KhuyenMai where ngay_tao > '" + date + "'";
+        List<KhuyenMai> list = new ArrayList<>();
+        try {
+            conn = new DBConnection().getConnection();
+            PreparedStatement ps = conn.prepareStatement(select);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new KhuyenMai(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+        return list;
+    }
+
+    @Override
+    public List<KhuyenMai> fiterByEndDate(String date) {
+        String select = "select * from KhuyenMai where ngay_het_han < '" + date + "'";
+        List<KhuyenMai> list = new ArrayList<>();
+        try {
+            conn = new DBConnection().getConnection();
+            PreparedStatement ps = conn.prepareStatement(select);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new KhuyenMai(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+        return list;
+    }
+
+    @Override
+    public List<KhuyenMai> fiterByBetweenDate(String date) {
+        String select = "select * from KhuyenMai where ngay_tao <= '" + date + "' AND ngay_het_han >= '" + date + "'";
+        List<KhuyenMai> list = new ArrayList<>();
+        try {
+            conn = new DBConnection().getConnection();
+            PreparedStatement ps = conn.prepareStatement(select);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new KhuyenMai(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+        return list;
     }
 }

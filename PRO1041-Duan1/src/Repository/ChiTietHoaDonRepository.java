@@ -122,6 +122,28 @@ public class ChiTietHoaDonRepository implements IChiTietHoaDonRepository {
     }
 
     @Override
+    public List<HoaDonModel> filterHoaDonByDate(String date, String startDate, String endDate) {
+        String sql = "Select h.ma, n.ten, k.ten, k.sdt, h.ngay_tao, h.ngay_thanh_toan, h.tong_tien, h.trang_thai From HoaDon "
+                + "h join NhanVien n on h.id_nhan_vien = n.Id join KhachHang k on h.id_khach_hang = k.id where h." + date + " between '" + startDate + "' and '" + endDate + "'";
+        List<HoaDonModel> list = new ArrayList<>();
+
+        try {
+            conn = new DBConnection().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                HoaDonModel hoaDonModel = new HoaDonModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5),
+                        rs.getDate(6), rs.getDouble(7), rs.getInt(8));
+                list.add(hoaDonModel);
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return list;
+    }
+
+    @Override
     public boolean insertCTHD(ChiTietHoaDon cthd) {
         String sql = "insert into ChiTietHoaDon(id_ctsp, id_hoa_don, id_khuyen_mai, so_luong, don_gia, ngay_tao, "
                 + "ngay_nhap, ghi_chu) values (?,?,?,?,?,?,?,?)";

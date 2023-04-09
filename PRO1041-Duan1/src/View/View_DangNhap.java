@@ -219,10 +219,11 @@ public class View_DangNhap extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "Login succesfully!");
                         for (RoleModel roleModel : listRM) {
                             if (roleModel.getRole().trim().equalsIgnoreCase("admin")) {
-                                mainForm form = new mainForm(roleModel.getMa().trim());
+                                mainForm form = new mainForm(roleModel.getMa().trim(), 1);
                                 form.setVisible(true);
                             } else {
-                                JOptionPane.showMessageDialog(this, "I'm Staff");
+                                mainForm form = new mainForm(roleModel.getMa().trim(), 0);
+                                form.setVisible(true);
                             }
                         }
                         this.dispose();
@@ -234,7 +235,6 @@ public class View_DangNhap extends javax.swing.JFrame {
                 }
             }
         }
-
     }//GEN-LAST:event_btn_signinMouseClicked
 
     private void btn_signinMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_signinMouseEntered
@@ -270,16 +270,17 @@ public class View_DangNhap extends javax.swing.JFrame {
                     if (!txt_username.getText().isEmpty() && txt_password.getPassword().length > 0) {
                         if (!listRM.isEmpty()) {
 //                        JOptionPane.showMessageDialog(this, "Login succesfully!");
-                        for (RoleModel roleModel : listRM) {
-                            if (roleModel.getRole().trim().equalsIgnoreCase("admin")) {
-                                mainForm form = new mainForm(roleModel.getMa().trim());
-                                form.setVisible(true);
-                            } else {
-                                JOptionPane.showMessageDialog(this, "I'm Staff");
+                            for (RoleModel roleModel : listRM) {
+                                if (roleModel.getRole().trim().equalsIgnoreCase("admin")) {
+                                    mainForm form = new mainForm(roleModel.getMa().trim(), 1);
+                                    form.setVisible(true);
+                                } else {
+                                    mainForm form = new mainForm(roleModel.getMa().trim(), 0);
+                                    form.setVisible(true);
+                                }
                             }
+                            this.dispose();
                         }
-                        this.dispose();
-                    }
                     } else {
                         JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin");
                     }

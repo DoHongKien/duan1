@@ -21,11 +21,11 @@ public interface IKhuyenMaiService {
 
 //    public List<KhuyenMai> locByTT(int tt);
 //    
-//    public List<KhuyenMai> fiterByStartDate(String date);
-//    
-//    public List<KhuyenMai> fiterByEndDate(String date);
-//    
-//    public List<KhuyenMai> fiterByBetweenDate(String date);
+    public List<KhuyenMai> fiterByStartDate(String date);
+    
+    public List<KhuyenMai> fiterByEndDate(String date);
+    
+    public List<KhuyenMai> fiterByBetweenDate(String date);
     public String insert(KhuyenMai km);
 
     public String update(KhuyenMai km);

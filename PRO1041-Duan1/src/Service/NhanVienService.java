@@ -23,6 +23,11 @@ public class NhanVienService implements NhanVienServiceInterface {
     }
 
     @Override
+    public List<NhanVien> getNhanVienByName(String name) {
+        return nvR.getNhanVienByName(name);
+    }
+
+    @Override
     public NhanVien getDB(String ma) {
         return nvR.getDB(ma);
     }
@@ -45,6 +50,15 @@ public class NhanVienService implements NhanVienServiceInterface {
     @Override
     public boolean update(NhanVien nv) {
         return nvR.update(nv);
+    }
+
+    @Override
+    public String updateMatKhau(NhanVien nv) {
+        if (nvR.updateMatKhau(nv)) {
+            return "Đổi mật khẩu thành công";
+        } else {
+            return "Đổi mật khẩu thất bại";
+        }
     }
 
     @Override

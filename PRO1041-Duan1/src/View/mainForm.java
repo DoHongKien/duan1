@@ -11,12 +11,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author quyen
  */
 public class mainForm extends javax.swing.JFrame {
+
+    int role = 1;
 
     public mainForm() {
         initComponents();
@@ -33,11 +36,13 @@ public class mainForm extends javax.swing.JFrame {
 
     }
 
-    public mainForm(String username) {
+    public mainForm(String username, int role) {
         initComponents();
         txt_nhanvien.setText(username);
+        this.role = role;
         date();
         new Thread() {
+            @Override
             public void run() {
                 while (true) {
                     Date date = new Date();
@@ -101,8 +106,15 @@ public class mainForm extends javax.swing.JFrame {
         lbl_time = new javax.swing.JLabel();
         lbl_date = new javax.swing.JLabel();
         txt_nhanvien = new javax.swing.JLabel();
+        btn_doimatkhau = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        btn_dangxuat = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         pnlCard3 = new javax.swing.JPanel();
         pnlCard1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         pnlCard4 = new javax.swing.JPanel();
         pnlCard5 = new javax.swing.JPanel();
         pnlCard6 = new javax.swing.JPanel();
@@ -133,18 +145,32 @@ public class mainForm extends javax.swing.JFrame {
                 btn_homeMouseExited(evt);
             }
         });
-        btn_home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
         jLabel2.setOpaque(true);
-        btn_home.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 5, 50));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Trang Chủ");
-        btn_home.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
 
-        jPanel2.add(btn_home, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 180, 50));
+        javax.swing.GroupLayout btn_homeLayout = new javax.swing.GroupLayout(btn_home);
+        btn_home.setLayout(btn_homeLayout);
+        btn_homeLayout.setHorizontalGroup(
+            btn_homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_homeLayout.createSequentialGroup()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(jLabel3))
+        );
+        btn_homeLayout.setVerticalGroup(
+            btn_homeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(btn_homeLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel3))
+        );
+
+        jPanel2.add(btn_home, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 180, 50));
 
         btn_sell.setBackground(new java.awt.Color(147, 214, 255));
         btn_sell.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -159,17 +185,31 @@ public class mainForm extends javax.swing.JFrame {
                 btn_sellMouseExited(evt);
             }
         });
-        btn_sell.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setBackground(new java.awt.Color(102, 102, 102));
-        btn_sell.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 5, 50));
 
         jLabel32.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(255, 255, 255));
         jLabel32.setText("Bán hàng");
-        btn_sell.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
 
-        jPanel2.add(btn_sell, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 180, 50));
+        javax.swing.GroupLayout btn_sellLayout = new javax.swing.GroupLayout(btn_sell);
+        btn_sell.setLayout(btn_sellLayout);
+        btn_sellLayout.setHorizontalGroup(
+            btn_sellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_sellLayout.createSequentialGroup()
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(jLabel32))
+        );
+        btn_sellLayout.setVerticalGroup(
+            btn_sellLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(btn_sellLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel32))
+        );
+
+        jPanel2.add(btn_sell, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 180, 50));
 
         btn_product.setBackground(new java.awt.Color(147, 214, 255));
         btn_product.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -184,17 +224,31 @@ public class mainForm extends javax.swing.JFrame {
                 btn_productMouseExited(evt);
             }
         });
-        btn_product.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setBackground(new java.awt.Color(102, 102, 102));
-        btn_product.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 5, 50));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Sản Phẩm");
-        btn_product.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
 
-        jPanel2.add(btn_product, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 180, 50));
+        javax.swing.GroupLayout btn_productLayout = new javax.swing.GroupLayout(btn_product);
+        btn_product.setLayout(btn_productLayout);
+        btn_productLayout.setHorizontalGroup(
+            btn_productLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_productLayout.createSequentialGroup()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(jLabel9))
+        );
+        btn_productLayout.setVerticalGroup(
+            btn_productLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(btn_productLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel9))
+        );
+
+        jPanel2.add(btn_product, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 180, 50));
 
         btn_staff.setBackground(new java.awt.Color(147, 214, 255));
         btn_staff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -209,17 +263,31 @@ public class mainForm extends javax.swing.JFrame {
                 btn_staffMouseExited(evt);
             }
         });
-        btn_staff.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setBackground(new java.awt.Color(102, 102, 102));
-        btn_staff.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 5, 50));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Nhân Viên");
-        btn_staff.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
 
-        jPanel2.add(btn_staff, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 180, 50));
+        javax.swing.GroupLayout btn_staffLayout = new javax.swing.GroupLayout(btn_staff);
+        btn_staff.setLayout(btn_staffLayout);
+        btn_staffLayout.setHorizontalGroup(
+            btn_staffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_staffLayout.createSequentialGroup()
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(jLabel12))
+        );
+        btn_staffLayout.setVerticalGroup(
+            btn_staffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(btn_staffLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel12))
+        );
+
+        jPanel2.add(btn_staff, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 180, 50));
 
         btn_customer.setBackground(new java.awt.Color(147, 214, 255));
         btn_customer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -234,17 +302,31 @@ public class mainForm extends javax.swing.JFrame {
                 btn_customerMouseExited(evt);
             }
         });
-        btn_customer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel14.setBackground(new java.awt.Color(102, 102, 102));
-        btn_customer.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 5, 50));
 
         jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(255, 255, 255));
         jLabel33.setText("Khách Hàng");
-        btn_customer.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
 
-        jPanel2.add(btn_customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 180, 50));
+        javax.swing.GroupLayout btn_customerLayout = new javax.swing.GroupLayout(btn_customer);
+        btn_customer.setLayout(btn_customerLayout);
+        btn_customerLayout.setHorizontalGroup(
+            btn_customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_customerLayout.createSequentialGroup()
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(jLabel33))
+        );
+        btn_customerLayout.setVerticalGroup(
+            btn_customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(btn_customerLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel33))
+        );
+
+        jPanel2.add(btn_customer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 180, 50));
 
         btn_report.setBackground(new java.awt.Color(147, 214, 255));
         btn_report.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -259,17 +341,31 @@ public class mainForm extends javax.swing.JFrame {
                 btn_reportMouseExited(evt);
             }
         });
-        btn_report.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel17.setBackground(new java.awt.Color(102, 102, 102));
-        btn_report.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 5, 50));
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Doanh Thu");
-        btn_report.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
 
-        jPanel2.add(btn_report, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 180, 50));
+        javax.swing.GroupLayout btn_reportLayout = new javax.swing.GroupLayout(btn_report);
+        btn_report.setLayout(btn_reportLayout);
+        btn_reportLayout.setHorizontalGroup(
+            btn_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_reportLayout.createSequentialGroup()
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(jLabel18))
+        );
+        btn_reportLayout.setVerticalGroup(
+            btn_reportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(btn_reportLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel18))
+        );
+
+        jPanel2.add(btn_report, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 490, 180, 50));
 
         btn_promotion.setBackground(new java.awt.Color(147, 214, 255));
         btn_promotion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -284,17 +380,31 @@ public class mainForm extends javax.swing.JFrame {
                 btn_promotionMouseExited(evt);
             }
         });
-        btn_promotion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel21.setBackground(new java.awt.Color(102, 102, 102));
-        btn_promotion.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 5, 50));
 
         jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(255, 255, 255));
         jLabel31.setText("Khuyến Mãi");
-        btn_promotion.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
 
-        jPanel2.add(btn_promotion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 180, 50));
+        javax.swing.GroupLayout btn_promotionLayout = new javax.swing.GroupLayout(btn_promotion);
+        btn_promotion.setLayout(btn_promotionLayout);
+        btn_promotionLayout.setHorizontalGroup(
+            btn_promotionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_promotionLayout.createSequentialGroup()
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(jLabel31))
+        );
+        btn_promotionLayout.setVerticalGroup(
+            btn_promotionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(btn_promotionLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel31))
+        );
+
+        jPanel2.add(btn_promotion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 180, 50));
 
         btn_receipt.setBackground(new java.awt.Color(147, 214, 255));
         btn_receipt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -309,26 +419,40 @@ public class mainForm extends javax.swing.JFrame {
                 btn_receiptMouseExited(evt);
             }
         });
-        btn_receipt.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel15.setBackground(new java.awt.Color(102, 102, 102));
-        btn_receipt.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 5, 50));
 
         jLabel34.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(255, 255, 255));
         jLabel34.setText("Hóa Đơn");
-        btn_receipt.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, -1, -1));
 
-        jPanel2.add(btn_receipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 180, 50));
+        javax.swing.GroupLayout btn_receiptLayout = new javax.swing.GroupLayout(btn_receipt);
+        btn_receipt.setLayout(btn_receiptLayout);
+        btn_receiptLayout.setHorizontalGroup(
+            btn_receiptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_receiptLayout.createSequentialGroup()
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(jLabel34))
+        );
+        btn_receiptLayout.setVerticalGroup(
+            btn_receiptLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(btn_receiptLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel34))
+        );
+
+        jPanel2.add(btn_receipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 180, 50));
 
         jLabel23.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setText("SevenT Store");
-        jPanel2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 130, -1));
+        jPanel2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, -1));
 
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 130, 10));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 130, 10));
 
         lbl_time.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_time.setForeground(new java.awt.Color(255, 255, 255));
@@ -340,23 +464,104 @@ public class mainForm extends javax.swing.JFrame {
 
         txt_nhanvien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txt_nhanvien.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.add(txt_nhanvien, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 110, 30));
+        jPanel2.add(txt_nhanvien, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 110, 30));
+
+        btn_doimatkhau.setBackground(new java.awt.Color(147, 214, 255));
+        btn_doimatkhau.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_doimatkhau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_doimatkhauMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_doimatkhauMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_doimatkhauMouseExited(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Đổi Mật Khẩu");
+
+        jLabel6.setBackground(new java.awt.Color(102, 102, 102));
+
+        javax.swing.GroupLayout btn_doimatkhauLayout = new javax.swing.GroupLayout(btn_doimatkhau);
+        btn_doimatkhau.setLayout(btn_doimatkhauLayout);
+        btn_doimatkhauLayout.setHorizontalGroup(
+            btn_doimatkhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_doimatkhauLayout.createSequentialGroup()
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(jLabel4))
+        );
+        btn_doimatkhauLayout.setVerticalGroup(
+            btn_doimatkhauLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(btn_doimatkhauLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel4))
+        );
+
+        jPanel2.add(btn_doimatkhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 180, 50));
+
+        btn_dangxuat.setBackground(new java.awt.Color(147, 214, 255));
+        btn_dangxuat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_dangxuat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_dangxuatMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_dangxuatMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_dangxuatMouseExited(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Đăng Xuất");
+
+        jLabel10.setBackground(new java.awt.Color(102, 102, 102));
+
+        javax.swing.GroupLayout btn_dangxuatLayout = new javax.swing.GroupLayout(btn_dangxuat);
+        btn_dangxuat.setLayout(btn_dangxuatLayout);
+        btn_dangxuatLayout.setHorizontalGroup(
+            btn_dangxuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_dangxuatLayout.createSequentialGroup()
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(jLabel7)
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+        btn_dangxuatLayout.setVerticalGroup(
+            btn_dangxuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(btn_dangxuatLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel7)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jPanel2.add(btn_dangxuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 590, 180, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 700));
 
         pnlCard1.setBackground(new java.awt.Color(255, 255, 255));
         pnlCard1.setMinimumSize(new java.awt.Dimension(1070, 680));
         pnlCard1.setLayout(new java.awt.BorderLayout());
+        pnlCard1.add(jLabel1, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout pnlCard3Layout = new javax.swing.GroupLayout(pnlCard3);
         pnlCard3.setLayout(pnlCard3Layout);
         pnlCard3Layout.setHorizontalGroup(
             pnlCard3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlCard1, javax.swing.GroupLayout.DEFAULT_SIZE, 1070, Short.MAX_VALUE)
+            .addComponent(pnlCard1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlCard3Layout.setVerticalGroup(
             pnlCard3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlCard1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(pnlCard1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel1.add(pnlCard3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 1070, 700));
@@ -422,6 +627,10 @@ public class mainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_sellMouseExited
 
     private void btn_productMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_productMouseClicked
+        if (role == 0) {
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền vào chức năng này");
+            return;
+        }
         bar(jLabel8);
         showForm(new JPanelSanPham());
     }//GEN-LAST:event_btn_productMouseClicked
@@ -435,6 +644,10 @@ public class mainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_productMouseExited
 
     private void btn_staffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_staffMouseClicked
+        if (role == 0) {
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền vào chức năng này");
+            return;
+        }
         bar(jLabel11);
         showForm(new JPanelNhanVien());
     }//GEN-LAST:event_btn_staffMouseClicked
@@ -448,6 +661,10 @@ public class mainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_staffMouseExited
 
     private void btn_customerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_customerMouseClicked
+        if (role == 0) {
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền vào chức năng này");
+            return;
+        }
         bar(jLabel14);
         showForm(new JPanelKhachHang());
     }//GEN-LAST:event_btn_customerMouseClicked
@@ -461,6 +678,10 @@ public class mainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_customerMouseExited
 
     private void btn_promotionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_promotionMouseClicked
+        if (role == 0) {
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền vào chức năng này");
+            return;
+        }
         bar(jLabel21);
         showForm(new JPanelKhuyenMai());
     }//GEN-LAST:event_btn_promotionMouseClicked
@@ -474,6 +695,10 @@ public class mainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_promotionMouseExited
 
     private void btn_reportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_reportMouseClicked
+        if (role == 0) {
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền vào chức năng này");
+            return;
+        }
         bar(jLabel17);
         showForm(new JPanelDoanhThu());
     }//GEN-LAST:event_btn_reportMouseClicked
@@ -487,6 +712,10 @@ public class mainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_reportMouseExited
 
     private void btn_receiptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_receiptMouseClicked
+        if (role == 0) {
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền vào chức năng này");
+            return;
+        }
         bar(jLabel15);
         showForm(new JPanelHoaDon());
     }//GEN-LAST:event_btn_receiptMouseClicked
@@ -499,10 +728,45 @@ public class mainForm extends javax.swing.JFrame {
         btn_receipt.setBackground(Color.decode("#96D6FF"));
     }//GEN-LAST:event_btn_receiptMouseExited
 
+    private void btn_doimatkhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_doimatkhauMouseClicked
+        bar(jLabel6);
+        DoiMatKhau dmk = new DoiMatKhau(txt_nhanvien.getText().trim());
+        dmk.setVisible(true);
+    }//GEN-LAST:event_btn_doimatkhauMouseClicked
+
+    private void btn_doimatkhauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_doimatkhauMouseEntered
+        btn_doimatkhau.setBackground(Color.decode("#0063EC"));
+    }//GEN-LAST:event_btn_doimatkhauMouseEntered
+
+    private void btn_doimatkhauMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_doimatkhauMouseExited
+        btn_doimatkhau.setBackground(Color.decode("#96D6FF"));
+    }//GEN-LAST:event_btn_doimatkhauMouseExited
+
+    private void btn_dangxuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_dangxuatMouseClicked
+        bar(jLabel10);
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn co chắc chắn muốn đăng xuất?", "Confirm", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            View_DangNhap dangNhap = new View_DangNhap();
+            dangNhap.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btn_dangxuatMouseClicked
+
+    private void btn_dangxuatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_dangxuatMouseEntered
+        btn_dangxuat.setBackground(Color.decode("#0063EC"));
+    }//GEN-LAST:event_btn_dangxuatMouseEntered
+
+    private void btn_dangxuatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_dangxuatMouseExited
+        btn_dangxuat.setBackground(Color.decode("#96D6FF"));
+    }//GEN-LAST:event_btn_dangxuatMouseExited
+
     public void bar(JLabel lb) {
         jLabel2.setOpaque(false);
         jLabel5.setOpaque(false);
+        jLabel6.setOpaque(false);
         jLabel8.setOpaque(false);
+        jLabel10.setOpaque(false);
         jLabel11.setOpaque(false);
         jLabel14.setOpaque(false);
         jLabel15.setOpaque(false);
@@ -556,6 +820,8 @@ public class mainForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_customer;
+    private javax.swing.JPanel btn_dangxuat;
+    private javax.swing.JPanel btn_doimatkhau;
     private javax.swing.JPanel btn_home;
     private javax.swing.JPanel btn_product;
     private javax.swing.JPanel btn_promotion;
@@ -563,6 +829,8 @@ public class mainForm extends javax.swing.JFrame {
     private javax.swing.JPanel btn_report;
     private javax.swing.JPanel btn_sell;
     private javax.swing.JPanel btn_staff;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
@@ -577,7 +845,10 @@ public class mainForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

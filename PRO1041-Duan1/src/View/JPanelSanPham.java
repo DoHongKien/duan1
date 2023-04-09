@@ -23,11 +23,7 @@ import Service.VGAService;
 import ViewModel.ChiTietSanPhamModel;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -68,8 +64,8 @@ public class JPanelSanPham extends javax.swing.JPanel {
         List<SanPham> listSP = spS.getAllSanPham();
         cbo_sanpham.setModel(new DefaultComboBoxModel(listSP.toArray()));
 
-        fillTB(ctspService.getListSanPham());
-        fillTBX(ctspService.getListSanPham());
+        fillSanPham(ctspService.getListSanPham());
+        fillSanPhamXoa(ctspService.getListSanPham());
 
         btn_sua.setEnabled(false);
         btn_xoa.setEnabled(false);
@@ -93,8 +89,8 @@ public class JPanelSanPham extends javax.swing.JPanel {
         List<SanPham> listSP = spS.getAllSanPham();
         cbo_sanpham.setModel(new DefaultComboBoxModel(listSP.toArray()));
 
-        fillTB(ctspService.getListSanPham());
-        fillTBX(ctspService.getListSanPham());
+        fillSanPham(ctspService.getListSanPham());
+        fillSanPhamXoa(ctspService.getListSanPham());
     }
 
     /**
@@ -160,6 +156,7 @@ public class JPanelSanPham extends javax.swing.JPanel {
         rdo_khong = new javax.swing.JRadioButton();
         cbo_serial = new javax.swing.JComboBox<>();
         btn_serial = new javax.swing.JButton();
+        btn_load = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_sanphamxoa = new javax.swing.JTable();
@@ -425,6 +422,8 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jSeparator1.setForeground(new java.awt.Color(147, 214, 255));
         jPanel6.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 450, 130, 10));
 
+        txtSLTon.setEditable(false);
+        txtSLTon.setBackground(new java.awt.Color(255, 255, 255));
         txtSLTon.setBorder(null);
         jPanel6.add(txtSLTon, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 430, 130, 20));
 
@@ -504,6 +503,17 @@ public class JPanelSanPham extends javax.swing.JPanel {
         });
         jPanel6.add(btn_serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 440, 130, 30));
 
+        btn_load.setBackground(new java.awt.Color(147, 214, 255));
+        btn_load.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_load.setForeground(new java.awt.Color(255, 255, 255));
+        btn_load.setText("Load");
+        btn_load.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_loadActionPerformed(evt);
+            }
+        });
+        jPanel6.add(btn_load, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 290, 60, 30));
+
         jTabbedPane1.addTab("Sản Phẩm", jPanel6);
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
@@ -524,9 +534,9 @@ public class JPanelSanPham extends javax.swing.JPanel {
         txt_timkiemspx.setBorder(null);
         txt_timkiemspx.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        jSeparator3.setForeground(new java.awt.Color(186, 79, 84));
+        jSeparator3.setForeground(new java.awt.Color(147, 214, 255));
 
-        btn_timkiemspx.setBackground(new java.awt.Color(186, 79, 84));
+        btn_timkiemspx.setBackground(new java.awt.Color(147, 214, 255));
         btn_timkiemspx.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_timkiemspx.setForeground(new java.awt.Color(255, 255, 255));
         btn_timkiemspx.setText("Tìm kiếm");
@@ -536,7 +546,7 @@ public class JPanelSanPham extends javax.swing.JPanel {
             }
         });
 
-        btn_khoiphuc.setBackground(new java.awt.Color(186, 79, 84));
+        btn_khoiphuc.setBackground(new java.awt.Color(147, 214, 255));
         btn_khoiphuc.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btn_khoiphuc.setForeground(new java.awt.Color(255, 255, 255));
         btn_khoiphuc.setText("Khôi Phục");
@@ -589,7 +599,7 @@ public class JPanelSanPham extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Đã Xóa", jPanel7);
+        jTabbedPane1.addTab("Ngừng bán", jPanel7);
 
         jPanel2.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 620));
 
@@ -624,7 +634,10 @@ public class JPanelSanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_tbl_sanphamMouseClicked
 
     private void btn_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timkiemActionPerformed
-        fillComboBox();
+        if (txt_timkiem.getText().equals("")) {
+            fillSanPham(ctspService.getListSanPham());
+        }
+        fillSanPham(ctspService.timKiem(txt_timkiem.getText()));
     }//GEN-LAST:event_btn_timkiemActionPerformed
 
     private void btn_hangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hangActionPerformed
@@ -683,31 +696,36 @@ public class JPanelSanPham extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Sản phẩm đã tồn tại");
             return;
         }
-
-        if (cf == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(this, ctspService.insert(getFieldInsert()));
-            fillTB(ctspService.getListSanPham());
+        if (checkValidate()) {
+            if (cf == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(this, ctspService.insert(getFieldInsert()));
+                fillSanPham(ctspService.getListSanPham());
+            }
         }
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
         int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?", "Sửa", JOptionPane.YES_NO_OPTION);
 
-        if (cf == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(this, ctspService.update(getFieldUpdate()));
-            fillTB(ctspService.getListSanPham());
-            btn_them.setEnabled(true);
-            btn_sua.setEnabled(false);
-            btn_xoa.setEnabled(false);
+        if (checkValidate()) {
+            if (cf == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(this, ctspService.update(getFieldUpdate()));
+                fillSanPham(ctspService.getListSanPham());
+                btn_them.setEnabled(true);
+                btn_sua.setEnabled(false);
+                btn_xoa.setEnabled(false);
+            }
         }
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
-        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
         int index = tbl_sanpham.getSelectedRow();
+
+        int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?", "Xóa", JOptionPane.YES_NO_OPTION);
         ChiTietSanPham ctsp = new ChiTietSanPham();
         ctsp.setId(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString()));
         ctsp.setTrangThai(1);
+
         if (cf == JOptionPane.YES_OPTION) {
             boolean result = ctspService.updateTT(ctsp);
             if (result) {
@@ -715,8 +733,8 @@ public class JPanelSanPham extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(this, "Xóa sản phẩm thất bại");
             }
-            fillTB(ctspService.getListSanPham());
-            fillTBX(ctspService.getListSanPham());
+            fillSanPham(ctspService.getListSanPham());
+            fillSanPhamXoa(ctspService.getListSanPham());
             btn_them.setEnabled(true);
             btn_sua.setEnabled(false);
             btn_xoa.setEnabled(false);
@@ -755,8 +773,8 @@ public class JPanelSanPham extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(this, "Khôi phục sản phẩm thất bại");
             }
-            fillTB(ctspService.getListSanPham());
-            fillTBX(ctspService.getListSanPham());
+            fillSanPham(ctspService.getListSanPham());
+            fillSanPhamXoa(ctspService.getListSanPham());
         }
     }//GEN-LAST:event_btn_khoiphucActionPerformed
 
@@ -770,7 +788,11 @@ public class JPanelSanPham extends javax.swing.JPanel {
         crud.setVisible(true);
     }//GEN-LAST:event_btn_serialActionPerformed
 
-    private void fillTB(List<ChiTietSanPhamModel> list) {
+    private void btn_loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loadActionPerformed
+        fillComboBox();
+    }//GEN-LAST:event_btn_loadActionPerformed
+
+    private void fillSanPham(List<ChiTietSanPhamModel> list) {
         DefaultTableModel mol = (DefaultTableModel) tbl_sanpham.getModel();
         mol.setRowCount(0);
         String tt;
@@ -783,7 +805,7 @@ public class JPanelSanPham extends javax.swing.JPanel {
         }
     }
 
-    private void fillTBX(List<ChiTietSanPhamModel> list) {
+    private void fillSanPhamXoa(List<ChiTietSanPhamModel> list) {
         DefaultTableModel mol = (DefaultTableModel) tbl_sanphamxoa.getModel();
         mol.setRowCount(0);
         String tt;
@@ -820,7 +842,7 @@ public class JPanelSanPham extends javax.swing.JPanel {
         ctsp.setGiaBan(Double.valueOf(txt_giaban.getText()));
         ctsp.setNgayTao(date.format(DateTimeFormatter.ISO_DATE));
         ctsp.setNgayNhap(date.format(DateTimeFormatter.ISO_DATE));
-        ctsp.setSlTon(Integer.parseInt(txtSLTon.getText()));
+        ctsp.setSlTon(0);
         if (rdo_con.isSelected()) {
             ctsp.setTrangThai(0);
         } else {
@@ -855,7 +877,6 @@ public class JPanelSanPham extends javax.swing.JPanel {
         ctsp.setGiaNhap(Double.valueOf(txt_gianhap.getText()));
         ctsp.setGiaBan(Double.valueOf(txt_giaban.getText()));
         ctsp.setNgayNhap(date.format(DateTimeFormatter.ISO_DATE));
-        ctsp.setSlTon(Integer.parseInt(txtSLTon.getText()));
         if (rdo_con.isSelected()) {
             ctsp.setTrangThai(0);
         } else {
@@ -956,206 +977,59 @@ public class JPanelSanPham extends javax.swing.JPanel {
         }
         return 0;
     }
-//    private boolean checkValidate() {
-//        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-//        Matcher ma = p.matcher(txtMa.getText());
-//        Matcher ten = p.matcher(txt_ten.getText());
-//
-//        if (txtMa.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Mã không được trống");
-//            txtMa.requestFocus();
-//            return false;
-//        } else if (ma.find()) {
-//            JOptionPane.showMessageDialog(this, "Mã không được chứa ký tự đặc biệt");
-//            txtMa.requestFocus();
-//            return false;
-//        }
-//
-//        if (checkMa(txtMa.getText().trim()) == 1) {
-//            JOptionPane.showMessageDialog(this, "Mã sản phẩm đã tồn tại");
-//            txtMa.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_ten.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Tên không được trống");
-//            txt_ten.requestFocus();
-//            return false;
-//        } else if (ten.find()) {
-//            JOptionPane.showMessageDialog(this, "Tên không được chứa ký tự đặc biệt");
-//            txt_ten.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_gianhap.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Giá nhập không được trống");
-//            txt_giaban.requestFocus();
-//            return false;
-//        }
-//
-//        try {
-//            double giaNhap = Double.parseDouble(txt_gianhap.getText());
-//
-//            if (giaNhap <= 0) {
-//                JOptionPane.showMessageDialog(this, "Giá nhập phải lớn hơn 0");
-//                txt_gianhap.requestFocus();
-//                return false;
-//            }
-//
-//        } catch (NumberFormatException e) {
-//            JOptionPane.showMessageDialog(this, "Giá bán phải là số");
-//            txt_gianhap.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_giaban.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Giá bán không được trống");
-//            txt_giaban.requestFocus();
-//            return false;
-//        }
-//
-//        try {
-//            double giaBan = Double.parseDouble(txt_giaban.getText());
-//
-//            if (giaBan <= 0) {
-//                JOptionPane.showMessageDialog(this, "Giá bán phải lớn hơn 0");
-//                txt_giaban.requestFocus();
-//                return false;
-//            }
-//
-//        } catch (NumberFormatException e) {
-//            JOptionPane.showMessageDialog(this, "Giá bán phải là số");
-//            txt_giaban.requestFocus();
-//            return false;
-//        }
-//
-//        if (txtSLTon.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Số lượng không được trống");
-//            txtSLTon.requestFocus();
-//            return false;
-//        }
-//
-//        try {
-//            int soLuong = Integer.parseInt(txtSLTon.getText());
-//
-//            if (soLuong <= 0) {
-//                JOptionPane.showMessageDialog(this, "Số lượng phải lớn hơn 0");
-//                txtSLTon.requestFocus();
-//                return false;
-//            }
-//
-//        } catch (NumberFormatException e) {
-//            JOptionPane.showMessageDialog(this, "Số lượng phải là số");
-//            txtSLTon.requestFocus();
-//            return false;
-//        }
-//        return true;
-//    }
-//    
-//    private boolean checkValidateUpdate() {
-//        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-//        Matcher ma = p.matcher(txtMa.getText());
-//        Matcher ten = p.matcher(txt_ten.getText());
-//
-//        if (txtMa.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Mã không được trống");
-//            txtMa.requestFocus();
-//            return false;
-//        } else if (ma.find()) {
-//            JOptionPane.showMessageDialog(this, "Mã không được chứa ký tự đặc biệt");
-//            txtMa.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_ten.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Tên không được trống");
-//            txt_ten.requestFocus();
-//            return false;
-//        } else if (ten.find()) {
-//            JOptionPane.showMessageDialog(this, "Tên không được chứa ký tự đặc biệt");
-//            txt_ten.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_gianhap.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Giá nhập không được trống");
-//            txt_giaban.requestFocus();
-//            return false;
-//        }
-//
-//        try {
-//            double giaNhap = Double.parseDouble(txt_gianhap.getText());
-//
-//            if (giaNhap <= 0) {
-//                JOptionPane.showMessageDialog(this, "Giá nhập phải lớn hơn 0");
-//                txt_gianhap.requestFocus();
-//                return false;
-//            }
-//
-//        } catch (NumberFormatException e) {
-//            JOptionPane.showMessageDialog(this, "Giá bán phải là số");
-//            txt_gianhap.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_giaban.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Giá bán không được trống");
-//            txt_giaban.requestFocus();
-//            return false;
-//        }
-//
-//        try {
-//            double giaBan = Double.parseDouble(txt_giaban.getText());
-//
-//            if (giaBan <= 0) {
-//                JOptionPane.showMessageDialog(this, "Giá bán phải lớn hơn 0");
-//                txt_giaban.requestFocus();
-//                return false;
-//            }
-//
-//        } catch (NumberFormatException e) {
-//            JOptionPane.showMessageDialog(this, "Giá bán phải là số");
-//            txt_giaban.requestFocus();
-//            return false;
-//        }
-//
-//        if (txtSLTon.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Số lượng không được trống");
-//            txtSLTon.requestFocus();
-//            return false;
-//        }
-//
-//        try {
-//            int soLuong = Integer.parseInt(txtSLTon.getText());
-//
-//            if (soLuong <= 0) {
-//                JOptionPane.showMessageDialog(this, "Số lượng phải lớn hơn 0");
-//                txtSLTon.requestFocus();
-//                return false;
-//            }
-//
-//        } catch (NumberFormatException e) {
-//            JOptionPane.showMessageDialog(this, "Số lượng phải là số");
-//            txtSLTon.requestFocus();
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    private int checkMa(String ma) {
-//        for (int i = 0; i < spS.getListSP().size(); i++) {
-//            SanPham get = spS.getListSP().get(i);
-//            if (get.getMa().trim().equalsIgnoreCase(ma)) {
-//                return 1;
-//            }
-//        }
-//        return 2;
-//    }
+
+    private boolean checkValidate() {
+
+        if (txt_gianhap.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Giá nhập không được trống");
+            txt_gianhap.requestFocus();
+            return false;
+        }
+
+        try {
+            double giaNhap = Double.parseDouble(txt_gianhap.getText());
+
+            if (giaNhap <= 0) {
+                JOptionPane.showMessageDialog(this, "Giá nhập phải lớn hơn 0");
+                txt_gianhap.requestFocus();
+                return false;
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Giá nhập phải là số");
+            txt_gianhap.requestFocus();
+            return false;
+        }
+
+        if (txt_giaban.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Giá bán không được trống");
+            txt_giaban.requestFocus();
+            return false;
+        }
+
+        try {
+            double giaBan = Double.parseDouble(txt_giaban.getText());
+
+            if (giaBan <= 0) {
+                JOptionPane.showMessageDialog(this, "Giá bán phải lớn hơn 0");
+                txt_giaban.requestFocus();
+                return false;
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Giá bán phải là số");
+            txt_giaban.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cpu;
     private javax.swing.JButton btn_hang;
     private javax.swing.JButton btn_khoiphuc;
+    private javax.swing.JButton btn_load;
     private javax.swing.JButton btn_manhinh;
     private javax.swing.JButton btn_mausac;
     private javax.swing.JButton btn_moi;

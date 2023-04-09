@@ -10,6 +10,7 @@ import com.toedter.calendar.JDateChooser;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,6 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.JTextComponent;
 
 /**
  *
@@ -27,16 +29,14 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
 
     DefaultTableModel defaultTableModel;
     KhuyenMaiService khuyenMaiService = new KhuyenMaiService();
-    private static Pattern DATE_PATTERN = Pattern.compile("^((2000|2400|2800|(19|2[0-9])(0[48]|[2468][048]|[13579][26]))-02-29)$"
-            + "|^(((19|2[0-9])[0-9]{2})-02-(0[1-9]|1[0-9]|2[0-8]))$"
-            + "|^(((19|2[0-9])[0-9]{2})-(0[13578]|10|12)-(0[1-9]|[12][0-9]|3[01]))$"
-            + "|^(((19|2[0-9])[0-9]{2})-(0[469]|11)-(0[1-9]|[12][0-9]|30))$");
 
     public JPanelKhuyenMai() {
         initComponents();
         fillTable(khuyenMaiService.getListKhuyenMai());
         btn_sua.setEnabled(false);
         btn_xoa.setEnabled(false);
+        disableTextField((JTextComponent) txt_ngaytao.getDateEditor().getUiComponent());
+        disableTextField((JTextComponent) txt_ngayhethan.getDateEditor().getUiComponent());
     }
 
     /**
@@ -77,10 +77,9 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         jSeparator6 = new javax.swing.JSeparator();
         txt_ngaytao = new com.toedter.calendar.JDateChooser();
         txt_ngayhethan = new com.toedter.calendar.JDateChooser();
-        txt_ngaysua = new com.toedter.calendar.JDateChooser();
-        jLabel8 = new javax.swing.JLabel();
         rdo_khong = new javax.swing.JRadioButton();
         rdo_co = new javax.swing.JRadioButton();
+        jLabel9 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1070, 680));
@@ -151,7 +150,7 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Id", "Mã", "Điều kiện", "Giá Trị", "Ngày Tạo", "Ngày Hết Hạn", "Ngày Sửa", "Trạng Thái"
+                "Id", "Mã", "Điều kiện", "Giá Trị", "Ngày Tạo", "Ngày Hết Hạn", "Trạng Thái"
             }
         ));
         tbl_khuyenmai.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -178,8 +177,8 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
 
         txt_dieukien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txt_dieukien.setBorder(null);
-        jPanel2.add(txt_dieukien, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 130, 150, -1));
-        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 150, 150, 10));
+        jPanel2.add(txt_dieukien, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 130, 130, -1));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 150, 130, 10));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Ngày Tạo");
@@ -187,7 +186,7 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Trạng Thái");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 390, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 340, -1, -1));
 
         btn_them.setBackground(new java.awt.Color(147, 214, 255));
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -245,24 +244,27 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         txt_giatri.setBorder(null);
         jPanel2.add(txt_giatri, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 180, 150, -1));
         jPanel2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 200, 150, 10));
-        jPanel2.add(txt_ngaytao, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 230, 150, -1));
-        jPanel2.add(txt_ngayhethan, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 280, 150, -1));
-        jPanel2.add(txt_ngaysua, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 340, 150, -1));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setText("Ngày Sửa");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 340, -1, -1));
+        txt_ngaytao.setDateFormatString("yyyy-MM-dd");
+        jPanel2.add(txt_ngaytao, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 230, 150, -1));
+
+        txt_ngayhethan.setDateFormatString("yyyy-MM-dd");
+        jPanel2.add(txt_ngayhethan, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 280, 150, -1));
 
         buttonGroup2.add(rdo_khong);
         rdo_khong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         rdo_khong.setText("Không");
-        jPanel2.add(rdo_khong, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 390, -1, -1));
+        jPanel2.add(rdo_khong, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 340, -1, -1));
 
         buttonGroup2.add(rdo_co);
         rdo_co.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         rdo_co.setSelected(true);
         rdo_co.setText("Có");
-        jPanel2.add(rdo_co, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 390, 50, -1));
+        jPanel2.add(rdo_co, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 340, 50, -1));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setText(">=");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 130, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -288,8 +290,8 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         txt_ma.setEditable(false);
         int index = tbl_khuyenmai.getSelectedRow();
         txt_ma.setText(tbl_khuyenmai.getValueAt(index, 1).toString().trim());
-        txt_giatri.setText(tbl_khuyenmai.getValueAt(index, 2).toString().trim());
-        txt_dieukien.setText(tbl_khuyenmai.getValueAt(index, 3).toString().trim());
+        txt_giatri.setText(tbl_khuyenmai.getValueAt(index, 3).toString().trim());
+        txt_dieukien.setText(tbl_khuyenmai.getValueAt(index, 2).toString().trim());
         try {
             Date date = new SimpleDateFormat("yyyy-MM-dd").parse(tbl_khuyenmai.getValueAt(index, 4).toString().trim());
             txt_ngaytao.setDate(date);
@@ -302,12 +304,6 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         } catch (ParseException ex) {
             Logger.getLogger(JPanelNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(tbl_khuyenmai.getValueAt(index, 6).toString().trim());
-            txt_ngaysua.setDate(date);
-        } catch (ParseException ex) {
-            Logger.getLogger(JPanelNhanVien.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_tbl_khuyenmaiMouseClicked
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
@@ -315,7 +311,7 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
             int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không?", "Thêm", JOptionPane.YES_NO_OPTION);
 
             if (cf == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(this, khuyenMaiService.insert(getField()));
+                JOptionPane.showMessageDialog(this, khuyenMaiService.insert(getFieldInsert()));
                 fillTable(khuyenMaiService.getListKhuyenMai());
                 clearForm();
             }
@@ -327,7 +323,7 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
             int cf = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không?", "Sửa", JOptionPane.YES_NO_OPTION);
 
             if (cf == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(this, khuyenMaiService.update(getField()));
+                JOptionPane.showMessageDialog(this, khuyenMaiService.update(getFieldUpdate()));
                 fillTable(khuyenMaiService.getListKhuyenMai());
                 btn_them.setEnabled(true);
                 btn_sua.setEnabled(false);
@@ -360,36 +356,56 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_moiActionPerformed
 
     private void rdo_tatcaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdo_tatcaMouseClicked
-//        fillTable(khuyenMaiService.getListKhuyenMai());
+        fillTable(khuyenMaiService.getListKhuyenMai());
     }//GEN-LAST:event_rdo_tatcaMouseClicked
 
     private void rdo_sapdienraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdo_sapdienraMouseClicked
-//        LocalDate localDate = LocalDate.now();
-//        fillTable(khuyenMaiService.fiterByStartDate(localDate.toString()));
+        LocalDate localDate = LocalDate.now();
+        fillTableFilter(khuyenMaiService.fiterByStartDate(localDate.toString()));
     }//GEN-LAST:event_rdo_sapdienraMouseClicked
 
     private void rdo_dangdienraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdo_dangdienraMouseClicked
-//        LocalDate localDate = LocalDate.now();
-//        fillTable(khuyenMaiService.fiterByBetweenDate(localDate.toString()));
+        LocalDate localDate = LocalDate.now();
+        fillTableFilter(khuyenMaiService.fiterByBetweenDate(localDate.toString()));
     }//GEN-LAST:event_rdo_dangdienraMouseClicked
 
     private void rdo_daketthucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rdo_daketthucMouseClicked
-//        LocalDate localDate = LocalDate.now();
-//        fillTable(khuyenMaiService.fiterByEndDate(localDate.toString()));
+        LocalDate localDate = LocalDate.now();
+        fillTableFilter(khuyenMaiService.fiterByEndDate(localDate.toString()));
     }//GEN-LAST:event_rdo_daketthucMouseClicked
+
+    private static void disableTextField(JTextComponent textComponent) {
+        textComponent.setEditable(false);
+        textComponent.setFocusable(false);
+        textComponent.setBackground(null);
+        textComponent.setBorder(null);
+    }
 
     private void fillTable(List<KhuyenMai> list) {
         defaultTableModel = (DefaultTableModel) tbl_khuyenmai.getModel();
         defaultTableModel.setRowCount(0);
         for (KhuyenMai km : list) {
+            String tt = km.getTrangThai() == 1 ? "Có hiệu lực" : "Không có hiệu lực";
             if (km.getTrangThai() != 2) {
-                defaultTableModel.addRow(new Object[]{km.getId(), km.getMa(), km.getDieuKien(), km.getGiaTri(), 
-                    km.getNgayTao(), km.getNgayHetHan(), km.getNgayNhap(), km.getTrangThai()});
+                defaultTableModel.addRow(new Object[]{km.getId(), km.getMa(), km.getDieuKien(), km.getGiaTri(),
+                    km.getNgayTao(), km.getNgayHetHan(), tt});
             }
         }
     }
 
-    private KhuyenMai getField() {
+    private void fillTableFilter(List<KhuyenMai> list) {
+        defaultTableModel = (DefaultTableModel) tbl_khuyenmai.getModel();
+        defaultTableModel.setRowCount(0);
+        for (KhuyenMai km : list) {
+            String tt = km.getTrangThai() == 1 ? "Có hiệu lực" : "Không có hiệu lực";
+            if (km.getTrangThai() != 2 && km.getTrangThai() != 0) {
+                defaultTableModel.addRow(new Object[]{km.getId(), km.getMa(), km.getDieuKien(), km.getGiaTri(),
+                    km.getNgayTao(), km.getNgayHetHan(), tt});
+            }
+        }
+    }
+
+    private KhuyenMai getFieldInsert() {
         JDateChooser ngayTao = new JDateChooser();
         ngayTao.setDate(txt_ngaytao.getDate());
         Date selectedDate = ngayTao.getDate();
@@ -398,10 +414,6 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         ngayHetHan.setDate(txt_ngayhethan.getDate());
         Date selectedDate1 = ngayHetHan.getDate();
 
-        JDateChooser ngaySua = new JDateChooser();
-        ngaySua.setDate(txt_ngaysua.getDate());
-        Date selectedDate2 = ngayTao.getDate();
-
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         KhuyenMai km = new KhuyenMai();
         km.setMa(txt_ma.getText());
@@ -409,7 +421,6 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         km.setDieuKien(Integer.parseInt(txt_dieukien.getText().trim()));
         km.setNgayTao(dateFormat.format(selectedDate));
         km.setNgayHetHan(dateFormat.format(selectedDate1));
-        km.setNgayNhap(dateFormat.format(selectedDate2));
         if (rdo_co.isSelected()) {
             km.setTrangThai(1);
         } else {
@@ -418,13 +429,43 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         return km;
     }
 
-    private boolean matches(String date) {
-        return DATE_PATTERN.matcher(date).matches();
+    private KhuyenMai getFieldUpdate() {
+        JDateChooser ngayTao = new JDateChooser();
+        ngayTao.setDate(txt_ngaytao.getDate());
+        Date selectedDate = ngayTao.getDate();
+
+        JDateChooser ngayHetHan = new JDateChooser();
+        ngayHetHan.setDate(txt_ngayhethan.getDate());
+        Date selectedDate1 = ngayHetHan.getDate();
+
+        LocalDate date = LocalDate.now();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        KhuyenMai km = new KhuyenMai();
+        km.setMa(txt_ma.getText());
+        km.setGiaTri(Integer.parseInt(txt_giatri.getText().trim()));
+        km.setDieuKien(Integer.parseInt(txt_dieukien.getText().trim()));
+        km.setNgayTao(dateFormat.format(selectedDate));
+        km.setNgayHetHan(dateFormat.format(selectedDate1));
+        km.setNgayNhap(date.format(DateTimeFormatter.ISO_DATE));
+        if (rdo_co.isSelected()) {
+            km.setTrangThai(1);
+        } else {
+            km.setTrangThai(0);
+        }
+        return km;
     }
 
     private boolean checkValidate() {
         Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
         Matcher ma = p.matcher(txt_ma.getText());
+        JDateChooser ngayTao = new JDateChooser();
+        ngayTao.setDate(txt_ngaytao.getDate());
+        Date selectedDate = ngayTao.getDate();
+
+        JDateChooser ngayHetHan = new JDateChooser();
+        ngayHetHan.setDate(txt_ngayhethan.getDate());
+        Date selectedDate1 = ngayHetHan.getDate();
 
         if (txt_ma.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Mã không được trống");
@@ -442,57 +483,67 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
             return false;
         }
 
+        if (checkGiaTri(Integer.parseInt(txt_ma.getText().trim())) == 1) {
+            JOptionPane.showMessageDialog(this, "Giá trị đã tồn tại");
+            txt_giatri.requestFocus();
+            return false;
+        }
+
         if (txt_dieukien.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Giá trị không được trống");
+            JOptionPane.showMessageDialog(this, "Điều kiện không được trống");
             txt_dieukien.requestFocus();
             return false;
         }
+
         try {
             int giaTri = Integer.parseInt(txt_dieukien.getText());
             if (giaTri <= 0) {
-                JOptionPane.showMessageDialog(this, "Giá trị phải lớn hơn 0");
+                JOptionPane.showMessageDialog(this, "Điều kiện phải lớn hơn 0");
                 txt_dieukien.requestFocus();
                 return false;
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Giá trị phải là số");
+            JOptionPane.showMessageDialog(this, "Điều kiện phải là số");
             txt_dieukien.requestFocus();
             return false;
         }
 
-//        if (txt_ngaytao.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
-//            txt_ngaytao.requestFocus();
-//            return false;
-//        } else if (!matches(txt_ngaytao.getText())) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
-//            txt_ngaytao.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_ngayhethan.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
-//            txt_ngayhethan.requestFocus();
-//            return false;
-//        } else if (!matches(txt_ngayhethan.getText())) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
-//            txt_ngayhethan.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_ngaysua.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
-//            txt_ngaysua.requestFocus();
-//            return false;
-//        } else if (!matches(txt_ngaysua.getText())) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
-//            txt_ngaysua.requestFocus();
-//            return false;
-//        }
+        if (txt_giatri.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Giá trị không được trống");
+            txt_giatri.requestFocus();
+            return false;
+        }
+        try {
+            int giaTri = Integer.parseInt(txt_giatri.getText());
+            if (giaTri <= 0) {
+                JOptionPane.showMessageDialog(this, "Giá trị phải lớn hơn 0");
+                txt_giatri.requestFocus();
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Giá trị phải là số");
+            txt_giatri.requestFocus();
+            return false;
+        }
+
+        if (selectedDate == null) {
+            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
+            txt_ngaytao.requestFocus();
+            return false;
+        }
+
+        if (selectedDate1 == null) {
+            JOptionPane.showMessageDialog(this, "Ngày hết hạn không được trống");
+            txt_ngayhethan.requestFocus();
+            return false;
+        }
         return true;
     }
 
     private void clearForm() {
+        txt_ngaytao.setDate(null);
+        txt_ngayhethan.setDate(null);
+
         txt_ma.setText("");
         txt_dieukien.setText("");
         txt_giatri.setText("");
@@ -517,52 +568,53 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         }
 
         if (txt_dieukien.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Giá trị không được trống");
-            txt_dieukien.requestFocus();
-            return false;
-        }
-        try {
-            int giaTri = Integer.parseInt(txt_dieukien.getText());
-            if (giaTri <= 0) {
-                JOptionPane.showMessageDialog(this, "Giá trị phải lớn hơn 0");
-                txt_dieukien.requestFocus();
-                return false;
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Giá trị phải là số");
+            JOptionPane.showMessageDialog(this, "Điều kiện không được trống");
             txt_dieukien.requestFocus();
             return false;
         }
 
-//        if (txt_ngaytao.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
-//            txt_ngaytao.requestFocus();
-//            return false;
-//        } else if (!matches(txt_ngaytao.getText())) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
-//            txt_ngaytao.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_ngayhethan.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
-//            txt_ngayhethan.requestFocus();
-//            return false;
-//        } else if (!matches(txt_ngayhethan.getText())) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
-//            txt_ngayhethan.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_ngaysua.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
-//            txt_ngaysua.requestFocus();
-//            return false;
-//        } else if (!matches(txt_ngaysua.getText())) {
-//            JOptionPane.showMessageDialog(this, "Ngày tạo không đúng định dạng");
-//            txt_ngaysua.requestFocus();
-//            return false;
-//        }
+        try {
+            int giaTri = Integer.parseInt(txt_dieukien.getText());
+            if (giaTri <= 0) {
+                JOptionPane.showMessageDialog(this, "Điều kiện phải lớn hơn 0");
+                txt_dieukien.requestFocus();
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Điều kiện phải là số");
+            txt_dieukien.requestFocus();
+            return false;
+        }
+
+        if (txt_giatri.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Giá trị không được trống");
+            txt_giatri.requestFocus();
+            return false;
+        }
+        try {
+            int giaTri = Integer.parseInt(txt_giatri.getText());
+            if (giaTri <= 0) {
+                JOptionPane.showMessageDialog(this, "Giá trị phải lớn hơn 0");
+                txt_giatri.requestFocus();
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Giá trị phải là số");
+            txt_giatri.requestFocus();
+            return false;
+        }
+
+        if (txt_ngaytao.getDate().toString().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
+            txt_ngaytao.requestFocus();
+            return false;
+        }
+
+        if (txt_ngayhethan.getDate().toString().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
+            txt_ngayhethan.requestFocus();
+            return false;
+        }
         return true;
     }
 
@@ -570,6 +622,16 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         for (int i = 0; i < khuyenMaiService.getListKhuyenMai().size(); i++) {
             KhuyenMai get = khuyenMaiService.getListKhuyenMai().get(i);
             if (get.getMa().trim().equalsIgnoreCase(ma)) {
+                return 1;
+            }
+        }
+        return 2;
+    }
+
+    private int checkGiaTri(int giatri) {
+        for (int i = 0; i < khuyenMaiService.getListKhuyenMai().size(); i++) {
+            KhuyenMai get = khuyenMaiService.getListKhuyenMai().get(i);
+            if (get.getGiaTri() == giatri) {
                 return 1;
             }
         }
@@ -590,7 +652,7 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -608,7 +670,6 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
     private javax.swing.JTextField txt_giatri;
     private javax.swing.JTextField txt_ma;
     private com.toedter.calendar.JDateChooser txt_ngayhethan;
-    private com.toedter.calendar.JDateChooser txt_ngaysua;
     private com.toedter.calendar.JDateChooser txt_ngaytao;
     // End of variables declaration//GEN-END:variables
 }

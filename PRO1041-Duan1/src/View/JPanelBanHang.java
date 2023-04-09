@@ -13,6 +13,7 @@ import Model.GioHang;
 import Model.HoaDon;
 import Model.KhachHang;
 import Model.SanPham;
+import Repository.BanHangRepository;
 import Repository.ChiTietHoaDonRepository;
 import Repository.GioHangRepository;
 import Service.BanHangService;
@@ -27,13 +28,16 @@ import ViewModel.ChiTietGioHangModel;
 import ViewModel.ChiTietSanPhamModel;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -59,6 +63,12 @@ public class JPanelBanHang extends javax.swing.JPanel {
     DefaultTableModel defaultTableModelHoaDon;
     DefaultTableModel defaultTableModelGioHang;
 
+    private static final Random random = new Random();
+    private static final HashSet<Integer> set = new HashSet<>();
+    LocalDate localDate = LocalDate.now();
+
+    int clickSerial = 0;
+
     public JPanelBanHang() {
         initComponents();
 
@@ -76,6 +86,29 @@ public class JPanelBanHang extends javax.swing.JPanel {
         fillHoaDon(banHangService.getAllHoaDon());
         fillHoaDonCho(banHangService.getAllHoaDon());
         fillGioHang(ctghService.getAllCTGH());
+
+        double tongTien = 0;
+        for (int i = 0; i < ctghService.getAllCTGH().size(); i++) {
+            ChiTietGioHangModel ctghm = ctghService.getAllCTGH().get(i);
+            if (ctghm.getTrangThai() == 1) {
+                tongTien += ctghm.getDonGia() * ctghm.getSoLuong();
+            }
+        }
+        txt_tongtien.setText(String.valueOf(tongTien));
+        txt_giamgia.setText(String.valueOf(khuyenMaiService.getGiaTriByDieuKien(tongTien, localDate.format(DateTimeFormatter.ISO_DATE), 1)));
+        double tienphaitra = tongTien - khuyenMaiService.getGiaTriByDieuKien(tongTien, localDate.format(DateTimeFormatter.ISO_DATE), 1);
+        txt_tienphaitra.setText(String.valueOf(tienphaitra));
+    }
+
+    public int generateUniqueInt() {
+        for (Integer i : new BanHangRepository().getMa()) {
+            set.add(i);
+        }
+        int value = random.nextInt(1000);
+        while (set.contains(value)) {
+            value = random.nextInt();
+        }
+        return value;
     }
 
     /**
@@ -520,17 +553,11 @@ public class JPanelBanHang extends javax.swing.JPanel {
         int index = tbl_sanpham.getSelectedRow();
         LocalDate localDate = LocalDate.now();
 
-//        if (timIdGioHang(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim())) == 1) {
-//            for (int i = 0; i < tbl_giohang.getRowCount(); i++) {
-//                if (tbl_sanpham.getValueAt(index, 0).toString().trim().equalsIgnoreCase(tbl_giohang.getValueAt(i, 0).toString().trim())) {
-//                    int sl = Integer.parseInt(tbl_giohang.getValueAt(i, 2).toString().trim()) + 1;
-//                    ChiTietGioHang ctGioHang = new ChiTietGioHang();
-//                    ctGioHang.setIdCTSP(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim()));
-//                    ctGioHang.setSoLuong(sl);
-//                    ctghService.updateSoLuong(ctGioHang);
-//                }
-//            }
-//        } else {
+        if (index == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm muốn thêm vào giỏ hàng");
+            return;
+        }
+
         ChiTietSanPham ctsp1 = ctspService.getDonGiaById(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim()));
         ChiTietGioHang ctgh = new ChiTietGioHang();
         ctgh.setIdCTSP(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim()));
@@ -540,7 +567,6 @@ public class JPanelBanHang extends javax.swing.JPanel {
         ctgh.setNgayNhap(localDate.format(DateTimeFormatter.ISO_DATE));
         ctgh.setTrangThai(1);
         ctghService.insert(ctgh);
-//        }
 
         double tongTien = 0;
         for (int i = 0; i < ctghService.getAllCTGH().size(); i++) {
@@ -558,24 +584,31 @@ public class JPanelBanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_themgiohangActionPerformed
 
     private void btn_xoagiohangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoagiohangActionPerformed
-        int index = tbl_giohang.getSelectedRow();
-        boolean result = ctghService.delete(Integer.parseInt(tbl_giohang.getValueAt(index, 0).toString()));
-        if (result) {
-            JOptionPane.showMessageDialog(this, "Xóa thành công sản phẩm khỏi giỏ hàng");
-        } else {
-            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi xóa sản phẩm khỏi giỏ hàng");
+        boolean result = false;
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa toàn bộ sản phẩm khỏi giỏ hàng", "Confirm", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            for (int i = 0; i < tbl_giohang.getRowCount(); i++) {
+                result = ctghService.delete(Integer.parseInt(tbl_giohang.getValueAt(i, 0).toString()));
+            }
+            if (result) {
+                JOptionPane.showMessageDialog(this, "Xóa thành công sản phẩm khỏi giỏ hàng");
+            } else {
+                JOptionPane.showMessageDialog(this, "Có lỗi xảy ra khi xóa sản phẩm khỏi giỏ hàng");
+            }
+            fillGioHang(ctghService.getAllCTGH());
+            clearForm();
         }
-        fillGioHang(ctghService.getAllCTGH());
-        clearForm();
     }//GEN-LAST:event_btn_xoagiohangActionPerformed
 
     private void btn_thanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thanhtoanActionPerformed
-        LocalDate localDate = LocalDate.now();
-        if (checkValidate()) {
-            double RanDomDouble = Math.random();
-            RanDomDouble = RanDomDouble * 500 + 1;
-            int ranInt = (int) RanDomDouble;
+        if (clickSerial == 0) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn serial cho sản phẩm trong giỏ hàng");
+            return;
+        }
 
+        if (checkValidate()) {
+            int maHD = generateUniqueInt();
             HoaDon hoaDon = new HoaDon();
             hoaDon.setIdNhanVien(nhanVienService.getIdNVByMa(txt_manhanvien.getText()));
             KhachHang kh = (KhachHang) cbo_khachhang.getSelectedItem();
@@ -584,7 +617,7 @@ public class JPanelBanHang extends javax.swing.JPanel {
             } else {
                 hoaDon.setIdKhachHang(kh.getId());
             }
-            hoaDon.setMa("HD" + ranInt);
+            hoaDon.setMa("HD" + maHD);
             hoaDon.setNgayThanhToan(localDate.format(DateTimeFormatter.ISO_DATE));
             hoaDon.setTongtien(Double.valueOf(txt_tongtien.getText()));
             hoaDon.setTrangThai(1);
@@ -642,7 +675,7 @@ public class JPanelBanHang extends javax.swing.JPanel {
                     PdfWriter.getInstance(doc, new FileOutputStream(path + "hoadonchitiet.pdf"));
                     doc.open();
 
-                    String ma = "HD" + ranInt;
+                    String ma = "HD" + maHD;
                     String tenKH = kh.getTen();
                     String ngayTao = txt_ngaytao.getText().trim();
                     String tongTien = txt_tienphaitra.getText().trim();
@@ -654,7 +687,7 @@ public class JPanelBanHang extends javax.swing.JPanel {
                         String soLuong = tbl_giohang.getValueAt(i, 3).toString();
                         String donGia = tbl_giohang.getValueAt(i, 5).toString();
                         PdfPCell cellTenSP = new PdfPCell(new Phrase(tenSP));
-                        PdfPCell cellDonGia = new PdfPCell(new Phrase(donGia));
+                        PdfPCell cellDonGia = new PdfPCell(new Phrase(donGia + "VND"));
                         PdfPCell cellSoLuong = new PdfPCell(new Phrase("SL: " + soLuong));
                         cellTenSP.setBorderColor(Color.WHITE);
                         cellDonGia.setBorderColor(Color.WHITE);
@@ -699,9 +732,9 @@ public class JPanelBanHang extends javax.swing.JPanel {
                     PdfPCell cellVachKe = new PdfPCell(new Phrase("--------------------------------------------"));
                     PdfPCell cellVachKe1 = new PdfPCell(new Phrase("--------------------------------------------"));
                     PdfPCell cellKhuyenMai = new PdfPCell(new Phrase("Khuyen Mai"));
-                    PdfPCell cellKhuyenMai1 = new PdfPCell(new Phrase(khuyenMai + "VNĐ"));
+                    PdfPCell cellKhuyenMai1 = new PdfPCell(new Phrase(khuyenMai + "VND"));
                     PdfPCell cellTongTien = new PdfPCell(new Phrase("Tong Tien"));
-                    PdfPCell cellTongTien1 = new PdfPCell(new Phrase(tongTien));
+                    PdfPCell cellTongTien1 = new PdfPCell(new Phrase(tongTien + "VND"));
 
                     cellMa.setBorderColor(Color.WHITE);
                     cellMa1.setBorderColor(Color.WHITE);
@@ -863,13 +896,17 @@ public class JPanelBanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_chk_khachvanglaiItemStateChanged
 
     private void tbl_giohangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_giohangMouseClicked
-        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn chọn serial cho sản phẩm?", "Xác nhận", JOptionPane.YES_NO_OPTION);
-
+        Object[] options = {"Thêm Serial", "Xóa khỏi giỏ", "Cancel"};
+        int result1 = JOptionPane.showOptionDialog(this, "Mời bạn chọn thêm serial hay xóa sản phẩm khỏi giỏ", "Chọn", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
         int index = tbl_giohang.getSelectedRow();
-        if (confirm == JOptionPane.YES_OPTION) {
-            View_Serial view_Serial = new View_Serial(Integer.parseInt(tbl_giohang.getValueAt(index, 1).toString()));
-            view_Serial.setVisible(true);
-        } else if (confirm == JOptionPane.NO_OPTION) {
+
+        if (result1 == 0) {
+            if (evt.getButton() == MouseEvent.BUTTON1) {
+                clickSerial++;
+                View_Serial view_Serial = new View_Serial(Integer.parseInt(tbl_giohang.getValueAt(index, 1).toString()));
+                view_Serial.setVisible(true);
+            }
+        } else if (result1 == 1) {
             int confirmDelete = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa sản phẩm khỏi giỏ hàng không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
             if (confirmDelete == JOptionPane.YES_OPTION) {
                 boolean result = ctghService.delete(Integer.parseInt(tbl_giohang.getValueAt(index, 0).toString()));
@@ -882,7 +919,6 @@ public class JPanelBanHang extends javax.swing.JPanel {
                 clearForm();
             }
         }
-
     }//GEN-LAST:event_tbl_giohangMouseClicked
 
     private void fillSanPham(List<ChiTietSanPhamModel> list) {
@@ -982,7 +1018,7 @@ public class JPanelBanHang extends javax.swing.JPanel {
         }
 
         if (txt_ngaytao.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ngày tạo không được trống");
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn 1 hóa đơn tiến hành thanh toán");
             txt_ngaytao.requestFocus();
             return false;
         }

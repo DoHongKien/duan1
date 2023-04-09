@@ -58,4 +58,19 @@ public class KhuyenMaiService implements IKhuyenMaiService {
         return "Xóa thất bại";
     }
 
+    @Override
+    public List<KhuyenMai> fiterByStartDate(String date) {
+        return khuyenMaiRepo.fiterByStartDate(date);
+    }
+
+    @Override
+    public List<KhuyenMai> fiterByEndDate(String date) {
+        return khuyenMaiRepo.fiterByEndDate(date);
+    }
+
+    @Override
+    public List<KhuyenMai> fiterByBetweenDate(String date) {
+        return khuyenMaiRepo.fiterByBetweenDate(date);
+    }
+
 }

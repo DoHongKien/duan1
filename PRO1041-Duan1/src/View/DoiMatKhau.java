@@ -4,7 +4,10 @@
  */
 package View;
 
-import java.util.Arrays;
+import Model.NhanVien;
+import Service.NhanVienService;
+import ViewModel.RoleModel;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -15,6 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class DoiMatKhau extends javax.swing.JFrame {
 
+    NhanVienService nhanVienService = new NhanVienService();
 
     public DoiMatKhau() {
         initComponents();
@@ -52,10 +56,6 @@ public class DoiMatKhau extends javax.swing.JFrame {
         btn_cancel = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txt_username = new javax.swing.JTextField();
-        btn_them = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        rdo_admin = new javax.swing.JRadioButton();
-        rdo_staff = new javax.swing.JRadioButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -73,7 +73,7 @@ public class DoiMatKhau extends javax.swing.JFrame {
         jLabel4.setBackground(new java.awt.Color(147, 214, 255));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("      Tài Khoản");
+        jLabel4.setText("        Đổi Mật Khẩu");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -117,29 +117,8 @@ public class DoiMatKhau extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Tài Khoản:");
 
+        txt_username.setEditable(false);
         txt_username.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        btn_them.setBackground(new java.awt.Color(147, 214, 255));
-        btn_them.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btn_them.setForeground(new java.awt.Color(255, 255, 255));
-        btn_them.setText("Thêm");
-        btn_them.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_themActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setText("Chức Vụ:");
-
-        buttonGroup1.add(rdo_admin);
-        rdo_admin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        rdo_admin.setSelected(true);
-        rdo_admin.setText("Admin");
-
-        buttonGroup1.add(rdo_staff);
-        rdo_staff.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        rdo_staff.setText("Staff");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -152,26 +131,19 @@ public class DoiMatKhau extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel5))
                 .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txt_password)
-                        .addComponent(txt_newpass)
-                        .addComponent(txt_renewpass)
-                        .addComponent(txt_username, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
-                    .addComponent(rdo_admin))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txt_password)
+                    .addComponent(txt_newpass)
+                    .addComponent(txt_renewpass)
+                    .addComponent(txt_username, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
-                .addComponent(btn_them)
-                .addGap(29, 29, 29)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_doimatkhau)
                 .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rdo_staff)
-                    .addComponent(btn_cancel))
+                .addComponent(btn_cancel)
                 .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
@@ -194,16 +166,10 @@ public class DoiMatKhau extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txt_renewpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(rdo_admin)
-                    .addComponent(rdo_staff))
-                .addGap(28, 28, 28)
+                .addGap(78, 78, 78)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_doimatkhau)
-                    .addComponent(btn_cancel)
-                    .addComponent(btn_them))
+                    .addComponent(btn_cancel))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
 
@@ -226,42 +192,27 @@ public class DoiMatKhau extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelActionPerformed
 
     private void btn_doimatkhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doimatkhauActionPerformed
-//        TaiKhoan pass = taiKhoanService.getChucVu(txt_username.getText(), String.valueOf(txt_password.getPassword()));
-//        if (check()) {
-//            if (pass != null) {
-//                String newpass = String.valueOf(txt_newpass.getPassword());
-//                String renewpass = String.valueOf(txt_renewpass.getPassword());
-//                if (renewpass.equals(newpass)) {
-//                    TaiKhoan taiKhoan = new TaiKhoan();
-//                    taiKhoan.setUserName(txt_username.getText());
-//                    taiKhoan.setPassWord(String.valueOf(txt_renewpass.getPassword()));
-//                    JOptionPane.showMessageDialog(this, taiKhoanService.update(taiKhoan));
-//                } else {
-//                    JOptionPane.showMessageDialog(this, "Nhập lại mật khẩu sai");
-//                }
-//
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Mật khẩu không chính xác");
-//                txt_password.requestFocus();
-//            }
-//        }
-    }//GEN-LAST:event_btn_doimatkhauActionPerformed
+        List<RoleModel> list = nhanVienService.roleLogin(txt_username.getText().trim(), String.valueOf(txt_password.getPassword()));
+        if (check()) {
+            if (!list.isEmpty()) {
+                String newpass = String.valueOf(txt_newpass.getPassword());
+                String renewpass = String.valueOf(txt_renewpass.getPassword());
+                if (renewpass.equals(newpass)) {
+                    NhanVien nhanVien = new NhanVien();
+                    nhanVien.setMa(txt_username.getText());
+                    nhanVien.setMatKhau(String.valueOf(txt_renewpass.getPassword()));
+                    JOptionPane.showMessageDialog(this, nhanVienService.updateMatKhau(nhanVien));
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nhập lại mật khẩu sai");
+                    txt_renewpass.requestFocus();
+                }
 
-    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
-//        if (check()) {
-//            TaiKhoan taiKhoan = new TaiKhoan();
-//            taiKhoan.setUserName(txt_username.getText().trim());
-//            taiKhoan.setPassWord(String.valueOf(txt_password.getPassword()));
-//            if (rdo_admin.isSelected()) {
-//                taiKhoan.setChucVu("admin");
-//            } else {
-//                taiKhoan.setChucVu("staff");
-//            }
-//            taiKhoan.setTrangThai(1);
-//            JOptionPane.showMessageDialog(this, taiKhoanService.insert(taiKhoan));
-//
-//        }
-    }//GEN-LAST:event_btn_themActionPerformed
+            } else {
+                JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không chính xác");
+                txt_password.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_btn_doimatkhauActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,60 +250,56 @@ public class DoiMatKhau extends javax.swing.JFrame {
         });
     }
 
-//    private boolean check() {
-//        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-//        Matcher password = p.matcher(String.valueOf(txt_password.getPassword()));
-//        Matcher newpass = p.matcher(String.valueOf(txt_newpass.getPassword()));
-//        Matcher renewpass = p.matcher(String.valueOf(txt_renewpass.getPassword()));
-//
-//        if (txt_password.getPassword().length <= 0) {
-//            JOptionPane.showMessageDialog(this, "Mật khẩu không được trống");
-//            txt_password.requestFocus();
-//            return false;
-//        } else if (password.find()) {
-//            JOptionPane.showMessageDialog(this, "Mật khẩu không được chứa ký tự đặc biệt");
-//            txt_password.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_newpass.getPassword().length <= 0) {
-//            JOptionPane.showMessageDialog(this, "Mật khẩu mới không được trống");
-//            txt_newpass.requestFocus();
-//            return false;
-//        } else if (newpass.find()) {
-//            JOptionPane.showMessageDialog(this, "Mật khẩu mới không được chứa ký tự đặc biệt");
-//            txt_newpass.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_renewpass.getPassword().length <= 0) {
-//            JOptionPane.showMessageDialog(this, "Mật khẩu nhập lại không được trống");
-//            txt_renewpass.requestFocus();
-//            return false;
-//        } else if (renewpass.find()) {
-//            JOptionPane.showMessageDialog(this, "Nhập lại mật khẩu không được chứa ký tự đặc biệt");
-//            txt_renewpass.requestFocus();
-//            return false;
-//        }
-//
-//        return true;
-//    }
+    private boolean check() {
+        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Matcher password = p.matcher(String.valueOf(txt_password.getPassword()));
+        Matcher newpass = p.matcher(String.valueOf(txt_newpass.getPassword()));
+        Matcher renewpass = p.matcher(String.valueOf(txt_renewpass.getPassword()));
+
+        if (txt_password.getPassword().length <= 0) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu không được trống");
+            txt_password.requestFocus();
+            return false;
+        } else if (password.find()) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu không được chứa ký tự đặc biệt");
+            txt_password.requestFocus();
+            return false;
+        }
+
+        if (txt_newpass.getPassword().length <= 0) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu mới không được trống");
+            txt_newpass.requestFocus();
+            return false;
+        } else if (newpass.find()) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu mới không được chứa ký tự đặc biệt");
+            txt_newpass.requestFocus();
+            return false;
+        }
+
+        if (txt_renewpass.getPassword().length <= 0) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu nhập lại không được trống");
+            txt_renewpass.requestFocus();
+            return false;
+        } else if (renewpass.find()) {
+            JOptionPane.showMessageDialog(this, "Nhập lại mật khẩu không được chứa ký tự đặc biệt");
+            txt_renewpass.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cancel;
     private javax.swing.JButton btn_doimatkhau;
-    private javax.swing.JButton btn_them;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton rdo_admin;
-    private javax.swing.JRadioButton rdo_staff;
     private javax.swing.JPasswordField txt_newpass;
     private javax.swing.JPasswordField txt_password;
     private javax.swing.JPasswordField txt_renewpass;

@@ -41,7 +41,6 @@ public class GioHangRepository {
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()) {
                 idGioHang = rs.getInt(1);
-                System.out.println(idGioHang);
             }
         } catch (SQLException e) {
             e.getMessage();

@@ -851,7 +851,7 @@ public class JPanelBanHang extends javax.swing.JPanel {
 
     private void btn_hoadonchoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hoadonchoActionPerformed
         int index = tbl_hoadon.getSelectedRow();
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
         KhachHang kh = (KhachHang) cbo_khachhang.getSelectedItem();
         HoaDon hoaDon = new HoaDon();
         hoaDon.setTrangThai(2);
@@ -923,12 +923,19 @@ public class JPanelBanHang extends javax.swing.JPanel {
 
         if (result1 == 0) {
             if (evt.getButton() == MouseEvent.BUTTON1) {
+                
                 int selectRow = tbl_giohang.rowAtPoint(evt.getPoint());
                 if (clickCountMap.containsKey(selectRow)) {
                     int clickCount = clickCountMap.get(selectRow);
                     clickCountMap.put(selectRow, clickCount + 1);
                 } else {
                     clickCountMap.put(selectRow, 1);
+                }
+                for (int i = 0; i < tbl_giohang.getRowCount(); i++) {
+                    if (clickCountMap.get(i) > Integer.valueOf(tbl_giohang.getValueAt(i, 3).toString())) {
+                        JOptionPane.showMessageDialog(this, "Bạn đã nhập đủ serial cho sản phẩm này rồi");
+                        return;
+                    }
                 }
                 View_Serial view_Serial = new View_Serial(Integer.parseInt(tbl_giohang.getValueAt(index, 1).toString()));
                 view_Serial.setVisible(true);

@@ -463,7 +463,7 @@ public class mainForm extends javax.swing.JFrame {
         jPanel2.add(lbl_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, 80, 20));
 
         txt_nhanvien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_nhanvien.setForeground(new java.awt.Color(255, 255, 255));
+        txt_nhanvien.setForeground(new java.awt.Color(147, 214, 255));
         jPanel2.add(txt_nhanvien, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 110, 30));
 
         btn_doimatkhau.setBackground(new java.awt.Color(147, 214, 255));
@@ -661,10 +661,6 @@ public class mainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_staffMouseExited
 
     private void btn_customerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_customerMouseClicked
-        if (role == 0) {
-            JOptionPane.showMessageDialog(this, "Bạn không có quyền vào chức năng này");
-            return;
-        }
         bar(jLabel14);
         showForm(new JPanelKhachHang());
     }//GEN-LAST:event_btn_customerMouseClicked

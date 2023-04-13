@@ -35,8 +35,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
@@ -54,7 +56,6 @@ public class JPanelBanHang extends javax.swing.JPanel {
     ChiTietSanPhamService ctspService = new ChiTietSanPhamService();
     BanHangService banHangService = new BanHangService();
     ChiTietGioHangService ctghService = new ChiTietGioHangService();
-    List<ChiTietGioHangModel> listCTGH = ctghService.getAllCTGH();
     NhanVienService nhanVienService = new NhanVienService();
     ChiTietHoaDonService cthdService = new ChiTietHoaDonService();
     KhuyenMaiService khuyenMaiService = new KhuyenMaiService();
@@ -68,6 +69,7 @@ public class JPanelBanHang extends javax.swing.JPanel {
     LocalDate localDate = LocalDate.now();
 
     int clickSerial = 0;
+    private final Map<Integer, Integer> clickCountMap = new HashMap<>();
 
     public JPanelBanHang() {
         initComponents();
@@ -551,22 +553,29 @@ public class JPanelBanHang extends javax.swing.JPanel {
 
     private void btn_themgiohangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themgiohangActionPerformed
         int index = tbl_sanpham.getSelectedRow();
-        LocalDate localDate = LocalDate.now();
-
+        int id_ctsp = Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString());
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm muốn thêm vào giỏ hàng");
             return;
         }
 
-        ChiTietSanPham ctsp1 = ctspService.getDonGiaById(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim()));
-        ChiTietGioHang ctgh = new ChiTietGioHang();
-        ctgh.setIdCTSP(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim()));
-        ctgh.setSoLuong(1);
-        ctgh.setDonGia(ctsp1.getGiaBan());
-        ctgh.setNgayTao(localDate.format(DateTimeFormatter.ISO_DATE));
-        ctgh.setNgayNhap(localDate.format(DateTimeFormatter.ISO_DATE));
-        ctgh.setTrangThai(1);
-        ctghService.insert(ctgh);
+        if (timIdCTSPTrongGioHang(id_ctsp)) {
+            int soLuong = ctghService.getSoLuongByIdCTSPInGioHang(id_ctsp) + 1;
+            ChiTietGioHang ctgh = new ChiTietGioHang();
+            ctgh.setSoLuong(soLuong);
+            ctgh.setIdCTSP(id_ctsp);
+            ctghService.updateSoLuong(ctgh);
+        } else {
+            ChiTietSanPham ctsp1 = ctspService.getDonGiaById(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim()));
+            ChiTietGioHang ctgh = new ChiTietGioHang();
+            ctgh.setIdCTSP(Integer.parseInt(tbl_sanpham.getValueAt(index, 0).toString().trim()));
+            ctgh.setSoLuong(1);
+            ctgh.setDonGia(ctsp1.getGiaBan());
+            ctgh.setNgayTao(localDate.format(DateTimeFormatter.ISO_DATE));
+            ctgh.setNgayNhap(localDate.format(DateTimeFormatter.ISO_DATE));
+            ctgh.setTrangThai(1);
+            ctghService.insert(ctgh);
+        }
 
         double tongTien = 0;
         for (int i = 0; i < ctghService.getAllCTGH().size(); i++) {
@@ -602,8 +611,21 @@ public class JPanelBanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_xoagiohangActionPerformed
 
     private void btn_thanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thanhtoanActionPerformed
-        if (clickSerial == 0) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn serial cho sản phẩm trong giỏ hàng");
+        if (!clickCountMap.isEmpty()) {
+            for (int i = 0; i < tbl_giohang.getRowCount(); i++) {
+                if (clickCountMap.containsKey(i)) {
+                    int clickCount = clickCountMap.get(i);
+                    if (clickCount < Integer.parseInt(tbl_giohang.getValueAt(i, 3).toString())) {
+                        JOptionPane.showMessageDialog(this, "Sản phẩm thứ " + (i + 1) + " mới thêm " + clickCount + " serial, còn " + (Integer.parseInt(tbl_giohang.getValueAt(i, 3).toString()) - clickCount) + " cái nữa!");
+                        return;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Sản phẩm " + (i + 1) + " chưa được thêm serial");
+                    return;
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn serial cho sản phẩm");
             return;
         }
 
@@ -672,7 +694,7 @@ public class JPanelBanHang extends javax.swing.JPanel {
                 Document doc = new Document();
 
                 try {
-                    PdfWriter.getInstance(doc, new FileOutputStream(path + "hoadonchitiet.pdf"));
+                    PdfWriter.getInstance(doc, new FileOutputStream(path + ".pdf"));
                     doc.open();
 
                     String ma = "HD" + maHD;
@@ -872,7 +894,6 @@ public class JPanelBanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_tbl_hoadonMouseClicked
 
     private void tbl_hoadonchoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_hoadonchoMouseClicked
-        LocalDate localDate = LocalDate.now();
         int index = tbl_hoadoncho.getSelectedRow();
         txt_mahoadon.setText(tbl_hoadoncho.getValueAt(index, 0).toString().trim());
         txt_ngaytao.setText(tbl_hoadoncho.getValueAt(index, 2).toString().trim());
@@ -902,7 +923,13 @@ public class JPanelBanHang extends javax.swing.JPanel {
 
         if (result1 == 0) {
             if (evt.getButton() == MouseEvent.BUTTON1) {
-                clickSerial++;
+                int selectRow = tbl_giohang.rowAtPoint(evt.getPoint());
+                if (clickCountMap.containsKey(selectRow)) {
+                    int clickCount = clickCountMap.get(selectRow);
+                    clickCountMap.put(selectRow, clickCount + 1);
+                } else {
+                    clickCountMap.put(selectRow, 1);
+                }
                 View_Serial view_Serial = new View_Serial(Integer.parseInt(tbl_giohang.getValueAt(index, 1).toString()));
                 view_Serial.setVisible(true);
             }
@@ -1043,30 +1070,14 @@ public class JPanelBanHang extends javax.swing.JPanel {
 
         return true;
     }
-//
-//    private int timSLGioHang(String ma, int sl) {
-//        for (int i = 0; i < listGioHang.size(); i++) {
-//            GioHang gh = listGioHang.get(i);
-//            if (gh.getMa().trim().equalsIgnoreCase(ma)) {
-//                return sl + gh.getSoLuong();
-//            }
-//        }
-//        return sl;
-//    }
-//
 
-    private int timIdGioHang(int id) {
-        for (int i = 0; i < listCTGH.size(); i++) {
-            ChiTietGioHangModel ctgh = listCTGH.get(i);
-            if (ctgh.getTrangThai() == 0) {
-                if (ctgh.getId() == id) {
-                    System.out.println("Vao 1");
-                    return 1;
-                }
+    public boolean timIdCTSPTrongGioHang(int id) {
+        for (int i = 0; i < tbl_giohang.getRowCount(); i++) {
+            if (Integer.parseInt(tbl_giohang.getValueAt(i, 1).toString()) == id) {
+                return true;
             }
         }
-        System.out.println("Vao 2");
-        return 2;
+        return false;
     }
 
 

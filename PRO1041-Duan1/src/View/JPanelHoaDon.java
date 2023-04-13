@@ -9,6 +9,7 @@ import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
+import com.toedter.calendar.JDateChooser;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
@@ -237,7 +238,7 @@ public class JPanelHoaDon extends javax.swing.JPanel {
         Document doc = new Document();
 
         try {
-            PdfWriter.getInstance(doc, new FileOutputStream(path + "hoadonchitiet.pdf"));
+            PdfWriter.getInstance(doc, new FileOutputStream(path + ".pdf"));
             doc.open();
 
             String ma = tbl_hoadon.getValueAt(index, 0).toString();
@@ -399,13 +400,15 @@ public class JPanelHoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_txt_timkiemKeyPressed
 
     private void btn_locActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_locActionPerformed
-        String ngay = (String) cbo_date.getSelectedItem();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date start = txt_startdate.getDate();
-        Date end = txt_enddate.getDate();
+        if (checkDate()) {
+            String ngay = (String) cbo_date.getSelectedItem();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date start = txt_startdate.getDate();
+            Date end = txt_enddate.getDate();
 
-        String ngay1 = ngay.equalsIgnoreCase("Ngày Tạo") ? "ngay_tao" : "ngay_thanh_toan";
-        fillHoaDon(chiTietHoaDonService.filterHoaDonByDate(ngay1, sdf.format(start), sdf.format(end)));
+            String ngay1 = ngay.equalsIgnoreCase("Ngày Tạo") ? "ngay_tao" : "ngay_thanh_toan";
+            fillHoaDon(chiTietHoaDonService.filterHoaDonByDate(ngay1, sdf.format(start), sdf.format(end)));
+        }
     }//GEN-LAST:event_btn_locActionPerformed
 
     private static void disableTextField(JTextComponent textComponent) {
@@ -439,34 +442,29 @@ public class JPanelHoaDon extends javax.swing.JPanel {
             defaultTableModelSanPham.addRow(new Object[]{ql.getTenSanPham(), ql.getGiaBan() + " VND", ql.getGiaTri() + " VND", ql.getSoLuong(), ql.getDonGia() + " VND"});
         }
     }
-//
-//    private boolean matches(String date) {
-//        return DATE_PATTERN.matcher(date).matches();
-//    }
-//
-//    private boolean checkValidate() {
-//        if (txt_startdate.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Ngày bắt đầu không được trống");
-//            txt_startdate.requestFocus();
-//            return false;
-//        } else if (!matches(txt_startdate.getText())) {
-//            JOptionPane.showMessageDialog(this, "Ngày bắt đầu không đúng định dạng");
-//            txt_startdate.requestFocus();
-//            return false;
-//        }
-//
-//        if (txt_enddate.getText().isEmpty()) {
-//            JOptionPane.showMessageDialog(this, "Ngày kết thức không được trống");
-//            txt_enddate.requestFocus();
-//            return false;
-//        } else if (!matches(txt_enddate.getText())) {
-//            JOptionPane.showMessageDialog(this, "Ngày kết thúc không đúng định dạng");
-//            txt_enddate.requestFocus();
-//            return false;
-//        }
-//
-//        return true;
-//    }
+
+    private boolean checkDate() {
+        JDateChooser startDate = new JDateChooser();
+        startDate.setDate(txt_startdate.getDate());
+        Date selectedDate = startDate.getDate();
+
+        JDateChooser endDate = new JDateChooser();
+        endDate.setDate(txt_enddate.getDate());
+        Date selectedDate1 = endDate.getDate();
+
+        if (selectedDate == null) {
+            JOptionPane.showMessageDialog(this, "Ngày bắt đầu lọc không được trống");
+            txt_startdate.requestFocus();
+            return false;
+        }
+
+        if (selectedDate1 == null) {
+            JOptionPane.showMessageDialog(this, "Ngày kết thúc lọc không được trống");
+            txt_startdate.requestFocus();
+            return false;
+        }
+        return true;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_inhoadon;

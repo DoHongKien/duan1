@@ -18,6 +18,8 @@ public interface IChiTietGioHangService {
     
     public List<ChiTietGioHangModel> getCTGHByIdHoaDon(int id);
     
+    public int getSoLuongByIdCTSPInGioHang(int id_ctsp);
+    
     public boolean insert(ChiTietGioHang ctgh);
     
     public boolean update(ChiTietGioHang ctgh);

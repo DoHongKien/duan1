@@ -17,6 +17,8 @@ public interface IChiTietGioHangRepository {
     public List<ChiTietGioHangModel> getAllCTGH();
     
     public List<ChiTietGioHangModel> getCTGHByIdHoaDon(int id);
+    
+    public int getSoLuongByIdCTSPInGioHang(int id_ctsp);
 
     public boolean insert(ChiTietGioHang ctgh);
     

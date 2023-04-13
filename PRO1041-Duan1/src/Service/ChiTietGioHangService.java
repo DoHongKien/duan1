@@ -31,6 +31,11 @@ public class ChiTietGioHangService implements IChiTietGioHangService {
     }
 
     @Override
+    public int getSoLuongByIdCTSPInGioHang(int id_ctsp) {
+        return ctghRepository.getSoLuongByIdCTSPInGioHang(id_ctsp);
+    }
+
+    @Override
     public boolean insert(ChiTietGioHang ctgh) {
         return ctghRepository.insert(ctgh);
     }

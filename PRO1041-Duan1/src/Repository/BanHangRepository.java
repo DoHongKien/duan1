@@ -172,23 +172,4 @@ public class BanHangRepository implements IBanHangRepository {
         }
         return list;
     }
-    private static final Random random = new Random();
-    private static final HashSet<Integer> set = new HashSet<>();
-
-    public int generateUniqueInt() {
-        for (Integer i : new BanHangRepository().getMa()) {
-            set.add(i);
-        }
-        int value = random.nextInt(1000);
-        while (set.contains(value)) {
-            value = random.nextInt();
-        }
-        set.add(value);
-        return value;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(new BanHangRepository().generateUniqueInt());
-//        new BanHangRepository().getMa();
-    }
 }

@@ -92,7 +92,6 @@ public class ChiTietSanPhamRepository implements IChiTietSanPhamRepository {
                 ctsp1.setGiaBan(rs.getDouble(1));
                 ctsp = ctsp1;
             }
-            System.out.println(ctsp.getGiaBan());
         } catch (SQLException e) {
         }
         return ctsp;

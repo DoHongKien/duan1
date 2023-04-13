@@ -41,7 +41,7 @@ public class ChiTietGioHangRepository implements IChiTietGioHangRepository {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                ChiTietGioHangModel ctghm = new ChiTietGioHangModel(rs.getInt(1), rs.getInt(2),rs.getDouble(3), rs.getInt(4), rs.getInt(5), rs.getString(6),
+                ChiTietGioHangModel ctghm = new ChiTietGioHangModel(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getInt(4), rs.getInt(5), rs.getString(6),
                         rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13));
                 list.add(ctghm);
             }
@@ -69,7 +69,7 @@ public class ChiTietGioHangRepository implements IChiTietGioHangRepository {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                ChiTietGioHangModel ctghm = new ChiTietGioHangModel(rs.getInt(1), rs.getInt(2),rs.getDouble(3), rs.getInt(4), rs.getInt(5), rs.getString(6),
+                ChiTietGioHangModel ctghm = new ChiTietGioHangModel(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getInt(4), rs.getInt(5), rs.getString(6),
                         rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13));
                 list.add(ctghm);
             }
@@ -77,6 +77,27 @@ public class ChiTietGioHangRepository implements IChiTietGioHangRepository {
             e.getMessage();
         }
         return list;
+    }
+
+    // Tìm số lượng của sản phẩm trong giỏ hàng đẻ làm chức năngtawng sản phẩm khi thêm sản phẩm đã có trong giỏ hàng
+    @Override
+    public int getSoLuongByIdCTSPInGioHang(int id_ctsp) {
+        String sql = "select so_luong from ChiTietGioHang where id_ctsp = ? and trang_thai = 1";
+        int soLuong = 0;
+
+        try {
+            conn = new DBConnection().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id_ctsp);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                soLuong = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return soLuong;
     }
 
     @Override
@@ -131,7 +152,7 @@ public class ChiTietGioHangRepository implements IChiTietGioHangRepository {
     // update số lượng khi ấn thêm vào giỏ hàng form bán hàng
     @Override
     public boolean updateSoLuong(ChiTietGioHang ctgh) {
-        String sql = "update ChiTietGioHang set so_luong = ? where id_ctsp = ?";
+        String sql = "update ChiTietGioHang set so_luong = ? where id_ctsp = ?  and trang_thai = 1";
         boolean f = false;
 
         try {

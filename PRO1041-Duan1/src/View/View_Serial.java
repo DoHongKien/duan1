@@ -68,7 +68,9 @@ public class View_Serial extends javax.swing.JFrame {
         btn_addserial.setBackground(new java.awt.Color(147, 214, 255));
         btn_addserial.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_addserial.setForeground(new java.awt.Color(255, 255, 255));
-        btn_addserial.setText("Ok");
+        btn_addserial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add20px.png"))); // NOI18N
+        btn_addserial.setText("Add");
+        btn_addserial.setBorderPainted(false);
         btn_addserial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_addserialActionPerformed(evt);
@@ -84,7 +86,9 @@ public class View_Serial extends javax.swing.JFrame {
         btn_timkiem.setBackground(new java.awt.Color(147, 214, 255));
         btn_timkiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_timkiem.setForeground(new java.awt.Color(255, 255, 255));
+        btn_timkiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/search.png"))); // NOI18N
         btn_timkiem.setText("Tìm");
+        btn_timkiem.setBorderPainted(false);
         btn_timkiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_timkiemActionPerformed(evt);
@@ -107,21 +111,21 @@ public class View_Serial extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(cbo_serial, javax.swing.GroupLayout.Alignment.LEADING, 0, 169, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                        .addComponent(btn_addserial, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31))))
+                        .addGap(33, 33, 33)
+                        .addComponent(btn_addserial)
+                        .addContainerGap(28, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(btn_timkiem)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbo_serial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_addserial))
+                    .addComponent(btn_addserial, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))

@@ -191,46 +191,54 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
         btn_them.setBackground(new java.awt.Color(147, 214, 255));
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_them.setForeground(new java.awt.Color(255, 255, 255));
+        btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add20px.png"))); // NOI18N
         btn_them.setText("Thêm");
+        btn_them.setBorderPainted(false);
         btn_them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_themActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_them, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 450, 90, 32));
+        jPanel2.add(btn_them, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 450, 90, 33));
 
         btn_sua.setBackground(new java.awt.Color(147, 214, 255));
         btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_sua.setForeground(new java.awt.Color(255, 255, 255));
+        btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit20px.png"))); // NOI18N
         btn_sua.setText("Sửa");
+        btn_sua.setBorderPainted(false);
         btn_sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_suaActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 450, 87, 32));
+        jPanel2.add(btn_sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 450, 87, 33));
 
         btn_xoa.setBackground(new java.awt.Color(147, 214, 255));
         btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_xoa.setForeground(new java.awt.Color(255, 255, 255));
+        btn_xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/delete20px.png"))); // NOI18N
         btn_xoa.setText("Xóa");
+        btn_xoa.setBorderPainted(false);
         btn_xoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_xoaActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 510, 87, 32));
+        jPanel2.add(btn_xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 510, 87, 33));
 
         btn_moi.setBackground(new java.awt.Color(147, 214, 255));
         btn_moi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_moi.setForeground(new java.awt.Color(255, 255, 255));
+        btn_moi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/clear20px.png"))); // NOI18N
         btn_moi.setText("Mới");
+        btn_moi.setBorderPainted(false);
         btn_moi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_moiActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_moi, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 510, 87, 32));
+        jPanel2.add(btn_moi, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 510, 87, 33));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Ngày Hết Hạn");

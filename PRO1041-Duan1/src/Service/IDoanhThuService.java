@@ -4,7 +4,9 @@
  */
 package Service;
 
+import ViewModel.BieuDoModel;
 import ViewModel.DoanhThuModel;
+import ViewModel.SanPhamThongKeModel;
 import ViewModel.ThongKeModel;
 import java.util.List;
 
@@ -43,4 +45,9 @@ public interface IDoanhThuService {
     public Long sumThongKeDoanhThuByMonth(int month);
 
     public Long sumThongKeDoanhThuByDay();
+    
+    // Chức năng hiển thị biểu đồ
+    public List<BieuDoModel> getBieuDo();
+    
+    public List<SanPhamThongKeModel> getSanPhamDoanhThu(int nam);
 }

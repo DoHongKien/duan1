@@ -15,6 +15,8 @@ public interface KhachHangInterface {
 
     public List<KhachHang> getListDB();
     
+    public List<KhachHang> getAllKhachHang();
+    
     public List<KhachHang> getListKHByName(String name);
 
     public KhachHang getDB(String ma);

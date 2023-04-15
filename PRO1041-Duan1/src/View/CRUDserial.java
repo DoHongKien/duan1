@@ -7,7 +7,6 @@ package View;
 import Model.Serial;
 import Service.ChiTietSanPhamService;
 import Service.SerialService;
-import java.awt.Image;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,7 +15,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -41,16 +39,11 @@ public class CRUDserial extends javax.swing.JFrame {
 
     public CRUDserial() {
         initComponents();
-        setTitle("Serial");
         fillTable(serialService.getAllSerial());
     }
 
     public CRUDserial(int id) {
         initComponents();
-        setTitle("Serial");
-        ImageIcon icon = new ImageIcon(getClass().getResource("/Images/sevent-logo.png"));
-        Image image = icon.getImage();
-        setIconImage(image);
         this.idCTSP = id;
         fillTable(serialService.getSerialByIdCTSP(idCTSP));
     }
@@ -111,8 +104,9 @@ public class CRUDserial extends javax.swing.JFrame {
         btnThem.setBackground(new java.awt.Color(147, 214, 255));
         btnThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnThem.setForeground(new java.awt.Color(255, 255, 255));
+        btnThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/import.png"))); // NOI18N
         btnThem.setText("Import");
-        btnThem.setBorder(null);
+        btnThem.setBorderPainted(false);
         btnThem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnThem.setPreferredSize(new java.awt.Dimension(85, 25));
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -126,16 +120,16 @@ public class CRUDserial extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(230, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(233, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 230, 280));
@@ -164,15 +158,7 @@ public class CRUDserial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-//        LocalDate localDate = LocalDate.now();
-//        String ngayTao = localDate.format(DateTimeFormatter.ISO_DATE);
-//        String ngayNhap = localDate.format(DateTimeFormatter.ISO_DATE);
-//        int trangThai = 0;
-//        Serial serial = new Serial(idCTSP, txt_maserial.getText().trim(), ngayTao, ngayNhap, trangThai);
-//        JOptionPane.showMessageDialog(this, serialService.insert(serial));
-//        int soluong = ctspService.getSoLuongByIdCTSP(idCTSP) + 1;
-//        ctspService.updateSoLuongByID(soluong, idCTSP);
-//        fillTable(serialService.getSerialByIdCTSP(idCTSP));
+        
         DefaultTableModel importDataExcelModel = (DefaultTableModel) tbl_serial.getModel();
         importDataExcelModel.setRowCount(0);
         FileInputStream fis = null;

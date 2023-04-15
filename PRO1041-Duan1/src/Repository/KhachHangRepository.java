@@ -45,6 +45,28 @@ public class KhachHangRepository implements KhachHangInterface {
     }
 
     @Override
+    public List<KhachHang> getAllKhachHang() {
+        String sql = "select * from KhachHang WHERE trang_thai != 2";
+        List<KhachHang> list = new ArrayList<>();
+        try {
+            ps = dbCon.getConnection().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new KhachHang(rs.getInt(1), rs.getString(2), rs.getNString(3),
+                        rs.getString(4), rs.getNString(5),
+                        rs.getString(6), rs.getNString(7),
+                        rs.getString(8), rs.getString(9), rs.getInt(10)));
+            }
+            ps.close();
+            rs.close();
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(KhachHangRepository.class.getName()).log(Level.SEVERE, null, ex);
+            return list;
+        }
+    }
+
+    @Override
     public List<KhachHang> getListKHByName(String name) {
         String sql = "select * from KhachHang where ten LIKE '%" + name + "%'";
         List<KhachHang> list = new ArrayList<>();

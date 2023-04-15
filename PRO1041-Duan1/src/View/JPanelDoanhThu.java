@@ -7,10 +7,14 @@ package View;
 import Model.SanPham;
 import Service.DoanhThuService;
 import Service.SanPhamService;
+import ViewModel.BieuDoModel;
 import ViewModel.DoanhThuModel;
+import ViewModel.SanPhamThongKeModel;
 import ViewModel.ThongKeModel;
 import com.toedter.calendar.JDateChooser;
+import java.awt.CardLayout;
 import java.awt.Desktop;
+import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
 import org.apache.poi.ss.usermodel.Cell;
@@ -28,6 +33,13 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 
 /**
  *
@@ -48,6 +60,9 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
         txt_spdangkinhdoanh.setText(String.valueOf(doanhThuService.sumThongKeSanPhamDangBan()));
         txt_spngungkinhdoanh.setText(String.valueOf(doanhThuService.sumThongKeSanPhamNgungBan()));
         txt_sphethang.setText(String.valueOf(doanhThuService.sumThongKeSanPhamHetHang()));
+        
+        bieuDoCot(view_bieudocot);
+        bieuDoTron(view_bieudotron);
 
         List<SanPham> listSP = sanPhamService.getAllSanPham();
         cbo_loaisanpham.addItem("Chọn tên sản phẩm");
@@ -131,6 +146,9 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
         btn_loc = new javax.swing.JButton();
         cbo_doanhthuthang = new javax.swing.JComboBox<>();
         btn_exportexcel1 = new javax.swing.JButton();
+        jPanel10 = new javax.swing.JPanel();
+        view_bieudocot = new javax.swing.JPanel();
+        view_bieudotron = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(1070, 680));
@@ -289,10 +307,12 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
             tbl_sanpham.getColumnModel().getColumn(0).setMaxWidth(400);
         }
 
-        btn_exportexcel.setBackground(new java.awt.Color(51, 153, 0));
+        btn_exportexcel.setBackground(new java.awt.Color(147, 214, 255));
         btn_exportexcel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_exportexcel.setForeground(new java.awt.Color(255, 255, 255));
-        btn_exportexcel.setText("Excel");
+        btn_exportexcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/excel.png"))); // NOI18N
+        btn_exportexcel.setText("Xuất Excel");
+        btn_exportexcel.setBorderPainted(false);
         btn_exportexcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_exportexcelActionPerformed(evt);
@@ -305,24 +325,19 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addContainerGap(1020, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(24, 24, 24))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(45, 45, 45)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(cbo_loaisanpham, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(96, 96, 96)
@@ -330,7 +345,12 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(cbo_loaithongke, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_exportexcel)))
+                                .addComponent(btn_exportexcel))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(51, 51, 51))))
         );
         jPanel5Layout.setVerticalGroup(
@@ -348,10 +368,10 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
                     .addComponent(cbo_loaisanpham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbo_loaithongke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(btn_exportexcel))
+                    .addComponent(btn_exportexcel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sản Phẩm", jPanel5);
@@ -445,7 +465,7 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
                         .addGap(64, 64, 64)
                         .addComponent(jLabel9))
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
+                        .addGap(34, 34, 34)
                         .addComponent(txt_doanhthungay)))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
@@ -482,7 +502,9 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
         btn_loc.setBackground(new java.awt.Color(147, 214, 255));
         btn_loc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_loc.setForeground(new java.awt.Color(255, 255, 255));
+        btn_loc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/filter.png"))); // NOI18N
         btn_loc.setText("Lọc");
+        btn_loc.setBorderPainted(false);
         btn_loc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_locActionPerformed(evt);
@@ -495,10 +517,12 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
             }
         });
 
-        btn_exportexcel1.setBackground(new java.awt.Color(51, 153, 0));
+        btn_exportexcel1.setBackground(new java.awt.Color(147, 214, 255));
         btn_exportexcel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_exportexcel1.setForeground(new java.awt.Color(255, 255, 255));
-        btn_exportexcel1.setText("Excel");
+        btn_exportexcel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/excel.png"))); // NOI18N
+        btn_exportexcel1.setText("Xuất Excel");
+        btn_exportexcel1.setBorderPainted(false);
         btn_exportexcel1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_exportexcel1ActionPerformed(evt);
@@ -526,17 +550,17 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
                         .addComponent(cbo_doanhthuthang, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel13)
-                        .addGap(27, 27, 27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txt_startdate, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
+                        .addGap(65, 65, 65)
                         .addComponent(jLabel14)
                         .addGap(27, 27, 27)
                         .addComponent(txt_enddate, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
+                        .addGap(49, 49, 49)
                         .addComponent(btn_loc)
-                        .addGap(27, 27, 27)
+                        .addGap(46, 46, 46)
                         .addComponent(btn_exportexcel1)
-                        .addGap(83, 83, 83))))
+                        .addGap(49, 49, 49))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -546,15 +570,15 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel13)
                         .addComponent(cbo_doanhthuthang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txt_startdate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btn_loc)
-                        .addComponent(btn_exportexcel1))
+                        .addComponent(btn_loc, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_exportexcel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel14)
                         .addComponent(txt_enddate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -564,6 +588,45 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
         );
 
         jTabbedPane1.addTab("Doanh Thu", jPanel6);
+
+        javax.swing.GroupLayout view_bieudocotLayout = new javax.swing.GroupLayout(view_bieudocot);
+        view_bieudocot.setLayout(view_bieudocotLayout);
+        view_bieudocotLayout.setHorizontalGroup(
+            view_bieudocotLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1070, Short.MAX_VALUE)
+        );
+        view_bieudocotLayout.setVerticalGroup(
+            view_bieudocotLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 309, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout view_bieudotronLayout = new javax.swing.GroupLayout(view_bieudotron);
+        view_bieudotron.setLayout(view_bieudotronLayout);
+        view_bieudotronLayout.setHorizontalGroup(
+            view_bieudotronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        view_bieudotronLayout.setVerticalGroup(
+            view_bieudotronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 245, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(view_bieudocot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(view_bieudotron, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(view_bieudocot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(view_bieudotron, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Biểu đồ", jPanel10);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -612,7 +675,7 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
     private void cbo_doanhthuthangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_doanhthuthangItemStateChanged
         int index = cbo_doanhthuthang.getSelectedIndex();
 
-        txt_doanhthuthang.setText(String.valueOf(doanhThuService.sumThongKeDoanhThuByMonth(index)));
+        txt_doanhthuthang.setText(String.valueOf(doanhThuService.sumThongKeDoanhThuByMonth(index)) + " VND");
     }//GEN-LAST:event_cbo_doanhthuthangItemStateChanged
 
     private void btn_exportexcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exportexcelActionPerformed
@@ -726,6 +789,45 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
             defaultTableModelDoanhThu.addRow(new Object[]{dtm.getNgayTao(), insertDot(String.valueOf(dtm.getDoanhThu())), dtm.getSoHoaDon()});
         }
     }
+    
+    private void bieuDoCot(JPanel jPanel) {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (BieuDoModel sp : doanhThuService.getBieuDo()) {
+            dataset.addValue(sp.getSoLuong(), "Sản phẩm bán theo tháng", String.valueOf(sp.getThang()));
+        }
+        JFreeChart barChart = ChartFactory.createBarChart(
+                "Biểu đồ thống kê số lượng sản phẩm bán trong năm".toUpperCase(),
+                "Các tháng trong năm", "Số lượng sản phẩm",
+                dataset, PlotOrientation.VERTICAL, false, true, false);
+        
+        ChartPanel chartPanel = new ChartPanel(barChart);
+        chartPanel.setPreferredSize(new Dimension(jPanel.getWidth(), 321));
+
+        jPanel.removeAll();
+        jPanel.setLayout(new CardLayout());
+        jPanel.add(chartPanel);
+        jPanel.validate();
+        jPanel.repaint();
+    }
+
+    private void bieuDoTron(JPanel jPanel) {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        for (SanPhamThongKeModel sp : doanhThuService.getSanPhamDoanhThu(2023)) {
+            dataset.setValue(sp.getTen(), sp.getDoanhThu());
+        }
+
+        JFreeChart chart = ChartFactory.createPieChart(
+                "Biểu đồ về doanh thu các hãng sản phẩm laptop".toUpperCase(),
+                dataset, true, true, true);
+
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(jPanel.getWidth(), 321));
+        jPanel.removeAll();
+        jPanel.setLayout(new CardLayout());
+        jPanel.add(chartPanel);
+        jPanel.validate();
+        jPanel.repaint();
+    }
 
     public static String insertDot(String input) {
         StringBuilder sb = new StringBuilder(input);
@@ -780,6 +882,7 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -801,5 +904,7 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
     private javax.swing.JLabel txt_sphethang;
     private javax.swing.JLabel txt_spngungkinhdoanh;
     private com.toedter.calendar.JDateChooser txt_startdate;
+    private javax.swing.JPanel view_bieudocot;
+    private javax.swing.JPanel view_bieudotron;
     // End of variables declaration//GEN-END:variables
 }

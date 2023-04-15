@@ -97,7 +97,9 @@ public class DoiMatKhau extends javax.swing.JFrame {
         btn_doimatkhau.setBackground(new java.awt.Color(147, 214, 255));
         btn_doimatkhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_doimatkhau.setForeground(new java.awt.Color(255, 255, 255));
-        btn_doimatkhau.setText("Đổi Mật Khẩu");
+        btn_doimatkhau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/changepass.png"))); // NOI18N
+        btn_doimatkhau.setText("Đổi");
+        btn_doimatkhau.setBorderPainted(false);
         btn_doimatkhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_doimatkhauActionPerformed(evt);
@@ -168,8 +170,8 @@ public class DoiMatKhau extends javax.swing.JFrame {
                     .addComponent(txt_renewpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(78, 78, 78)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_doimatkhau)
-                    .addComponent(btn_cancel))
+                    .addComponent(btn_doimatkhau, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
 

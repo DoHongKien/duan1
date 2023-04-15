@@ -162,50 +162,54 @@ public class JPanelHoaDon extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Ngày");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, -1, -1));
 
         cbo_date.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbo_dateItemStateChanged(evt);
             }
         });
-        jPanel2.add(cbo_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, 127, -1));
+        jPanel2.add(cbo_date, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 70, 127, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Từ");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 40, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 40, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Đến");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 40, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 40, -1, -1));
 
         btn_inhoadon.setBackground(new java.awt.Color(147, 214, 255));
         btn_inhoadon.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_inhoadon.setForeground(new java.awt.Color(255, 255, 255));
-        btn_inhoadon.setText("In hóa đơn");
+        btn_inhoadon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/print.png"))); // NOI18N
+        btn_inhoadon.setText("In");
+        btn_inhoadon.setBorderPainted(false);
         btn_inhoadon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_inhoadonActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_inhoadon, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, -1, -1));
+        jPanel2.add(btn_inhoadon, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, 77, 33));
 
         txt_startdate.setDateFormatString("yyyy-MM-dd");
-        jPanel2.add(txt_startdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, 130, -1));
+        jPanel2.add(txt_startdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 70, 130, -1));
 
         txt_enddate.setDateFormatString("yyyy-MM-dd");
-        jPanel2.add(txt_enddate, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 70, 120, -1));
+        jPanel2.add(txt_enddate, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 70, 120, -1));
 
         btn_loc.setBackground(new java.awt.Color(147, 214, 255));
         btn_loc.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_loc.setForeground(new java.awt.Color(255, 255, 255));
+        btn_loc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/filter.png"))); // NOI18N
         btn_loc.setText("Lọc");
+        btn_loc.setBorderPainted(false);
         btn_loc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_locActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_loc, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 70, 50, -1));
+        jPanel2.add(btn_loc, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 70, 73, 33));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 55, 1070, 620));
     }// </editor-fold>//GEN-END:initComponents

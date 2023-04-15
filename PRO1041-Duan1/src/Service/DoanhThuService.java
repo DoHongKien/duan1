@@ -5,7 +5,9 @@
 package Service;
 
 import Repository.DoanhThuRepository;
+import ViewModel.BieuDoModel;
 import ViewModel.DoanhThuModel;
+import ViewModel.SanPhamThongKeModel;
 import ViewModel.ThongKeModel;
 import java.util.List;
 
@@ -88,6 +90,16 @@ public class DoanhThuService implements IDoanhThuService {
     @Override
     public Long sumThongKeDoanhThuByDay() {
         return doanhThuRepository.sumThongKeDoanhThuByDay();
+    }
+
+    @Override
+    public List<BieuDoModel> getBieuDo() {
+        return doanhThuRepository.getBieuDo();
+    }
+
+    @Override
+    public List<SanPhamThongKeModel> getSanPhamDoanhThu(int nam) {
+        return doanhThuRepository.getSanPhamDoanhThu(nam);
     }
 
 }

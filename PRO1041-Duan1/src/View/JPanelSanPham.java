@@ -170,7 +170,7 @@ public class JPanelSanPham extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setBackground(new java.awt.Color(147, 214, 255));
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("          Sản Phẩm");
         jLabel2.setOpaque(true);
@@ -197,7 +197,6 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tbl_sanpham.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         tbl_sanpham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -220,26 +219,28 @@ public class JPanelSanPham extends javax.swing.JPanel {
         btn_hang.setBackground(new java.awt.Color(147, 214, 255));
         btn_hang.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_hang.setForeground(new java.awt.Color(255, 255, 255));
-        btn_hang.setText("Hãng");
+        btn_hang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit3.png"))); // NOI18N
+        btn_hang.setBorderPainted(false);
         btn_hang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_hangActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_hang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 441, 130, 28));
+        jPanel6.add(btn_hang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 441, 130, 33));
 
         jPanel6.add(cbo_cpu, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 411, 130, -1));
 
         btn_cpu.setBackground(new java.awt.Color(147, 214, 255));
         btn_cpu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_cpu.setForeground(new java.awt.Color(255, 255, 255));
-        btn_cpu.setText("CPU");
+        btn_cpu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit3.png"))); // NOI18N
+        btn_cpu.setBorderPainted(false);
         btn_cpu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cpuActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_cpu, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 441, 130, 28));
+        jPanel6.add(btn_cpu, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 441, 130, 33));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -276,24 +277,26 @@ public class JPanelSanPham extends javax.swing.JPanel {
         btn_ram.setBackground(new java.awt.Color(147, 214, 255));
         btn_ram.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_ram.setForeground(new java.awt.Color(255, 255, 255));
-        btn_ram.setText("RAM");
+        btn_ram.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit3.png"))); // NOI18N
+        btn_ram.setBorderPainted(false);
         btn_ram.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ramActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_ram, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 441, 130, 28));
+        jPanel6.add(btn_ram, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 441, 130, 33));
 
         btn_ocung.setBackground(new java.awt.Color(147, 214, 255));
         btn_ocung.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_ocung.setForeground(new java.awt.Color(255, 255, 255));
-        btn_ocung.setText("Ổ cứng");
+        btn_ocung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit3.png"))); // NOI18N
+        btn_ocung.setBorderPainted(false);
         btn_ocung.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ocungActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_ocung, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 441, 130, 28));
+        jPanel6.add(btn_ocung, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 441, 130, 33));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -308,24 +311,26 @@ public class JPanelSanPham extends javax.swing.JPanel {
         btn_vga.setBackground(new java.awt.Color(147, 214, 255));
         btn_vga.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_vga.setForeground(new java.awt.Color(255, 255, 255));
-        btn_vga.setText("VGA");
+        btn_vga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit3.png"))); // NOI18N
+        btn_vga.setBorderPainted(false);
         btn_vga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_vgaActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_vga, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 537, 130, 28));
+        jPanel6.add(btn_vga, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 537, 130, 33));
 
         btn_manhinh.setBackground(new java.awt.Color(147, 214, 255));
         btn_manhinh.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_manhinh.setForeground(new java.awt.Color(255, 255, 255));
-        btn_manhinh.setText("Màn Hình");
+        btn_manhinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit3.png"))); // NOI18N
+        btn_manhinh.setBorderPainted(false);
         btn_manhinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_manhinhActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_manhinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 537, 130, 28));
+        jPanel6.add(btn_manhinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 537, 130, 33));
 
         jPanel6.add(cbo_manhinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 507, 130, -1));
 
@@ -340,13 +345,14 @@ public class JPanelSanPham extends javax.swing.JPanel {
         btn_mausac.setBackground(new java.awt.Color(147, 214, 255));
         btn_mausac.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_mausac.setForeground(new java.awt.Color(255, 255, 255));
-        btn_mausac.setText("Màu Sắc");
+        btn_mausac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit3.png"))); // NOI18N
+        btn_mausac.setBorderPainted(false);
         btn_mausac.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_mausacActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_mausac, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 537, 130, 28));
+        jPanel6.add(btn_mausac, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 537, 130, 33));
 
         jPanel6.add(cbo_mausac, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 507, 130, -1));
 
@@ -361,13 +367,14 @@ public class JPanelSanPham extends javax.swing.JPanel {
         btn_sanpham.setBackground(new java.awt.Color(147, 214, 255));
         btn_sanpham.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_sanpham.setForeground(new java.awt.Color(255, 255, 255));
-        btn_sanpham.setText("Sản Phẩm");
+        btn_sanpham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit3.png"))); // NOI18N
+        btn_sanpham.setBorderPainted(false);
         btn_sanpham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_sanphamActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_sanpham, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 537, 130, 28));
+        jPanel6.add(btn_sanpham, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 537, 130, 33));
 
         jPanel6.add(cbo_sanpham, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 507, 130, -1));
 
@@ -391,15 +398,17 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel6.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 343, 160, 10));
 
         btn_timkiem.setBackground(new java.awt.Color(147, 214, 255));
-        btn_timkiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_timkiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_timkiem.setForeground(new java.awt.Color(255, 255, 255));
-        btn_timkiem.setText("Tìm kiếm");
+        btn_timkiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/search.png"))); // NOI18N
+        btn_timkiem.setText("Tìm");
+        btn_timkiem.setBorderPainted(false);
         btn_timkiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_timkiemActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_timkiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 323, -1, -1));
+        jPanel6.add(btn_timkiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 316, 77, 33));
 
         jLabel11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel11.setText("Giá bán");
@@ -407,7 +416,7 @@ public class JPanelSanPham extends javax.swing.JPanel {
 
         jLabel13.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel13.setText("Trạng Thái");
-        jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 470, 70, 20));
+        jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 460, 70, 20));
 
         txt_gianhap.setBorder(null);
         jPanel6.add(txt_gianhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 360, 130, 20));
@@ -420,12 +429,12 @@ public class JPanelSanPham extends javax.swing.JPanel {
         jPanel6.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 340, 80, 20));
 
         jSeparator1.setForeground(new java.awt.Color(147, 214, 255));
-        jPanel6.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 450, 130, 10));
+        jPanel6.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 440, 130, 10));
 
         txtSLTon.setEditable(false);
         txtSLTon.setBackground(new java.awt.Color(255, 255, 255));
         txtSLTon.setBorder(null);
-        jPanel6.add(txtSLTon, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 430, 130, 20));
+        jPanel6.add(txtSLTon, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 420, 130, 20));
 
         jSeparator4.setForeground(new java.awt.Color(147, 214, 255));
         jPanel6.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 380, 130, 10));
@@ -436,50 +445,58 @@ public class JPanelSanPham extends javax.swing.JPanel {
         btn_sua.setBackground(new java.awt.Color(147, 214, 255));
         btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_sua.setForeground(new java.awt.Color(255, 255, 255));
+        btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit20px.png"))); // NOI18N
         btn_sua.setText("Sửa");
+        btn_sua.setBorderPainted(false);
         btn_sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_suaActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(807, 533, 70, 32));
+        jPanel6.add(btn_sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 530, 77, 33));
 
         btn_moi.setBackground(new java.awt.Color(147, 214, 255));
         btn_moi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_moi.setForeground(new java.awt.Color(255, 255, 255));
+        btn_moi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/clear20px.png"))); // NOI18N
         btn_moi.setText("Mới");
+        btn_moi.setBorderPainted(false);
         btn_moi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_moiActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_moi, new org.netbeans.lib.awtextra.AbsoluteConstraints(977, 533, 70, 32));
+        jPanel6.add(btn_moi, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 530, 77, 33));
 
         btn_them.setBackground(new java.awt.Color(147, 214, 255));
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_them.setForeground(new java.awt.Color(255, 255, 255));
+        btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add20px.png"))); // NOI18N
         btn_them.setText("Thêm");
+        btn_them.setBorderPainted(false);
         btn_them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_themActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_them, new org.netbeans.lib.awtextra.AbsoluteConstraints(717, 533, 70, 32));
+        jPanel6.add(btn_them, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 530, 86, 33));
 
         btn_xoa.setBackground(new java.awt.Color(147, 214, 255));
         btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_xoa.setForeground(new java.awt.Color(255, 255, 255));
+        btn_xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/delete20px.png"))); // NOI18N
         btn_xoa.setText("Xóa");
+        btn_xoa.setBorderPainted(false);
         btn_xoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_xoaActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(897, 533, 70, 32));
+        jPanel6.add(btn_xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 530, 77, 33));
 
         jLabel15.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel15.setText("Số lượng tồn");
-        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 410, 90, 20));
+        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 400, 90, 20));
 
         buttonGroup1.add(rdo_con);
         rdo_con.setSelected(true);
@@ -495,24 +512,28 @@ public class JPanelSanPham extends javax.swing.JPanel {
         btn_serial.setBackground(new java.awt.Color(147, 214, 255));
         btn_serial.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_serial.setForeground(new java.awt.Color(255, 255, 255));
+        btn_serial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit3.png"))); // NOI18N
         btn_serial.setText("Serial");
+        btn_serial.setBorderPainted(false);
         btn_serial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_serialActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 440, 130, 30));
+        jPanel6.add(btn_serial, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 440, 130, 33));
 
         btn_load.setBackground(new java.awt.Color(147, 214, 255));
         btn_load.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_load.setForeground(new java.awt.Color(255, 255, 255));
+        btn_load.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/reload.png"))); // NOI18N
         btn_load.setText("Load");
+        btn_load.setBorderPainted(false);
         btn_load.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_loadActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_load, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 290, 60, 30));
+        jPanel6.add(btn_load, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 290, 90, 33));
 
         jTabbedPane1.addTab("Sản Phẩm", jPanel6);
 
@@ -539,7 +560,9 @@ public class JPanelSanPham extends javax.swing.JPanel {
         btn_timkiemspx.setBackground(new java.awt.Color(147, 214, 255));
         btn_timkiemspx.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_timkiemspx.setForeground(new java.awt.Color(255, 255, 255));
-        btn_timkiemspx.setText("Tìm kiếm");
+        btn_timkiemspx.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/search.png"))); // NOI18N
+        btn_timkiemspx.setText("Tìm");
+        btn_timkiemspx.setBorderPainted(false);
         btn_timkiemspx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_timkiemspxActionPerformed(evt);
@@ -549,7 +572,9 @@ public class JPanelSanPham extends javax.swing.JPanel {
         btn_khoiphuc.setBackground(new java.awt.Color(147, 214, 255));
         btn_khoiphuc.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btn_khoiphuc.setForeground(new java.awt.Color(255, 255, 255));
+        btn_khoiphuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/khoiphuc.png"))); // NOI18N
         btn_khoiphuc.setText("Khôi Phục");
+        btn_khoiphuc.setBorderPainted(false);
         btn_khoiphuc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_khoiphucActionPerformed(evt);
@@ -576,7 +601,7 @@ public class JPanelSanPham extends javax.swing.JPanel {
                             .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(40, 40, 40)
                         .addComponent(btn_timkiemspx)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 584, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 572, Short.MAX_VALUE)
                         .addComponent(btn_khoiphuc)
                         .addGap(87, 87, 87))))
         );
@@ -592,10 +617,10 @@ public class JPanelSanPham extends javax.swing.JPanel {
                         .addGap(0, 0, 0)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btn_timkiemspx)
-                        .addComponent(btn_khoiphuc, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_timkiemspx, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_khoiphuc, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

@@ -5,7 +5,9 @@
 package Repository;
 
 import Utility.DBConnection;
+import ViewModel.BieuDoModel;
 import ViewModel.DoanhThuModel;
+import ViewModel.SanPhamThongKeModel;
 import ViewModel.ThongKeModel;
 import java.util.List;
 import java.sql.Connection;
@@ -337,5 +339,120 @@ public class DoanhThuRepository implements IDoanhThuRepository {
             e.printStackTrace(System.out);
         }
         return tong;
+    }
+
+    @Override
+    public List<BieuDoModel> getBieuDo() {
+        List<BieuDoModel> list = new ArrayList<>();
+        String sql = "WITH CTE AS ("
+                + "    SELECT"
+                + "        YEAR(cthd.ngay_tao) AS Nam, "
+                + "        MONTH(cthd.ngay_tao) AS Thang, "
+                + "        COUNT(cthd.id_ctsp) AS SoLuongSanPham "
+                + "    FROM "
+                + "        ChiTietHoaDon cthd "
+                + "    WHERE\n"
+                + "        cthd.ngay_tao >= DATEADD(month, -11, GETDATE()) "
+                + "    GROUP BY "
+                + "        YEAR(cthd.ngay_tao), "
+                + "        MONTH(cthd.ngay_tao) "
+                + ") "
+                + "SELECT "
+                + "    ThangNam.Nam, "
+                + "    ThangNam.Thang, "
+                + "    ISNULL(CTE.SoLuongSanPham, 0) AS SoLuongSanPham "
+                + "FROM "
+                + "    ( "
+                + "        SELECT "
+                + "            YEAR(GETDATE()) AS Nam, "
+                + "            1 AS Thang "
+                + "        UNION ALL "
+                + "        SELECT "
+                + "            YEAR(GETDATE()) AS Nam, "
+                + "            2 AS Thang "
+                + "        UNION ALL "
+                + "        SELECT "
+                + "            YEAR(GETDATE()) AS Nam, "
+                + "            3 AS Thang "
+                + "        UNION ALL "
+                + "        SELECT "
+                + "            YEAR(GETDATE()) AS Nam, "
+                + "            4 AS Thang "
+                + "        UNION ALL "
+                + "        SELECT "
+                + "            YEAR(GETDATE()) AS Nam,\n"
+                + "            5 AS Thang\n"
+                + "        UNION ALL\n"
+                + "        SELECT\n"
+                + "            YEAR(GETDATE()) AS Nam,\n"
+                + "            6 AS Thang\n"
+                + "        UNION ALL\n"
+                + "        SELECT\n"
+                + "            YEAR(GETDATE()) AS Nam,\n"
+                + "            7 AS Thang\n"
+                + "        UNION ALL\n"
+                + "        SELECT\n"
+                + "            YEAR(GETDATE()) AS Nam,\n"
+                + "            8 AS Thang\n"
+                + "        UNION ALL\n"
+                + "        SELECT\n"
+                + "            YEAR(GETDATE()) AS Nam,\n"
+                + "            9 AS Thang\n"
+                + "        UNION ALL\n"
+                + "        SELECT\n"
+                + "            YEAR(GETDATE()) AS Nam,\n"
+                + "            10 AS Thang\n"
+                + "        UNION ALL\n"
+                + "        SELECT\n"
+                + "            YEAR(GETDATE()) AS Nam,\n"
+                + "            11 AS Thang\n"
+                + "        UNION ALL\n"
+                + "        SELECT\n"
+                + "            YEAR(GETDATE()) AS Nam,\n"
+                + "            12 AS Thang\n"
+                + "    ) AS ThangNam\n"
+                + "LEFT JOIN\n"
+                + "    CTE ON ThangNam.Nam = CTE.Nam AND ThangNam.Thang = CTE.Thang\n"
+                + "ORDER BY\n"
+                + "    ThangNam.Nam,\n"
+                + "    ThangNam.Thang;";
+
+        try {
+            conn = new DBConnection().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                BieuDoModel bieuDoModel = new BieuDoModel(rs.getInt(1), rs.getInt(2), rs.getInt(3));
+                list.add(bieuDoModel);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return list;
+    }
+
+    @Override
+    public List<SanPhamThongKeModel> getSanPhamDoanhThu(int nam) {
+        List<SanPhamThongKeModel> list = new ArrayList<>();
+        String sql = "select SanPham.ten, sum(ChiTietHoaDon.don_gia) from ChiTietHoaDon join ChiTietSanPham on "
+                + "ChiTietHoaDon.id_ctsp = ChiTietSanPham.id join SanPham on ChiTietSanPham.id_san_pham = SanPham.id "
+                + "where YEAR(ChiTietHoaDon.ngay_tao) = ? "
+                + "group by SanPham.ten";
+
+        try {
+            conn = new DBConnection().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, nam);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                SanPhamThongKeModel keModel = new SanPhamThongKeModel(rs.getString(1), rs.getLong(2));
+                list.add(keModel);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return list;
     }
 }

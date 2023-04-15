@@ -22,6 +22,11 @@ public class KhachHangService implements KhachHangServiceInterface {
     }
 
     @Override
+    public List<KhachHang> getAllKhachHang() {
+        return khR.getAllKhachHang();
+    }
+
+    @Override
     public List<KhachHang> getListKHByName(String name) {
         return khR.getListKHByName(name);
     }

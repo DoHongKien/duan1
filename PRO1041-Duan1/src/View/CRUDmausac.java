@@ -122,8 +122,9 @@ public class CRUDmausac extends javax.swing.JFrame {
         btn_them.setBackground(new java.awt.Color(147, 214, 255));
         btn_them.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_them.setForeground(new java.awt.Color(255, 255, 255));
+        btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add20px.png"))); // NOI18N
         btn_them.setText("Thêm");
-        btn_them.setBorder(null);
+        btn_them.setBorderPainted(false);
         btn_them.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_them.setPreferredSize(new java.awt.Dimension(85, 25));
         btn_them.addActionListener(new java.awt.event.ActionListener() {
@@ -135,8 +136,9 @@ public class CRUDmausac extends javax.swing.JFrame {
         btn_sua.setBackground(new java.awt.Color(147, 214, 255));
         btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_sua.setForeground(new java.awt.Color(255, 255, 255));
+        btn_sua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/edit20px.png"))); // NOI18N
         btn_sua.setText("Sửa");
-        btn_sua.setBorder(null);
+        btn_sua.setBorderPainted(false);
         btn_sua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_sua.setPreferredSize(new java.awt.Dimension(85, 35));
         btn_sua.addActionListener(new java.awt.event.ActionListener() {
@@ -148,8 +150,9 @@ public class CRUDmausac extends javax.swing.JFrame {
         btn_xoa.setBackground(new java.awt.Color(147, 214, 255));
         btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_xoa.setForeground(new java.awt.Color(255, 255, 255));
+        btn_xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/delete20px.png"))); // NOI18N
         btn_xoa.setText("Xóa");
-        btn_xoa.setBorder(null);
+        btn_xoa.setBorderPainted(false);
         btn_xoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_xoa.setMinimumSize(new java.awt.Dimension(85, 35));
         btn_xoa.setPreferredSize(new java.awt.Dimension(85, 35));
@@ -162,8 +165,9 @@ public class CRUDmausac extends javax.swing.JFrame {
         btn_moi.setBackground(new java.awt.Color(147, 214, 255));
         btn_moi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btn_moi.setForeground(new java.awt.Color(255, 255, 255));
+        btn_moi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/clear20px.png"))); // NOI18N
         btn_moi.setText("Mới");
-        btn_moi.setBorder(null);
+        btn_moi.setBorderPainted(false);
         btn_moi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_moi.setMinimumSize(new java.awt.Dimension(85, 35));
         btn_moi.setPreferredSize(new java.awt.Dimension(85, 35));
@@ -244,12 +248,12 @@ public class CRUDmausac extends javax.swing.JFrame {
                     .addComponent(rdo_het))
                 .addGap(50, 50, 50)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_sua, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_xoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_moi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_moi, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 

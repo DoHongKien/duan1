@@ -45,8 +45,11 @@ public class View_DangNhap extends javax.swing.JFrame {
         btn_signin = new javax.swing.JLabel();
         pnl_cancel = new javax.swing.JPanel();
         btn_cancel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,9 +101,9 @@ public class View_DangNhap extends javax.swing.JFrame {
         pnl_signin.setBackground(new java.awt.Color(147, 214, 255));
         pnl_signin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
-        btn_signin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_signin.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btn_signin.setForeground(new java.awt.Color(255, 255, 255));
-        btn_signin.setText("        Sign in");
+        btn_signin.setText("      Sign in");
         btn_signin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_signin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -130,9 +133,9 @@ public class View_DangNhap extends javax.swing.JFrame {
         pnl_cancel.setBackground(new java.awt.Color(147, 214, 255));
         pnl_cancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
-        btn_cancel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_cancel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btn_cancel.setForeground(new java.awt.Color(255, 255, 255));
-        btn_cancel.setText("        Cancel");
+        btn_cancel.setText("    Cancel");
         btn_cancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_cancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -150,22 +153,34 @@ public class View_DangNhap extends javax.swing.JFrame {
         pnl_cancel.setLayout(pnl_cancelLayout);
         pnl_cancelLayout.setHorizontalGroup(
             pnl_cancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_cancel, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+            .addGroup(pnl_cancelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btn_cancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(16, 16, 16))
         );
         pnl_cancelLayout.setVerticalGroup(
             pnl_cancelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btn_cancel, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
         );
 
-        jPanel3.add(pnl_cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 90, 30));
+        jPanel3.add(pnl_cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 90, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/user.png"))); // NOI18N
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 30, 30));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/password.png"))); // NOI18N
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 30, 30));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(147, 214, 255));
-        jLabel5.setText("SEVENT STORE");
+        jLabel5.setText("Laptop World");
         jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 150, 30));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/laptop_1.png"))); // NOI18N
+        jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 100, 80));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -355,6 +370,9 @@ public class View_DangNhap extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btn_cancel;
     private javax.swing.JLabel btn_signin;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

@@ -135,13 +135,31 @@ public class JPanelNhanVien extends javax.swing.JPanel {
             new String [] {
                 "ID", "Mã ", "Tên", "Ngày sinh", "Giới tính", "SDT", "Địa chỉ", "Mật Khẩu", "Ngày Tạo", "Ngày Sửa", "Chức Vụ", "Trạng Thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbl_nhanvien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbl_nhanvienMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tbl_nhanvien);
+        if (tbl_nhanvien.getColumnModel().getColumnCount() > 0) {
+            tbl_nhanvien.getColumnModel().getColumn(0).setMinWidth(40);
+            tbl_nhanvien.getColumnModel().getColumn(0).setMaxWidth(40);
+            tbl_nhanvien.getColumnModel().getColumn(2).setMinWidth(100);
+            tbl_nhanvien.getColumnModel().getColumn(2).setMaxWidth(200);
+            tbl_nhanvien.getColumnModel().getColumn(3).setMinWidth(90);
+            tbl_nhanvien.getColumnModel().getColumn(3).setMaxWidth(90);
+            tbl_nhanvien.getColumnModel().getColumn(4).setMinWidth(60);
+            tbl_nhanvien.getColumnModel().getColumn(4).setMaxWidth(60);
+        }
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 1060, 220));
 
@@ -353,6 +371,7 @@ public class JPanelNhanVien extends javax.swing.JPanel {
             btn_them.setEnabled(true);
             btn_sua.setEnabled(false);
             btn_xoa.setEnabled(false);
+            txt_matkhau.setEditable(true);
         }
     }//GEN-LAST:event_btn_suaActionPerformed
 
@@ -367,22 +386,12 @@ public class JPanelNhanVien extends javax.swing.JPanel {
             btn_them.setEnabled(true);
             btn_sua.setEnabled(false);
             btn_xoa.setEnabled(false);
+            txt_matkhau.setEditable(true);
         }
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void btn_lammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lammoiActionPerformed
-        btn_them.setEnabled(true);
-        btn_sua.setEnabled(false);
-        btn_xoa.setEnabled(false);
-        txt_ma.setEditable(true);
-        txt_ma.setText("");
-        txt_ten.setText("");
-        txt_ngaysinh.setDate(null);
-        txt_sdt.setText("");
-        txt_diachi.setText("");
-        txt_matkhau.setText("");
-        rdo_nam.setSelected(true);
-        rdo_dilam.setSelected(true);
+        clearForm();
     }//GEN-LAST:event_btn_lammoiActionPerformed
 
     private void tbl_nhanvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_nhanvienMouseClicked
@@ -563,11 +572,28 @@ public class JPanelNhanVien extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Xóa thất bại");
         }
     }
+    
+    private void clearForm() {
+        btn_them.setEnabled(true);
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
+        txt_ma.setEditable(true);
+        txt_matkhau.setEditable(true);
+        txt_ma.setText("");
+        txt_ten.setText("");
+        txt_ngaysinh.setDate(null);
+        txt_sdt.setText("");
+        txt_diachi.setText("");
+        txt_matkhau.setText("");
+        rdo_nam.setSelected(true);
+        rdo_dilam.setSelected(true);
+    }
 
     private boolean checkValidateInsert() {
-        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Pattern p = Pattern.compile("[^a-z0-9\\\\s]", Pattern.CASE_INSENSITIVE);
+        Pattern p1 = Pattern.compile(".*[!@#$%^&*(),.?\\\":{}|<>].*", Pattern.CASE_INSENSITIVE);
         Matcher ma = p.matcher(txt_ma.getText());
-        Matcher ten = p.matcher(txt_ten.getText());
+        Matcher ten = p1.matcher(txt_ten.getText());
         Matcher matkhau = p.matcher(txt_matkhau.getText());
 
         JDateChooser ngayTao = new JDateChooser();
@@ -635,7 +661,7 @@ public class JPanelNhanVien extends javax.swing.JPanel {
     }
 
     private boolean checkValidateUpdate() {
-        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Pattern p = Pattern.compile(".*[!@#$%^&*(),.?\\\":{}|<>].*", Pattern.CASE_INSENSITIVE);
         Matcher ten = p.matcher(txt_ten.getText());
         Matcher matkhau = p.matcher(txt_matkhau.getText());
 

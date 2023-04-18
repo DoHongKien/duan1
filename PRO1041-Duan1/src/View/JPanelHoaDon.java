@@ -153,7 +153,7 @@ public class JPanelHoaDon extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Tên sản phẩm", "Giá bán", "Khuyến mãi", "Số lượng", "Đơn giá"
+                "Tên sản phẩm", "Giá bán (VND)", "Khuyến mãi (VND)", "Số lượng", "Đơn giá (VND)"
             }
         ));
         jScrollPane2.setViewportView(tbl_sanpham);
@@ -209,7 +209,7 @@ public class JPanelHoaDon extends javax.swing.JPanel {
                 btn_locActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_loc, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 70, 73, 33));
+        jPanel2.add(btn_loc, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 60, 90, 33));
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 55, 1070, 620));
     }// </editor-fold>//GEN-END:initComponents
@@ -260,8 +260,9 @@ public class JPanelHoaDon extends javax.swing.JPanel {
                 String tenSP = tbl_sanpham.getValueAt(i, 0).toString();
                 String soLuong = tbl_sanpham.getValueAt(i, 3).toString();
                 String donGia = tbl_sanpham.getValueAt(i, 4).toString();
+                int DONGIA = (int) (Integer.parseInt(tbl_sanpham.getValueAt(i, 3).toString()) * Double.parseDouble(tbl_sanpham.getValueAt(i, 1).toString()));
                 PdfPCell cellTenSP = new PdfPCell(new Phrase(tenSP));
-                PdfPCell cellDonGia = new PdfPCell(new Phrase(donGia));
+                PdfPCell cellDonGia = new PdfPCell(new Phrase(DONGIA + " VND"));
                 PdfPCell cellSoLuong = new PdfPCell(new Phrase("SL: " + soLuong));
                 cellTenSP.setBorderColor(Color.WHITE);
                 cellDonGia.setBorderColor(Color.WHITE);
@@ -443,7 +444,7 @@ public class JPanelHoaDon extends javax.swing.JPanel {
         defaultTableModelSanPham = (DefaultTableModel) tbl_sanpham.getModel();
         defaultTableModelSanPham.setRowCount(0);
         for (ChiTietHoaDonModel ql : list) {
-            defaultTableModelSanPham.addRow(new Object[]{ql.getTenSanPham(), ql.getGiaBan() + " VND", ql.getGiaTri() + " VND", ql.getSoLuong(), ql.getDonGia() + " VND"});
+            defaultTableModelSanPham.addRow(new Object[]{ql.getTenSanPham(), ql.getGiaBan(), ql.getGiaTri(), ql.getSoLuong(), ql.getDonGia()});
         }
     }
 

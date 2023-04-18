@@ -680,6 +680,7 @@ public class JPanelBanHang extends javax.swing.JPanel {
                 cthd.setGhiChu(txt_ghichu.getText().trim());
                 if (cthdService.insertCTHD(cthd)) {
                     System.out.println("thanh cong");
+                    clickCountMap.clear();
                 } else {
                     System.out.println("that bai");
                 }
@@ -723,9 +724,9 @@ public class JPanelBanHang extends javax.swing.JPanel {
                     for (int i = 0; i < tbl_giohang.getRowCount(); i++) {
                         String tenSP = tbl_giohang.getValueAt(i, 2).toString();
                         String soLuong = tbl_giohang.getValueAt(i, 3).toString();
-                        String donGia = tbl_giohang.getValueAt(i, 5).toString();
+                        String donGia = tbl_giohang.getValueAt(i, 4).toString();
                         PdfPCell cellTenSP = new PdfPCell(new Phrase(tenSP));
-                        PdfPCell cellDonGia = new PdfPCell(new Phrase(donGia + "VND"));
+                        PdfPCell cellDonGia = new PdfPCell(new Phrase(donGia + " VND"));
                         PdfPCell cellSoLuong = new PdfPCell(new Phrase("SL: " + soLuong));
                         cellTenSP.setBorderColor(Color.WHITE);
                         cellDonGia.setBorderColor(Color.WHITE);
@@ -948,9 +949,11 @@ public class JPanelBanHang extends javax.swing.JPanel {
                     clickCountMap.put(selectRow, 1);
                 }
                 for (int i = 0; i < tbl_giohang.getRowCount(); i++) {
-                    if (clickCountMap.get(i) > Integer.valueOf(tbl_giohang.getValueAt(i, 3).toString())) {
-                        JOptionPane.showMessageDialog(this, "Bạn đã nhập đủ serial cho sản phẩm này rồi");
-                        return;
+                    if (clickCountMap.containsKey(i)) {
+                        if (clickCountMap.get(i) > Integer.valueOf(tbl_giohang.getValueAt(i, 3).toString())) {
+                            JOptionPane.showMessageDialog(this, "Bạn đã nhập đủ serial cho sản phẩm này rồi");
+                            return;
+                        }
                     }
                 }
                 View_Serial view_Serial = new View_Serial(Integer.parseInt(tbl_giohang.getValueAt(index, 1).toString()));

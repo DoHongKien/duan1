@@ -491,7 +491,7 @@ public class JPanelKhuyenMai extends javax.swing.JPanel {
             return false;
         }
 
-        if (checkGiaTri(Integer.parseInt(txt_ma.getText().trim())) == 1) {
+        if (checkGiaTri(Integer.parseInt(txt_giatri.getText().trim())) == 1) {
             JOptionPane.showMessageDialog(this, "Giá trị đã tồn tại");
             txt_giatri.requestFocus();
             return false;

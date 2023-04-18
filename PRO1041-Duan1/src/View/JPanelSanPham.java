@@ -453,7 +453,7 @@ public class JPanelSanPham extends javax.swing.JPanel {
                 btn_suaActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 530, 77, 33));
+        jPanel6.add(btn_sua, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 530, 80, 33));
 
         btn_moi.setBackground(new java.awt.Color(147, 214, 255));
         btn_moi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -492,7 +492,7 @@ public class JPanelSanPham extends javax.swing.JPanel {
                 btn_xoaActionPerformed(evt);
             }
         });
-        jPanel6.add(btn_xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 530, 77, 33));
+        jPanel6.add(btn_xoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 530, 80, 33));
 
         jLabel15.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel15.setText("Số lượng tồn");

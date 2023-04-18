@@ -281,6 +281,7 @@ public class JPanelKhachHang extends javax.swing.JPanel {
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         if (checkValidateInsert()) {
             addKH();
+            clearForm();
         }
     }//GEN-LAST:event_btn_themActionPerformed
 
@@ -304,21 +305,12 @@ public class JPanelKhachHang extends javax.swing.JPanel {
             btn_them.setEnabled(true);
             btn_sua.setEnabled(false);
             btn_xoa.setEnabled(false);
+            clearForm();
         }
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void btn_lammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lammoiActionPerformed
-        btn_them.setEnabled(true);
-        btn_sua.setEnabled(false);
-        btn_xoa.setEnabled(false);
-        txt_ma.setEditable(true);
-        txt_ma.setText("");
-        txt_ten.setText("");
-        txt_ngaysinh.setDate(null);
-        txt_sdt.setText("");
-        txt_diachi.setText("");
-        rdo_nam.setSelected(true);
-        rdo_co.setSelected(true);
+        clearForm();
     }//GEN-LAST:event_btn_lammoiActionPerformed
 
     private void tbl_khachhangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_khachhangMouseClicked
@@ -471,11 +463,26 @@ public class JPanelKhachHang extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Xóa thất bại");
         }
     }
+    
+    public void clearForm() {
+        btn_them.setEnabled(true);
+        btn_sua.setEnabled(false);
+        btn_xoa.setEnabled(false);
+        txt_ma.setEditable(true);
+        txt_ma.setText("");
+        txt_ten.setText("");
+        txt_ngaysinh.setDate(null);
+        txt_sdt.setText("");
+        txt_diachi.setText("");
+        rdo_nam.setSelected(true);
+        rdo_co.setSelected(true);
+    }
 
     private boolean checkValidateInsert() {
-        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Pattern p = Pattern.compile("[^a-z0-9\\\\s]", Pattern.CASE_INSENSITIVE);
+        Pattern p1 = Pattern.compile(".*[!@#$%^&*(),.?\\\":{}|<>].*", Pattern.CASE_INSENSITIVE);
         Matcher ma = p.matcher(txt_ma.getText());
-        Matcher ten = p.matcher(txt_ten.getText());
+        Matcher ten = p1.matcher(txt_ten.getText());
 
         JDateChooser ngayTao = new JDateChooser();
         ngayTao.setDate(txt_ngaysinh.getDate());
@@ -532,8 +539,8 @@ public class JPanelKhachHang extends javax.swing.JPanel {
     }
 
     private boolean checkValidateUpdate() {
-        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
-        Matcher ten = p.matcher(txt_ten.getText());
+        Pattern p1 = Pattern.compile(".*[!@#$%^&*(),.?\\\":{}|<>].*", Pattern.CASE_INSENSITIVE);
+        Matcher ten = p1.matcher(txt_ten.getText());
 
         JDateChooser ngayTao = new JDateChooser();
         ngayTao.setDate(txt_ngaysinh.getDate());

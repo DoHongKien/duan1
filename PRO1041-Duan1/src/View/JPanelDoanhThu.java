@@ -675,7 +675,7 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
     private void cbo_doanhthuthangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_doanhthuthangItemStateChanged
         int index = cbo_doanhthuthang.getSelectedIndex();
 
-        txt_doanhthuthang.setText(String.valueOf(doanhThuService.sumThongKeDoanhThuByMonth(index)) + " VND");
+        txt_doanhthuthang.setText(insertDot(String.valueOf(doanhThuService.sumThongKeDoanhThuByMonth(index))) + " VND");
     }//GEN-LAST:event_cbo_doanhthuthangItemStateChanged
 
     private void btn_exportexcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_exportexcelActionPerformed
@@ -832,10 +832,10 @@ public class JPanelDoanhThu extends javax.swing.JPanel {
     public static String insertDot(String input) {
         StringBuilder sb = new StringBuilder(input);
         int length = sb.length();
-        int position = length - 3; // Bắt đầu từ vị trí cuối cùng
+        int position = length - 3;
         while (position > 0) {
-            sb.insert(position, "."); // Chèn dấu chấm vào mỗi 3 ký tự
-            position -= 3; // Di chuyển lên 3 ký tự tiếp theo
+            sb.insert(position, ".");
+            position -= 3;
         }
         return sb.toString();
     }
